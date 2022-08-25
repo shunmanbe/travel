@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('top');
+    return view('itinerary/top');
 });
 
 Auth::routes();
