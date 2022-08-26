@@ -18,8 +18,8 @@ Auth::routes();
 
 Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'MakeController@index');
-    Route::get('/itinerary', 'MakeController@index');
+    Route::get('/', 'ItineraryController@index');
+    Route::get('/itinerary', 'ItineraryController@index');
     
     
     
