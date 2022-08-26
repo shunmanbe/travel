@@ -14,11 +14,14 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <ls>
-            <li>しおり1</li>
-            <li>しおり2</li>
-            <li>しおり3</li>
-        </ls>
+        <h1>しおり一覧</h1>
+        <div class='itinerary'>
+            @foreach($itineraries as $itinerary)
+            <div class='itinerary'>
+                <h2 class='title'>{{ $post->title }}</h2>
+            </div>
+            @endforeach
+        </div>
         @endsection
     </body>
 </html>
