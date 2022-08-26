@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMakesTable extends Migration
+class CreateItinerariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('makes', function (Blueprint $table) {
+        Schema::create('itineraries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateMakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('makes');
+        Schema::dropIfExists('itineraries');
     }
 }
