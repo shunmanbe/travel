@@ -14,7 +14,14 @@
     <body>
         @extends('layouts.app')
         @section('content')
-       
+        <h1>しおり一覧</h1>
+        <div class='itinerary'>
+            @foreach($itineraries as $itinerary)
+            <div class='itinerary'>
+                <h2 class='title'><a href="/itinerary/{{ $itinerary->id }}">{{ $itinerary->title }}</a></h2>
+            </div>
+            @endforeach
+        </div>
         @endsection
     </body>
 </html>
