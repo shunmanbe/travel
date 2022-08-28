@@ -14,14 +14,15 @@
     <body>
         @extends('layouts.app')
         @section('content')
-       <a>出発地</a>
-       <a class="title" href="">{{ $place->title }}</a>
-       <div class="place">
-        @foreach($places as $place)
-            <a>↓</a>
-            <a>目的地</a>
-            <a class="title" href="">{{ $place->title }}</a>
-        @endforeach
+        <a>日付:{{ $detail-> }}</a>
+        <a>出発地</a>
+        <a class="title" href="">{{ $place->title }}</a>
+        <div class="place">
+            @foreach($places as $place)
+                <a>↓</a>
+                <a>目的地</a>
+                <a class="title" href="">{{ $place->title }}</a>
+            @endforeach
         </div>
         @endsection
         
