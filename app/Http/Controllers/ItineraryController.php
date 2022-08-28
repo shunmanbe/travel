@@ -9,6 +9,11 @@ class ItineraryController extends Controller
 {
     public function index(Itinerary $itinerary)
     {
-        return view('itinerary/top')->with(['itineraries' => $itinerary->get()]);
+        return view('itineraries/top')->with(['itineraries' => $itinerary->get()]);
+    }
+    
+    public function show(Detail $detail)
+    {
+        return view('itineraries/show')->with(['details' => $detail->get()]);
     }
 }
