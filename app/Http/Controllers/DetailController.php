@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Detail;
+use App\Place;
 
 class DetailController extends Controller
 {
