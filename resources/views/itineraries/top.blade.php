@@ -18,7 +18,7 @@
         <div class='itinerary'>
             @foreach($itineraries as $itinerary)
             <div class='itinerary'>
-                <h2 class='title'><a href="/itinerary/{{ $itinerary->id }}">{{ $itinerary->title }}</a></h2>
+                <h2 class='title'><a href="/itineraries/{{ $itinerary->id }}">{{ $itinerary->title }}</a></h2>
             </div>
             @endforeach
         </div>

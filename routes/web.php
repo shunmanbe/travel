@@ -20,7 +20,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'ItineraryController@index');
     Route::get('/itineraries', 'ItineraryController@index');
-    Route::get('/itineraries/{itinerary}', 'ItineraryController@show');
+    Route::get('/itineraries/{itinerary}', 'DetailController@show');
     
     
     
