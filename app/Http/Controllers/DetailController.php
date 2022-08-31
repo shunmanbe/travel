@@ -13,5 +13,10 @@ class DetailController extends Controller
     {
         return view('itineraries/show')->with(['detail' => $detail]);
     }
+    
+    public function new_entry()
+    {
+        return view('itineraries/new_entry');
+    }
 
 }

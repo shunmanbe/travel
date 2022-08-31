@@ -21,7 +21,7 @@
                 <h2 class='title'><a href="/itineraries/{{ $itinerary->id }}">{{ $itinerary->title }}</a></h2>
             </div>
             @endforeach
-            <a　href="">新規作成</a>
+            <a href="/itineraries/new_entry">新規作成</a>
         </div>
         @endsection
     </body>
