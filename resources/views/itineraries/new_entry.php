@@ -16,6 +16,7 @@
         @section('content')
         <a>日付</a>
         <a>出発地</a>
+        <a></a>
        
         @endsection
         
