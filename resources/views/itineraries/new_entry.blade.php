@@ -14,8 +14,8 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <a>日付</a>
-        <a>出発地</a>
+        <a>日付</a> //日付を入力
+        <a>出発地</a> //出発地を選択
         <a></a>
        
         @endsection
