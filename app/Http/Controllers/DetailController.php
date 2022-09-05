@@ -18,5 +18,10 @@ class DetailController extends Controller
     {
         return view('itineraries/new_entry');
     }
+    
+    public function store(Request $request)
+    {
+        
+    }
 
 }
