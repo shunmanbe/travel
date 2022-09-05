@@ -16,7 +16,12 @@
         @section('content')
         <a>日付</a> //日付を入力
         <a>出発地</a> //出発地を選択
-        <a></a>
+        <select　name="area">
+            <option value="未選択">選択してください</option>
+            @foreach($areas as $area)
+            
+            @endforeach
+        </select>
        
         @endsection
         
