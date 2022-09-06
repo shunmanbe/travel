@@ -18,6 +18,6 @@ class AreaSeeder extends Seeder
         Area::create(['name'=>'中部']);
         Area::create(['name'=>'近畿']);
         Area::create(['name'=>'中国・四国']);
-        Area::create(['name'=>'九州']);
+        Area::create(['name'=>'九州・沖縄']);
     }
 }
