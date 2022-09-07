@@ -10,6 +10,6 @@ class Prefecture extends Model
     {
         return $this->belongsTo('App\Area');
     }
-    
+
     protected $fillable = ['name', 'area_id'];
 }
