@@ -174,7 +174,7 @@ class PrefectureSeeder extends Seeder
         
          Prefecture::create([
             'name'=>'岡山県',
-            'area_id'=>''
+            'area_id'=>'6'
         ]);
         
          Prefecture::create([

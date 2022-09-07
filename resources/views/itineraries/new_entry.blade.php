@@ -19,7 +19,7 @@
         <select　name="area">
             <option value="未選択">選択してください</option>
             @foreach($areas as $area)
-            
+            <option value="id">"name"</option>
             @endforeach
         </select>
        
