@@ -19,8 +19,11 @@ class DetailController extends Controller
         return view('itineraries/new_entry');
     }
     
-    public function store(Request $request)
+    public function store(Request $request, Detail $detail)
     {
+        $input = $request['date'];
+        $detail->fill($input)->save();
+        return redirect('/itineraries/new_entry_area');
         
     }
 

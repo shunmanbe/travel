@@ -14,11 +14,11 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <p>出発地する地域を選択</p> //出発地を選択
+        <p>都道府県を選択</p> //出発地を選択
         <select　name="area">
             <option value="未選択">選択してください</option>
-            @foreach($areas as $area)
-            <option value="id">{{$area->name}}</option>
+            @foreach($prefectures as $prefecture)
+            <option value="id">{{$prefecture->name}}</option>
             @endforeach
         </select>
         
