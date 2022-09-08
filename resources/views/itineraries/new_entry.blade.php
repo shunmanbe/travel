@@ -14,14 +14,25 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <a>日付</a> //日付を入力
-        <a>出発地</a> //出発地を選択
-        <select　name="area">
-            <option value="未選択">選択してください</option>
-            @foreach($areas as $area)
-            <option value="id">"name"</option>
-            @endforeach
-        </select>
+        <form action="/itineraries/new_entry/area" method="POST">
+            @csrf
+            <a>出発日</a> <!--//出発日を入力-->
+               <input type="integer" name="depature_year" placeholder="20◯◯">
+               年
+               <input type="integer" name="depature_month" placeholder="◯◯">
+               月
+               <input type="integer" name="depature_day" placeholder="◯◯">
+               日
+            
+             <a>到着日</a> //到着日を入力
+               <input type="integer" name="end_year" placeholder="20◯◯">
+               年
+               <input type="integer" name="end_month" placeholder="◯◯">
+               月
+               <input type="integer" name="end_day" placeholder="◯◯">
+               日
+               <input type="submit" value="日程を登録する">
+       </form>
        
         @endsection
         
