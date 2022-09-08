@@ -22,6 +22,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries', 'ItineraryController@index');
     Route::get('/itineraries/{itinerary}', 'DetailController@show');
     Route::get('/itineraries/new_entry', 'DetailController@new_entry');
+    Route::get('/itineraries/new_entry/area', 'AreaController@select');
     
     
     
