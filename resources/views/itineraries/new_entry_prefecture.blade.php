@@ -14,8 +14,10 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <p>都道府県を選択</p> //出発地を選択
-        <select　name="area">
+        <!--都道府県を選択-->
+        <p>都道府県を選択</p> 
+        <select　name="prefecture">
+            @csrf
             <option value="未選択">選択してください</option>
             @foreach($prefectures as $prefecture)
             <option value="id">{{$prefecture->name}}</option>

@@ -20,12 +20,11 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'ItineraryController@index');
     Route::get('/itineraries', 'ItineraryController@index');
-    Route::get('/itineraries/new_entry', 'DetailController@new_entry');
-    Route::get('/itineraries/{itinerary}', 'DetailController@show');
-    Route::get('/itineraries/new_entry/area', 'AreaController@select');
+    Route::get('/itineraries/new_entry_date', 'DetailController@new_entry_date');
     Route::get('/itineraries/new_entry/prefecture', 'PrefectureController@select');
     Route::post('/itineraries/new_entry/area', 'DetailController@store');
-    
-    
+    Route::get('itineraries/new_entry/prefecture/{area}', 'PrefectureController@select');
+    Route::get('/itineraries/{itinerary}', 'DetailController@show');
+    //Route::get('/itineraries/new_entry/area', 'AreaController@select');
     
 });

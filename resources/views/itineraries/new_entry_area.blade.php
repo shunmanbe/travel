@@ -14,15 +14,17 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <p>出発地する地域を選択</p> //出発地を選択
+        <!--出発地を選択-->
+        <p>出発地する地域を選択</p> 
         <select　name="area">
+            @csrf
             <option value="未選択">選択してください</option>
             @foreach($areas as $area)
             <option value="id">{{$area->name}}</option>
             @endforeach
         </select>
         
-        <a href="/itineraries/new_entry/prefecture">次へ</a>
+        <a href="/itineraries/new_entry/prefecture/{{$area->id}}">次へ</a>
        
         @endsection
         

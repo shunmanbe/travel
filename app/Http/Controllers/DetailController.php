@@ -14,9 +14,9 @@ class DetailController extends Controller
         return view('itineraries/show')->with(['detail' => $detail]);
     }
     
-    public function new_entry()
+    public function new_entry_date()
     {
-        return view('itineraries/new_entry');
+        return view('itineraries/new_entry_date');
     }
     
     public function store(Request $request, Detail $detail)

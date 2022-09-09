@@ -16,12 +16,9 @@ class CreateDetailsTable extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->integer('departure_year');
-            $table->integer('depature_month');
-            $table->integer('depature_day');
-            $table->integer('end_year');
-            $table->integer('end_month');
-            $table->integer('end_day');
+            $table->date('departure_date');
+            $table->date('end_date');
+            
             
         });
     }
