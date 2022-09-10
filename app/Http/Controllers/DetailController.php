@@ -6,17 +6,13 @@ use Illuminate\Http\Request;
 use App\Detail;
 use App\Place;
 use Carbon\Carbon;
+use App\Area;
 
 class DetailController extends Controller
 {
     public function date_select()
     {
         return view('itineraries/new_entry_date');
-    }
-    
-     public function show(Detail $itinerary)
-    {
-        return view('itineraries/show')->with(['detail' => $itinerary]);
     }
     
     public function date_store(Request $request, Detail $detail)//日付を保存
@@ -27,8 +23,14 @@ class DetailController extends Controller
         //$detail->fill($input_ed)->save();
         $input = $request['date'];
         $detail->fill($input)->save();
-        return redirect('/itineraries/new_entry_area');//地域選択画面へ
+        return redirect('/itineraries/new_entry/area');//地域選択画面を表示するweb.phpへ
     }
+    
+    public function area_select(Area $area)
+    {
+        return view('itineraries/new_entry_area')->with(['areas'=>$area->get()]);//地域選択画面を表示
+    }
+    
     
     public function area_store(Request $request, Detail $detail)//出発地域を保存
     {
@@ -46,6 +48,10 @@ class DetailController extends Controller
     
     
     
+     public function show(Detail $itinerary)
+    {
+        return view('itineraries/show')->with(['detail' => $itinerary]);
+    }
     
     
      public function new_entry_date()

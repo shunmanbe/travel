@@ -21,12 +21,12 @@
             <select　name="area">
                 <option value="未選択">選択してください</option>
                 @foreach($areas as $area)
-                    <option value="area_name">{{$area->name}}</option>
+                    <option value="area_name">{{$area->area_name}}</option>
                 @endforeach
             </select>
         </form>
         <input type="submit" value="次へ">
-       //"/itineraries/new_entry/prefecture/{{$area->id}}">次へ</a>
+       
         @endsection
         
     </body>
