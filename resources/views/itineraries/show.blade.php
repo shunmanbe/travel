@@ -14,7 +14,7 @@
     <body>
         @extends('layouts.app')
         @section('content')
-        <a>期間:{{ $detail->depature_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
+        <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
         //→{{ $detail->end_day }}</a>
         <a>出発地</a>
        

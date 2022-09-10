@@ -16,16 +16,17 @@
         @section('content')
         <!--出発地を選択-->
         <p>出発地する地域を選択</p> 
-        <select　name="area">
+        <form action="/itineraries/new_entry/area_store" method="POST">
             @csrf
-            <option value="未選択">選択してください</option>
-            @foreach($areas as $area)
-            <option value="id">{{$area->name}}</option>
-            @endforeach
-        </select>
-        
-        <a href="/itineraries/new_entry/prefecture/{{$area->id}}">次へ</a>
-       
+            <select　name="area">
+                <option value="未選択">選択してください</option>
+                @foreach($areas as $area)
+                    <option value="area_name">{{$area->name}}</option>
+                @endforeach
+            </select>
+        </form>
+        <input type="submit" value="次へ">
+       //"/itineraries/new_entry/prefecture/{{$area->id}}">次へ</a>
         @endsection
         
     </body>

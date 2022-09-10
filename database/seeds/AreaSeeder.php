@@ -12,12 +12,12 @@ class AreaSeeder extends Seeder
      */
     public function run()
     {
-        Area::create(['name'=>'北海道']);
-        Area::create(['name'=>'東北']);
-        Area::create(['name'=>'関東']);
-        Area::create(['name'=>'中部']);
-        Area::create(['name'=>'近畿']);
-        Area::create(['name'=>'中国・四国']);
-        Area::create(['name'=>'九州・沖縄']);
+        Area::create(['area_name'=>'北海道']);
+        Area::create(['area_name'=>'東北']);
+        Area::create(['area_name'=>'関東']);
+        Area::create(['area_name'=>'中部']);
+        Area::create(['area_name'=>'近畿']);
+        Area::create(['area_name'=>'中国・四国']);
+        Area::create(['area_name'=>'九州・沖縄']);
     }
 }

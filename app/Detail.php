@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Detail extends Model
 {
     protected $fillable = [
-        'date[depature_date]', 
-        'date[end_date]', 
+        'departure_date', 
+        'end_date', 
+        'area_name',
+        'prefecture_name'
         ];
     
     public function places()
