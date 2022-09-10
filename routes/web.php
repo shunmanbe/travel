@@ -23,12 +23,12 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');
     Route::post('/itineraries/new_entry/area_store', 'DetailController@area_store');
+    Route::get('/itineraries/new_entry/area', 'DetailController@area_select');
+    
     Route::post('/itineraries/new_entry/prefecture_store', 'DetailController@store');
-    
-    
     Route::get('/itineraries/new_entry/prefecture', 'PrefectureController@select');
     
-    Route::get('/itineraries/new_entry/area', 'AreaController@select');
+    
     Route::get('itineraries/new_entry/prefecture/{area}', 'PrefectureController@select');
     Route::get('/itineraries/{itinerary}', 'DetailController@show');
    
