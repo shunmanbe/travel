@@ -13,4 +13,5 @@ class AreaController extends Controller
     {
         return view('itineraries/new_entry_area')->with(['areas' => $area->get()]);
     }
+    
 }
