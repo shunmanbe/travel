@@ -18,8 +18,8 @@ class CreateDetailsTable extends Migration
             $table->timestamps();
             $table->date('departure_date');
             $table->date('end_date');
-            $table->text('area_name')->nullable();
-            $table->text('prefecture_name')->nullable();
+            $table->string('area_name')->nullable();
+            $table->string('prefecture_name')->nullable();
             
             
         });

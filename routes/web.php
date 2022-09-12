@@ -20,13 +20,13 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'ItineraryController@index');
     Route::get('/itineraries', 'ItineraryController@index');
-    Route::get('/itineraries/new_entry/date', 'DetailController@date_select');
-    Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');
-    Route::post('/itineraries/new_entry/area_store', 'DetailController@area_store');
-    Route::get('/itineraries/new_entry/area', 'DetailController@area_select');
-    
+    Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
+    Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
+    Route::get('/itineraries/new_entry/{detail}/area', 'DetailController@area_select');//出発エリア選択画面へ
+    Route::post('/itineraries/new_entry/{detail}/area_store', 'DetailController@area_store');//出発エリアを保存
+    Route::get('/itineraries/new_entry/{detail}/prefecture', 'DetailController@prefecture_select');//出発都道府県選択画面へ
     Route::post('/itineraries/new_entry/prefecture_store', 'DetailController@store');
-    Route::get('/itineraries/new_entry/prefecture', 'PrefectureController@select');
+   
     
     
     Route::get('itineraries/new_entry/prefecture/{area}', 'PrefectureController@select');
