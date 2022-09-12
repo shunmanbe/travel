@@ -15,18 +15,17 @@
         @extends('layouts.app')
         @section('content')
         <!--出発地を選択-->
-        <p>出発地する地域を選択</p> 
-        <form action="/itineraries/new_entry/area_store" method="POST">
+        <p>出発する地域を選択</p> 
+        <form action="/itineraries/new_entry/{{$detail->id}}/area_store" method="POST">
             @csrf
-            <select　name="area">
+            <select name="area[area_name]">
                 <option value="未選択">選択してください</option>
                 @foreach($areas as $area)
-                    <option value="area_name">{{$area->area_name}}</option>
+                    <option value="{{$area->area_name}}">{{$area->area_name}}</option>
                 @endforeach
             </select>
+            <input type="submit" value="次へ">
         </form>
-        <input type="submit" value="次へ">
-       
         @endsection
         
     </body>

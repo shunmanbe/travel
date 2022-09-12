@@ -18,10 +18,10 @@
         <p>都道府県を選択</p> 
         <form action="/itineraries/new_entry/prefecture_store" method="POST">
             @csrf
-            <select　name="prefecture">
+            <select name="prefecture[prefecture_name]">
                 <option value="未選択">選択してください</option>
                 @foreach($prefectures as $prefecture)
-                <option value="prefecture_name">{{$prefecture->name}}</option>
+                    <option value="prefecture_name">{{$prefecture->prefecture_name}}</option>
                 @endforeach
             </select>
             <input type="submit" value="登録">
