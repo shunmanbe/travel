@@ -49,7 +49,7 @@ class DetailController extends Controller
     {
         $input_p = $request('prefecture_name');
         $detail->fill($input_p)->save();
-        return redirect('itineraries/new_entry_station');//出発駅選択画面を表示するweb.phpへ
+        return redirect('itineraries/new_entry_railRoute');//出発駅選択画面を表示するweb.phpへ
     }
     
     

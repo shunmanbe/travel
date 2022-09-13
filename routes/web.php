@@ -25,14 +25,14 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/new_entry/{detail}/area', 'DetailController@area_select');//出発エリア選択画面へ
     Route::post('/itineraries/new_entry/{detail}/area_store', 'DetailController@area_store');//出発エリアを保存
     Route::get('/itineraries/new_entry/{detail}/prefecture', 'DetailController@prefecture_select');//出発都道府県選択画面へ
-    Route::post('/itineraries/new_entry/prefecture_store', 'DetailController@store');
-   
+    Route::post('/itineraries/new_entry/{detail}/prefecture_store', 'DetailController@store');//出発都道府県を保存
+    Route::post('itineraries/new_entry/{detail}');
     
     
-    Route::get('itineraries/new_entry/prefecture/{area}', 'PrefectureController@select');
+    
     Route::get('/itineraries/{itinerary}', 'DetailController@show');
    
-    Route::post('/itineraries/new_entry/prefecture_store', 'PrefectureController@prefecture_store');
-    //Route::get('/itineraries/new_entry/area', 'AreaController@select');
+
+    
     
 });

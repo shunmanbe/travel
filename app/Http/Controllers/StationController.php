@@ -15,7 +15,10 @@ class StationController extends Controller
         $client = new Client();
         $response = $client->request($method, $url);
         
-        $posts = $response->getBody();
-        $posts = json_decode($posts, true);
+        $stations = json_decode($posts, true);
+        return view('new_entry_station')->with([
+            'stations' => $stations['stations']    
+        ]);
+        dd($stations);
     }
 }

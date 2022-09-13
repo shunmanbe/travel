@@ -10,7 +10,9 @@ class Detail extends Model
         'departure_date', 
         'end_date', 
         'area_name',
-        'prefecture_name'
+        'prefecture_name',
+        'railRoute_name',
+        'station_name'
         ];
     
     public function places()
