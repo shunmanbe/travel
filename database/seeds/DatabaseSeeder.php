@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AreaSeeder::class);
         $this->call(PrefectureSeeder::class);
-        $this->call(RailrouteSeeder::class);
+        $this->call(RouteSeeder::class);
         $this->call(StationSeeder::class);
     }
 }

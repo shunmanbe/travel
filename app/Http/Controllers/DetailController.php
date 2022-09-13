@@ -8,6 +8,8 @@ use App\Place;
 use Carbon\Carbon;
 use App\Area;
 use App\Prefecture;
+use GuzzleHttp\Client;
+
 
 class DetailController extends Controller
 {
@@ -42,16 +44,31 @@ class DetailController extends Controller
         $select_prefecture = $area->where('area_name', $detail->area_name)->first();
        
         //$select_prefectureに含まれているareaデータのidを持つprefectureをgetしている。
-        return view('itineraries/new_entry_prefecture')->with(['prefectures'=>$select_prefecture->prefectures()->get(), 'detail'=>$detail]);//地域選択画面を表示
+        
+        return view('/itineraries/new_entry_prefecture')->with(['prefectures'=>$select_prefecture->prefectures()->get(), 'detail'=>$detail]);//地域選択画面を表示
     }
     
     public function prefecture_store(Request $request, Detail $detail)//出発都道府県を保存
     {
-        $input_p = $request('prefecture_name');
+        $input_p = $request->prefecture;
         $detail->fill($input_p)->save();
-        return redirect('itineraries/new_entry_railRoute');//出発駅選択画面を表示するweb.phpへ
+        return redirect('/itineraries/new_entry/'.$detail->id.'/railroute');//出発駅選択画面を表示するweb.phpへ
     }
     
+    public function railroute_select(Request $request, Detail $detail)
+    {
+       
+        $url = "http://express.heartrails.com/api/json?method=getLines";
+        $method = "GET";
+        
+        $client = new Client();
+        $response = $client->request($method, $url);
+        
+        $railroutes = json_decode($response->getBody(), true);
+        dd($railroutes);
+       
+        //return view('/itineraries/new_entry_railroute');
+    }
     
     
      public function show(Detail $itinerary)
