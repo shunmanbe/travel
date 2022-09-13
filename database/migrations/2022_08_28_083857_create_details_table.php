@@ -20,8 +20,8 @@ class CreateDetailsTable extends Migration
             $table->date('end_date');
             $table->string('area_name')->nullable();
             $table->string('prefecture_name')->nullable();
-            
-            
+            $table->string('railRoute_name')->nullable();
+            $table->string('station_name')->nullable();
         });
     }
 
