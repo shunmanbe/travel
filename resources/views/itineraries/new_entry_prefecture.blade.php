@@ -16,7 +16,7 @@
         @section('content')
         <!--都道府県を選択-->
         <p>都道府県を選択</p> 
-        <form action="/itineraries/new_entry/prefecture_store" method="POST">
+        <form action="/itineraries/new_entry/{{$detail->id}}/prefecture_store" method="POST">
             @csrf
             <select name="prefecture[prefecture_name]">
                 <option value="未選択">選択してください</option>

@@ -25,10 +25,11 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/new_entry/{detail}/area', 'DetailController@area_select');//出発エリア選択画面へ
     Route::post('/itineraries/new_entry/{detail}/area_store', 'DetailController@area_store');//出発エリアを保存
     Route::get('/itineraries/new_entry/{detail}/prefecture', 'DetailController@prefecture_select');//出発都道府県選択画面へ
-    Route::post('/itineraries/new_entry/{detail}/prefecture_store', 'DetailController@store');//出発都道府県を保存
-    Route::post('itineraries/new_entry/{detail}');
+    Route::post('/itineraries/new_entry/{detail}/prefecture_store', 'DetailController@prefecture_store');//出発都道府県を保存
     
+    Route::get('itineraries/new_entry/{detail}/railroute', 'DetailController@railroute_select');//路線選択画面へ
     
+    //Route::post('itineraries/new_entry/{detail}/railroute', 'RailrouteController@index');
     
     Route::get('/itineraries/{itinerary}', 'DetailController@show');
    

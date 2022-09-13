@@ -15,6 +15,7 @@
         @extends('layouts.app')
         @section('content')
         <!--都道府県を選択-->
+        <p>a</p>
        
         @endsection
         
