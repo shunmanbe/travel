@@ -65,15 +65,15 @@ class DetailController extends Controller
         $response = $client->request($method, $url);
         
         $railroutes = json_decode($response->getBody(), true);
-        dd($railroutes);
        
         //return view('/itineraries/new_entry_railroute');
     }
     
     
-     public function show(Detail $itinerary)
+     public function show(Detail $detail)
     {
-        return view('itineraries/show')->with(['detail' => $itinerary]);
+
+        return view('itineraries/show')->with(['detail' => $detail]);
     }
     
     

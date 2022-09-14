@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detail extends Model
 {
+     public function places()
+    {
+        return $this->hasMany('App\Place');
+    }
+    
     protected $fillable = [
         'departure_date', 
         'end_date', 
@@ -15,10 +20,9 @@ class Detail extends Model
         'station_name'
         ];
     
-    public function places()
-    {
-        return $this->hasMany('App\Place');
-    }
+    protected $dates = ['departure_date', 'end_date'];
+    
+   
     
     //protected $d_date = ['depature_date'];
     
