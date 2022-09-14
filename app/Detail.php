@@ -22,6 +22,7 @@ class Detail extends Model
     
     protected $dates = ['departure_date', 'end_date'];
     
+    
    
     
     //protected $d_date = ['depature_date'];

@@ -73,7 +73,7 @@ class DetailController extends Controller
      public function show(Detail $detail)
     {
 
-        return view('itineraries/show')->with(['detail' => $detail]);
+        return view('itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first()]);
     }
     
     
