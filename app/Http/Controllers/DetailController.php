@@ -84,7 +84,7 @@ class DetailController extends Controller
     
     public function departure_area()
     {
-        return view ('itineraries/departure_area');
+        return view ('itineraries/departure_area2');
     }
 
 
