@@ -21,7 +21,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/', 'ItineraryController@index');
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
-    Route::get('/itineraries/new_entry/{detail}/departure_area', 'DetailController@departure_area');
+    Route::get('/itineraries/new_entry/{detail}/departure_area', 'PlaceController@departure_area');
     
     
     
