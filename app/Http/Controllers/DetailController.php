@@ -55,7 +55,7 @@ class DetailController extends Controller
         return redirect('/itineraries/new_entry/'.$detail->id.'/railroute');//出発駅選択画面を表示するweb.phpへ
     }
     
-    public function railroute_select(Request $request, Detail $detail)
+    public function railroute_select(Request $request, Detail $detail)//heartrails検証用
     {
        
         $url = "http://express.heartrails.com/api/json?method=getLines";
@@ -84,7 +84,7 @@ class DetailController extends Controller
     
     public function departure_area()
     {
-        return view ('itineraries/departure_area2');
+        return view ('itineraries/departure_area_nouken');//yahooのmap作り途中
     }
 
 
