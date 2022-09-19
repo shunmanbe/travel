@@ -27,7 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    'api_key' => env('GOOGLE_MAP_API'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

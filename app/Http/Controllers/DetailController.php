@@ -22,8 +22,51 @@ class DetailController extends Controller
     {
         $input_d = $request['date'];
         $detail->fill($input_d)->save();
-        return redirect('/itineraries/new_entry/'.$detail->id.'/departure_area');//地域選択画面を表示するweb.phpへ
+        return redirect('/itineraries/'.$detail->id.'/show');//地域選択画面を表示するweb.phpへ
     }
+    
+    
+    public function show(Detail $detail) //日付情報を用いて詳細画面表示
+    {
+        return view('itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first()]);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public function area_select(Area $area, Detail $detail)
     {
@@ -70,11 +113,7 @@ class DetailController extends Controller
     }
     
     
-     public function show(Detail $detail)
-    {
-
-        return view('itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first()]);
-    }
+     
     
     
      public function new_entry_date()
