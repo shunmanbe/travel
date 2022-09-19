@@ -16,8 +16,9 @@
         @section('content')
         <!--出発地を選択-->
         <p>出発する地域を選択</p> 
-        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ "筑波大学" }}'>
-        width=100% height=100% frameborder='1'></iframe>
+        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $search_name }}'
+  width='50%' height='300' frameborder='0'></iframe>
+  
         @endsection
         
     </body>

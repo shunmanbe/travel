@@ -16,7 +16,8 @@
         @section('content')
         <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
         
-        <a>出発地</a>
+        <p>出発地</p>
+        <a href ="/itineraries/{{$detail->id}}/departure_place_search">出発地を選択</a>
        
         @endsection
         

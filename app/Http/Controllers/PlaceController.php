@@ -4,10 +4,53 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+use App\Detail;
 
 class PlaceController extends Controller
 {
-     public function departure_area(Place $place)
+   
+     
+    public function departure_place(Detail $detail)//Google Maps Embed API
+    {
+        return view('/itineraries/departure_place'); 
+    }
+     
+    public function departure_place_serach()
+    {
+        return view('/itineraries/departure_place_search');
+    }
+    
+    public function departure_place_map(Request $request)
+    {
+        // .envのAPIキーを変数へ
+        $api_key = config('app.api_key');
+        $input_s = $request['search_name'];
+        return view('/itineraries/zdeparture_area2')->with(['search_name'=>$input_s, 'api_key'=>$api_key]);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     public function departure_area() //yahooAPI住所情報取得
     {
 
         $client = new \GuzzleHttp\Client();
@@ -30,5 +73,4 @@ class PlaceController extends Controller
         ]);
        
      }
-     
 }
