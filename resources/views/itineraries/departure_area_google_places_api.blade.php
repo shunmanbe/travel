@@ -15,14 +15,11 @@
         @extends('layouts.app')
         @section('content')
         <!--出発地を選択-->
-        <h1>出発する地域を検索</h1> 
-        <form action="/itineraries/departure_place_map" method="POST">
-            @csrf
-            <input type="search_name" name="search_name" placeholder="例：東京 マック">
-            <input type="submit" value="検索">
-        </form>
-        
+        <p>出発する地域を選択</p> 
+        <iframe id='map' src='https://maps.googleapis.com/maps/api/place/textsearch/json?key={{ config("services.google-map.apikey") }}&q={{ $search_name }}
+  width='50%' height='300' frameborder='0'></iframe>
+  
         @endsection
-       
+        
     </body>
 </html>
