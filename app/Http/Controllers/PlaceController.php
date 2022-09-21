@@ -20,12 +20,25 @@ class PlaceController extends Controller
         return view('/itineraries/departure_place_search');
     }
     
-    public function departure_place_map(Request $request)
+    public function departure_place_map_embed(Request $request)
     {
         // .envのAPIキーを変数へ
         $api_key = config('app.api_key');
         $input_s = $request['search_name'];
-        return view('/itineraries/zdeparture_area2')->with(['search_name'=>$input_s, 'api_key'=>$api_key]);
+        return view('/itineraries/departure_area_google_embed_map_api')->with(['search_name'=>$input_s, 'api_key'=>$api_key]);
+    }
+    
+    public function departure_place_map_places(Request $request)
+    {
+        $url = "https://maps.googleapis.com/maps/api/place/textsearch/json?key={{ config("services.google-map.apikey") }}&q={{ $search_name }}";
+        $method = "GET";
+        
+        $client = new Client();
+        $response = $client->request($method, $url);
+        
+        $railroutes = json_decode($response->getBody(), true);
+       
+        //return view('/itineraries/new_entry_railroute');
     }
     
     
