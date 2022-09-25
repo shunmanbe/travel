@@ -30,15 +30,14 @@ class PlaceController extends Controller
     
     public function departure_place_map_places(Request $request)
     {
-        $url = "https://maps.googleapis.com/maps/api/place/textsearch/json?key={{ config("services.google-map.apikey") }}&q={{ $search_name }}";
-        $method = "GET";
-        
-        $client = new Client();
-        $response = $client->request($method, $url);
-        
-        $railroutes = json_decode($response->getBody(), true);
-       
-        //return view('/itineraries/new_entry_railroute');
+        $input_s = $request['search_name'];
+        $client = new \GuzzleHttp\Client();
+        //$url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&q=' . $search_name;
+        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key='. config("services.google-map-places.apikey");
+        $response = $client->request('GET', $url);
+        ['Bearer' => config('serveices.google-map.apikey')];
+        $address = json_decode($response->getBody(), true);
+        return view('/itineraries/departure_area_google_places_api')->with(['search_name'=>$input_s]);
     }
     
     

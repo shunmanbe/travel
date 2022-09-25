@@ -16,7 +16,7 @@
         @section('content')
         <!--出発地を選択-->
         <p>出発する地域を選択</p> 
-        <iframe id='map' src='https://maps.googleapis.com/maps/api/place/textsearch/json?key={{ config("services.google-map.apikey") }}&q={{ $search_name }}
+        <iframe id='map' src='https://maps.googleapis.com/maps/api/place/detailes/json?key={{ config("services.google-map.apikey") }}&place_id=ChIJgUbEo8cfqokR5lP9_Wh_DaM'
   width='50%' height='300' frameborder='0'></iframe>
   
         @endsection

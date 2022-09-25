@@ -33,5 +33,9 @@ return [
     'google-map' => [
         'apikey' => env('GOOGLE_MAP_API'),
     ],
+    
+    'google-map-places' => [
+        'apikey' => env('GOOGLE_MAP_PLACES_API'),
+    ],
 
 ];
