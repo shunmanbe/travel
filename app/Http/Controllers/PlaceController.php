@@ -28,15 +28,19 @@ class PlaceController extends Controller
         return view('/itineraries/departure_area_google_embed_map_api')->with(['search_name'=>$input_s, 'api_key'=>$api_key]);
     }
     
-    public function departure_place_map_places(Request $request)
+    public function departure_place_google_map_place_details(Request $request)
     {
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
-        //$url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&q=' . $search_name;
-        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key='. config("services.google-map-places.apikey");
+        //検索ワードに関連する施設の詳細情報を取得
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map-places.apikey") . '&query=' . $input_s . '&language=ja';
+        
+        
+        //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
         $response = $client->request('GET', $url);
         ['Bearer' => config('serveices.google-map.apikey')];
         $address = json_decode($response->getBody(), true);
+        dd($address);
         return view('/itineraries/departure_area_google_places_api')->with(['search_name'=>$input_s]);
     }
     
