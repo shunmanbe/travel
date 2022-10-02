@@ -37,11 +37,19 @@ class PlaceController extends Controller
         
         
         //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
-        $response = $client->request('GET', $url);
-        ['Bearer' => config('serveices.google-map.apikey')];
-        $address = json_decode($response->getBody(), true);
-        dd($address);
-        return view('/itineraries/departure_area_google_places_api')->with(['search_name'=>$input_s]);
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $details = json_decode($response->getBody(), true);
+        $place_ids = [ ];
+        $place_names = [ ];
+        //$places = array( );
+        for($i = 0; $i < count($details['results']); $i++){
+            $place_ids[ ] = $details['results'][$i]['place_id'];
+            $place_names[ ] = $details['results'][$i]['name'];
+            //$places[ $details['results'][$i]['place_id'] ] = $details['results'][$i]['name'];
+        }
+        $places = array_map(null, $place_ids, $place_names);
+        return view('/itineraries/departure_place_select')->with(['places' => $places]);
     }
     
     
