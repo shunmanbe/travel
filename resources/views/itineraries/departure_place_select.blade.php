@@ -16,19 +16,15 @@
         @section('content')
         <!--出発地を選択-->
         <h1>以下から出発地を選択してください</h1> 
-        <form action="/itineraries/departure_place_map" method="POST">
+        @foreach ($places as $place)
+        <form action="/itineraries/departure_place_store" method="POST">
             @csrf
-            
-            @foreach ($places as $place)
-            <h2>{{$place[1]}}</h2>
+            <h2><input name="departure[departure_place]"> {{$place[1]}}</h2>
+            <p><input type="submit" value="ここを出発地として保存する"></p>
             <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map-places.apikey") }}&q={{ $place[1] }}'
             width='50%' height='300' frameborder='0'></iframe>
-            
-            @endforeach
-            
-            
         </form>
-        
+        @endforeach
         @endsection
        
     </body>

@@ -15,22 +15,33 @@ class DetailController extends Controller
 {
     public function date_select()
     {
-        return view('itineraries/new_entry_date');
+        return view('/itineraries/new_entry_date');
     }
     
     public function date_store(Request $request, Detail $detail)//日付を保存
     {
-        $input_d = $request['date'];
-        $detail->fill($input_d)->save();
+        $input_date = $request['date'];
+        $detail->fill($input_date)->save();
         return redirect('/itineraries/'.$detail->id.'/show');//地域選択画面を表示するweb.phpへ
     }
     
     
     public function show(Detail $detail) //日付情報を用いて詳細画面表示
     {
-        return view('itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first()]);
+        return view('/itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first()]);
     }
     
+    public function departure_place_store(Request $request, Detail $detail)
+    {
+        $input_departure = $request['departure'];
+        $detail->fill($input_departure)->save();
+        return redirect('/itineraries/'.$detail->id.'/decide_only_departure_place');//出発地を保存
+    }
+    
+    public function decide_destination1(Detail $detail) //出発地のみ決定した状態で詳細画面表示
+    {
+        return view('/itineraries/decide_only_departure_place')->with(['detail' => $detail]);
+    }
     
     
     
