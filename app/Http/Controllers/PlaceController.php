@@ -49,6 +49,7 @@ class PlaceController extends Controller
             //$places[ $details['results'][$i]['place_id'] ] = $details['results'][$i]['name'];
         }
         $places = array_map(null, $place_ids, $place_names);
+        dd($places);
         return view('/itineraries/departure_place_select')->with(['places' => $places]);
     }
     
