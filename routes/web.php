@@ -24,8 +24,8 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/show', 'DetailController@show');//日付のみを表示させた詳細ページを表示させるControllerへ
     Route::get('/itineraries/{detail}/departure_place_search', 'PlaceController@departure_place_serach');//出発地を検索
     //Route::post('/itineraries/departure_place_map', 'PlaceController@departure_place_map_embed');//検索ワードからgoogle-embedマップを表示
-    Route::post('/itineraries/departure_place_map', 'PlaceController@departure_place_google_map_place_details');//検索ワードからgoogle-placesマップを表示
-    Route::post('/itineraries/departure_place_store', 'DetailController@departure_place_store');//地図から選択した出発地をデータベースに保存
+    Route::post('/itineraries/{detail}/departure_place_map', 'PlaceController@departure_place_google_map_place_details');//検索ワードからgoogle-placesマップを表示
+    Route::post('/itineraries/{detail}/departure_place_store', 'DetailController@departure_place_store');//地図から選択した出発地をデータベースに保存
     Route::post('/itineraries/{detail}/decide_only_departure_place', 'DetailController@decide_destination1');//出発地が決定しており、一つ目の目的地を決めるControllerへ
     
     

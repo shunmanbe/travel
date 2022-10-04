@@ -15,7 +15,7 @@ class DetailController extends Controller
 {
     public function date_select()
     {
-        return view('/itineraries/new_entry_date');
+        return view('itineraries/new_entry_date');
     }
     
     public function date_store(Request $request, Detail $detail)//日付を保存
@@ -40,7 +40,7 @@ class DetailController extends Controller
     
     public function decide_destination1(Detail $detail) //出発地のみ決定した状態で詳細画面表示
     {
-        return view('/itineraries/decide_only_departure_place')->with(['detail' => $detail]);
+        return view('/itineraries//decide_only_departure_place')->with(['detail' => $detail]);
     }
     
     

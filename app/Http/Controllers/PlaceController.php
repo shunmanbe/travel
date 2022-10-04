@@ -17,7 +17,7 @@ class PlaceController extends Controller
      
     public function departure_place_serach()
     {
-        return view('/itineraries/departure_place_search');
+        return view('/itineraries/'.$detail->id.'/departure_place_search');
     }
     
     public function departure_place_map_embed(Request $request)
@@ -44,13 +44,12 @@ class PlaceController extends Controller
         $place_names = [ ];
         //$places = array( );
         for($i = 0; $i < count($details['results']); $i++){
-            $place_ids[ ] = $details['results'][$i]['place_id'];
+            $place_ids[ ] = $details['results'][$i]['formatted_address'];
             $place_names[ ] = $details['results'][$i]['name'];
             //$places[ $details['results'][$i]['place_id'] ] = $details['results'][$i]['name'];
         }
         $places = array_map(null, $place_ids, $place_names);
-        dd($places);
-        return view('/itineraries/departure_place_select')->with(['places' => $places]);
+        return view('/itineraries/'.$detail->id.'/departure_place_select')->with(['places' => $places]);
     }
     
     
