@@ -14,10 +14,8 @@ class Detail extends Model
     protected $fillable = [
         'departure_date', 
         'end_date', 
-        'area_name',
-        'prefecture_name',
-        'railRoute_name',
-        'station_name'
+        'departure_place_name',
+        'departure_place_address',
         ];
     
     protected $dates = ['departure_date', 'end_date'];
