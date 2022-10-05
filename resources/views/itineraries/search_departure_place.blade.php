@@ -15,8 +15,14 @@
         @extends('layouts.app')
         @section('content')
         <!--出発地を選択-->
-        <p>出発する地域を選択</p> 
-        <a>{{$place}}</a>
+        <h1>出発する地域を検索</h1> 
+        <form action="/itineraries/{{$detail->id}}/departure_place_map" method="POST">
+            @csrf
+            <input type="search_name" name="search_name" placeholder="例：東京 マック">
+            <input type="submit" value="検索">
+        </form>
+        
         @endsection
+       
     </body>
 </html>

@@ -35,15 +35,52 @@ class DetailController extends Controller
     {
         $input_departure = $request['departure'];
         $detail->fill($input_departure)->save();
-        return redirect('/itineraries/'.$detail->id.'/decide_only_departure_place');//出発地を保存
+        return redirect('/itineraries/'.$detail->id.'/decided_only_departure_place');//出発地を保存
     }
     
-    public function decide_destination1(Detail $detail) //出発地のみ決定した状態で詳細画面表示
+    public function decide_first_destination(Detail $detail) //出発地が決定した状態で詳細画面表示
     {
-        return view('/itineraries//decide_only_departure_place')->with(['detail' => $detail]);
+        return view('/itineraries//decided_only_departure_place')->with(['detail' => $detail]);
+    }
+    
+    public function first_destination_store(Request $request, Detail $detail)
+    {
+        $input_first = $request['first'];
+        $detail->fill($input_first)->save();
+        return redirect('/itineraries/'.$detail->id.'/decided_first_destination');//出発地を保存
     }
     
     
+    
+    
+    public function decide_second_destination(Detail $detail) //目的地1までが決定した状態で詳細画面表示
+    {
+        return view('/itineraries//decided_first_destination')->with(['detail' => $detail]);
+    }
+    
+    public function second_destination_store(Request $request, Detail $detail)
+    {
+        $input_second = $request['second'];
+        $detail->fill($input_second)->save();
+        return redirect('/itineraries/'.$detail->id.'/decided_second_destination');//出発地を保存
+    }
+    
+    public function decide_third_destination(Detail $detail) //出発地2までが決定した状態で詳細画面表示
+    {
+        return view('/itineraries//decided_second_destination')->with(['detail' => $detail]);
+    }
+    
+    public function third_destination_store(Request $request, Detail $detail)
+    {
+        $input_third = $request['third'];
+        $detail->fill($input_third)->save();
+        return redirect('/itineraries/'.$detail->id.'/decided_third_destination');//出発地を保存
+    }
+    
+    public function decided_all(Detail $detail) //出発地3までが決定した状態で詳細画面表示
+    {
+        return view('/itineraries//decided_all_places')->with(['detail' => $detail]);
+    }
     
     
     

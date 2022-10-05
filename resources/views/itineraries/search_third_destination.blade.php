@@ -16,7 +16,7 @@
         @section('content')
         <!--出発地を選択-->
         <h1>出発する地域を検索</h1> 
-        <form action="/itineraries/departure_place_map" method="POST">
+        <form action="/itineraries/{{$detail->id}}/third_destination_map" method="POST">
             @csrf
             <input type="search_name" name="search_name" placeholder="例：東京 マック">
             <input type="submit" value="検索">

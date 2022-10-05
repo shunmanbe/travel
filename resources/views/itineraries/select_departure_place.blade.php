@@ -17,7 +17,7 @@
         <!--出発地を選択-->
         <h1>以下から出発地を選択してください</h1> 
         @foreach ($places as $place)
-        <form action="/itineraries/departure_place_store" method="POST">
+        <form action="/itineraries/{{ $detail->id }}/departure_place_store" method="POST">
             @csrf
             <h2>{{$place[1]}}</h2>
             <input type="hidden" name="departure[departure_place_address]" value={{$place[0]}}>
