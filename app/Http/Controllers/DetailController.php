@@ -85,6 +85,20 @@ class DetailController extends Controller
     
     
     
+    public function route_to_first_destination(Request $request, Detail $detail)
+    {
+        $client = new \GuzzleHttp\Client();
+        //検索ワードに関連する施設の詳細情報を取得
+        $url = 'https://maps.googleapis.com/maps/api/directions/json?origin='. $detail->departure_place_address .'&destination='. $detail->first_destination_address .'&key=' . config("services.google-map-places.apikey");
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $details = json_decode($response->getBody(), true);
+        return view('/itineraries/route_to_first_destination_map')->with(['detail' => $detail]);
+    }
+    
+    
+    
+    
     
     
     
