@@ -44,6 +44,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/decided_third_destination', 'DetailController@decided_all');//目的地3まで決定している状態で詳細表示
     
     
+    Route::get('/itineraries/{detail}/route_to_first_destination', 'DetailController@route_to_first_destination');//目的地1までの経路表示ページへ
+    
+    
+    
     
     //Route::get('/itineraries/new_entry/{detail}/departure_area', 'PlaceController@departure_point');
     //Route::get('/itineraries/new_entry/{detail}/area', 'DetailController@area_select');//出発エリア選択画面へ
