@@ -16,9 +16,9 @@
         @section('content')
         <h1>しおり一覧</h1>
         <div class='itinerary'>
-            @foreach($itineraries as $itinerary)
+            @foreach($details as $detail)
             <div class='itinerary'>
-                <h2 class='title'><a href="/itineraries/{{ $itinerary->id }}">{{ $itinerary->title }}</a></h2>
+                <h2 class='title'><a href="/itineraries/{{ $detail->id }}/show">{{ $detail->title }}</a></h2>
             </div>
             @endforeach
             <a href="/itineraries/new_entry/date">新規作成</a>

@@ -10,4 +10,10 @@ class Place extends Model
     {
         return $this->belongsTo('App\Detail');
     }
+    
+    protected $fillable = [
+        'detail_id',
+        'destination_address',
+        'destination_name',
+        ];
 }
