@@ -18,9 +18,10 @@
         <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
         
         <p>出発地：{{ $detail->departure_place_name }}</p>
+        
         @if(empty($places))
         @else
-        @foreach($places as $place)
+        @foreach($places as $n => $place)
         <form action="/itineraries/new_entry/date_store" method="POST">
             @csrf
             <select name="Mode">
@@ -32,11 +33,12 @@
         </form>
         <a href="/itineraries/{{$detail->id}}/route_to_first_destination">経路詳細</a>
         <p>移動時間：</p>
-        <a>目的地{{ $place->id }}:{{ $place->destination_name }}
+        <a>目的地{{ $n + 1 }}:{{ $place->destination_name }}
+        <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}">目的地を編集</a>
         <br>
         @endforeach
         @endif
-        <a href ="/itineraries/{{$detail->id}}/destination_search">出発地を選択</a>
+        <a href ="/itineraries/{{$detail->id}}/destination_search">目的地を選択</a>
         <br>
         <a href ="/">しおり一覧に戻る</a>
         @endsection

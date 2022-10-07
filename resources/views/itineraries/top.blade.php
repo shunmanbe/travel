@@ -18,7 +18,7 @@
         <div class='itinerary'>
             @foreach($details as $detail)
             <div class='itinerary'>
-                <h2 class='title'><a href="/itineraries/{{ $detail->id }}/show">{{ $detail->title }}</a></h2>
+                <h2 class='title'><a href="/itineraries/{{ $detail->id }}/show/{{ $place->id }}">{{ $detail->title }}</a></h2>
             </div>
             @endforeach
             <a href="/itineraries/new_entry/date">新規作成</a>

@@ -68,9 +68,9 @@ class DetailController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show');
     }
     
-    public function show(Detail $detail, Place $place) //日付情報を用いて詳細画面表示
+    public function show(Detail $detail, Place $place) //詳細画面表示
     {
-        return view('/itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first(), 'places' => $place->get()]);
+        return view('/itineraries/show')->with(['detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
     // public function departure_place_store(Request $request, Detail $detail)

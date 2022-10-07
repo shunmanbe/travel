@@ -22,7 +22,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
     Route::get('/itineraries/{detail}/show', 'DetailController@show');//詳細ページへ(出発地のみ登録)
-    Route::get('/itineraries/{detail}/show/{place}', 'PlaceController@show');//詳細ページへ
+    Route::get('/itineraries/{detail}/show/{place}', 'PlaceController@show');//詳細ページへ（目的地決定後）
     
     //出発地を決める
     Route::get('/itineraries/{detail}/departure_place_search', 'DetailController@departure_place_serach');//出発地を検索
@@ -34,7 +34,11 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/destination_search', 'PlaceController@destination_search');//目的地検索
     Route::post('/itineraries/{detail}/destination_map', 'PlaceController@destination_map');//検索ワードからgoogle-placesマップを表示
     Route::post('/itineraries/{detail}/destination_store', 'PlaceController@destination_store');//地図から選択した目的地をデータベースに保存
-    Route::get('/itineraries/{detail}/decided_destination/{place}', 'DetailController@show');//出発地が決定しており、詳細を表示するControllerへ
+    
+    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//登録地を編集
+    Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');
+    Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');
+    
     
     
    
