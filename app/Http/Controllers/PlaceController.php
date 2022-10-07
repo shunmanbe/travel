@@ -8,43 +8,49 @@ use App\Detail;
 
 class PlaceController extends Controller
 {
-   
-     
-    public function departure_place(Detail $detail)//Google Maps Embed API
+    public function destination_search(Detail $detail)
     {
-        return view('/itineraries/departure_place'); 
-    }
-     
-    public function departure_place_serach(Detail $detail)
-    {
-        return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
+        return view('/itineraries/search_destination')->with(['detail' => $detail]);
     }
     
     
-    
-    public function departure_place_map(Request $request, Detail $detail)
+    public function destination_map(Request $request, Detail $detail, Place $place)
     {
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map-places.apikey") . '&query=' . $input_s . '&language=ja';
-        
-        
-        //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $details = json_decode($response->getBody(), true);
-        $place_ids = [ ];
+        $place_addresses = [ ];
         $place_names = [ ];
         //$places = array( );
         for($i = 0; $i < count($details['results']); $i++){
-            $place_ids[ ] = $details['results'][$i]['formatted_address'];
+            $place_addresses[ ] = $details['results'][$i]['formatted_address'];
             $place_names[ ] = $details['results'][$i]['name'];
             //$places[ $details['results'][$i]['place_id'] ] = $details['results'][$i]['name'];
         }
-        $places = array_map(null, $place_ids, $place_names);
-        return view('/itineraries/select_departure_place')->with(['places' => $places, 'detail' => $detail]);
+        $place_details = array_map(null, $place_addresses, $place_names);
+        return view('/itineraries/select_destination')->with(['place_details' => $place_details, 'detail' => $detail, 'place' => $place]);
     }
+    
+    public function destination_store(Request $request, Detail $detail, Place $place)
+    {
+        $place->fill($request['destination'])->save();
+        return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);//出発地を保存
+    }
+    
+    public function show(Detail $detail, Place $place) //目的地を含めた詳細画面表示
+    {
+        
+        return view('/itineraries/show')->with(['detail' => $detail->orderBy('id', 'DESC')->first(), 'places' => $place->get()]);
+    }
+    
+    
+    
+    
+    
     
     public function first_destination_search(Detail $detail)
     {
@@ -56,7 +62,7 @@ class PlaceController extends Controller
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map-places.apikey") . '&query=' . $input_s . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         
         
         //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
@@ -88,7 +94,7 @@ class PlaceController extends Controller
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map-places.apikey") . '&query=' . $input_s . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         
         
         //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
@@ -121,7 +127,7 @@ class PlaceController extends Controller
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map-places.apikey") . '&query=' . $input_s . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         
         
         //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;

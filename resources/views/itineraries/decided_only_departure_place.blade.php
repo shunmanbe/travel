@@ -16,7 +16,7 @@
         @section('content')
         <h2>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</h2>
         
-        <h3>出発地：{{ $detail->departure_place_name }}</h3>
+        <h3>出発地：{{ $place->departure_place_name }}</h3>
         
         <a href ="/itineraries/{{$detail->id}}/first_destination_search">目的地を追加</a>
        

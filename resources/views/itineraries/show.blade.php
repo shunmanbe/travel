@@ -14,12 +14,33 @@
     <body>
         @extends('layouts.app')
         @section('content')
+        <h1>{{ $detail->title }}</h1>
         <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
         
-        <p>出発地</p>
-        <a href ="/itineraries/{{$detail->id}}/departure_place_search">出発地を選択</a>
-       
+        <p>出発地：{{ $detail->departure_place_name }}</p>
+        @if(empty($places))
+        @else
+        @foreach($places as $place)
+        <form action="/itineraries/new_entry/date_store" method="POST">
+            @csrf
+            <select name="Mode">
+                <option value="">移動手段を選択し、経路詳細を表示してください</option>
+                <option value="DRIVING">自動車</option>
+                <option value="TRANSIT">電車</option>
+                <option value="WALKING">徒歩</option>
+            </select>
+        </form>
+        <a href="/itineraries/{{$detail->id}}/route_to_first_destination">経路詳細</a>
+        <p>移動時間：</p>
+        <a>目的地{{ $place->id }}:{{ $place->destination_name }}
+        <br>
+        @endforeach
+        @endif
+        <a href ="/itineraries/{{$detail->id}}/destination_search">出発地を選択</a>
+        <br>
+        <a href ="/">しおり一覧に戻る</a>
         @endsection
         
+
     </body>
 </html>

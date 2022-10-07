@@ -16,16 +16,11 @@ class CreateDetailsTable extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->string('title');
             $table->date('departure_date');
             $table->date('end_date');
             $table->string('departure_place_address')->nullable();
             $table->string('departure_place_name')->nullable();
-            $table->string('first_destination_address')->nullable();
-            $table->string('first_destination_name')->nullable();
-            $table->string('second_destination_address')->nullable();
-            $table->string('second_destination_name')->nullable();
-            $table->string('third_destination_address')->nullable();
-            $table->string('third_destination_name')->nullable();
         });
     }
 

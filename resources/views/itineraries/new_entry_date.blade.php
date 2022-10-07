@@ -17,11 +17,15 @@
         <form action="/itineraries/new_entry/date_store" method="POST">
             @csrf
             <!--//出発日を入力-->
+            <a>旅行タイトル</a>
+            <br>
+            <input type="initial_setting" name="initial_setting[title]">
+            <br>
             <a>出発日</a>
-            <input type="date" name="date[departure_date]">
+            <input type="date" name="initial_setting[departure_date]">
             <br>
             <a>到着日</a>
-            <input type="date" name="date[end_date]">
+            <input type="date" name="initial_setting[end_date]">
             
             <input type="submit" value="次へ">
         </form>

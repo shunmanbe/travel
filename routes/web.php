@@ -18,15 +18,26 @@ Auth::routes();
 
 Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'ItineraryController@index');
+    Route::get('/', 'DetailController@index');
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
-    Route::get('/itineraries/{detail}/show', 'DetailController@show');//日付のみを表示させた詳細ページを表示させるControllerへ
+    Route::get('/itineraries/{detail}/show', 'DetailController@show');//詳細ページへ(出発地のみ登録)
+    Route::get('/itineraries/{detail}/show/{place}', 'PlaceController@show');//詳細ページへ
     
-    Route::get('/itineraries/{detail}/departure_place_search', 'PlaceController@departure_place_serach');//出発地を検索
-    Route::post('/itineraries/{detail}/departure_place_map', 'PlaceController@departure_place_map');//検索ワードからgoogle-placesマップを表示
+    //出発地を決める
+    Route::get('/itineraries/{detail}/departure_place_search', 'DetailController@departure_place_serach');//出発地を検索
+    Route::post('/itineraries/{detail}/departure_place_map', 'DetailController@departure_place_map');//検索ワードからgoogle-placesマップを表示
     Route::post('/itineraries/{detail}/departure_place_store', 'DetailController@departure_place_store');//地図から選択した出発地をデータベースに保存
-    Route::get('/itineraries/{detail}/decided_only_departure_place', 'DetailController@decide_first_destination');//出発地が決定しており、一つ目の目的地を決めるControllerへ
+    Route::get('/itineraries/{detail}/decided_only_departure_place', 'DetailController@decide_first_destination');//出発地が決定しており、詳細を表示するControllerへ
+    
+    //目的地を決める
+    Route::get('/itineraries/{detail}/destination_search', 'PlaceController@destination_search');//目的地検索
+    Route::post('/itineraries/{detail}/destination_map', 'PlaceController@destination_map');//検索ワードからgoogle-placesマップを表示
+    Route::post('/itineraries/{detail}/destination_store', 'PlaceController@destination_store');//地図から選択した目的地をデータベースに保存
+    Route::get('/itineraries/{detail}/decided_destination/{place}', 'DetailController@show');//出発地が決定しており、詳細を表示するControllerへ
+    
+    
+   
     
     Route::get('/itineraries/{detail}/first_destination_search', 'PlaceController@first_destination_search');//目的地1を検索
     Route::post('/itineraries/{detail}/first_destination_map', 'PlaceController@first_destination_map');//検索ワードからgoogle-placesマップを表示
@@ -46,6 +57,14 @@ Route::group(['middleware'=>['auth']], function(){
     
     Route::get('/itineraries/{detail}/route_to_first_destination', 'DetailController@route_to_first_destination');//目的地1までの経路表示ページへ
     
+    
+    
+    
+    
+    
+    
+    
+    Route::get('itineraries/{$detail}/show', 'DetailController@decide_second_destination');//しおり名をクリックするとしおりの詳細ページを表示
     
     
     
