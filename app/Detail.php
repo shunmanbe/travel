@@ -11,8 +11,14 @@ class Detail extends Model
         return $this->hasMany('App\Place');
     }
     
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    
     protected $fillable = [
         'title',
+        'user_id',
         'departure_date', 
         'end_date', 
         'departure_place_address',

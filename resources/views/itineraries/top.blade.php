@@ -20,6 +20,11 @@
             <div class='itinerary'>
                 <h2 class='title'><a href="/itineraries/{{ $detail->id }}/show/{{ $place->id }}">{{ $detail->title }}</a></h2>
             </div>
+            <form action="/itineraries/{{ $detail->id }}" method="post" style="display:inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit">このしおりを削除</button> 
+            </form>
             @endforeach
             <a href="/itineraries/new_entry/date">新規作成</a>
         </div>

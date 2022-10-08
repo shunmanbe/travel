@@ -39,7 +39,9 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');
     Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');
     
-    
+    //削除
+    Route::delete('/itineraries/{detail}', 'DetailController@delete');//しおり一覧からしおりを削除
+    Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@delete');//しおり詳細の目的地を削除
     
    
     

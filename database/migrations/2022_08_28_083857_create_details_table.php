@@ -16,6 +16,7 @@ class CreateDetailsTable extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('title');
             $table->date('departure_date');
             $table->date('end_date');
