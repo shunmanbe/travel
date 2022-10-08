@@ -19,7 +19,7 @@
             <!--//出発日を入力-->
             <a>旅行タイトル</a>
             <br>
-            <input type="initial_setting" name="initial_setting[title]">
+            <input type="text" name="initial_setting[title]">
             <br>
             <a>出発日</a>
             <input type="date" name="initial_setting[departure_date]">
@@ -27,6 +27,7 @@
             <a>到着日</a>
             <input type="date" name="initial_setting[end_date]">
             
+            <input type="hidden" name="initial_setting[user_id]" value={{$user->id}}>
             <input type="submit" value="次へ">
         </form>
        

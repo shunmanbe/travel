@@ -35,6 +35,11 @@
         <p>移動時間：</p>
         <a>目的地{{ $n + 1 }}:{{ $place->destination_name }}
         <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}">目的地を編集</a>
+        <form action="/itineraries/{{ $detail->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit">目的地を削除</button> 
+        </form>
         <br>
         @endforeach
         @endif
