@@ -27,7 +27,6 @@
             <a>到着日</a>
             <input type="date" name="initial_setting[end_date]">
             
-            <input type="hidden" name="initial_setting[user_id]" value={{$user->id}}>
             <input type="submit" value="次へ">
         </form>
        

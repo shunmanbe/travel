@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class DetailController extends Controller
 {
-     public function index(Detail $detail, Place $place, User $user)
+    public function index(Detail $detail, Place $place, User $user)
     {
-        return view('itineraries/top')->with(['details' => $detail->where('user_id', $user->id)->get(), 'place' => $place, 'user' => $user]);
+        return view('itineraries/top')->with(['details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place]);
     }
     
     

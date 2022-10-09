@@ -23,11 +23,12 @@
             <form action="/itineraries/{{ $detail->id }}" method="post" style="display:inline">
             @csrf
             @method('DELETE')
-            <button type="submit">このしおりを削除</button> 
+            <button type="submit" onClick="delete_alert(event);return false;">このしおりを削除</button> 
             </form>
             @endforeach
             <a href="/itineraries/new_entry/date">新規作成</a>
         </div>
         @endsection
+        <script src="{{ asset('/js/alert.js') }}"></script>
     </body>
 </html>
