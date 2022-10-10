@@ -11,8 +11,10 @@
         "php": "^7.2.5|~8.0.0",
         "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.4",
+        "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^6.20.26",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laravelcollective/html": "^6.3"
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",
