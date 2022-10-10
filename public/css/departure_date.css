@@ -1,0 +1,11 @@
+.date_select {
+    background-color: white;
+    text-align:center;
+    font-size: 30px;
+}
+
+.btn {
+    background-color:red;
+    color:red;
+    opacity:0.8;
+}

@@ -8,28 +8,33 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
+        <link rel="stylesheet" href="{{ asset('/css/departure_date.css')  }}" >
       
     </head>
     <body>
         @extends('layouts.app')
         @section('content')
-        <form action="/itineraries/new_entry/date_store" method="POST">
-            @csrf
-            <!--//出発日を入力-->
-            <a>旅行タイトル</a>
-            <br>
-            <input type="text" name="initial_setting[title]">
-            <br>
-            <a>出発日</a>
-            <input type="date" name="initial_setting[departure_date]">
-            <br>
-            <a>到着日</a>
-            <input type="date" name="initial_setting[end_date]">
-            
-            <input type="submit" value="次へ">
-        </form>
-       
+        <div class = "date_select">
+            <form action="/itineraries/new_entry/date_store" method="POST">
+                @csrf
+                <!--//出発日を入力-->
+                <a>旅行タイトル</a>
+                <br>
+                <input type="text" name="initial_setting[title]">
+                <br>
+                <br>
+                <a>出発日</a>
+                <input type="date" name="initial_setting[departure_date]">
+                <br>
+                <br>
+                <a>到着日</a>
+                <input type="date" name="initial_setting[end_date]">
+                <br>
+                <br>
+                <br>
+                    <input class ="btn" type="submit" value="次へ">
+            </form>
+        </div>
         @endsection
        
         
