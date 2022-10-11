@@ -19,12 +19,11 @@ function initMap() {
   //リクエストの終着点の位置（Grand Central Station 到着地点の緯度経度）
   const end = new google.maps.LatLng( 40.752741,-73.9772);  
   
-  console.log(starts);
   // ルートを取得するリクエスト
   const request = {
     origin: starts,      // 出発地点の緯度経度
     destination: ends,   // 到着地点の緯度経度
-    travelMode: 'WALKING' //トラベルモード（歩き）
+    travelMode: travel //トラベルモード（歩き）
   };
   
   //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、

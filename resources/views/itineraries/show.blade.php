@@ -9,13 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
-        <style>
-        #gmap 
-        {
-          height: 400px;
-          width: 600px;
-        }
-        </style>
+       
     </head>
     <body>
         @extends('layouts.app')
@@ -24,11 +18,12 @@
         <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
         
         <p>出発地：{{ $detail->departure_place_name }}</p>
+        <a href="/itineraries/{{$detail->id}}/edit">出発地を編集</a>
         
         @if(empty($places))
         @else
         @foreach($places as $n => $place)
-        <form action="/itineraries/new_entry/date_store" method="POST">
+        <form action="/itineraries/{{$detail->id}}/route" method="POST">
             @csrf
             <select name="Mode">
                 <option value="">移動手段を選択し、経路詳細を表示してください</option>
@@ -36,25 +31,22 @@
                 <option value="TRANSIT">電車</option>
                 <option value="WALKING">徒歩</option>
             </select>
-        </form>
-        <!--<a href="/itineraries/{{$detail->id}}/route">経路詳細</a>-->
-        <div id="gmap"></div><!-- 地図を表示する領域 -->
-        <input type="button" value="経路を表示" onclick="initMap()">
-        <script>
+            <a href="/itineraries/{{$detail->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
             @if($n+1 == 1)
-                var starts = @json($detail->departure_place_name);
-                var ends =@json($places[$n]->destination_name);
-                
+                <!--// var starts = @json($detail->departure_place_name);-->
+                <input type="hidden" name="start" value={{$detail->departure_place_name}}>
+                <!--// var ends =@json($places[$n]->destination_name);-->
+                <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
             @else
-                var starts =@json($places[$n]->destination_name);
-                var ends =@json($places[$n-1]->destination_name);
+                <!--// var starts =@json($places[$n]->destination_name);-->
+                <input type="hidden" name="start" value={{$places[$n]->destination_name}}>
+                <!--// var ends =@json($places[$n+1]->destination_name);-->
+                <input type="hidden" name="end" value={{$places[$n+1]->destination_name}}>
             @endif
+        </form>
         
-            
-            
-        </script>
         
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
+        
         
         <p>移動時間：</p>
         <a>目的地{{ $n + 1 }}:{{ $place->destination_name }}
@@ -75,6 +67,6 @@
         <a href ="/">しおり一覧に戻る</a>
         @endsection
         <script src="{{ asset('/js/alert.js') }}"></script>
-        <script src="{{ asset('/js/map_route.js') }}"></script>
+        
     </body>
 </html>

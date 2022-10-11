@@ -20,19 +20,22 @@
                 <!--//出発日を入力-->
                 <a>旅行タイトル</a>
                 <br>
-                <input type="text" name="initial_setting[title]">
+                <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
                 <br>
+                <p class="title__error" style="color:red">{{ $errors->first('initial_setting.title') }}</p>
                 <br>
                 <a>出発日</a>
-                <input type="date" name="initial_setting[departure_date]">
+                <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                 <br>
+                <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
                 <br>
                 <a>到着日</a>
-                <input type="date" name="initial_setting[end_date]">
+                <input type="date" name="initial_setting[end_date]" value="{{ old('initial_setting.end_date') }}">
+                <br>
+                <p class="end_date__error" style="color:red">{{ $errors->first('initial_setting.end_date') }}</p>
                 <br>
                 <br>
-                <br>
-                    <input class ="btn" type="submit" value="次へ">
+                <input class ="btn" type="submit" value="次へ">
             </form>
         </div>
         @endsection

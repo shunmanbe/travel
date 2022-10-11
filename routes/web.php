@@ -34,6 +34,8 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{detail}/destination_map', 'PlaceController@destination_map');//検索ワードからgoogle-placesマップを表示
     Route::post('/itineraries/{detail}/destination_store', 'PlaceController@destination_store');//地図から選択した目的地をデータベースに保存
     
+    //編集
+    Route::get('/itineraries/{detail}/edit', 'DetailController@edit');//出発地を編集
     Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//登録地を編集
     Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');
     Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');
@@ -43,7 +45,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@delete');//しおり詳細の目的地を削除
     
     //詳細表示
-    Route::get('/itineraries/{detail}/route', 'PlaceController@route');
+    Route::post('/itineraries/{detail}/route', 'DetailController@route');
     
    
 });
