@@ -25,26 +25,21 @@
   </div>
 
   <main>
-    <div id="container">
-      @extends('layouts.app')
-      @section('content')
-            <h1>しおり一覧</h1>
-            <div class='itinerary'>
-                @foreach($details as $detail)
-                    <div class='itinerary'>
-                        <h2 class='title'><a href="/itineraries/{{ $detail->id }}/show/{{ $place->id }}">{{ $detail->title }}</a></h2>
-                    </div>
-                    <form action="/itineraries/{{ $detail->id }}" method="post" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onClick="delete_alert(event);return false;">このしおりを削除</button> 
-                    </form>
-                @endforeach
-                <a href="/itineraries/new_entry/date">新規作成</a>
-            </div>
-    @endsection
-        <script src="{{ asset('/js/alert.js') }}"></script>
-    </div>
+        <div id="container">
+        <!--   @extends('layouts.app')-->
+        <!--  @section('content')-->
+        <!--出発地を選択-->
+        <!--<div class ="select">-->
+        <!--    <h1>出発する地域を検索</h1> -->
+        <!--    <form action="/itineraries/{{$detail->id}}/departure_place_map" method="POST">-->
+        <!--        @csrf-->
+        <!--        <input type="search_name" name="search_name" placeholder="例：東京 マック"　value="{{ old('search_name') }}">-->
+        <!--        <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>-->
+        <!--        <input type="submit" value="検索">-->
+        <!--    </form>-->
+        <!--</div>-->
+        <!--@endsection-->
+        </div>
   </main>
 <!--==============JQuery読み込み===============-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -57,7 +52,3 @@
 <script src="{{ asset('/js/4-1-1.js') }}"></script>
 </body>
 </html>
-
-        
-        
-       

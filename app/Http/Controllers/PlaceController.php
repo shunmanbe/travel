@@ -92,9 +92,5 @@ class PlaceController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show');
     }
     
-    //ルートを表示
-    public function route()
-    {
-        
-    }
+    
 }

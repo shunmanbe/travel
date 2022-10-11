@@ -11,6 +11,8 @@ use App\Prefecture;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DetailDateRequest;
+use App\Http\Requests\DetailSearchRequest;
 
 class DetailController extends Controller
 {
@@ -25,12 +27,14 @@ class DetailController extends Controller
         return view('itineraries/new_entry_date')->with(['user' => $user]);
     }
     
-    public function date_store(Request $request, Detail $detail)//日付を保存
+    //日付を保存
+    public function date_store(DetailDateRequest $request, Detail $detail)
     {
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $detail->fill($input_date)->save();
-        return redirect('/itineraries/'.$detail->id.'/departure_place_search');//地域選択画面を表示するweb.phpへ
+        //地域選択画面を表示するweb.phpへ
+        return redirect('/itineraries/'.$detail->id.'/departure_place_search');
     }
     
     public function departure_place_serach(Detail $detail)
@@ -38,25 +42,21 @@ class DetailController extends Controller
         return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
     }
     
-    public function departure_place_map(Request $request, Detail $detail)
+    public function departure_place_map(DetailSearchRequest $request, Detail $detail)
     {
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
         $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
-        
-        
-        //$url = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . config("services.google-map.apikey") . '&q=' . $input_s;
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $details_get = json_decode($response->getBody(), true);
         $place_ids = [ ];
         $place_names = [ ];
-        //$places = array( );
-        for($i = 0; $i < count($details_get['results']); $i++){
+        for($i = 0; $i < count($details_get['results']); $i++)
+        {
             $place_ids[ ] = $details_get['results'][$i]['formatted_address'];
             $place_names[ ] = $details_get['results'][$i]['name'];
-            //$places[ $details['results'][$i]['place_id'] ] = $details['results'][$i]['name'];
         }
         $place_details = array_map(null, $place_ids, $place_names);
         return view('/itineraries/select_departure_place')->with(['detail' => $detail,'place_details' => $place_details]);
@@ -70,15 +70,38 @@ class DetailController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show');
     }
     
-    public function show(Detail $detail, Place $place) //詳細画面表示
+    //詳細画面表示
+    public function show(Detail $detail, Place $place) 
     {
         return view('/itineraries/show')->with(['detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
-    
+    //しおりを削除
     public function delete(Detail $detail)
     {
         $detail->delete();
         return redirect('/');
     }
     
+    //出発地を編集
+    public function edit(Detail $detail)
+    {
+        return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
+    }
+    
+    //ルートを表示
+    public function route(Request $request, Detail $detail)
+    {
+        $mode = $request->input('Mode');
+        // $start = $request->input('start');
+        $end = $request->input('end');
+        // $start = $request->start;
+        // $start = $request['start'];
+        // $start = $request->('start');
+        // $start = $request->input[start];
+        
+        
+        
+        dd($start);
+        return view('itineraries/route')->with(['mode'=> $mode, 'start' => $start, 'end' => $end]);
+    }
 }

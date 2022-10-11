@@ -18,7 +18,7 @@
         <h1>目的地を検索</h1> 
         <form action="/itineraries/{{$detail->id}}/destination_map" method="POST">
             @csrf
-            <input type="search_name" name="search_name" placeholder="例：東京 マック">
+            <input type="text" name="search_name" placeholder="例：東京 マック">
             <input type="submit" value="検索">
         </form>
         

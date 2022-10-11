@@ -19,7 +19,8 @@
             <h1>出発する地域を検索</h1> 
             <form action="/itineraries/{{$detail->id}}/departure_place_map" method="POST">
                 @csrf
-                <input type="search_name" name="search_name" placeholder="例：東京 マック">
+                <input type="text" name="search_name" placeholder="例：東京 マック"　value="{{ old('search_name') }}">
+                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
                 <input type="submit" value="検索">
             </form>
         </div>
