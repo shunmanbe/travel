@@ -18,7 +18,8 @@ class DetailController extends Controller
 {
     public function index(Detail $detail, Place $place, User $user)
     {
-        return view('itineraries/top')->with(['details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place]);
+        $auth = Auth::user();
+        return view('itineraries/top')->with(['auth' => $auth, 'details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place]);
     }
     
     
@@ -92,16 +93,22 @@ class DetailController extends Controller
     public function route(Request $request, Detail $detail)
     {
         $mode = $request->input('Mode');
-        // $start = $request->input('start');
+        $start = $request->start;
         $end = $request->input('end');
-        // $start = $request->start;
+        
         // $start = $request['start'];
         // $start = $request->('start');
         // $start = $request->input[start];
+     
         
-        
-        
-        dd($start);
         return view('itineraries/route')->with(['mode'=> $mode, 'start' => $start, 'end' => $end]);
     }
+    
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+    
+
 }

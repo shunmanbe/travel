@@ -22,9 +22,9 @@
         <div id="gmap"></div><!-- 地図を表示する領域 -->
         <input type="button" value="経路を表示" onclick="initMap()">
         <script>
-            var mode = {{$mode}};
-            var start = {{$start}};
-            var end = {{$end}};
+            var starts = '{{$start}}';
+            var ends = '{{$end}}';
+            var travel = '{{$mode}}';
         </script>
         @endsection
        

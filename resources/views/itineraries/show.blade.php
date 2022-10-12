@@ -39,9 +39,9 @@
                 <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
             @else
                 <!--// var starts =@json($places[$n]->destination_name);-->
-                <input type="hidden" name="start" value={{$places[$n]->destination_name}}>
-                <!--// var ends =@json($places[$n+1]->destination_name);-->
-                <input type="hidden" name="end" value={{$places[$n+1]->destination_name}}>
+                <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
+                <!--// var ends =@json($places[$n]->destination_name);-->
+                <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
             @endif
         </form>
         
