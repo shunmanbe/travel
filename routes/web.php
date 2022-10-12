@@ -47,5 +47,7 @@ Route::group(['middleware'=>['auth']], function(){
     //詳細表示
     Route::post('/itineraries/{detail}/route', 'DetailController@route');
     
+    //ログアウト
+    Route::get('itineraries/logout', 'DetailController@logout');
    
 });
