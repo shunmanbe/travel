@@ -76,6 +76,7 @@ class DetailController extends Controller
     {
         return view('/itineraries/show')->with(['detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
+    
     //しおりを削除
     public function delete(Detail $detail)
     {
@@ -83,8 +84,23 @@ class DetailController extends Controller
         return redirect('/');
     }
     
+    //しおり名・旅行期間を編集
+    public function edit_new_entry(Detail $detail, User $user)
+    {
+        return view('itineraries/edit_new_entry')->with(['detail' => $detail, 'user' => $user]);
+    }
+    
+    //しおり名と旅行期間をアップデート
+    public function update_new_entry(DetailDateRequest $request, Detail $detail)
+    {
+        $input_date = $request['initial_setting'];
+        $input_date['user_id'] = Auth::id();
+        $detail->fill($input_date)->save();
+        return view('/itineraries/show')->with(['detail' => $detail]);
+    }
+    
     //出発地を編集
-    public function edit(Detail $detail)
+    public function edit_departure(Detail $detail)
     {
         return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
     }
