@@ -9,12 +9,23 @@
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('/css/departure_date.css')  }}" >
+        <!--アイコン表示-->
+        <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--ヘッダー-->
+        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
       
     </head>
     <body>
-        @extends('layouts.app')
-        @section('content')
-        <div class = "date_select">
+        <header>
+            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-right">
+                <ul>
+                    <li>{{ $auth->name }}</li>
+                    <li><a href="/itineraries/logout">ログアウト</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class = "container">
             <form action="/itineraries/{{$detail->id}}/new_entry/update" method="POST">
                 @csrf
                 @method('PUT')
@@ -39,7 +50,7 @@
                 <input class ="btn" type="submit" value="次へ">
             </form>
         </div>
-        @endsection
+        
        
         
     </body>

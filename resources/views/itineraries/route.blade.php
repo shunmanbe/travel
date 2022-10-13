@@ -15,19 +15,30 @@
               width: 600px;
             }
         </style>
+        <!--アイコン表示-->
+        <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--ヘッダー-->
+        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>
-        @extends('layouts.app')
-        @section('content')
-        <div id="gmap"></div><!-- 地図を表示する領域 -->
-        <input type="button" value="経路を表示" onclick="initMap()">
-        <script>
-            var starts = '{{$start}}';
-            var ends = '{{$end}}';
-            var travel = '{{$mode}}';
-        </script>
-        @endsection
-       
+        <header>
+            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-right">
+                <ul>
+                    <li>{{ $auth->name }}</li>
+                    <li><a href="/itineraries/logout">ログアウト</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="container">
+            <div id="gmap"></div><!-- 地図を表示する領域 -->
+            <input type="button" value="経路を表示" onclick="initMap()">
+            <script>
+                var starts = '{{$start}}';
+                var ends = '{{$end}}';
+                var travel = '{{$mode}}';
+            </script>
+        </div>
         <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
         <script src="{{ asset('/js/map_route.js') }}"></script>
     </body>

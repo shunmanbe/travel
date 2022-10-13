@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\Detail;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DetailSearchRequest;
 
 class PlaceController extends Controller
 {
@@ -14,12 +16,14 @@ class PlaceController extends Controller
     //目的地を検索
     public function destination_search(Detail $detail)
     {
-        return view('/itineraries/search_destination')->with(['detail' => $detail]);
+        $auth = Auth::user();
+        return view('/itineraries/search_destination')->with(['auth' => $auth, 'detail' => $detail]);
     }
     
     //目的地を地図表示
-    public function destination_map(Request $request, Detail $detail, Place $place)
+    public function destination_map(DetailSearchRequest $request, Detail $detail, Place $place)
     {
+        $auth = Auth::user();
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
@@ -35,7 +39,7 @@ class PlaceController extends Controller
             $place_names[ ] = $details['results'][$i]['name'];
         }
         $place_details = array_map(null, $place_addresses, $place_names);
-        return view('/itineraries/select_destination')->with(['place_details' => $place_details, 'detail' => $detail, 'place' => $place]);
+        return view('/itineraries/map_destination')->with(['auth' => $auth, 'place_details' => $place_details, 'detail' => $detail, 'place' => $place]);
     }
     
     //目的地を保存
@@ -48,18 +52,21 @@ class PlaceController extends Controller
     //目的地を含めた詳細画面表示
     public function show(Detail $detail, Place $place) 
     {
-        return view('/itineraries/show')->with(['detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        $auth = Auth::user();
+        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
     //目的地を編集
     public function edit(Detail $detail, Place $place)
     {
-        return view('/itineraries/search_destination_edit')->with(['detail' => $detail, 'place' => $place]);
+        $auth = Auth::user();
+        return view('/itineraries/search_destination_edit')->with(['auth' => $auth, 'detail' => $detail, 'place' => $place]);
     }
     
     //編集時の地図表示
     public function edit_departure_place_map(Request $request, Detail $detail, Place $place)
     {
+        $auth = Auth::user();
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
@@ -75,7 +82,7 @@ class PlaceController extends Controller
             $place_names[ ] = $details['results'][$i]['name'];
         }
         $place_details = array_map(null, $place_addresses, $place_names);
-        return view('/itineraries/select_destination_edit')->with(['place_details' => $place_details, 'detail' => $detail, 'place' => $place]);
+        return view('/itineraries/map_destination_edit')->with(['auth' => $auth, 'place_details' => $place_details, 'detail' => $detail, 'place' => $place]);
     }
     
     //編集内容を更新
