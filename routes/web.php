@@ -38,7 +38,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/new_entry/edit', 'DetailController@edit_new_entry');//しおり名と旅行期間を編集
     Route::put('/itineraries/{detail}/new_entry/update', 'DetailController@update_new_entry');//しおり名と旅行期間をアップデート
     Route::get('/itineraries/{detail}/departure/edit', 'DetailController@edit_departure');//出発地を編集
-    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//登録地を編集
+    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//目的地を編集
     Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');
     Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');
     

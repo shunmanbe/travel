@@ -25,7 +25,8 @@ class DetailController extends Controller
     
     public function date_select(User $user)
     {
-        return view('itineraries/new_entry_date')->with(['user' => $user]);
+        $auth = Auth::user();
+        return view('itineraries/new_entry_date')->with(['auth' => $auth, 'user' => $user]);
     }
     
     //日付を保存
@@ -40,11 +41,13 @@ class DetailController extends Controller
     
     public function departure_place_serach(Detail $detail)
     {
-        return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
+        $auth = Auth::user();
+        return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'detail' => $detail]);
     }
     
     public function departure_place_map(DetailSearchRequest $request, Detail $detail)
     {
+        $auth = Auth::user();
         $input_s = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
@@ -60,7 +63,7 @@ class DetailController extends Controller
             $place_names[ ] = $details_get['results'][$i]['name'];
         }
         $place_details = array_map(null, $place_ids, $place_names);
-        return view('/itineraries/select_departure_place')->with(['detail' => $detail,'place_details' => $place_details]);
+        return view('/itineraries/map_departure_place')->with(['auth' => $auth, 'detail' => $detail,'place_details' => $place_details]);
     }
     
     public function departure_place_store(Request $request, Place $place, Detail $detail)
@@ -74,7 +77,8 @@ class DetailController extends Controller
     //詳細画面表示
     public function show(Detail $detail, Place $place) 
     {
-        return view('/itineraries/show')->with(['detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        $auth = Auth::user();
+        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
     //しおりを削除
@@ -87,37 +91,35 @@ class DetailController extends Controller
     //しおり名・旅行期間を編集
     public function edit_new_entry(Detail $detail, User $user)
     {
-        return view('itineraries/edit_new_entry')->with(['detail' => $detail, 'user' => $user]);
+        $auth = Auth::user();
+        return view('itineraries/edit_new_entry')->with(['auth' => $auth, 'detail' => $detail, 'user' => $user]);
     }
     
     //しおり名と旅行期間をアップデート
     public function update_new_entry(DetailDateRequest $request, Detail $detail)
     {
+        $auth = Auth::user();
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $detail->fill($input_date)->save();
-        return view('/itineraries/show')->with(['detail' => $detail]);
+        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail]);
     }
     
     //出発地を編集
     public function edit_departure(Detail $detail)
     {
-        return view('/itineraries/search_departure_place')->with(['detail' => $detail]);
+        $auth = Auth::user();
+        return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'detail' => $detail]);
     }
     
     //ルートを表示
     public function route(Request $request, Detail $detail)
     {
+        $auth = Auth::user();
         $mode = $request->input('Mode');
-        $start = $request->start;
+        $start = $request->input('start');
         $end = $request->input('end');
-        
-        // $start = $request['start'];
-        // $start = $request->('start');
-        // $start = $request->input[start];
-     
-        
-        return view('itineraries/route')->with(['mode'=> $mode, 'start' => $start, 'end' => $end]);
+        return view('itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end]);
     }
     
     public function logout()
