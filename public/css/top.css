@@ -47,18 +47,20 @@ header {
     background-color: #ffdab9;
     width: 100%;
     height: 80px;
+    position: fixed;
 }
 
 .header-title {
     line-height: 80px;
-    margin:0 auto;
-    padding-left: 40%;
-    float: left;
+    text-align: center;
 }
 
 .header-right ul {
     list-style: none;
     float: right;
+    position: fixed;
+    top: 0px;
+    right: 0px;
 }
 
 .header-right li {
@@ -97,6 +99,7 @@ a {
     background-color: #fffaf0;
     font-size: 28px;
     width: 100%;
+    padding-top: 80px;
 }
 
 .itineraries h1 {

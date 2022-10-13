@@ -16,9 +16,10 @@
         @section('content')
         <h1>{{ $detail->title }}</h1>
         <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
+        <a href="/itineraries/{{$detail->id}}/new_entry/edit">しおり名と期間を編集</a>
         
         <p>出発地：{{ $detail->departure_place_name }}</p>
-        <a href="/itineraries/{{$detail->id}}/edit">出発地を編集</a>
+        <a href="/itineraries/{{$detail->id}}/departure/edit">出発地を編集</a>
         
         @if(empty($places))
         @else
