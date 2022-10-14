@@ -107,12 +107,18 @@ section:nth-child(2n){
 }
 
 /*ここまでがページトップリンク*/
+.containers {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 20px;
+}
 
-/*.containers {*/
-/*    padding-top: 100px;*/
-/*    text-align: center;*/
-/*    font-size: 20px;*/
-/*}*/
+.container {
+    padding-top: 50px;
+    text-align: center;
+    font-size: 40px;
+    padding-bottom: 80px;
+}
 
 .btn {
     border: 2px solid orange;

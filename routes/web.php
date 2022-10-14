@@ -46,10 +46,16 @@ Route::group(['middleware'=>['auth']], function(){
     Route::delete('/itineraries/{detail}', 'DetailController@delete');//しおり一覧からしおりを削除
     Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@delete');//しおり詳細の目的地を削除
     
-    //詳細表示
+    //経路詳細表示
     Route::post('/itineraries/{detail}/route', 'DetailController@route');
     
     //ログアウト
-    Route::get('itineraries/logout', 'DetailController@logout');
+    Route::get('/itineraries/logout', 'DetailController@logout');
+    
+    //メモ
+    Route::get('/itineraries/{detail}/memo/{place}', 'PlaceController@memo');
+    
+    //各地点の出発・到着時刻を保存
+    Route::post('/itineraries/{detail}/time_store/{place}', 'PlaceController@time_store');
    
 });

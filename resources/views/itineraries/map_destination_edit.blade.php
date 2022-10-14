@@ -21,7 +21,7 @@
             <div class="header-title"><h1>旅のしおり</h1></div>
             <div class="header-right">
                 <ul>
-                    <li>{{ $auth->name }}</li>
+                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
                     <li><a href="/itineraries/logout">ログアウト</a></li>
                 </ul>
             </div>

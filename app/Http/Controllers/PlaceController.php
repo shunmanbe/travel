@@ -99,5 +99,19 @@ class PlaceController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show');
     }
     
+    //メモ
+    public function memo(Detail $detail, Place $place)
+    {
+        $auth = Auth::user();
+        return view('itineraries/memo')->with(['auth' => $auth, 'place' => $place]);
+    }
     
+    //出発時刻を保存
+    public function time_store(Request $request, Detail $detail, Place $place)
+    {
+        $auth = Auth::user();
+        $input = $request->input('time');
+        $place->fill($input)->save();
+        return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+    }
 }
