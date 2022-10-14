@@ -13,13 +13,15 @@
         <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--ヘッダー-->
+        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>
         <header>
             <div class="header-title"><h1>旅のしおり</h1></div>
             <div class="header-right">
                 <ul>
-                    <li>{{ $auth->name }}</li>
+                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
                     <li><a href="/itineraries/logout">ログアウト</a></li>
                 </ul>
             </div>
@@ -39,7 +41,7 @@
                     <br>
                     <br>
                     <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_detail[1] }}'
-                    width='50%' height='300' frameborder='0'></iframe>
+                    width='50%' height='500' frameborder='0'></iframe>
                 </form>
             </div>
             @endforeach

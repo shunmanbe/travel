@@ -19,6 +19,8 @@ class CreatePlacesTable extends Migration
             $table->integer('detail_id')->unsigned()->nullable();
             $table->string('destination_address')->nullable();
             $table->string('destination_name')->nullable();
+            $table->datetime('departure_time')->nullable();
+            $table->datetime('arrival_time')->nullable();
         });
     }
 

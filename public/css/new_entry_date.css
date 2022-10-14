@@ -1,4 +1,11 @@
 /*ここからmain*/
+.container {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 40px;
+    padding-bottom: 80px;
+}
+
 .btn {
     border: 2px solid orange;
     border-radius: 40px;

@@ -13,6 +13,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DetailDateRequest;
 use App\Http\Requests\DetailSearchRequest;
+use App\Http\Requests\ModeRequest;
+use Illuminate\Support\Facades\Validator;
 
 class DetailController extends Controller
 {
@@ -113,13 +115,13 @@ class DetailController extends Controller
     }
     
     //ルートを表示
-    public function route(Request $request, Detail $detail)
+    public function route(ModeRequest $request, Detail $detail)
     {
         $auth = Auth::user();
         $mode = $request->input('Mode');
         $start = $request->input('start');
         $end = $request->input('end');
-        return view('itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end]);
+        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end]);
     }
     
     public function logout()
@@ -127,6 +129,6 @@ class DetailController extends Controller
         Auth::logout();
         return redirect('/');
     }
-    
+
 
 }

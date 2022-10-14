@@ -19,7 +19,7 @@
             <div class="header-title"><h1>旅のしおり</h1></div>
             <div class="header-right">
                 <ul>
-                    <li>{{ $auth->name }}</li>
+                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
                     <li><a href="/itineraries/logout">ログアウト</a></li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
             <h1>出発する地域を検索</h1> 
             <form action="/itineraries/{{$detail->id}}/departure_place_map" method="POST">
                 @csrf
-                <input type="text" name="search_name" placeholder="例：東京スカイツリー"　value="{{ old('search_name') }}">
+                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
                 <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
                 <input class ="btn" type="submit" value="検索">
             </form>
