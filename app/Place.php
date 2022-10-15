@@ -15,5 +15,7 @@ class Place extends Model
         'detail_id',
         'destination_address',
         'destination_name',
+        'departure_time',
+        'arrival_time'
         ];
 }

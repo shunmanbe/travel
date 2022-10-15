@@ -4,11 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>旅のしおり</title>
+        <title>Itinerary</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
+        <!--ページトップリンク-->
+        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ヘッダー-->
@@ -24,15 +26,9 @@
                 </ul>
             </div>
         </header>
-        <!--目的地を選択-->
         <div class="container">
-            <h1>目的地を検索</h1> 
-            <form action="/itineraries/{{$detail->id}}/destination_map" method="POST">
-                @csrf
-                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
-                <input class="btn" type="submit" value="検索">
-            </form>
+            {{ __('送信完了') }}
         </div>
     </body>
 </html>
+

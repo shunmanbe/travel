@@ -4,11 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>旅のしおり</title>
+        <title>Itinerary</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
+        <style>
+            #gmap 
+            {
+              height: 400px;
+              width: 600px;
+            }
+        </style>
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ヘッダー-->
@@ -24,15 +30,16 @@
                 </ul>
             </div>
         </header>
-        <!--目的地を選択-->
         <div class="container">
-            <h1>目的地を検索</h1> 
-            <form action="/itineraries/{{$detail->id}}/destination_map" method="POST">
-                @csrf
-                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
-                <input class="btn" type="submit" value="検索">
-            </form>
+            <div id="gmap"></div><!-- 地図を表示する領域 -->
+            <input type="button" value="経路を表示" onclick="initMap()">
+            <script>
+                var starts = '{{$start}}';
+                var ends = '{{$end}}';
+                var travel = '{{$mode}}';
+            </script>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
+        <script src="{{ asset('/js/map_route.js') }}"></script>
     </body>
 </html>

@@ -34,7 +34,11 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{detail}/destination_map', 'PlaceController@destination_map');//検索ワードからgoogle-placesマップを表示
     Route::post('/itineraries/{detail}/destination_store', 'PlaceController@destination_store');//地図から選択した目的地をデータベースに保存
     
-    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//登録地を編集
+    //編集
+    Route::get('/itineraries/{detail}/new_entry/edit', 'DetailController@edit_new_entry');//しおり名と旅行期間を編集
+    Route::put('/itineraries/{detail}/new_entry/update', 'DetailController@update_new_entry');//しおり名と旅行期間をアップデート
+    Route::get('/itineraries/{detail}/departure/edit', 'DetailController@edit_departure');//出発地を編集
+    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//目的地を編集
     Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');
     Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');
     
@@ -42,8 +46,22 @@ Route::group(['middleware'=>['auth']], function(){
     Route::delete('/itineraries/{detail}', 'DetailController@delete');//しおり一覧からしおりを削除
     Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@delete');//しおり詳細の目的地を削除
     
-    //詳細表示
-    Route::get('/itineraries/{detail}/route', 'PlaceController@route');
+    //経路詳細表示
+    Route::post('/itineraries/{detail}/route', 'DetailController@route');
     
+    //ログアウト
+    Route::get('/itineraries/logout', 'DetailController@logout');
+    
+    //メモ
+    Route::get('/itineraries/{detail}/memo/{place}', 'PlaceController@memo');
+    
+    //各地点の出発・到着時刻を保存
+    Route::post('/itineraries/{detail}/time_store/{place}', 'PlaceController@time_store');
    
+    //お問い合わせ
+    Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ
+    Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');//入力確認ページ
+    Route::post('/itineraries/contact/send', 'ContactsController@send');
+    
+    
 });
