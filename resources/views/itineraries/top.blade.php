@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Itinerary</title>
+        <title>旅のしおり</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -55,8 +55,15 @@
                     <a class="new_entry" href="/itineraries/new_entry/date">新規作成</a>
                 </div>
             </div>
-            <script src="{{ asset('/js/alert.js') }}"></script>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
+        <script src="{{ asset('/js/alert.js') }}"></script>
         <!--==============JQuery読み込み===============-->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
