@@ -58,4 +58,10 @@ Route::group(['middleware'=>['auth']], function(){
     //各地点の出発・到着時刻を保存
     Route::post('/itineraries/{detail}/time_store/{place}', 'PlaceController@time_store');
    
+    //お問い合わせ
+    Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ
+    Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');//入力確認ページ
+    Route::post('/itineraries/contact/send', 'ContactsController@send');
+    
+    
 });
