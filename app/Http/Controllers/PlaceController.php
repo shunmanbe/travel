@@ -8,6 +8,8 @@ use App\Detail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DetailSearchRequest;
+use App\Http\Requests\DepartureTimeRequest;
+use App\Http\Requests\ArrivalTimeRequest;
 
 class PlaceController extends Controller
 {
@@ -29,7 +31,7 @@ class PlaceController extends Controller
         //検索ワードに関連する施設の詳細情報を取得
         $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         $response = $client->request('GET', $url,
-        ['Bearer' => config('serveices.google-map.apikey')]);
+        ['Bearer' => config('serveices.google-map.apikey'), 'max'=>2]);
         $details = json_decode($response->getBody(), true);
         $place_addresses = [ ];
         $place_names = [ ];
@@ -107,10 +109,19 @@ class PlaceController extends Controller
     }
     
     //出発時刻を保存
-    public function time_store(Request $request, Detail $detail, Place $place)
+    public function departure_time_store(DepartureTimeRequest $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
-        $input = $request->input('time');
+        $input = $request['time'];
+        $place->fill($input)->save();
+        return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+    }
+    
+     //出発時刻を保存
+    public function arrival_time_store(ArrivalTimeRequest $request, Detail $detail, Place $place)
+    {
+        $auth = Auth::user();
+        $input = $request->input('arrival_time');
         $place->fill($input)->save();
         return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }

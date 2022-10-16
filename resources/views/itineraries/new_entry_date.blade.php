@@ -8,9 +8,10 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/new_entry_date.css')  }}" >
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="{{ asset('/css/new_entry_date.css')  }}" >
         <!--ヘッダー-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
