@@ -109,7 +109,7 @@ class PlaceController extends Controller
     }
     
     //出発時刻を保存
-    public function departure_time_store(DepartureTimeRequest $request, Detail $detail, Place $place)
+    public function departure_time_store(Request $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
         $input = $request['time'];
@@ -118,10 +118,10 @@ class PlaceController extends Controller
     }
     
      //出発時刻を保存
-    public function arrival_time_store(ArrivalTimeRequest $request, Detail $detail, Place $place)
+    public function arrival_time_store(Request $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
-        $input = $request->input('arrival_time');
+        $input = $request['time'];
         $place->fill($input)->save();
         return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }

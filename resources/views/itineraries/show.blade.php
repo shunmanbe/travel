@@ -61,8 +61,6 @@
                                     <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
                                         @csrf
                                         <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
-                                        
-                                        <p class="title__error" style="color:red">{{ $errors->first('time.departure_time') }}</p>
                                     </form>
                                 @else
                                     <p>出発時刻：{{$place->departure_time}}</p>
@@ -95,7 +93,6 @@
                                     <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                         @csrf
                                         <p>到着時刻：<input type="datetime-local" name="arrival_time"><input class ="btn" type="submit" value="保存"></p>
-                                        <p class="title__error" style="color:red">{{ $errors->first('time.arrival_time') }}</p>
                                     </form>
                                 @else
                                     <p>到着時刻：{{$place->arrival_time}}</p>
