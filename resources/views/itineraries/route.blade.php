@@ -38,7 +38,7 @@
             </div>
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>
-            <!--<input type="button" value="経路を表示" onclick="initMap()">-->
+            <input type="button" value="経路を表示" onclick="initMap()">
             <script>
                 var starts = '{{$start}}';
                 var ends = '{{$end}}';
@@ -46,6 +46,7 @@
             </script>
             <a href="/itineraries/{{$detail->id}}/show">戻る</a>
         </div>
+        <!--callback関数でapiを呼び出すときにcallback関数でinitMapを呼び出している-->
         <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
         <script src="{{ asset('/js/map_route.js') }}"></script>
     </body>
