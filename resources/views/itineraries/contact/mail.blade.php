@@ -38,13 +38,6 @@
                 ■お問い合わせ内容<br>
                 {!! nl2br($body) !!}<br>
         </div>
-        <!--ページトップリンク-->
-        <footer id="footer">
-            <p id="page-top"><a href="#">Page Top</a></p> 
-        </footer>
-        <!--ページトップリンク-->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="{{ asset('/js/page_top_link.js') }}"></script>
     </body>
 </html>
 
