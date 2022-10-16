@@ -56,16 +56,20 @@
                             @endfor
                         </div>
                         <div class="supplement">
-                            @if(empty($place->departure_time))
-                                <form action="/itineraries/{{$detail->id}}/time_store/{{$place->id}}" method="POST">
-                                    @csrf
-                                    <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
-                                </form>
-                            @else
-                                <p>出発時刻：{{$place->departure_time}}</p>
-                            @endif
+                            <div class="departure_time">
+                                @if(empty($place->departure_time))
+                                    <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
+                                        @csrf
+                                        <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
+                                        
+                                        <p class="title__error" style="color:red">{{ $errors->first('time.departure_time') }}</p>
+                                    </form>
+                                @else
+                                    <p>出発時刻：{{$place->departure_time}}</p>
+                                @endif
+                            </div>
                             <div class="route">
-                                <form action="/itineraries/{{$detail->id}}/route" method="POST">
+                                <form action="/itineraries/{{$detail->id}}/route/{{$place->id}}" method="POST">
                                     @csrf
                                     <select name="Mode">
                                         <option value="">移動手段を選択</option>
@@ -88,9 +92,10 @@
                             <p>移動時間：</p>
                             <div class="arrival">
                                 @if(empty($place->arrival_time))
-                                    <form  action="/itineraries/{{$detail->id}}/time_store/{{$place->id}}" method="POST">
+                                    <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                         @csrf
-                                        <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
+                                        <p>到着時刻：<input type="datetime-local" name="arrival_time"><input class ="btn" type="submit" value="保存"></p>
+                                        <p class="title__error" style="color:red">{{ $errors->first('time.arrival_time') }}</p>
                                     </form>
                                 @else
                                     <p>到着時刻：{{$place->arrival_time}}</p>
@@ -99,7 +104,7 @@
                         </div>
                     </div>
                             <div class="destination">
-                                <p class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
+                                <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
                                     <!--目的地編集-->
                                     <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                     <!--目的地メモ-->
@@ -110,7 +115,7 @@
                                         @method('DELETE') 
                                         <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
                                     </form>
-                                </p>
+                                </div>
                             </div>
                         <br>
                     @endforeach

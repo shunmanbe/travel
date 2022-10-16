@@ -55,8 +55,11 @@ Route::group(['middleware'=>['auth']], function(){
     //メモ
     Route::get('/itineraries/{detail}/memo/{place}', 'PlaceController@memo');
     
-    //各地点の出発・到着時刻を保存
-    Route::post('/itineraries/{detail}/time_store/{place}', 'PlaceController@time_store');
+    //各地点の出発時刻を保存
+    Route::post('/itineraries/{detail}/departure_time_store/{place}', 'PlaceController@departure_time_store');
+    
+    //各地点の到着時刻を保存
+    Route::post('/itineraries/{detail}/arrival_time_store/{place}', 'PlaceController@arrival_time_store');
    
     //お問い合わせ
     Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ
