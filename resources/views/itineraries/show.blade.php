@@ -28,13 +28,10 @@
         </header>
         <div class="containers">
             <!--しおり名-->
-            <div class="title">
+            <div class="theme">
                 <h1>{{ $detail->title }}</h1>
-                <div  class="title_supplement">
-                    <a href="/itineraries/{{$detail->id}}/new_entry/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
-                </div>
-                
-                <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
+                <a>　　期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</a>
+                <a href="/itineraries/{{$detail->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
             </div>
             
             <div class="departure">
@@ -46,7 +43,6 @@
                 </p>
             </div>
             
-            </div>
             <div class="destinations">
                 @if(empty($places))
                 @else
@@ -80,28 +76,26 @@
                                     <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
                                     <a href="/itineraries/{{$detail->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
                                     @if($n+1 == 1)
-                                        <!--// var starts = @json($detail->departure_place_name);-->
                                         <input type="hidden" name="start" value={{$detail->departure_place_name}}>
-                                        <!--// var ends =@json($places[$n]->destination_name);-->
                                         <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
                                     @else
-                                        <!--// var starts =@json($places[$n]->destination_name);-->
                                         <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
-                                        <!--// var ends =@json($places[$n]->destination_name);-->
                                         <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
                                     @endif
                                 </form>
                             </div>
                         
                             <p>移動時間：</p>
-                            @if(empty($place->arrival_time))
-                                <form action="/itineraries/{{$detail->id}}/time_store/{{$place->id}}" method="POST">
-                                    @csrf
-                                    <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
-                                </form>
-                            @else
-                                <p>到着時刻：{{$place->arrival_time}}</p>
-                            @endif
+                            <div class="arrival">
+                                @if(empty($place->arrival_time))
+                                    <form  action="/itineraries/{{$detail->id}}/time_store/{{$place->id}}" method="POST">
+                                        @csrf
+                                        <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
+                                    </form>
+                                @else
+                                    <p>到着時刻：{{$place->arrival_time}}</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                             <div class="destination">
