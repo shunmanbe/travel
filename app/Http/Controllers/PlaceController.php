@@ -45,6 +45,7 @@ class PlaceController extends Controller
     //目的地を保存
     public function destination_store(Request $request, Detail $detail, Place $place)
     {
+        //dd($request['destination']);
         $place->fill($request['destination'])->save();
         return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);
     }

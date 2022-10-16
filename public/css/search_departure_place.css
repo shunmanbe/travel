@@ -36,12 +36,12 @@ input {
     font-family: 筑紫A丸ゴシック;
     font-weight: bold;
     font-size: 20px;
-    box-shadow: 0px 6px #72220A;
+    box-shadow: 0px 5px #72220A;
 }
 
 .btn:active {
     box-shadow: none;
     position:relative;
     left: 0px;
-    top: 6px;
+    top: 5px;
 }
