@@ -8,13 +8,16 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
          <!--ページトップリンク-->
         <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/page_top_link')  }}" >
         <!--ヘッダー-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        
     </head>
     <body>
         <header>

@@ -18,7 +18,7 @@
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <h1 class="header-title">旅のしおり</div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -31,7 +31,7 @@
             <div class="title">
                 <h1>{{ $detail->title }}</h1>
                 <div  class="title_supplement">
-                    <a href="/itineraries/{{$detail->id}}/new_entry/edit"><i class="fa-solid fa-pen-to-square"></i>しおり名・期間を編集</a>
+                    <a href="/itineraries/{{$detail->id}}/new_entry/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 
                 <a>期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}
@@ -39,7 +39,7 @@
             
             <div class="departure">
                 <p class="name">
-                    出発地：{{ $detail->departure_place_name }}
+                    <a>出発地：{{ $detail->departure_place_name }}</a>
                     <a class="departure_supplement" href="/itineraries/{{$detail->id}}/departure/edit">
                     <!--編集アイコン-->
                     <i class="fa-solid fa-pen-to-square icon"></i></a>
@@ -110,11 +110,11 @@
                                     <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                     <!--目的地メモ-->
                                     <a class="memo" href="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
-                                    
+                                    <!--目的地削除-->
                                     <form action="/itineraries/{{ $detail->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
                                         @csrf
-                                        @method('DELETE')
-                                        <input class="trash" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
+                                        @method('DELETE') 
+                                        <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
                                     </form>
                                 </p>
                             </div>
@@ -122,9 +122,11 @@
                     @endforeach
                 @endif
             </div>
-            <a href ="/itineraries/{{$detail->id}}/destination_search">目的地を選択</a>
-            <br>
-            <a href ="/">しおり一覧に戻る</a>
+            <div class="center">
+                <a href ="/itineraries/{{$detail->id}}/destination_search">目的地を選択</a>
+                <br>
+                <a href ="/">しおり一覧に戻る</a>
+            </div>
         </div>
         <script src="{{ asset('/js/alert.js') }}"></script>
     </body>
