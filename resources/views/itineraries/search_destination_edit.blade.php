@@ -4,15 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Itinerary</title>
+        <title>旅のしおり</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
         <!--ヘッダー-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
-      
     </head>
     <body>
         <header>
@@ -24,13 +25,14 @@
                 </ul>
             </div>
         </header>
+        <!--目的地を選択-->
         <div class="container">
-            <!--出発地を選択-->
             <h1>目的地を検索</h1> 
-            <form action="/itineraries/{{$detail->id}}/destination_map/edit/{{$place->id}}" method="POST">
+            <form action="/itineraries/{{$detail->id}}/destination_map" method="POST">
                 @csrf
-                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索">
-                <input type="submit" value="検索">
+                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
+                <input class="btn" type="submit" value="検索">
             </form>
         </div>
     </body>

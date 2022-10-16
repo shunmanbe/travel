@@ -17,6 +17,8 @@
         </style>
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="{{ asset('/css/route.css')  }}" >
         <!--ヘッダー-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
@@ -31,13 +33,18 @@
             </div>
         </header>
         <div class="container">
-            <div id="gmap"></div><!-- 地図を表示する領域 -->
-            <input type="button" value="経路を表示" onclick="initMap()">
+            <div class="title">
+                <h1>経路：{{$start}}→{{$end}}</h1>
+            </div>
+            <!-- 地図を表示する領域 -->
+            <div id="gmap"></div>
+            <!--<input type="button" value="経路を表示" onclick="initMap()">-->
             <script>
                 var starts = '{{$start}}';
                 var ends = '{{$end}}';
                 var travel = '{{$mode}}';
             </script>
+            <a href="/itineraries/{{$detail->id}}/show">戻る</a>
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
         <script src="{{ asset('/js/map_route.js') }}"></script>

@@ -115,13 +115,13 @@ class DetailController extends Controller
     }
     
     //ルートを表示
-    public function route(ModeRequest $request, Detail $detail)
+    public function route(ModeRequest $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
         $mode = $request->input('Mode');
         $start = $request->input('start');
         $end = $request->input('end');
-        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end]);
+        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'detail' => $detail]);
     }
     
     public function logout()

@@ -26,7 +26,7 @@
         </header>
         <!--出発地を選択-->
         <div class="container">
-            <h1>出発する地域を検索</h1> 
+            <h1>出発地を検索</h1> 
             <form action="/itineraries/{{$detail->id}}/departure_place_map" method="POST">
                 @csrf
                 <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
