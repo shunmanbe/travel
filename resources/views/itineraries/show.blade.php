@@ -38,8 +38,9 @@
                 <p class="name">
                     <a>出発地：{{ $detail->departure_place_name }}</a>
                     <a class="departure_supplement" href="/itineraries/{{$detail->id}}/departure/edit">
-                    <!--編集アイコン-->
-                    <i class="fa-solid fa-pen-to-square icon"></i></a>
+                        <!--編集アイコン-->
+                        <i class="fa-solid fa-pen-to-square icon"></i>
+                    </a>
                 </p>
             </div>
             
@@ -47,73 +48,88 @@
                 @if(empty($places))
                 @else
                     @foreach($places as $n => $place)
-                    <div class="to_destination">
-                        <div class="triangles">
-                            @for ($i=0; $i<3; $i++)
-                                <br>
-                                <div class="triangle"></div>
-                                <br>
-                            @endfor
-                        </div>
-                        <div class="supplement">
-                            <div class="departure_time">
-                                @if(empty($place->departure_time))
-                                    <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
-                                        @csrf
-                                        <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
-                                    </form>
-                                @else
-                                    <p>出発時刻：{{$place->departure_time}}</p>
-                                @endif
+                        <div class="to_destination">
+                            <div class="triangles">
+                                @for ($i=0; $i<3; $i++)
+                                    <br>
+                                    <div class="triangle"></div>
+                                    <br>
+                                @endfor
                             </div>
-                            <div class="route">
-                                <form action="/itineraries/{{$detail->id}}/route/{{$place->id}}" method="POST">
-                                    @csrf
-                                    <select name="Mode">
-                                        <option value="">移動手段を選択</option>
-                                        <option value="DRIVING">自動車</option>
-                                        <option value="TRANSIT">電車</option>
-                                        <option value="WALKING">徒歩</option>
-                                    </select>
-                                    <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
-                                    <a href="/itineraries/{{$detail->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
-                                    @if($n+1 == 1)
-                                        <input type="hidden" name="start" value={{$detail->departure_place_name}}>
-                                        <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                            <div class="supplement">
+                                <div class="departure_time">
+                                    @if(empty($place->departure_time))
+                                        <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
+                                            @csrf
+                                            <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
+                                        </form>
+                                        
                                     @else
-                                        <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
-                                        <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                            <p>出発時刻：{{$place->departure_time}}
+                                            <form action="/itineraries/{{ $detail->id }}/departure_time/{{ $place->id }}/edit" method="post">
+                                                @csrf
+                                                @method('PUT') 
+                                                <input type="submit" value="&#xf044;"> 
+                                            </form>
+                                                <a class="departure_time" href="/itineraries/{{$detail->id}}/departure_time/edit">
+                                                    <!--編集アイコン-->
+                                                    <i class="fa-solid fa-pen-to-square icon"></i>
+                                                </a>
+                                                
+                                            </p>
                                     @endif
-                                </form>
-                            </div>
-                        
-                            <p>移動時間：</p>
-                            <div class="arrival">
-                                @if(empty($place->arrival_time))
-                                    <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
+                                </div>
+                                <div class="route">
+                                    <form action="/itineraries/{{$detail->id}}/route/{{$place->id}}" method="POST">
                                         @csrf
-                                        <p>到着時刻：<input type="datetime-local" name="arrival_time"><input class ="btn" type="submit" value="保存"></p>
-                                    </form>
-                                @else
-                                    <p>到着時刻：{{$place->arrival_time}}</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                            <div class="destination">
-                                <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
-                                    <!--目的地編集-->
-                                    <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
-                                    <!--目的地メモ-->
-                                    <a class="memo" href="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
-                                    <!--目的地削除-->
-                                    <form action="/itineraries/{{ $detail->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
-                                        @csrf
-                                        @method('DELETE') 
-                                        <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
+                                        <select name="Mode">
+                                            <option value="">移動手段を選択</option>
+                                            <option value="DRIVING">自動車</option>
+                                            <option value="TRANSIT">電車</option>
+                                            <option value="WALKING">徒歩</option>
+                                        </select>
+                                        <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
+                                        <a href="/itineraries/{{$detail->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
+                                        @if($n+1 == 1)
+                                            <input type="hidden" name="start" value={{$detail->departure_place_name}}>
+                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                        @else
+                                            <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
+                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                        @endif
                                     </form>
                                 </div>
+                                <div class="arrival">
+                                    @if(empty($place->arrival_time))
+                                        <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
+                                            @csrf
+                                            <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
+                                        </form>
+                                    @else
+                                        <p>到着時刻：{{$place->arrival_time}}
+                                             <a class="departure_time" href="/itineraries/{{$detail->id}}/arrival_time/edit">
+                                                <!--編集アイコン-->
+                                                <i class="fa-solid fa-pen-to-square icon"></i>
+                                            </a>
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
+                        </div>
+                        <div class="destination">
+                            <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
+                                <!--目的地編集-->
+                                <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                <!--目的地メモ-->
+                                <a class="memo" href="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
+                                <!--目的地削除-->
+                                <form action="/itineraries/{{ $detail->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
+                                    @csrf
+                                    @method('DELETE') 
+                                    <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
+                                </form>
+                            </div>
+                        </div>
                         <br>
                     @endforeach
                 @endif

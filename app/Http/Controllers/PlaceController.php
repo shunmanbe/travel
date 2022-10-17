@@ -114,15 +114,17 @@ class PlaceController extends Controller
         $auth = Auth::user();
         $input = $request['time'];
         $place->fill($input)->save();
-        return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        return redirect('/itineraries/'.$detail->id.'/show');
+        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
-     //出発時刻を保存
+     //到着時刻を保存
     public function arrival_time_store(Request $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
         $input = $request['time'];
         $place->fill($input)->save();
-        return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        return redirect('/itineraries/'.$detail->id.'/show');
+        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
 }

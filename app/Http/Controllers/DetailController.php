@@ -129,6 +129,14 @@ class DetailController extends Controller
         Auth::logout();
         return redirect('/');
     }
+    
+    
+    public function edit_departure_time(Detail $detail, Place $place)
+    {
+        $place->departure_time = null;
+        $place->save();
+        return redirect('/itineraries/'. $detail->id .'/show/');
+    }
 
 
 }

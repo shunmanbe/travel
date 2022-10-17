@@ -79,6 +79,14 @@ form {
     margin: auto;
 }
 
+.route {
+    margin: 110px 0px;
+}
+
+.supplement p{
+    margin: 0px;
+}
+
 .center {
     text-align: center;
     font-size: 20px;
