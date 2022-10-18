@@ -53,7 +53,8 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/logout', 'DetailController@logout');
     
     //メモ
-    Route::get('/itineraries/{detail}/memo/{place}', 'PlaceController@memo');
+    Route::get('/itineraries/{detail}/memo/{place}', 'PlaceController@memo');//メモページへ
+    Route::post('/itineraries/{detail}/memo/{place}/store', 'PlaceController@memo_store');//メモを保存
     
     //各地点の出発時刻
     Route::post('/itineraries/{detail}/departure_time_store/{place}', 'PlaceController@departure_time_store');//保存

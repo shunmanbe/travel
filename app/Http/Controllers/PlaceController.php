@@ -105,7 +105,15 @@ class PlaceController extends Controller
     public function memo(Detail $detail, Place $place)
     {
         $auth = Auth::user();
-        return view('itineraries/memo')->with(['auth' => $auth, 'place' => $place]);
+        return view('itineraries/memo')->with(['auth' => $auth, 'detail' => $detail, 'place' => $place]);
+    }
+    
+    //メモを保存
+    public function memo_store(Detail $detail, Place $place, Request $request)
+    {
+        $input_memo = $request->input('memo');
+        $place->fill($input_memo)->save();
+        return redirect('/itineraries/'.$detail->id.'/show');
     }
     
     //出発時刻を保存
