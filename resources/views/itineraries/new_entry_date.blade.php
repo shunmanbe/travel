@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Itinerary</title>
-
+        <title>旅のしおり</title>
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--CSS-->
-        <link rel="stylesheet" href="{{ asset('/css/new_entry_date.css')  }}" >
-        <!--ヘッダー-->
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/title_date.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>
@@ -47,5 +47,12 @@
                 </form>
             </div>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

@@ -10,15 +10,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--ヘッダー-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
-        <!--各ページcss-->
+        <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
-       
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <!--header-->
+        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>
         <header>
-            <h1 class="header-title">旅のしおり</div>
+            <div class="header-title"><h1>旅のしおり</h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -140,6 +141,13 @@
                 <a href ="/">しおり一覧に戻る</a>
             </div>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
         <script src="{{ asset('/js/alert.js') }}"></script>
     </body>
 </html>

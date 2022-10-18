@@ -7,12 +7,12 @@ body {
 a {
     text-decoration:none;
     font-weight: bold;
+    color: black;
 }
-
-a:visited{
-  color: inherit;
+a:hover{
+     /*text-decoration: none;   */
+     color: orange;
 }
-
 
 /*ここからはheader*/
 header {
