@@ -1,5 +1,5 @@
 /*mapのページだけ"user agent stylesheet"が邪魔しているようなのでheader情報を追加*/
-header-title h1 {
+.header-title h1 {
     font-size: 40px;
 }
 

@@ -21,6 +21,7 @@ class CreatePlacesTable extends Migration
             $table->string('destination_name')->nullable();
             $table->datetime('departure_time')->nullable();
             $table->datetime('arrival_time')->nullable();
+            $table->string('memo')->nullable();
         });
     }
 
