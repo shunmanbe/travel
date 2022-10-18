@@ -27,7 +27,8 @@
             </div>
         </header>
         <div class="container">
-            {{ __('送信完了') }}
+            {{ __('送信完了') }}--
+            <a href="/">トップページに戻る</a>
         </div>
     </body>
 </html>

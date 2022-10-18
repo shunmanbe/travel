@@ -31,7 +31,7 @@ class PlaceController extends Controller
         //検索ワードに関連する施設の詳細情報を取得
         $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         $response = $client->request('GET', $url,
-        ['Bearer' => config('serveices.google-map.apikey'), 'max'=>2]);
+        ['Bearer' => config('serveices.google-map.apikey')]);
         $details = json_decode($response->getBody(), true);
         $place_addresses = [ ];
         $place_names = [ ];
