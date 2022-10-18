@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\ContactsSendmail;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ContactRequest;
 
 class ContactsController extends Controller
 {
@@ -16,17 +17,9 @@ class ContactsController extends Controller
         return view('itineraries/contact/form')->with(['auth' => $auth]);
     }
     
-    public function confirm(User $user, Request $request)
+    public function confirm(User $user, ContactRequest $request)
     {
         $auth = Auth::user();
-        // バリデーションルールを定義
-        // 引っかかるとエラーを起こしてくれる
-        $request->validate([
-        'email' => 'required|email',
-        'title' => 'required',
-        'body' => 'required',
-        ]);
-    
         // フォームからの入力値を全て取得
         $inputs = $request->all();
     
@@ -38,12 +31,6 @@ class ContactsController extends Controller
     public function send(User $user, Request $request)
     {
         $auth = Auth::user();
-        // バリデーション
-        $request->validate([
-        'email' => 'required|email',
-        'title' => 'required',
-        'body' => 'required'
-        ]);
     
         // actionの値を取得
         $action = $request->input('action');
@@ -65,7 +52,7 @@ class ContactsController extends Controller
             // ユーザにメールを送信
             \Mail::to($inputs['email'])->send(new ContactsSendmail($inputs));
             // 自分にメールを送信
-            \Mail::to('dspsblab@gmail.com')->send(new ContactsSendmail($inputs));
+            \Mail::to('travel.itinerary.service@gmail.com')->send(new ContactsSendmail($inputs));
     
             // 二重送信対策のためトークンを再発行
             $request->session()->regenerateToken();

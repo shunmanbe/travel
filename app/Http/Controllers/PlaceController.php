@@ -8,6 +8,8 @@ use App\Detail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DetailSearchRequest;
+use App\Http\Requests\DepartureTimeRequest;
+use App\Http\Requests\ArrivalTimeRequest;
 
 class PlaceController extends Controller
 {
@@ -108,11 +110,22 @@ class PlaceController extends Controller
     }
     
     //出発時刻を保存
-    public function time_store(Request $request, Detail $detail, Place $place)
+    public function departure_time_store(Request $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
-        $input = $request->input('time');
+        $input = $request['time'];
         $place->fill($input)->save();
-        return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        return redirect('/itineraries/'.$detail->id.'/show');
+        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+    }
+    
+     //到着時刻を保存
+    public function arrival_time_store(Request $request, Detail $detail, Place $place)
+    {
+        $auth = Auth::user();
+        $input = $request['time'];
+        $place->fill($input)->save();
+        return redirect('/itineraries/'.$detail->id.'/show');
+        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
 }

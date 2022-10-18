@@ -14,17 +14,32 @@ function initMap() {
   //directionsRenderer と地図を紐付け
   directionsRenderer.setMap(map); 
   
-  //リクエストの出発点の位置（Empire State Building 出発地点の緯度経度）
-  const start = new google.maps.LatLng(40.748541, -73.985758);  
-  //リクエストの終着点の位置（Grand Central Station 到着地点の緯度経度）
-  const end = new google.maps.LatLng( 40.752741,-73.9772);  
-  
   // ルートを取得するリクエスト
   const request = {
-    origin: starts,      // 出発地点の緯度経度
-    destination: ends,   // 到着地点の緯度経度
-    travelMode: travel //トラベルモード（歩き）
+    origin: start,      // 出発地点
+    destination: end,   // 到着地点
+    travelMode: travel //トラベルモード
   };
+  
+  function timeRequired(response, status) {
+	    if(status == "OK") 
+	    {
+        for (var i = 0; i < origins.length; i++)
+        {
+          var results = response.rows[i].elements;
+          for (var j = 0; j < results.length; j++) 
+          {
+            var element = results[j];
+            var distance = element.distance.text;
+            var duration = element.duration.text;
+            var from = origins[i];
+            var to = destinations[j];
+            var routeTime = document.getElementById("route-time");
+            routeTime.innerHTML = "およそ" + duration + "で着きます"
+	         }
+        }
+	    }  
+   }
   
   //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、
   //コールバック関数で結果を setDirections(result) で directionsRenderer にセットして表示

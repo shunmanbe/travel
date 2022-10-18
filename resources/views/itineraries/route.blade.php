@@ -38,14 +38,15 @@
             </div>
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>
-            <!--<input type="button" value="経路を表示" onclick="initMap()">-->
-            <script>
-                var starts = '{{$start}}';
-                var ends = '{{$end}}';
-                var travel = '{{$mode}}';
-            </script>
+            <p>地図がうまく表示されない場合はリロードしてください</p>
             <a href="/itineraries/{{$detail->id}}/show">戻る</a>
         </div>
+        <script>
+            var start = '{{$start}}';
+            var end = '{{$end}}';
+            var travel = '{{$mode}}';
+        </script>
+        <!--callback関数でapiを呼び出すときにcallback関数でinitMapを呼び出している-->
         <script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" async defer></script>
         <script src="{{ asset('/js/map_route.js') }}"></script>
     </body>

@@ -121,6 +121,7 @@ class DetailController extends Controller
         $mode = $request->input('Mode');
         $start = $request->input('start');
         $end = $request->input('end');
+        //falseにする。ここに到達すればバリデーションテェックは通過。
         return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'detail' => $detail]);
     }
     
@@ -128,6 +129,14 @@ class DetailController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+    
+    
+    public function edit_departure_time(Detail $detail, Place $place)
+    {
+        $place->departure_time = null;
+        $place->save();
+        return redirect('/itineraries/'. $detail->id .'/show/');
     }
 
 

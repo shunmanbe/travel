@@ -6,6 +6,10 @@
     padding-bottom: 80px;
 }
 
+input {
+    font-size: 30px;
+}
+
 .btn {
     border: 2px solid orange;
     border-radius: 40px;
@@ -14,12 +18,13 @@
     color: white;
     font-family: 筑紫A丸ゴシック;
     font-weight: bold;
-    box-shadow: 0px 10px #72220A;
+    box-shadow: 0px 6px #72220A;
 }
 
 .btn:active {
     box-shadow: none;
     position:relative;
     left: 0px;
-    top: 10px;
+    top: 6px;
 }
+

@@ -21,8 +21,10 @@ class ModeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Place $place)
     {
+        //ここでtrueにする
+        //渡されたplace以外はfalseにする？
         return [
             'Mode' => 'required'
         ];

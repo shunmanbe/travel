@@ -1,5 +1,5 @@
 /*placeholderにアイコンを表示*/
-.use_icon {
+.use_icon::placeholder{
     /*これを書くことでアイコン表示可能*/
 	font-family: FontAwesome; 
 	/*その他の文字が太くなるので以下で調整*/
