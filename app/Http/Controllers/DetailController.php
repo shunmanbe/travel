@@ -121,6 +121,7 @@ class DetailController extends Controller
         $mode = $request->input('Mode');
         $start = $request->input('start');
         $end = $request->input('end');
+        //falseにする。ここに到達すればバリデーションテェックは通過。
         return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'detail' => $detail]);
     }
     
