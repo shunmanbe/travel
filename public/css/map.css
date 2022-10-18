@@ -1,4 +1,8 @@
-/*ここまでがページトップリンク*/
+/*mapのページだけ"user agent stylesheet"が邪魔しているようなのでheader情報を追加*/
+header-title h1 {
+    font-size: 40px;
+}
+
 .containers {
     padding-top: 100px;
     text-align: center;
@@ -11,7 +15,6 @@
     padding-top: 30px;
     text-align: center;
     font-size: 25px;
-   
 }
 
 .btn {

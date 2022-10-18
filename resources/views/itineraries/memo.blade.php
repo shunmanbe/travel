@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Itinerary</title>
+        <title>旅のしおり</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -28,8 +28,12 @@
         <div class = "container">
             <p>{{$place->destination_name}}</p>
         </div>
-        
-       
-        
+        <footer>
+            <div class="footer-wrapper">
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

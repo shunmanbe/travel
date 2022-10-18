@@ -1,102 +1,38 @@
-@charset "utf-8";
-
-/*========= LoadingのためのCSS ===============*/
-
-/* Loading背景画面設定　*/
-
-#splash {
-    /*fixedで全面に固定*/
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  background:#333;
-  text-align:center;
-  color:#fff;
-}
-
-
-/*========= レイアウトのためのCSS ===============*/
-
-
-/*#container{*/
-/*    width:100%;*/
-/*    height: 100vh;*/
-/*    background: #ccc;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    text-align: center;*/
-/*}*/
-
-
-a{
-    color: #333;
-}
-a:hover{
-     text-decoration: none;   
-}
-
-/*ここまでがローディング用*/
 body {
     font-family: 筑紫A丸ゴシック;
     background-color: #fffaf0;
 }
 
-/*ここからはheader*/
-header {
-    background-color: #ffdab9;
-    width: 100%;
-    position: fixed;
-    z-index: 10;
-}
-
-.header-title {
-    line-height: 80px;
-    text-align: center;
-    font-size: 25px;
-}
-
-.header-right ul {
-    list-style: none;
-    float: right;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-}
-
-.header-right li {
-    float: left;
-    line-height: 80px;
-    padding-right: 25px
-}
-
-.header-right a {
-    display: block;
-    /*background-color: rgba(255, 218, 185, 0.1);*/
-    transition: all 0.5s;
-    padding: 0px 20px;
-}
-.header-right a:hover {
-    background-color: #ffa500;
-}
-
 /*ここからmain*/
 a {
-    text-decoration:none;
+    text-decoration: none;
 }
 
-.title {
+.index {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.index-detail {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.theme {
     text-align: left;
     width: 80%;
     background: linear-gradient(to right, #fffaf0 0%, #fffaf0 51%, #FFDCAC 100%);
     background-size: 200% auto;
-    transition: .3s;
+    transition: 0.3s;
 }
-.title:hover {
+.theme:hover {
     position: relative;
     top: 5px;
     background-position: right center;
+}
+
+.theme a {
+    display: block;
 }
 
 .trash {
@@ -140,15 +76,16 @@ a {
 
 .new_entry {
     padding: 8px 24px;
-    color: snow;
+    color: white;
     display: inline-block;
     font-weight: bold;
     border-radius: 100px;
-    background-color: rgba(230, 116, 71, 0.8);
+    background-color: rgba(255, 140, 0, 0.8);
     transition: 0.3s;
     text-align: center;
     margin: auto;
 }
+
 
 .new_entry:hover {
     color: #ff8c00;
@@ -161,41 +98,3 @@ a {
     top: 6px;
     
 }
-
-footer {
-    background-color: #ffdab9;
-    width: 100%;
-    height: 80px;
-    position: fixed;
-    bottom: 0px;
-    z-index: 10;
-    margin:0 auto;
-}
-
-.footer-wrapper {
-
-}
-
-.footer-wrapper ul {
-    text-align: right;
-}
-
-.footer-wrapper li {
-    padding-right: 25px;
-    line-height: 80px;
-}
-
-.footer-wrapper a {
-    padding: 0px 20px;
-    
-}
-
-
-/*.index_detail {*/
-/*    margin:0;*/
-/*    margin-right: 10%;*/
-/*    margin-left: 40%;*/
-/*    width: 50%;*/
-/*}    */
-    
-
