@@ -38,13 +38,13 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/new_entry/edit', 'DetailController@edit_new_entry');//しおり名と旅行期間を編集
     Route::put('/itineraries/{detail}/new_entry/update', 'DetailController@update_new_entry');//しおり名と旅行期間をアップデート
     Route::get('/itineraries/{detail}/departure/edit', 'DetailController@edit_departure');//出発地を編集
-    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//目的地を編集
-    Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');//目的地を選択
+    Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit_destination');//目的地を編集
+    Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_destination_map');//目的地を選択
     Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@destination_update');//目的地をアップデート
     
     //削除
-    Route::delete('/itineraries/{detail}', 'DetailController@delete');//しおり一覧からしおりを削除
-    Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@delete');//しおり詳細の目的地を削除
+    Route::delete('/itineraries/{detail}', 'DetailController@itinerary_delete');//しおり一覧からしおりを削除
+    Route::delete('/itineraries/{detail}/destinetion/{place}','PlaceController@destination_delete');//しおり詳細の目的地を削除
     
     //経路詳細表示
     Route::post('/itineraries/{detail}/route/{place}', 'DetailController@route');
