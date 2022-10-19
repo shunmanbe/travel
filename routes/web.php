@@ -40,7 +40,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{detail}/departure/edit', 'DetailController@edit_departure');//出発地を編集
     Route::get('/itineraries/{detail}/edit/{place}', 'PlaceController@edit');//目的地を編集
     Route::post('/itineraries/{detail}/destination_map/edit/{place}', 'PlaceController@edit_departure_place_map');//目的地を選択
-    Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@update');//目的地をアップデート
+    Route::put('/itineraries/{detail}/destination_update/{place}', 'PlaceController@destination_update');//目的地をアップデート
     
     //削除
     Route::delete('/itineraries/{detail}', 'DetailController@delete');//しおり一覧からしおりを削除

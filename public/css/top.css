@@ -44,6 +44,7 @@ a {
 .trash:hover {
     position: relative;
     top: 5px;
+    color: orange;
 }
 
 .container {

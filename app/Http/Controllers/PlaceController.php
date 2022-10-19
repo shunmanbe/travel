@@ -90,8 +90,8 @@ class PlaceController extends Controller
     //編集内容を更新
     public function update(Request $request, Detail $detail, Place $place)
     {
-        $place->fill($request['destination'])->save();
-        return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);//目的地をupdate
+        $place->fill($request->('destination'))->save();
+        return redirect('/itineraries/'.$detail->id.'/show');//目的地をupdate
     }
     
     //削除
@@ -123,7 +123,6 @@ class PlaceController extends Controller
         $input = $request['time'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$detail->id.'/show');
-        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
      //到着時刻を保存
@@ -133,6 +132,5 @@ class PlaceController extends Controller
         $input = $request['time'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$detail->id.'/show');
-        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
 }
