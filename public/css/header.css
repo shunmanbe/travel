@@ -10,8 +10,10 @@ a {
     color: black;
 }
 a:hover{
-     /*text-decoration: none;   */
      color: orange;
+}
+span {
+    font-weight: bold;
 }
 
 /*ここからはheader*/
@@ -27,6 +29,7 @@ header {
     text-align: center;
     font-size: 20px;
 }
+
 header h1 {
     margin: 0 auto;
 }
@@ -48,11 +51,12 @@ header h1 {
 
 .header-right a {
     display: block;
-    transition: all 0.5s;
+    transition: all 0.3s;
     padding: 0px 20px;
     height: 80px;
 }
 
 .header-right a:hover {
     background-color: #ffa500;
+    color: black;
 }

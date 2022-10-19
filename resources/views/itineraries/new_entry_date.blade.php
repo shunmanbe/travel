@@ -30,29 +30,21 @@
                 <form action="/itineraries/new_entry/date_store" method="POST">
                     @csrf
                     <!--//出発日を入力-->
-                    <a>旅行タイトル</a>
+                    <span>旅行タイトル</span>
                     <br>
                     <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
                     <p class="title__error" style="color:red">{{ $errors->first('initial_setting.title') }}</p>
-                    <a>出発日</a>
+                    <span>出発日</span>
                     <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                     <br>
                     <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
-                    <a>到着日</a>
+                    <span>到着日</span>
                     <input type="date" name="initial_setting[end_date]" value="{{ old('initial_setting.end_date') }}">
                     <br>
                     <p class="end_date__error" style="color:red">{{ $errors->first('initial_setting.end_date') }}</p>
-                    <br>
                     <input class ="btn" type="submit" value="次へ">
                 </form>
             </div>
         </div>
-        <footer>
-            <div class="footer-wrapper">
-                <ul>
-                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
-            </div>
-        </footer>
     </body>
 </html>

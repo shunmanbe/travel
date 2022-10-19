@@ -11,9 +11,8 @@ use App\Prefecture;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\DetailDateRequest;
-use App\Http\Requests\DetailSearchRequest;
 use App\Http\Requests\ModeRequest;
+use App\Http\Requests\DetailDateRequest;
 use Illuminate\Support\Facades\Validator;
 
 class DetailController extends Controller
@@ -104,7 +103,7 @@ class DetailController extends Controller
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $detail->fill($input_date)->save();
-        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail]);
+        return redirect('/itineraries/' . $detail->id . '/show');
     }
     
     //出発地を編集

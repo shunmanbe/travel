@@ -21,7 +21,7 @@ class ModeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Place $place)
+    public function rules()
     {
         //ここでtrueにする
         //渡されたplace以外はfalseにする？

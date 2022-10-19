@@ -31,13 +31,13 @@
             <!--しおり名-->
             <div class="theme">
                 <h1>{{ $detail->title }}</h1>
-                <a>　　期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</a>
+                <span>　　期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</span>
                 <a href="/itineraries/{{$detail->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
             </div>
             
             <div class="departure">
                 <p class="name">
-                    <a>出発地：{{ $detail->departure_place_name }}</a>
+                    <span>出発地：{{ $detail->departure_place_name }}</span>
                     <a class="departure_supplement" href="/itineraries/{{$detail->id}}/departure/edit">
                         <!--編集アイコン-->
                         <i class="fa-solid fa-pen-to-square icon"></i>
