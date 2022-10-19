@@ -21,8 +21,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/', 'DetailController@index');
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
-    Route::get('/itineraries/{detail}/show', 'DetailController@show');//詳細ページへ(出発地のみ登録)
-    Route::get('/itineraries/{detail}/show/{place}', 'PlaceController@show');//詳細ページへ（目的地決定後）
+    Route::get('/itineraries/{detail}/show', 'DetailController@show');//詳細ページへ
     
     //出発地を決める
     Route::get('/itineraries/{detail}/departure_place_search', 'DetailController@departure_place_serach');//出発地を検索
