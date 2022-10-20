@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ModeRequest;
 use App\Http\Requests\DetailDateRequest;
+use App\Http\Requests\DetailSearchRequest;
 use Illuminate\Support\Facades\Validator;
 
 class DetailController extends Controller
@@ -83,7 +84,7 @@ class DetailController extends Controller
     }
     
     //しおりを削除
-    public function delete(Detail $detail)
+    public function itinerary_delete(Detail $detail)
     {
         $detail->delete();
         return redirect('/');

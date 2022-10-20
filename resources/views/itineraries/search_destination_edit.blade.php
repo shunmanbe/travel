@@ -28,7 +28,7 @@
         <!--目的地を選択-->
         <div class="container">
             <h1>目的地を検索</h1> 
-            <form action="/itineraries/{{$detail->id}}/destination_map" method="POST">
+            <form action="/itineraries/{{$detail->id}}/destination_map/edit/{{$place->id}}" method="POST">
                 @csrf
                 <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
                 <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
