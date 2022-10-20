@@ -91,7 +91,7 @@ class PlaceController extends Controller
     public function destination_update(Request $request, Detail $detail, Place $place)
     {
         $place->fill($request->input('destination'))->save();
-        return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);//目的地をupdate
+        return redirect('/itineraries/'.$detail->id.'/show');//目的地をupdate
     }
     
     //削除

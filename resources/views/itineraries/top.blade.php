@@ -46,7 +46,7 @@
                         @foreach($details as $detail)
                             <div class="itinerary">
                                 <div class="theme">
-                                    <h2><a href="/itineraries/{{ $detail->id }}/show/{{ $place->id }}">{{ $detail->title }}</a></h2>
+                                    <h2><a href="/itineraries/{{ $detail->id }}/completed_show">{{ $detail->title }}</a></h2>
                                 </div>
                                 <form action="/itineraries/{{ $detail->id }}" method="post">
                                     @csrf
