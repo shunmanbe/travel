@@ -8,8 +8,6 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/top.css')  }}" >
-
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
@@ -17,6 +15,14 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/loading.css') }}" >
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/top.css')  }}" >
+        <!--loading-->
+        <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <!--header-->
+        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
 
     <body>
@@ -36,11 +42,11 @@
             <div class='itineraries'>
                 <h1>しおり一覧</h1>
                 <div class="index">
-                    <div class="index_detail">
+                    <div class="index-detail">
                         @foreach($details as $detail)
                             <div class="itinerary">
-                                <div class="title">
-                                    <h2><a href="/itineraries/{{ $detail->id }}/show/{{ $place->id }}">{{ $detail->title }}</a></h2>
+                                <div class="theme">
+                                    <h2><a href="/itineraries/{{ $detail->id }}/completed_show">{{ $detail->title }}</a></h2>
                                 </div>
                                 <form action="/itineraries/{{ $detail->id }}" method="post">
                                     @csrf

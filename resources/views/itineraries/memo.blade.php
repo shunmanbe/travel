@@ -4,14 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Itinerary</title>
+        <title>旅のしおり</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/departure_date.css')  }}" >
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--ヘッダー-->
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/memo.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
       
     </head>
@@ -26,10 +29,20 @@
             </div>
         </header>
         <div class = "container">
-            <p>{{$place->destination_name}}</p>
+            <h2>{{$place->destination_name}}</h2>
+            <form action="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}/store" method="POST">
+                @csrf
+                <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
+                <br>
+                <input type="submit" value="保存して詳細ページへ">
+            </form>
         </div>
-        
-       
-        
+        <footer>
+            <div class="footer-wrapper">
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

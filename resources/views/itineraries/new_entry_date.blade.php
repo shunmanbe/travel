@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Itinerary</title>
-
+        <title>旅のしおり</title>
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--CSS-->
-        <link rel="stylesheet" href="{{ asset('/css/new_entry_date.css')  }}" >
-        <!--ヘッダー-->
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/title_date.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>
@@ -30,19 +30,18 @@
                 <form action="/itineraries/new_entry/date_store" method="POST">
                     @csrf
                     <!--//出発日を入力-->
-                    <a>旅行タイトル</a>
+                    <span>旅行タイトル</span>
                     <br>
                     <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
                     <p class="title__error" style="color:red">{{ $errors->first('initial_setting.title') }}</p>
-                    <a>出発日</a>
+                    <span>出発日</span>
                     <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                     <br>
                     <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
-                    <a>到着日</a>
+                    <span>到着日</span>
                     <input type="date" name="initial_setting[end_date]" value="{{ old('initial_setting.end_date') }}">
                     <br>
                     <p class="end_date__error" style="color:red">{{ $errors->first('initial_setting.end_date') }}</p>
-                    <br>
                     <input class ="btn" type="submit" value="次へ">
                 </form>
             </div>

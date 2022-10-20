@@ -10,6 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--モーダル用jQuery読み込み-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
         <!--footer-->
@@ -32,21 +34,16 @@
             <div class="theme">
                 <h1>{{ $detail->title }}</h1>
                 <span>　　期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</span>
-                <a href="/itineraries/{{$detail->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
             </div>
             
             <div class="departure">
                 <p class="name">
                     <span>出発地：{{ $detail->departure_place_name }}</span>
-                    <a class="departure_supplement" href="/itineraries/{{$detail->id}}/departure/edit">
-                        <!--編集アイコン-->
-                        <i class="fa-solid fa-pen-to-square icon"></i>
-                    </a>
                 </p>
             </div>
-            
             <div class="destinations">
                 @if(empty($places))
+                    <p>出発時刻：</p>
                 @else
                     @foreach($places as $n => $place)
                         <div class="to_destination">
@@ -59,26 +56,7 @@
                             </div>
                             <div class="supplement">
                                 <div class="departure_time">
-                                    @if(empty($place->departure_time))
-                                        <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
-                                            @csrf
-                                            <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
-                                        </form>
-                                        
-                                    @else
-                                            <p>出発時刻：{{$place->departure_time}}
-                                            <form action="/itineraries/{{ $detail->id }}/departure_time/{{ $place->id }}/edit" method="post">
-                                                @csrf
-                                                @method('PUT') 
-                                                <input type="submit" value="&#xf044;"> 
-                                            </form>
-                                                <a class="departure_time" href="/itineraries/{{$detail->id}}/departure_time/edit">
-                                                    <!--編集アイコン-->
-                                                    <i class="fa-solid fa-pen-to-square icon"></i>
-                                                </a>
-                                                
-                                            </p>
-                                    @endif
+                                            <p>出発時刻：{{$place->departure_time}}</p>
                                 </div>
                                 <div class="route">
                                     <form action="/itineraries/{{$detail->id}}/route/{{$place->id}}" method="POST">
@@ -101,34 +79,15 @@
                                     </form>
                                 </div>
                                 <div class="arrival">
-                                    @if(empty($place->arrival_time))
-                                        <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
-                                            @csrf
-                                            <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
-                                        </form>
-                                    @else
-                                        <p>到着時刻：{{$place->arrival_time}}
-                                             <a class="departure_time" href="/itineraries/{{$detail->id}}/arrival_time/edit">
-                                                <!--編集アイコン-->
-                                                <i class="fa-solid fa-pen-to-square icon"></i>
-                                            </a>
-                                        </p>
-                                    @endif
+                                        <p>到着時刻：{{$place->arrival_time}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="destination">
                             <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
-                                <!--目的地編集-->
-                                <a href="/itineraries/{{$detail->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                <!--目的地メモ-->
                                 <!--目的地メモ-->
                                 <a class="memo" href="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
-                                <!--目的地削除-->
-                                <form action="/itineraries/{{ $detail->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
-                                    @csrf
-                                    @method('DELETE') 
-                                    <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
-                                </form>
                             </div>
                         </div>
                         <br>
@@ -136,7 +95,7 @@
                 @endif
             </div>
             <div class="center">
-                <a href ="/itineraries/{{$detail->id}}/destination_search">目的地を選択</a>
+                <a href ="/itineraries/{{$detail->id}}/show/edit">しおりを編集する</a>
                 <br>
                 <a href ="/">しおり一覧に戻る</a>
             </div>
@@ -149,5 +108,6 @@
             </div>
         </footer>
         <script src="{{ asset('/js/alert.js') }}"></script>
+        <script src="modal.js"></script>
     </body>
 </html>

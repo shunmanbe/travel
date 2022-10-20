@@ -49,7 +49,7 @@ class PlaceController extends Controller
     {
         //dd($request['destination']);
         $place->fill($request['destination'])->save();
-        return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);
+        return redirect('/itineraries/'.$detail->id.'/show');
     }
     
     //目的地を含めた詳細画面表示
@@ -60,14 +60,14 @@ class PlaceController extends Controller
     }
     
     //目的地を編集
-    public function edit(Detail $detail, Place $place)
+    public function edit_destination(Detail $detail, Place $place)
     {
         $auth = Auth::user();
         return view('/itineraries/search_destination_edit')->with(['auth' => $auth, 'detail' => $detail, 'place' => $place]);
     }
     
     //編集時の地図表示
-    public function edit_departure_place_map(Request $request, Detail $detail, Place $place)
+    public function edit_destination_map(Request $request, Detail $detail, Place $place)
     {
         $auth = Auth::user();
         $input_s = $request['search_name'];
@@ -89,14 +89,14 @@ class PlaceController extends Controller
     }
     
     //編集内容を更新
-    public function update(Request $request, Detail $detail, Place $place)
+    public function destination_update(Request $request, Detail $detail, Place $place)
     {
-        $place->fill($request['destination'])->save();
-        return redirect('/itineraries/'.$detail->id.'/show/'.$place->id);//目的地をupdate
+        $place->fill($request->input('destination'))->save();
+        return redirect('/itineraries/'.$detail->id.'/show');//目的地をupdate
     }
     
     //削除
-    public function delete(Detail $detail, Place $place)
+    public function destination_delete(Detail $detail, Place $place)
     {
         $place->delete();
         return redirect('/itineraries/'.$detail->id.'/show');
@@ -106,7 +106,15 @@ class PlaceController extends Controller
     public function memo(Detail $detail, Place $place)
     {
         $auth = Auth::user();
-        return view('itineraries/memo')->with(['auth' => $auth, 'place' => $place]);
+        return view('itineraries/memo')->with(['auth' => $auth, 'detail' => $detail, 'place' => $place]);
+    }
+    
+    //メモを保存
+    public function memo_store(Detail $detail, Place $place, Request $request)
+    {
+        $input_memo = $request->input('memo');
+        $place->fill($input_memo)->save();
+        return redirect('/itineraries/'.$detail->id.'/show');
     }
     
     //出発時刻を保存
@@ -116,7 +124,6 @@ class PlaceController extends Controller
         $input = $request['time'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$detail->id.'/show');
-        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
      //到着時刻を保存
@@ -126,6 +133,5 @@ class PlaceController extends Controller
         $input = $request['time'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$detail->id.'/show');
-        //return view('itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
 }

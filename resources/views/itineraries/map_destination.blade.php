@@ -4,16 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Itinerary</title>
+        <title>旅のしおり</title>
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
         <!--ページトップリンク-->
         <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/8-1-2/css/8-1-2.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--ヘッダー-->
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/map.css')  }}" >
+        <!--loading-->
+        <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
     </head>
     <body>

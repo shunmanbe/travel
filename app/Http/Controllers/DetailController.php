@@ -11,20 +11,35 @@ use App\Prefecture;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ModeRequest;
 use App\Http\Requests\DetailDateRequest;
 use App\Http\Requests\DetailSearchRequest;
-use App\Http\Requests\ModeRequest;
 use Illuminate\Support\Facades\Validator;
 
 class DetailController extends Controller
 {
+    //しおり一覧画面へ
     public function index(Detail $detail, Place $place, User $user)
     {
         $auth = Auth::user();
         return view('itineraries/top')->with(['auth' => $auth, 'details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place]);
     }
     
+    //完成した詳細画面表示
+    public function completed_show(Detail $detail, Place $place) 
+    {
+        $auth = Auth::user();
+        return view('/itineraries/completed_show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+    }
     
+    //詳細編集画面表示
+    public function show_edit(Detail $detail, Place $place) 
+    {
+        $auth = Auth::user();
+        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+    }
+    
+    //日付選択画面へ
     public function date_select(User $user)
     {
         $auth = Auth::user();
@@ -41,12 +56,14 @@ class DetailController extends Controller
         return redirect('/itineraries/'.$detail->id.'/departure_place_search');
     }
     
+    //出発地を選択
     public function departure_place_serach(Detail $detail)
     {
         $auth = Auth::user();
         return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'detail' => $detail]);
     }
     
+    //出発地をマップから選択
     public function departure_place_map(DetailSearchRequest $request, Detail $detail)
     {
         $auth = Auth::user();
@@ -68,6 +85,7 @@ class DetailController extends Controller
         return view('/itineraries/map_departure_place')->with(['auth' => $auth, 'detail' => $detail,'place_details' => $place_details]);
     }
     
+    //出発地を保存
     public function departure_place_store(Request $request, Place $place, Detail $detail)
     {
         $input_departure = $request['departure'];
@@ -76,15 +94,9 @@ class DetailController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show');
     }
     
-    //詳細画面表示
-    public function show(Detail $detail, Place $place) 
-    {
-        $auth = Auth::user();
-        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
-    }
     
     //しおりを削除
-    public function delete(Detail $detail)
+    public function itinerary_delete(Detail $detail)
     {
         $detail->delete();
         return redirect('/');
@@ -104,7 +116,7 @@ class DetailController extends Controller
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $detail->fill($input_date)->save();
-        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail]);
+        return redirect('/itineraries/' . $detail->id . '/show');
     }
     
     //出発地を編集
