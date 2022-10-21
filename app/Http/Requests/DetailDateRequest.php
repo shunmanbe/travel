@@ -35,7 +35,6 @@ class DetailDateRequest extends FormRequest
             'initial_setting.title.required' => 'タイトルを入力してください',
             'initial_setting.departure_date.required' => '出発日を選択してください',
             'initial_setting.end_date.required' => '到着日を選択してください',
-            'search_name.required' => 'キーワードを入力してください',
         ];
     }
 }
