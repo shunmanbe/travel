@@ -25,3 +25,9 @@ footer {
     padding: 0px 20px;
     
 }
+
+/*コピーライト*/
+.copyright {
+    line-height: 60px;
+    text-align: center;
+}
