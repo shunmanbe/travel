@@ -5,7 +5,7 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-//AuthenticatesUser=ユーザー認証
+
 trait AuthenticatesUsers
 {
     use RedirectsUsers, ThrottlesLogins;

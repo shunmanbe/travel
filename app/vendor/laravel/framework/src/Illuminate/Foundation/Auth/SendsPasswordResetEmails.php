@@ -49,7 +49,6 @@ trait SendsPasswordResetEmails
     {
         $request->validate(['email' => 'required|email']);
     }
-    
 
     /**
      * Get the needed authentication credentials from the request.

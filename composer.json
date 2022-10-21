@@ -43,13 +43,13 @@
             "database/factories"
         ]
         "exclude-from-classmap": [
-            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ConfirmsPasswords.php"
+            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php"
             "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php"
             "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php"
             "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmail.php"
         ]
         "files":[
-            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ConfirmsPasswords.php"
+            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php"
             "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php"
             "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php"
             "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmai.php"

@@ -77,12 +77,8 @@ trait ResetsPasswords
      */
     protected function validationErrorMessages()
     {
-        return [
-            // 加筆部位
-            'password.required' => 'パスワードは8文字以上です。'
-            ];
+        return [];
     }
-    
 
     /**
      * Get the password reset credentials from the request.
