@@ -41,18 +41,18 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ]
-        "exclude-from-classmap": [
-            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php"
-            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php"
-            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php"
-            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmail.php"
-        ]
+        ],
+        "exclude-from-classmap":[
+            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php",
+            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php",
+            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php",
+            "vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmails.php"
+        ],
         "files":[
-            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php"
-            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php"
-            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php"
-            "app\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmai.php"
+            "app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php",
+            "app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php",
+            "app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php",
+            "app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmails.php"
         ]
         
     },
