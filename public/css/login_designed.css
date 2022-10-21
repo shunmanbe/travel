@@ -1,0 +1,17 @@
+.container {
+    text-align: center;
+    padding-top: 100px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-header {
+    padding-bottom: 30px;
+    font-size: 30px;
+}
+
+.btn {
+    margin: 20px 0px 40px 0px;
+}
+
+
