@@ -36,7 +36,7 @@ class DetailController extends Controller
     public function show_edit(Detail $detail, Place $place) 
     {
         $auth = Auth::user();
-        return view('/itineraries/show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
+        return view('/itineraries/edit_show')->with(['auth' => $auth, 'detail' => $detail, 'places' => $place->where('detail_id', $detail->id)->get()]);
     }
     
     //日付選択画面へ
@@ -91,7 +91,7 @@ class DetailController extends Controller
         $input_departure = $request['departure'];
         $detail->fill($input_departure)->save();
         //return redirect('/itineraries/'.$detail->id.'/decided_only_departure_place');//出発地を保存
-        return redirect('/itineraries/'.$detail->id.'/show');
+        return redirect('/itineraries/'.$detail->id.'/show/edit');
     }
     
     
@@ -150,6 +150,5 @@ class DetailController extends Controller
         $place->save();
         return redirect('/itineraries/'. $detail->id .'/show/');
     }
-
 
 }

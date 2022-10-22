@@ -138,6 +138,11 @@
             <div class="center">
                 <a href ="/itineraries/{{$detail->id}}/destination_search">目的地を選択</a>
                 <br>
+                <br>
+                <br>
+                <a href="/itineraries/{{$detail->id}}/completed_show">しおりを確定する</a>
+                <br>
+                <br>
                 <a href ="/">しおり一覧に戻る</a>
             </div>
         </div>
