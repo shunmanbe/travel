@@ -16,9 +16,10 @@
 Auth::routes();
 
 
-Route::group(['middleware'=>['auth']], function(){
+Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザーのみアクセス可能
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'DetailController@index');
+    Route::get('/', 'DetailController@index'); //しおり一覧画面へ
+    Route::post('ajaxlike', 'DetailController@ajaxlike');
     Route::get('/itineraries/new_entry/date', 'DetailController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'DetailController@date_store');//日程を保存
     Route::get('/itineraries/{detail}/completed_show', 'DetailController@completed_show');//完成した詳細ページへ
@@ -57,11 +58,12 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{detail}/memo/{place}/store', 'PlaceController@memo_store');//メモを保存
     
     //各地点の出発時刻
-    Route::post('/itineraries/{detail}/departure_time_store/{place}', 'PlaceController@departure_time_store');//保存
-    Route::put('/itineraries/{detail}/departure_time/{place}/edit', 'DetailController@edit_departure_time');//出発時刻を編集(削除)
+    Route::post('/itineraries/{detail}/departure_time_store/{place}', 'PlaceController@departure_time_store'); //出発時刻を保存
+    Route::get('/itineraries/{detail}/departure_time/{place}/edit', 'PlaceController@edit_departure_time'); //出発時刻を編集(削除)
     
-    //各地点の到着時刻を保存
-    Route::post('/itineraries/{detail}/arrival_time_store/{place}', 'PlaceController@arrival_time_store');
+    //各地点の到着時刻
+    Route::post('/itineraries/{detail}/arrival_time_store/{place}', 'PlaceController@arrival_time_store'); //到着時刻を保存
+    Route::get('/itineraries/{detail}/arrival_time/{place}/edit', 'PlaceController@edit_arrival_time'); //到着時刻を編集(削除)
    
     //お問い合わせ
     Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ

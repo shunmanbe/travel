@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Detail;
 use App\Place;
+use App\Like;
 use Carbon\Carbon;
 use App\Area;
 use App\Prefecture;
@@ -16,15 +17,54 @@ use App\Http\Requests\DetailDateRequest;
 use App\Http\Requests\DetailSearchRequest;
 use Illuminate\Support\Facades\Validator;
 
+
 class DetailController extends Controller
 {
     //しおり一覧画面へ
-    public function index(Detail $detail, Place $place, User $user)
+    public function index(Detail $detail, Place $place, User $user, Like $like)
     {
         $auth = Auth::user();
-        return view('itineraries/top')->with(['auth' => $auth, 'details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place]);
+        //データという名前の配列を作成
+        $data = []; 
+        //いいねをつけたしおりを作成日時の降順で取得
+        $details = Detail::with('likes')->orderBy('created_at', 'desc')->paginate(10);
+        //$dataの配列に要素を追加
+        $data = [
+                'details' => $detail, 
+                'like' => $like,
+            ];
+        
+        return view('itineraries/index')->with(['auth' => $auth, 'details' => $detail->where('user_id', auth()->id())->get(), 'place' => $place, 'like' => $like]);
     }
     
+    public function ajaxlike(Request $request, Like $like)
+    {
+        $id = Auth::user()->id;
+        $detail_id = $request->detail_id;
+        $detail = Detail::findOrFail($detail_id); //findOrFail()は、一致するitinerary_idが見つからなかった場合は、エラーを返す。find()は、一致するitinerary_idが見つからなかった場合はnullを返す。
+
+        // 空でない（既にいいねしている）とき
+        if ($like->like_exist($id, $post_id)) {
+            //likesテーブルのレコードを削除
+            $like = Like::where('post_id', $post_id)->where('user_id', $id)->delete();
+        } else {
+            //空（まだ「いいね」していない）ならlikesテーブルに新しいレコードを作成する
+            $like = new Like;
+            $like->detail_id = $request->detail_id;
+            $like->user_id = Auth::user()->id;
+            $like->save();
+        }
+        //いいねの総数
+        $itineraryLikesCount = $detail->withCount('likes');
+
+        //一つの変数にajaxに渡す値をまとめる
+        $json = [
+            'detailLikesCount' => $detailLikesCount,
+        ];
+        //ajaxに引数(パラメーター)の値を返す
+        return response()->json($json);
+    }
+
     //完成した詳細画面表示
     public function completed_show(Detail $detail, Place $place) 
     {
@@ -141,14 +181,6 @@ class DetailController extends Controller
     {
         Auth::logout();
         return redirect('/');
-    }
-    
-    
-    public function edit_departure_time(Detail $detail, Place $place)
-    {
-        $place->departure_time = null;
-        $place->save();
-        return redirect('/itineraries/'. $detail->id .'/show/');
     }
 
 }

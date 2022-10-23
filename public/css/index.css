@@ -99,3 +99,7 @@ a {
     top: 6px;
     
 }
+
+.loved i {
+  color: red !important;
+}

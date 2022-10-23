@@ -59,25 +59,21 @@
                             </div>
                             <div class="supplement">
                                 <div class="departure_time">
+                                    <!--出発時刻が入力されていない時-->
                                     @if(empty($place->departure_time))
                                         <form action="/itineraries/{{$detail->id}}/departure_time_store/{{$place->id}}" method="POST">
                                             @csrf
                                             <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
                                         </form>
-                                        
+                                    <!--出発時刻が入力されている時 -->
                                     @else
-                                            <p>出発時刻：{{$place->departure_time}}
-                                            <form action="/itineraries/{{ $detail->id }}/departure_time/{{ $place->id }}/edit" method="post">
-                                                @csrf
-                                                @method('PUT') 
-                                                <input type="submit" value="&#xf044;"> 
-                                            </form>
-                                                <a class="departure_time" href="/itineraries/{{$detail->id}}/departure_time/edit">
-                                                    <!--編集アイコン-->
-                                                    <i class="fa-solid fa-pen-to-square icon"></i>
-                                                </a>
-                                                
-                                            </p>
+                                        <p>出発時刻：{{$place->departure_time}}
+                                            <!--出発時刻を削除-->
+                                            <a class="departure_time" href="/itineraries/{{$detail->id}}/departure_time/{{$place->id}}/edit">
+                                                <!--編集アイコン-->
+                                                <i class="fa-solid fa-pen-to-square icon"></i>
+                                            </a>
+                                        </p>
                                     @endif
                                 </div>
                                 <div class="route">
@@ -100,15 +96,17 @@
                                         @endif
                                     </form>
                                 </div>
-                                <div class="arrival">
+                                <div class="arrival_time">
+                                    <!--到着時刻が入力されていない時-->
                                     @if(empty($place->arrival_time))
                                         <form  action="/itineraries/{{$detail->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                             @csrf
                                             <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
                                         </form>
+                                    <!--到着時刻が入力されている時-->
                                     @else
                                         <p>到着時刻：{{$place->arrival_time}}
-                                             <a class="departure_time" href="/itineraries/{{$detail->id}}/arrival_time/edit">
+                                             <a class="arrival_time" href="/itineraries/{{$detail->id}}/arrival_time/{{$place->id}}/edit">
                                                 <!--編集アイコン-->
                                                 <i class="fa-solid fa-pen-to-square icon"></i>
                                             </a>
