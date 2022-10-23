@@ -6,20 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Itinerary extends Model
 {
-    public function getByLimit(int $limit_count = 10)
+    public function places()
     {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->limit($limit_count)->get();
+        return $this->hasMany('App\Place');
     }
     
     public function user()
     {
         return $this->belongsTo('App\User');
     }
-
+    
     public function likes()
     {
         return $this->hasMany('App\Like');
     }
     
+    protected $fillable = [
+        'title',
+        'user_id',
+        'departure_date', 
+        'end_date', 
+        'departure_place_address',
+        'departure_place_name',
+        ];
 }
