@@ -42,9 +42,16 @@ class User extends Authenticatable
 
 class Users extends Model
 {
+    //ユーザーのしおり
     public function details()
     {
         return $this->hasMany('App\Detail');
+    }
+
+    // ユーザーがいいねしているしおり
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
     }
     
 }

@@ -16,7 +16,7 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/top.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/index.css')  }}" >
         <!--loading-->
         <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
         <!--footer-->
@@ -48,6 +48,17 @@
                                 <div class="theme">
                                     <h2><a href="/itineraries/{{ $detail->id }}/completed_show">{{ $detail->title }}</a></h2>
                                 </div>
+                                <!--@if($like->like_exist(Auth::user()->id,$detail->id))-->
+                                <!--    <p class="favorite-marke">-->
+                                <!--      <a class="js-like-toggle loved" href="" data-postid="{{ $detail->id }}"><i class="fas fa-heart"></i></a>-->
+                                <!--      <span class="likesCount">{{$post->likes_count}}</span>-->
+                                <!--    </p>-->
+                                <!--@else-->
+                                <!--    <p class="favorite-marke">-->
+                                <!--      <a class="js-like-toggle" href="" data-postid="{{ $detail->id }}"><i class="fas fa-heart"></i></a>-->
+                                <!--      <span class="likesCount">{{$detail->likes_count}}</span>-->
+                                <!--    </p>-->
+                                <!--@endif​-->
                                 <form action="/itineraries/{{ $detail->id }}" method="post">
                                     @csrf
                                     @method('DELETE')

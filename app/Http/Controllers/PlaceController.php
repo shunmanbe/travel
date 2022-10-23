@@ -126,6 +126,14 @@ class PlaceController extends Controller
         return redirect('/itineraries/'.$detail->id.'/show/edit');
     }
     
+    //出発時刻を編集(削除)
+    public function edit_departure_time(Detail $detail, Place $place)
+    {
+        $place->departure_time = null;
+        $place->save();
+        return redirect('/itineraries/'. $detail->id .'/show/edit');
+    }
+    
      //到着時刻を保存
     public function arrival_time_store(Request $request, Detail $detail, Place $place)
     {
@@ -134,4 +142,13 @@ class PlaceController extends Controller
         $place->fill($input)->save();
         return redirect('/itineraries/'.$detail->id.'/show/edit');
     }
+    
+    //到着時刻を編集(削除)
+    public function edit_arrival_time(Detail $detail, Place $place)
+    {
+        $place->arrival_time = null;
+        $place->save();
+        return redirect('/itineraries/'. $detail->id .'/show/edit');
+    }
+    
 }

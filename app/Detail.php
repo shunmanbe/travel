@@ -16,6 +16,11 @@ class Detail extends Model
         return $this->belongsTo('App\User');
     }
     
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+    
     protected $fillable = [
         'title',
         'user_id',
