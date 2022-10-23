@@ -17,6 +17,8 @@ class Like extends Model
     {
         return $this->belongsTo('App\Post');
     }
+    
+    protected $fillable = ['user_id', 'detail_id'];
 
     //いいねが既にされているかを確認
     public function like_exist($user_id, $detail_id)
