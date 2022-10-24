@@ -39,7 +39,7 @@
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>
             <p>地図がうまく表示されない場合はリロードしてください</p>
-            <a href="/itineraries/{{$detail->id}}/show">戻る</a>
+            <a href="/itineraries/{{$itinerary->id}}/show">戻る</a>
         </div>
         <script>
             var start = '{{$start}}';

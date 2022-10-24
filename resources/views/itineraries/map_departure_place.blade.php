@@ -34,12 +34,12 @@
             <h1>以下から出発地を選択してください</h1> 
             @foreach ($place_details as $place_detail)
             <div class="container">
-                <form action="/itineraries/{{ $detail->id }}/departure_place_store" method="POST">
+                <form action="/itineraries/{{ $itinerary->id }}/departure_place_store" method="POST">
                     @csrf
                     <h2>{{$place_detail[1]}}</h2>
                     <input type="hidden" name="departure[departure_place_address]" value={{$place_detail[0]}}>
                     <input type="hidden" name="departure[departure_place_name]" value={{$place_detail[1]}}>
-                    <input type="hidden" name="departure[detail_id]" value={{$detail->id}}>
+                    <input type="hidden" name="departure[detail_id]" value={{$itinerary->id}}>
                     <input class="btn" type="submit" value="ここを出発地として保存する">
                     <br>
                     <br>

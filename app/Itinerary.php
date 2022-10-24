@@ -25,8 +25,11 @@ class Itinerary extends Model
         'title',
         'user_id',
         'departure_date', 
-        'end_date', 
+        'arrival_date', 
         'departure_place_address',
         'departure_place_name',
         ];
+        
+    //Carbonインスタンス化    
+    protected $dates = ['departure_date', 'arrival_date'];
 }

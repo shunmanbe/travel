@@ -39,9 +39,9 @@
                     <br>
                     <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
                     <span>到着日</span>
-                    <input type="date" name="initial_setting[end_date]" value="{{ old('initial_setting.end_date') }}">
+                    <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
                     <br>
-                    <p class="end_date__error" style="color:red">{{ $errors->first('initial_setting.end_date') }}</p>
+                    <p class="arrival_date__error" style="color:red">{{ $errors->first('initial_setting.arrival_date') }}</p>
                     <input class ="btn" type="submit" value="次へ">
                 </form>
             </div>

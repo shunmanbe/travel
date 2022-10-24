@@ -30,7 +30,7 @@
         </header>
         <div class = "container">
             <h2>{{$place->destination_name}}</h2>
-            <form action="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}/store" method="POST">
+            <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
                 @csrf
                 <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
                 <br>

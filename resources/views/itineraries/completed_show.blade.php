@@ -32,13 +32,13 @@
         <div class="containers">
             <!--しおり名-->
             <div class="theme">
-                <h1>{{ $detail->title }}</h1>
-                <span>　　期間:{{ $detail->departure_date->format('Y年m月d日') }}→{{ $detail->end_date->format('Y年m月d日') }}</span>
+                <h1>{{ $itinerary->title }}</h1>
+                <span>　　期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
             </div>
             
             <div class="departure">
                 <p class="name">
-                    <span>出発地：{{ $detail->departure_place_name }}</span>
+                    <span>出発地：{{ $itinerary->departure_place_name }}</span>
                 </p>
             </div>
             <div class="destinations">
@@ -59,7 +59,7 @@
                                             <p>出発時刻：{{$place->departure_time}}</p>
                                 </div>
                                 <div class="route">
-                                    <form action="/itineraries/{{$detail->id}}/route/{{$place->id}}" method="POST">
+                                    <form action="/itineraries/{{$itinerary->id}}/route/{{$place->id}}" method="POST">
                                         @csrf
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
@@ -68,9 +68,9 @@
                                             <option value="WALKING">徒歩</option>
                                         </select>
                                         <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
-                                        <a href="/itineraries/{{$detail->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
+                                        <a href="/itineraries/{{$itinerary->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
                                         @if($n+1 == 1)
-                                            <input type="hidden" name="start" value={{$detail->departure_place_name}}>
+                                            <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
                                             <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
                                         @else
                                             <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
@@ -87,7 +87,7 @@
                             <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
                                 <!--目的地メモ-->
                                 <!--目的地メモ-->
-                                <a class="memo" href="/itineraries/{{ $detail->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
+                                <a class="memo" href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
                             </div>
                         </div>
                         <br>
@@ -95,7 +95,7 @@
                 @endif
             </div>
             <div class="center">
-                <a href ="/itineraries/{{$detail->id}}/show/edit">しおりを編集する</a>
+                <a href ="/itineraries/{{$itinerary->id}}/show/edit">しおりを編集する</a>
                 <br>
                 <a href ="/">しおり一覧に戻る</a>
             </div>
