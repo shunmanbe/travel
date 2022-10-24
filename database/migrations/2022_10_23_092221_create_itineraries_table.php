@@ -22,12 +22,6 @@ class CreateItinerariesTable extends Migration
             $table->string('departure_place_address')->nullable();
             $table->string('departure_place_name')->nullable();
             $table->timestamps();
-            
-            
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onDelete('cascade');
         });
     }
 
