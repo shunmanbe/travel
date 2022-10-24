@@ -13,12 +13,12 @@ class CreateItinerariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('details', function (Blueprint $table) {
+        Schema::create('itineraries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
             $table->date('departure_date');
-            $table->date('end_date');
+            $table->date('arrival_date');
             $table->string('departure_place_address')->nullable();
             $table->string('departure_place_name')->nullable();
             $table->timestamps();
@@ -38,7 +38,7 @@ class CreateItinerariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('details');
+        Schema::dropIfExists('itineraries');
     }
 }
 

@@ -26,7 +26,7 @@
             </div>
         </header>
         <div class = "container">
-            <form action="/itineraries/{{$detail->id}}/new_entry/update" method="POST">
+            <form action="/itineraries/{{$itinerary->id}}/new_entry/update" method="POST">
                 @csrf
                 @method('PUT')
                 <!--//出発日を入力-->
@@ -39,9 +39,9 @@
                 <br>
                 <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
                 <a>到着日</a>
-                <input type="date" name="initial_setting[end_date]" value="{{ old('initial_setting.end_date') }}">
+                <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
                 <br>
-                <p class="end_date__error" style="color:red">{{ $errors->first('initial_setting.end_date') }}</p>
+                <p class="arrival_date__error" style="color:red">{{ $errors->first('initial_setting.arrival_date') }}</p>
                 <br>
                 <input class ="btn" type="submit" value="次へ">
             </form>

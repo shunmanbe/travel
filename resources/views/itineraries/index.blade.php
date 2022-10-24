@@ -43,23 +43,12 @@
                 <h1>しおり一覧</h1>
                 <div class="index">
                     <div class="index-detail">
-                        @foreach($details as $detail)
+                        @foreach($itineraries as $itinerary)
                             <div class="itinerary">
                                 <div class="theme">
-                                    <h2><a href="/itineraries/{{ $detail->id }}/completed_show">{{ $detail->title }}</a></h2>
+                                    <h2><a href="/itineraries/{{ $itinerary->id }}/completed_show">{{ $itinerary->title }}</a></h2>
                                 </div>
-                                <!--@if($like->like_exist(Auth::user()->id,$detail->id))-->
-                                <!--    <p class="favorite-marke">-->
-                                <!--      <a class="js-like-toggle loved" href="" data-postid="{{ $detail->id }}"><i class="fas fa-heart"></i></a>-->
-                                <!--      <span class="likesCount">{{$post->likes_count}}</span>-->
-                                <!--    </p>-->
-                                <!--@else-->
-                                <!--    <p class="favorite-marke">-->
-                                <!--      <a class="js-like-toggle" href="" data-postid="{{ $detail->id }}"><i class="fas fa-heart"></i></a>-->
-                                <!--      <span class="likesCount">{{$detail->likes_count}}</span>-->
-                                <!--    </p>-->
-                                <!--@endif​-->
-                                <form action="/itineraries/{{ $detail->id }}" method="post">
+                                <form action="/itineraries/{{ $itinerary->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="trash" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>

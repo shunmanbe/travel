@@ -12,7 +12,7 @@ class Place extends Model
     }
     
     protected $fillable = [
-        'detail_id',
+        'itinerary_id',
         'destination_address',
         'destination_name',
         'departure_time',

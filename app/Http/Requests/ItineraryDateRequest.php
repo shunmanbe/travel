@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DetailDateRequest extends FormRequest
+class ItineraryDateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class DetailDateRequest extends FormRequest
         return [
             'initial_setting.title' => 'required|string|max:30',
             'initial_setting.departure_date' => 'required|date',
-            'initial_setting.end_date' => 'required|date',
+            'initial_setting.arrival_date' => 'required|date',
         ];
     }
     
@@ -34,7 +34,7 @@ class DetailDateRequest extends FormRequest
         return [
             'initial_setting.title.required' => 'タイトルを入力してください',
             'initial_setting.departure_date.required' => '出発日を選択してください',
-            'initial_setting.end_date.required' => '到着日を選択してください',
+            'initial_setting.arrival_date.required' => '到着日を選択してください',
         ];
     }
 }
