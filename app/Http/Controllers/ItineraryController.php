@@ -20,49 +20,42 @@ use Illuminate\Support\Facades\Validator;
 class ItineraryController extends Controller
 {
     //しおり一覧画面へ
-    public function index(Itinerary $itinerary, Place $place, User $user, Like $like)
+    public function index(Itinerary $itinerary, Place $place, User $user)
     {
         $auth = Auth::user();
-        //データという名前の配列を作成
-        $data = []; 
-        //いいねをつけたしおりを作成日時の降順で取得
-        $itineraries = Itinerary::with('likes')->orderBy('created_at', 'desc')->paginate(10);
-        //$dataの配列に要素を追加
-        $data = [
-                'itineraries' => $itinerary, 
-                'like' => $like,
-            ];
+        $itineraries = Itinerary::withCount('likes')->orderBy('id', 'desc')->paginate(10);
+        $param = ['itineraries' => $itineraries];
         
-        return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', auth()->id())->get(), 'place' => $place, 'like' => $like]);
+        return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itineraries, 'place' => $place, 'param' => $param]);
     }
-    
-    public function ajaxlike(Request $request, Like $like)
-    {
-        $id = Auth::user()->id;
-        $itinerary_id = $request->Itinerary_id;
-        $itinerary = Itinerary::findOrFail($itinerary_id); //findOrFail()は、一致するitinerary_idが見つからなかった場合は、エラーを返す。find()は、一致するitinerary_idが見つからなかった場合はnullを返す。
+    //->where('user_id', auth()->id())->get()    ↑$itinerariesの後ろについてたやつ 
+    // public function ajaxlike(Request $request, Like $like)
+    // {
+    //     $id = Auth::user()->id;
+    //     $itinerary_id = $request->Itinerary_id;
+    //     $itinerary = Itinerary::findOrFail($itinerary_id); //findOrFail()は、一致するitinerary_idが見つからなかった場合は、エラーを返す。find()は、一致するitinerary_idが見つからなかった場合はnullを返す。
 
-        // 空でない（既にいいねしている）とき
-        if ($like->like_exist($id, $post_id)) {
-            //likesテーブルのレコードを削除
-            $like = Like::where('post_id', $post_id)->where('user_id', $id)->delete();
-        } else {
-            //空（まだ「いいね」していない）ならlikesテーブルに新しいレコードを作成する
-            $like = new Like;
-            $like->Itinerary_id = $request->Itinerary_id;
-            $like->user_id = Auth::user()->id;
-            $like->save();
-        }
-        //いいねの総数
-        $itineraryLikesCount = $itinerary->withCount('likes');
+    //     // 空でない（既にいいねしている）とき
+    //     if ($like->like_exist($id, $post_id)) {
+    //         //likesテーブルのレコードを削除
+    //         $like = Like::where('post_id', $post_id)->where('user_id', $id)->delete();
+    //     } else {
+    //         //空（まだ「いいね」していない）ならlikesテーブルに新しいレコードを作成する
+    //         $like = new Like;
+    //         $like->Itinerary_id = $request->Itinerary_id;
+    //         $like->user_id = Auth::user()->id;
+    //         $like->save();
+    //     }
+    //     //いいねの総数
+    //     $itineraryLikesCount = $itinerary->withCount('likes');
 
-        //一つの変数にajaxに渡す値をまとめる
-        $json = [
-            'ItineraryLikesCount' => $itineraryLikesCount,
-        ];
-        //ajaxに引数(パラメーター)の値を返す
-        return response()->json($json);
-    }
+    //     //一つの変数にajaxに渡す値をまとめる
+    //     $json = [
+    //         'ItineraryLikesCount' => $itineraryLikesCount,
+    //     ];
+    //     //ajaxに引数(パラメーター)の値を返す
+    //     return response()->json($json);
+    // }
 
     //完成した詳細画面表示
     public function completed_show(Itinerary $itinerary, Place $place) 
@@ -72,7 +65,7 @@ class ItineraryController extends Controller
     }
     
     //詳細編集画面表示
-    public function show_edit(Itinerary $itinerary, Place $place) 
+    public function edit_show(Itinerary $itinerary, Place $place) 
     {
         $auth = Auth::user();
         return view('/itineraries/edit_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
@@ -130,7 +123,7 @@ class ItineraryController extends Controller
         $input_departure = $request['departure'];
         $itinerary->fill($input_departure)->save();
         //return redirect('/itineraries/'.$itinerary->id.'/decided_only_departure_place');//出発地を保存
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     
@@ -155,7 +148,7 @@ class ItineraryController extends Controller
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $itinerary->fill($input_date)->save();
-        return redirect('/itineraries/' . $itinerary->id . '/show/edit');
+        return redirect('/itineraries/' . $itinerary->id . '/edit/show');
     }
     
     //出発地を編集
@@ -165,7 +158,7 @@ class ItineraryController extends Controller
         return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary]);
     }
     
-    //ルートを表示
+    //詳細編集ページから経路詳細（ルート）を表示
     public function route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
@@ -176,10 +169,46 @@ class ItineraryController extends Controller
         return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'itinerary' => $itinerary]);
     }
     
+     //詳細完成ページから経路詳細（ルート）を表示
+    public function completed_routeroute(ModeRequest $request, Itinerary $itinerary, Place $place)
+    {
+        $auth = Auth::user();
+        $mode = $request->input('Mode');
+        $start = $request->input('start');
+        $end = $request->input('end');
+        //falseにする。ここに到達すればバリデーションテェックは通過。
+        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'itinerary' => $itinerary]);
+    }
+    
+    //ログアウト
     public function logout()
     {
         Auth::logout();
         return redirect('/');
+    }
+    
+    //いいね機能
+    public function like(Request $request)
+    {
+        $user_id = Auth::user()->id; //ログインユーザーのid取得
+        $itinerary_id = $request->itinerary_id; //投稿idの取得
+        $already_liked = Like::where('user_id', $user_id)->where('itinerary_id', $itinerary_id)->first();
+    
+        if (!$already_liked) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
+            $like = new Like; //Likeクラスのインスタンスを作成
+            $like->itinerary_id = $itinerary_id; //Likeインスタンスにitinerary_id,user_idをセット
+            $like->user_id = $user_id; //上と同様
+            $like->save();
+        } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+            Like::where('itinerary_id', $itinerary_id)->where('user_id', $user_id)->delete();
+        }
+        //この投稿の最新の総いいね数を取得
+        //withCountメソッドを使用することでリレーションされている別テーブルの数をカウントすることができる。
+        $itinerary_likes_count = itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        $param = [
+            'itinerary_likes_count' => $itinerary_likes_count,
+        ];
+        return response()->json($param); //6.JSONデータをjQueryに返す
     }
 
 }

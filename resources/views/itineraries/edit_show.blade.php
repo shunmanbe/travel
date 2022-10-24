@@ -86,7 +86,7 @@
                                             <option value="WALKING">徒歩</option>
                                         </select>
                                         <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
-                                        <a href="/itineraries/{{$itinerary->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
+                                        <input type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
                                             <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
@@ -138,7 +138,7 @@
                 <br>
                 <br>
                 <br>
-                <a href="/itineraries/{{$itinerary->id}}/completed_show">しおりを確定する</a>
+                <a href="/itineraries/{{$itinerary->id}}/completed/show">しおりを確定する</a>
                 <br>
                 <br>
                 <a href ="/">しおり一覧に戻る</a>

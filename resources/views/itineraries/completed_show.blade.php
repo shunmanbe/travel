@@ -59,7 +59,7 @@
                                             <p>出発時刻：{{$place->departure_time}}</p>
                                 </div>
                                 <div class="route">
-                                    <form action="/itineraries/{{$itinerary->id}}/route/{{$place->id}}" method="POST">
+                                    <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
                                         @csrf
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
@@ -68,7 +68,7 @@
                                             <option value="WALKING">徒歩</option>
                                         </select>
                                         <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
-                                        <a href="/itineraries/{{$itinerary->id}}/route"><input type="submit" name="route" value="経路詳細"></a>
+                                        <input type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
                                             <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
