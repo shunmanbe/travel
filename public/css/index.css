@@ -103,3 +103,8 @@ a {
 .loved i {
   color: red !important;
 }
+
+
+.liked {
+    color: pink;
+}

@@ -21,6 +21,13 @@ class Itinerary extends Model
         return $this->hasMany('App\Like');
     }
     
+    //後でviewで使う、いいねされているかを判定するメソッド
+    public function isLikedBy($user): bool 
+    {
+        //user_idの値がuserのidを同じもののうち、itinerary_idがlikeのidを同じものの最初の値を取ってくる。その値が空(null)であれば、false。からでなければtrue。
+        return Like::where('user_id', $user->id)->where('itinerary_id', $this->id)->first() !==null;
+    }
+    
     protected $fillable = [
         'title',
         'user_id',

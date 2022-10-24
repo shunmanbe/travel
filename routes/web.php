@@ -22,8 +22,8 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     Route::post('ajaxlike', 'ItineraryController@ajaxlike');
     Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store');//日程を保存
-    Route::get('/itineraries/{itinerary}/completed_show', 'ItineraryController@completed_show');//完成した詳細ページへ
-    Route::get('itineraries/{itinerary}/show/edit', 'ItineraryController@show_edit');//詳細編集ページへ
+    Route::get('/itineraries/{itinerary}/completed/show', 'ItineraryController@completed_show');//完成した詳細ページへ
+    Route::get('itineraries/{itinerary}/edit/show', 'ItineraryController@edit_show');//詳細編集ページへ
     
     //出発地を決める
     Route::get('/itineraries/{itinerary}/departure_place_search', 'ItineraryController@departure_place_serach');//出発地を検索
@@ -47,8 +47,9 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     Route::delete('/itineraries/{itinerary}', 'ItineraryController@itinerary_delete');//しおり一覧からしおりを削除
     Route::delete('/itineraries/{itinerary}/destinetion/{place}','PlaceController@destination_delete');//しおり詳細の目的地を削除
     
-    //経路詳細表示
-    Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route');
+    //経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
+    Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route'); //詳細編集画面から経路詳細ページへ
+    Route::post('/itineraries/{itinerary}/completed_route/{place}', 'ItineraryController@completed_route'); //詳細完成ページから経路詳細ページへ
     
     //ログアウト
     Route::get('/itineraries/logout', 'ItineraryController@logout');
@@ -70,5 +71,7 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');//入力確認ページ
     Route::post('/itineraries/contact/send', 'ContactsController@send');//「送信しました」画面
     
+    //いいね機能
+    Route::post('/like', 'ItineraryController@like');
     
 });
