@@ -12,10 +12,10 @@
         <link rel="stylesheet" href="{{ asset('/css/index.css')  }}" >
         <!--loading-->
         <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
 
     <body>
@@ -59,6 +59,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

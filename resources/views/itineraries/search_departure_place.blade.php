@@ -12,8 +12,10 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
         <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
@@ -35,5 +37,13 @@
                 <input class ="btn" type="submit" value="検索">
             </form>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

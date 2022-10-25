@@ -14,10 +14,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
@@ -102,6 +102,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

@@ -8,15 +8,14 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <!--ページトップリンク-->
-        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
-        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/8-1-2/css/8-1-2.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/map.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         
     </head>
     <body>
@@ -50,8 +49,13 @@
             @endforeach
         </div>
          <!--ページトップリンク-->
-        <footer id="footer">
-            <p id="page-top"><a href="#">Page Top</a></p> 
+        <footer>
+            <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
         </footer>
         <!--ページトップリンク-->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

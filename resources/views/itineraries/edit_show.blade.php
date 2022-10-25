@@ -12,10 +12,10 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
@@ -146,7 +146,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2020 Shun.N</span></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>
