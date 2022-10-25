@@ -48,7 +48,7 @@ class PlaceController extends Controller
     public function destination_store(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request['destination'])->save();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     //目的地を含めた詳細画面表示
@@ -91,14 +91,14 @@ class PlaceController extends Controller
     public function destination_update(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request->input('destination'))->save();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');//目的地をupdate
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');//目的地をupdate
     }
     
     //削除
     public function destination_delete(Itinerary $itinerary, Place $place)
     {
         $place->delete();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     //メモ
@@ -113,7 +113,7 @@ class PlaceController extends Controller
     {
         $input_memo = $request->input('memo');
         $place->fill($input_memo)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     //出発時刻を保存
@@ -122,7 +122,7 @@ class PlaceController extends Controller
         $auth = Auth::user();
         $input = $request['time'];
         $place->fill($input)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     //出発時刻を編集(削除)
@@ -130,7 +130,7 @@ class PlaceController extends Controller
     {
         $place->departure_time = null;
         $place->save();
-        return redirect('/itineraries/'. $itinerary->id .'/show/edit');
+        return redirect('/itineraries/'. $itinerary->id .'/edit/show');
     }
     
      //到着時刻を保存
@@ -139,7 +139,7 @@ class PlaceController extends Controller
         $auth = Auth::user();
         $input = $request['time'];
         $place->fill($input)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/show/edit');
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
     //到着時刻を編集(削除)
@@ -147,7 +147,7 @@ class PlaceController extends Controller
     {
         $place->arrival_time = null;
         $place->save();
-        return redirect('/itineraries/'. $itinerary->id .'/show/edit');
+        return redirect('/itineraries/'. $itinerary->id .'/edit/show');
     }
     
 }

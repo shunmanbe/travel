@@ -74,4 +74,8 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     //いいね機能
     Route::post('/like', 'ItineraryController@like');
     
+    //他の人のしおりを見る
+    Route::get('/itineraries/others/index', 'ItineraryController@others_index');
+    Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show');
+    
 });
