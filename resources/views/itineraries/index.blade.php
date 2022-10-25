@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>旅のしおり</title>
 
@@ -49,18 +48,6 @@
                                 <div class="theme">
                                     <h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2>
                                 </div>
-                                <!--いいねマークについての処理-->
-                                @if (!$itinerary->isLikedBy(Auth::user()))
-                                    <span class="likes">
-                                        <i class="fas fa-music like-toggle" data-itinerary-id="{{ $itinerary->id }}"></i>
-                                        <span class="like-counter">{{$itinerary->likes_count}}</span>
-                                    </span><!-- /.likes -->
-                                @else
-                                    <span class="likes">
-                                        <i class="fas fa-music heart like-toggle liked" data-itinerary-id="{{ $itinerary->id }}"></i>
-                                        <span class="like-counter">{{$itinerary->likes_count}}</span>
-                                    </span><!-- /.likes -->
-                                @endif
                                 <form action="/itineraries/{{ $itinerary->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -74,6 +61,11 @@
                     <a class="new_entry" href="/itineraries/new_entry/date">新規作成</a>
                 </div>
             </div>
+            <br>
+            <br>
+            <div class="others">
+                <a href="/itineraries/others/index">他のユーザーが作成したしおりを見る</a>
+            </div>
         </div>
         <footer>
             <div class="footer-wrapper">
@@ -83,7 +75,6 @@
             </div>
         </footer>
         <script src="{{ asset('/js/alert.js') }}"></script>
-        <script src="{{ asset('/js/like.js') }}"></script>
         <!--==============JQuery読み込み===============-->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>

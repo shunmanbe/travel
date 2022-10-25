@@ -18,12 +18,14 @@ class CreateLikesTable extends Migration
             $table->timestamps();
             
             $table->unsignedBigInteger('user_id'); //usersテーブルの外部キー設定
+            
             $table->foreign('user_id') //外部キー制約
                 ->references('id') //参照カラム
                 ->on('users') //参照テーブル
                 ->onDelete('cascade'); //userが削除されたときに、userに紐づくlikeも一緒に削除   
                 
             $table->unsignedBigInteger('itinerary_id'); //上記と同様
+            
             $table->foreign('itinerary_id')
                 ->references('id')
                 ->on('itineraries')

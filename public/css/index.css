@@ -85,6 +85,7 @@ a {
     transition: 0.3s;
     text-align: center;
     margin: auto;
+    border:2px solid #fffaf0;
 }
 
 
@@ -100,11 +101,10 @@ a {
     
 }
 
-.loved i {
-  color: red !important;
+.liked {
+    color: fuchsia;
 }
 
-
-.liked {
-    color: pink;
+.others {
+    text-align: center;
 }

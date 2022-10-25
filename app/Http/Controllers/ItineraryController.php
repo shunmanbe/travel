@@ -23,39 +23,8 @@ class ItineraryController extends Controller
     public function index(Itinerary $itinerary, Place $place, User $user)
     {
         $auth = Auth::user();
-        $itineraries = Itinerary::withCount('likes')->orderBy('id', 'desc')->paginate(10);
-        $param = ['itineraries' => $itineraries];
-        
-        return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itineraries, 'place' => $place, 'param' => $param]);
+        return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', auth()->id())->get(), 'place' => $place]);
     }
-    //->where('user_id', auth()->id())->get()    ↑$itinerariesの後ろについてたやつ 
-    // public function ajaxlike(Request $request, Like $like)
-    // {
-    //     $id = Auth::user()->id;
-    //     $itinerary_id = $request->Itinerary_id;
-    //     $itinerary = Itinerary::findOrFail($itinerary_id); //findOrFail()は、一致するitinerary_idが見つからなかった場合は、エラーを返す。find()は、一致するitinerary_idが見つからなかった場合はnullを返す。
-
-    //     // 空でない（既にいいねしている）とき
-    //     if ($like->like_exist($id, $post_id)) {
-    //         //likesテーブルのレコードを削除
-    //         $like = Like::where('post_id', $post_id)->where('user_id', $id)->delete();
-    //     } else {
-    //         //空（まだ「いいね」していない）ならlikesテーブルに新しいレコードを作成する
-    //         $like = new Like;
-    //         $like->Itinerary_id = $request->Itinerary_id;
-    //         $like->user_id = Auth::user()->id;
-    //         $like->save();
-    //     }
-    //     //いいねの総数
-    //     $itineraryLikesCount = $itinerary->withCount('likes');
-
-    //     //一つの変数にajaxに渡す値をまとめる
-    //     $json = [
-    //         'ItineraryLikesCount' => $itineraryLikesCount,
-    //     ];
-    //     //ajaxに引数(パラメーター)の値を返す
-    //     return response()->json($json);
-    // }
 
     //完成した詳細画面表示
     public function completed_show(Itinerary $itinerary, Place $place) 
@@ -204,11 +173,27 @@ class ItineraryController extends Controller
         }
         //この投稿の最新の総いいね数を取得
         //withCountメソッドを使用することでリレーションされている別テーブルの数をカウントすることができる。
-        $itinerary_likes_count = itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
         $param = [
             'itinerary_likes_count' => $itinerary_likes_count,
         ];
         return response()->json($param); //6.JSONデータをjQueryに返す
     }
+    
+    //他のユーザーのしおりを見る
+    public function others_index(Itinerary $itinerary)
+    {
+        $auth = Auth::user();
+        $itineraries = Itinerary::withCount('likes')->orderBy('id', 'desc')->paginate(10);
+        $param = ['itineraries' => $itineraries];
+        return view ('itineraries/others_index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', '!=', $auth->id)->get(), 'param' => $param]);
+    }
+    
+    public function completed_others_show(Itinerary $itinerary, Place $place)
+    {
+        $auth = Auth::user();
+        return view('/itineraries/completed_others_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+    }
+    
 
 }
