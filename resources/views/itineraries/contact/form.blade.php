@@ -14,12 +14,14 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--css読み込み-->
         <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -56,7 +58,7 @@
                 </div>
                 <br>
                 <div class="center">
-                    <button type="submit">入力内容確認</button>
+                    <button class="btn" type="submit">入力内容確認</button>
                 </div>
             </form>
         </div>

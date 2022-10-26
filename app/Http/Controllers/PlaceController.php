@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Place;
 use App\Itinerary;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItinerarySearchRequest;
@@ -120,7 +121,7 @@ class PlaceController extends Controller
     public function departure_time_store(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $input = $request['time'];
+        $input = $request['time_d'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
@@ -134,10 +135,10 @@ class PlaceController extends Controller
     }
     
      //到着時刻を保存
-    public function arrival_time_store(Request $request, Itinerary $itinerary, Place $place)
+    public function arrival_time_store(ArrivalTimeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $input = $request['time'];
+        $input = $request['time_a'];
         $place->fill($input)->save();
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }

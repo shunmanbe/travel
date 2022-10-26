@@ -17,7 +17,7 @@
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -30,18 +30,18 @@
                 @csrf
                 @method('PUT')
                 <!--//出発日を入力-->
-                <a>旅行タイトル</a>
+                <span>旅行タイトル</span>
                 <br>
-                <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
-                <p class="title__error" style="color:red">{{ $errors->first('initial_setting.title') }}</p>
-                <a>出発日</a>
-                <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
+                <input type="text" name="initial_setting[title]" value="{{ $itinerary->title }}">
+                <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
+                <span>出発日</span>
+                <input type="date" name="initial_setting[departure_date]" value="{{ $itinerary->departure_date->format('Y-m-d') }}">
                 <br>
-                <p class="departure_date__error" style="color:red">{{ $errors->first('initial_setting.departure_date') }}</p>
-                <a>到着日</a>
-                <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
+                <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
+                <span>到着日</span>
+                <input type="date" name="initial_setting[arrival_date]" value="{{ $itinerary->arrival_date->format('Y-m-d') }}">
                 <br>
-                <p class="arrival_date__error" style="color:red">{{ $errors->first('initial_setting.arrival_date') }}</p>
+                <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                 <br>
                 <input class ="btn" type="submit" value="次へ">
             </form>

@@ -26,7 +26,7 @@
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -41,7 +41,7 @@
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>
             <p>地図がうまく表示されない場合はリロードしてください</p>
-            <a href="/itineraries/{{$itinerary->id}}/completed_show">戻る</a>
+            <a href="/itineraries/{{$itinerary->id}}/completed/show">戻る</a>
         </div>
         <footer>
             <div class="footer-wrapper">

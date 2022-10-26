@@ -20,7 +20,9 @@ class CreatePlacesTable extends Migration
             $table->string('destination_address')->nullable();
             $table->string('destination_name')->nullable();
             $table->datetime('departure_time')->nullable();
+            $table->boolean('departure_time_flag')->nullable();
             $table->datetime('arrival_time')->nullable();
+            $table->boolean('arrival_time_flag')->nullable();
             $table->string('memo')->nullable();
         });
     }

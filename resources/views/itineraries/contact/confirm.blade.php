@@ -14,12 +14,14 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--css読み込み-->
         <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -28,7 +30,7 @@
             </div>
         </header>
         <div class="container">
-            <form action="/itineraries/contact/send" method="POST">
+            <form action="/itineraries/contact/thanks" method="POST">
                 @csrf
                 <label>メールアドレス：</label>
                 {{ $inputs['email'] }}
@@ -43,8 +45,11 @@
                 {!! nl2br(e($inputs['body'])) !!}
                 <input name="body" value="{{ $inputs['body'] }}" type="hidden">
                 <br>
+                <br>
                 <div class="center">
-                    <button class="btn" type="submit" name="action" value="back">入力内容修正</button>
+                    <button class="modify" type="submit" name="action" value="back">入力内容修正</button>
+                    <br>
+                    <br>
                     <button class="btn" type="submit" name="action" value="submit">送信する</button>
                 </div>
             </form>

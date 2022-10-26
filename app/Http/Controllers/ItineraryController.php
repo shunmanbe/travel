@@ -139,7 +139,7 @@ class ItineraryController extends Controller
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
-    public function completed_routeroute(ModeRequest $request, Itinerary $itinerary, Place $place)
+    public function completed_route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         $mode = $request->input('Mode');

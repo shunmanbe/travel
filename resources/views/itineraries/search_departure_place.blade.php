@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -33,7 +33,7 @@
             <form action="/itineraries/{{$itinerary->id}}/departure_place_map" method="POST">
                 @csrf
                 <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
+                <p class="error-message">{{ $errors->first('search_name') }}</p>
                 <input class ="btn" type="submit" value="検索">
             </form>
         </div>
