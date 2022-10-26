@@ -3,6 +3,7 @@
     text-align: center;
     font-size: 20px;
     margin: auto;
+    text-align: left;
 }
 
 input {
@@ -16,10 +17,6 @@ textarea {
     border: 2px solid orange;
     background-color: white;
     height: 200px;
-}
-
-.container {
-    text-align: left;
 }
 
 .center {
@@ -67,6 +64,19 @@ textarea {
 
 
 /*thanks用*/
+.container-thanks {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+}
+
+/*カーソルを重ねた時に「しおり一覧へ」の文字の色が変わってしまうのを避けるため*/
+.to-index:hover {
+    color: white;
+}
+
 .warning {
     color: red;
 }
+
