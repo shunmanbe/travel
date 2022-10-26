@@ -26,8 +26,6 @@ a {
     transition: 0.3s;
 }
 .theme:hover {
-    position: relative;
-    top: 5px;
     background-position: right center;
 }
 
@@ -42,8 +40,6 @@ a {
 }
 
 .trash:hover {
-    position: relative;
-    top: 5px;
     color: orange;
 }
 

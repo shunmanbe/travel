@@ -12,12 +12,14 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
         <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -31,9 +33,17 @@
             <form action="/itineraries/{{$itinerary->id}}/destination_map" method="POST">
                 @csrf
                 <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                <p class="serch_name__error" style="color:red">{{ $errors->first('search_name') }}</p>
+                <p class="error-message">{{ $errors->first('search_name') }}</p>
                 <input class="btn" type="submit" value="検索">
             </form>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

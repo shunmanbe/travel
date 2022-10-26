@@ -58,6 +58,11 @@ select {
     color: #339900;
 }
 
+.icon:hover{
+    color: #FF8177;
+    transition: 0.2s;
+}
+
 form {
     display: inline-block;
 }

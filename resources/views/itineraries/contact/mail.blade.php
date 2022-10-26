@@ -8,17 +8,20 @@
 
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
         <!--ページトップリンク-->
         <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--ヘッダー-->
+        <!--css読み込み-->
+        <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>

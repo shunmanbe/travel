@@ -12,15 +12,15 @@
         <link rel="stylesheet" href="{{ asset('/css/index.css')  }}" >
         <!--loading-->
         <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
 
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -59,6 +59,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

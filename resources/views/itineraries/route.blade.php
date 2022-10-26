@@ -19,12 +19,14 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
         <link rel="stylesheet" href="{{ asset('/css/route.css')  }}" >
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -41,6 +43,14 @@
             <p>地図がうまく表示されない場合はリロードしてください</p>
             <a href="/itineraries/{{$itinerary->id}}/edit/show">戻る</a>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
         <script>
             var start = '{{$start}}';
             var end = '{{$end}}';

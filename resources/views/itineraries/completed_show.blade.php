@@ -14,14 +14,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -67,7 +67,7 @@
                                             <option value="TRANSIT">電車</option>
                                             <option value="WALKING">徒歩</option>
                                         </select>
-                                        <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
+                                        <p class="error-message">{{ $errors->first('Mode') }}</p>
                                         <input type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
@@ -95,13 +95,14 @@
                 @endif
             </div>
             <div class="center">
-                <a href ="/itineraries/{{$itinerary->id}}/show/edit">しおりを編集する</a>
+                <a href ="/itineraries/{{$itinerary->id}}/edit/show">しおりを編集する</a>
                 <br>
                 <a href ="/">しおり一覧に戻る</a>
             </div>
         </div>
         <footer>
             <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

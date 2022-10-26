@@ -42,9 +42,7 @@ class ContactsController extends Controller
         if($action !== 'submit'){
     
             // 戻るボタンの場合リダイレクト処理
-            return redirect()
-            ->route('itineraries/contact/form')
-            ->withInput($inputs);
+            return redirect('/itineraries/contact/form')->withInput($inputs);
             
         } else {
             // 送信ボタンの場合、送信処理

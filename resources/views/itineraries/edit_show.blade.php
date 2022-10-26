@@ -12,14 +12,14 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
-        <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -63,7 +63,9 @@
                                     @if(empty($place->departure_time))
                                         <form action="/itineraries/{{$itinerary->id}}/departure_time_store/{{$place->id}}" method="POST">
                                             @csrf
-                                            <p>出発時刻：<input type="datetime-local" name="time[departure_time]"><input class ="btn" type="submit" value="保存"></p>
+                                            <p>出発時刻：
+                                            <input type="datetime-local" name="time_d[departure_time]"><input class ="btn" type="submit" value="保存"></p>
+                                            <p class="error-message">{{ $errors->first('time.departure_time') }}</p>
                                         </form>
                                     <!--出発時刻が入力されている時 -->
                                     @else
@@ -85,7 +87,7 @@
                                             <option value="TRANSIT">電車</option>
                                             <option value="WALKING">徒歩</option>
                                         </select>
-                                        <p class="title__error" style="color:red">{{ $errors->first('Mode') }}</p>
+                                        <p class="error-message">{{ $errors->first('Mode') }}</p>
                                         <input type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
@@ -101,7 +103,7 @@
                                     @if(empty($place->arrival_time))
                                         <form  action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                             @csrf
-                                            <p>到着時刻：<input type="datetime-local" name="time[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
+                                            <p>到着時刻：<input type="datetime-local" name="time_a[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
                                         </form>
                                     <!--到着時刻が入力されている時-->
                                     @else
@@ -146,7 +148,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2020 Shun.N</span></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

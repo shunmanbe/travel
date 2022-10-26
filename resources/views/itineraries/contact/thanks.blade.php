@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{ asset('/css/map_departure_place.css')  }}" >
         <!--ページトップリンク-->
         <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
+        <!--css読み込み-->
+        <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ヘッダー-->
@@ -18,7 +20,7 @@
     </head>
     <body>
         <header>
-            <div class="header-title"><h1>旅のしおり</h1></div>
+            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
                     <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -27,8 +29,15 @@
             </div>
         </header>
         <div class="container">
-            {{ __('送信完了') }}--
-            <a href="/">トップページに戻る</a>
+            <span>送信が完了しました<。/span>
+            <br>
+            <span>お問い合わせありがとうございました。</span>
+            <br>
+            <br>
+            
+            <a class="btn" href="/">しおり一覧へ</a>
+            <br>
+            <span class="warning">このページでリロード・戻るボタンを押さないでください</span>
         </div>
     </body>
 </html>

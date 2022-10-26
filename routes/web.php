@@ -69,7 +69,7 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     //お問い合わせ
     Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ
     Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');//入力確認ページ
-    Route::post('/itineraries/contact/send', 'ContactsController@send');//「送信しました」画面
+    Route::post('/itineraries/contact/thanks', 'ContactsController@send');//「送信しました」画面
     
     //いいね機能
     Route::post('/like', 'ItineraryController@like');
