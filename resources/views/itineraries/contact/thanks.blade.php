@@ -15,8 +15,10 @@
         <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--ヘッダー-->
+        <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!--footer-->
+        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
     </head>
     <body>
         <header>
@@ -28,17 +30,28 @@
                 </ul>
             </div>
         </header>
-        <div class="container">
-            <span>送信が完了しました<。/span>
+        <div class="container-thanks">
+            <span>送信が完了しました。</span>
+            <br>
             <br>
             <span>お問い合わせありがとうございました。</span>
             <br>
+            <span>送信内容をメールでお送りします。少し時間をおいてからご確認ください。</span>
             <br>
-            
-            <a class="btn" href="/">しおり一覧へ</a>
+            <br>
+            <a class="btn to-index" href="/">しおり一覧へ</a>
+            <br>
             <br>
             <span class="warning">このページでリロード・戻るボタンを押さないでください</span>
         </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <ul>
+                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>
 

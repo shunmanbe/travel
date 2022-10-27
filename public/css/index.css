@@ -37,10 +37,12 @@ a {
     text-align: left;
     width: 20%;
     padding-top: 30%;
+    color: #339900;
 }
 
 .trash:hover {
-    color: orange;
+    color: #FF8177;
+    transition: 0.2s;
 }
 
 .container {
