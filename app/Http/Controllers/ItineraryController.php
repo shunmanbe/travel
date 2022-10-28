@@ -107,6 +107,7 @@ class ItineraryController extends Controller
     public function edit_new_entry(Itinerary $itinerary, User $user)
     {
         $auth = Auth::user();
+        // $inputs = $itinerary['title', 'departure_date', 'arrival_date'];
         return view('itineraries/edit_new_entry')->with(['auth' => $auth, 'itinerary' => $itinerary, 'user' => $user]);
     }
     
