@@ -32,14 +32,15 @@
                 <!--//出発日を入力-->
                 <span>旅行タイトル</span>
                 <br>
-                <input type="text" name="initial_setting[title]" value="{{ $itinerary->title }}">
+                <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
+                <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $itinerary->title) }}"> 
                 <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                 <span>出発日</span>
-                <input type="date" name="initial_setting[departure_date]" value="{{ $itinerary->departure_date->format('Y-m-d') }}">
+                <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
                 <br>
                 <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
                 <span>到着日</span>
-                <input type="date" name="initial_setting[arrival_date]" value="{{ $itinerary->arrival_date->format('Y-m-d') }}">
+                <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
                 <br>
                 <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                 <br>
