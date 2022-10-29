@@ -32,4 +32,11 @@ const app = new Vue({
 });
 
 
-require('./ajaxlike.js')
+require('./ajaxlike.js');
+
+// vue-js-modalをインポート
+import VModal from 'vue-js-modal';
+
+Vue.use(VModal)
+
+

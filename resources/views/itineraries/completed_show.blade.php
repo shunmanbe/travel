@@ -86,8 +86,22 @@
                         <div class="destination">
                             <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
                                 <!--目的地メモ-->
-                                <!--目的地メモ-->
-                                <a class="memo" href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
+                                <!--<a class="memo"  href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>-->
+                                <template>
+                                    <modal name="memo">
+                                        <div class="close-modal">
+                                            <i class="fa fa-2x fa-times"></i>
+                                        </div>
+                                        <div id="signup-form">
+                                            <h2>Emailで新規登録</h2>
+                                            <form action="#">
+                                                <input class="form-control" type="text" placeholder="メールアドレス">
+                                                <input class="form-control" type="password" placeholder="パスワード">
+                                                <div id="submit-btn">新規登録</div>
+                                            </form> 
+                                        </div>
+                                    </modal>
+                                </template>
                             </div>
                         </div>
                         <br>

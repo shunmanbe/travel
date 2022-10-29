@@ -119,3 +119,8 @@ form {
   cursor: pointer;
 }
 
+/*completed_showのみ*/
+#memo-modal {
+    display: none;
+}
+
