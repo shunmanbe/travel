@@ -68,7 +68,7 @@
                                             <option value="WALKING">徒歩</option>
                                         </select>
                                         <p class="error-message">{{ $errors->first('Mode') }}</p>
-                                        <input type="submit" name="route" value="経路詳細">
+                                        <input class="btn" type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
                                             <input type="hidden" name="end" value={{$places[$n]->destination_name}}>

@@ -34,7 +34,7 @@
                 @csrf
                 <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
                 <br>
-                <input type="submit" value="保存して詳細ページへ">
+                <input class="btn" type="submit" value="保存して詳細ページへ">
             </form>
         </div>
         <footer>
