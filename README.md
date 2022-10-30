@@ -1,7 +1,7 @@
 # 旅のしおり
 
 ## リンク
-URL:https://radiant-mountain-36845.herokuapp.com/
+URL:https://radiant-mountain-36845.herokuapp.com
 
 #### お試し用アカウント（日々修正を行っているため、デプロイのタイミングによってはお試し用アカウントが作成されていない場合がございます。その場合は、新規登録強いていただけると助かります。）
 メールアドレス：sample@sample
