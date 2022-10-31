@@ -122,7 +122,7 @@ form {
     top: 5px;
 }
 
-
+/*completed_showのみ*/
 /*モーダル部分（完成した詳細ページのみ）*/
 .memo-modal {
   position: fixed;
@@ -130,9 +130,21 @@ form {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 100;
   display: none;
+}
+
+.modal-contents {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  background-color: #fffaf0;
+  padding: 20px 0 40px;
+  border-radius: 10px;
+  width: 40%;
+  height: 60%;
+  text-align: center;
 }
 
 .fa-times {
@@ -143,8 +155,19 @@ form {
   cursor: pointer;
 }
 
-/*completed_showのみ*/
-#memo-modal {
-    display: none;
+.memo-body {
+    border: 5px solid orange;
+    border-radius: 5px;
+    width: 90%;
+    height: 80%;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    background-color: white;
 }
 
+.memo-body span {
+    z-index: 200;
+    color: red;
+    float:left;
+}

@@ -39,17 +39,10 @@
                                     <h2><a href="/itineraries/{{ $itinerary->id }}/completed/others/show">{{ $itinerary->title }}</a></h2>
                                 </div>
                                 <!--いいねマークについての処理-->
-                                @if (!$itinerary->isLikedBy(Auth::user()))
-                                    <span class="likes">
-                                        <i class="fa-regular fa-heart like-toggle" data-itinerary-id="{{ $itinerary->id }}"></i>
-                                        <span class="like-counter">{{$itinerary->likes_count}}</span>
-                                    </span><!-- /.likes -->
-                                @else
                                     <span class="likes">
                                         <i class="fa-regular fa-heart like-toggle liked" data-itinerary-id="{{ $itinerary->id }}"></i>
                                         <span class="like-counter">{{$itinerary->likes_count}}</span>
-                                    </span><!-- /.likes -->
-                                @endif
+                                    </span>
                             </div>
                         @endforeach
                     </div>
