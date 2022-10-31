@@ -39,4 +39,5 @@ import VModal from 'vue-js-modal';
 
 Vue.use(VModal)
 
+Vue.component('Memo-modal', require('.components/modals/Memo_modal.vue').default);
 

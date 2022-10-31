@@ -86,22 +86,24 @@
                         <div class="destination">
                             <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
                                 <!--目的地メモ-->
-                                <!--<a class="memo"  href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>-->
-                                <template>
-                                    <modal name="memo">
-                                        <div class="close-modal">
+                                <!--メモアイコン-->
+                                <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
+                                <!--メモモーダル-->
+                                <div class="memo-modal">
+                                    <div class="modal-contents">
+                                        <!--メモ閉じるボタン-->
+                                        <div class="close-memo">
                                             <i class="fa fa-2x fa-times"></i>
                                         </div>
-                                        <div id="signup-form">
-                                            <h2>Emailで新規登録</h2>
-                                            <form action="#">
-                                                <input class="form-control" type="text" placeholder="メールアドレス">
-                                                <input class="form-control" type="password" placeholder="パスワード">
-                                                <div id="submit-btn">新規登録</div>
-                                            </form> 
+                                        <!--メモ内容-->
+                                        <div class="memo">
+                                            <span>メモ</span>
                                         </div>
-                                    </modal>
-                                </template>
+                                        <div class="memo-body">
+                                            <span>{{$place->memo}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -123,6 +125,6 @@
             </div>
         </footer>
         <script src="{{ asset('/js/alert.js') }}"></script>
-        <script src="modal.js"></script>
+        <script src="{{ asset('/js/memo-modal.js') }}"></script>
     </body>
 </html>

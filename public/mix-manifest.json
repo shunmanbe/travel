@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/like.js": "/js/like.js"
+    "/js/like.js": "/js/like.js",
+    "/js/memo-modal.js": "/js/memo-modal.js"
 }

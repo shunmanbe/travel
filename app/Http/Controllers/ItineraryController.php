@@ -58,7 +58,7 @@ class ItineraryController extends Controller
     }
     
     //出発地を選択
-    public function departure_place_serach(Itinerary $itinerary)
+    public function departure_place_search(Itinerary $itinerary)
     {
         $auth = Auth::user();
         return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary]);
@@ -178,7 +178,7 @@ class ItineraryController extends Controller
         $param = [
             'itinerary_likes_count' => $itinerary_likes_count,
         ];
-        return response()->json($param); //6.JSONデータをjQueryに返す
+        return response()->json($param); //JSONデータをjQueryに返す
     }
     
     //他のユーザーのしおりを見る
