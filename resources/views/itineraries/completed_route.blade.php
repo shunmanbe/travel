@@ -36,7 +36,7 @@
         </header>
         <div class="container">
             <div class="title">
-                <h1>経路：{{$start}}→{{$end}}</h1>
+                <h1>経路：{{$start_name}}→{{$end_name}}</h1>
             </div>
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>

@@ -63,18 +63,28 @@
                                         @csrf
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
-                                            <option value="DRIVING">自動車</option>
                                             <option value="TRANSIT">電車</option>
+                                            <option value="DRIVING">自動車</option>
+                                            <option value="BICYCLING">自転車</option>
                                             <option value="WALKING">徒歩</option>
                                         </select>
+                                        <!--エラーメッセージ-->
                                         <p class="error-message">{{ $errors->first('Mode') }}</p>
+                                        <!--経路詳細ボタン-->
                                         <input class="btn" type="submit" name="route" value="経路詳細">
+                                        <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                         @if($n+1 == 1)
-                                            <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
-                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                            <!--出発地から出発の場合は出発地→目的地-->
+                                            <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
+                                            <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
+                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
+                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
                                         @else
-                                            <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
-                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                            <!--目的地からの出発の場合は目的地→目的地-->
+                                            <input type="hidden" name="start_name" value={{$places[$n-1]->destination_name}}>
+                                            <input type="hidden" name="start_address" value={{$place[$n-1]->destination_address}}>
+                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
+                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
                                         @endif
                                     </form>
                                 </div>

@@ -85,6 +85,7 @@ class PlaceController extends Controller
             $place_names[ ] = $itineraries['results'][$i]['name'];
         }
         $place_details = array_map(null, $place_addresses, $place_names);
+        dd($place_details);
         return view('/itineraries/map_destination_edit')->with(['auth' => $auth, 'place_details' => $place_details, 'itinerary' => $itinerary, 'place' => $place]);
     }
     
@@ -150,5 +151,6 @@ class PlaceController extends Controller
         $place->save();
         return redirect('/itineraries/'. $itinerary->id .'/edit/show');
     }
+    
     
 }

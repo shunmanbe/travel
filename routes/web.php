@@ -23,7 +23,8 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select');//日程選択画面へ
     Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store');//日程を保存
     Route::get('/itineraries/{itinerary}/completed/show', 'ItineraryController@completed_show');//完成した詳細ページへ
-    Route::get('itineraries/{itinerary}/edit/show', 'ItineraryController@edit_show');//詳細編集ページへ
+    Route::get('itineraries/{itinerary}/edit/show', 'PlaceController@geocoding');//詳細編集ページへ
+    // Route::get('itineraries/{itinerary}/edit/show', 'ItineraryController@edit_show');//詳細編集ページへ
     
     //出発地を決める
     Route::get('/itineraries/{itinerary}/departure_place_search', 'ItineraryController@departure_place_serach');//出発地を検索
@@ -77,5 +78,8 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     //他の人のしおりを見る
     Route::get('/itineraries/others/index', 'ItineraryController@others_index');
     Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show');
+    
+    //ジオコーディング
+    Route::get('itineraries/geocoding', 'ItineraryController@geocoding');
     
 });
