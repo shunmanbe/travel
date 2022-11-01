@@ -132,9 +132,16 @@ class ItineraryController extends Controller
     public function route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $mode = $request->input('Mode');
-        $start = $request->input('start');
-        $end = $request->input('end');
+        if(Mode == TRANSIT){
+            $start_address = $request->input('start_address');
+            $end_address = $request->input('end_address');
+            return redirect('itineraries/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
+        }else{
+            $mode = $request->input('Mode');
+            $start = $request->input('start_name');
+            $end = $request->input('end_name');
+        }
+        
         //falseにする。ここに到達すればバリデーションテェックは通過。
         return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'itinerary' => $itinerary]);
     }
@@ -143,11 +150,18 @@ class ItineraryController extends Controller
     public function completed_route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $mode = $request->input('Mode');
-        $start = $request->input('start');
-        $end = $request->input('end');
+        if($request->input('Mode') == 'TRANSIT'){
+            return redirect('itineraries/geocoding');
+        }else{
+            $mode = $request->input('Mode');
+            $start = $request->input('start_name');
+            $end = $request->input('end_name');
+        }
+        // $mode = $request->input('Mode');
+        // $start_name = $request->input('start_name');
+        // $end_name = $request->input('end_name');
         //falseにする。ここに到達すればバリデーションテェックは通過。
-        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'itinerary' => $itinerary]);
+        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'end_name' => $end_name, 'itinerary' => $itinerary]);
     }
     
     //ログアウト
@@ -194,6 +208,29 @@ class ItineraryController extends Controller
     {
         $auth = Auth::user();
         return view('/itineraries/completed_others_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+    }
+    
+    //ジオコーディング（住所から緯度・軽度取得）
+    public function geocoding()
+    {
+        $auth = Auth::user();
+        $client = new \GuzzleHttp\Client();
+        
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config("services.google-map.apikey") . '&address=' . $start_address . '&language=ja';
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $itineraries = json_decode($response->getBody(), true);
+        dd($itineraries);
+        //緯度取得
+        $place_lat = [ ];
+        //軽度取得
+        $place_lng = [ ];
+        for($i = 0; $i < count($itineraries['results']); $i++)
+        {
+            $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
+            $place_names[ ] = $itineraries['results'][$i]['name'];
+        }
+        $place_details = array_map(null, $place_addresses, $place_names);
     }
     
 

@@ -163,11 +163,6 @@ form {
     position: absolute;
     top: 15%;
     left: 5%;
-    background-color: white;
-}
-
-.memo-body span {
     z-index: 200;
-    color: red;
-    float:left;
+    background-color: white;
 }
