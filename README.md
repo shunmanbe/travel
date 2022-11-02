@@ -22,7 +22,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
 ## 使用技術
 - PHP 8.0.23
 - Laravel 6.20.44
-- Vue.js 2.7.10
+- jQuery 3.4.1
 - MySQL 10.2.38-MariaDB
 - AWS
 - Google Places API
