@@ -27,6 +27,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
 - AWS
 - Google Places API
 - Google Directions API
+- Google Maps Embed API
 
 ## 機能一覧
 - ユーザー登録
