@@ -7,8 +7,6 @@ use App\Itinerary;
 use App\Place;
 use App\Like;
 use Carbon\Carbon;
-use App\Area;
-use App\Prefecture;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -91,7 +89,6 @@ class ItineraryController extends Controller
     {
         $input_departure = $request['departure'];
         $itinerary->fill($input_departure)->save();
-        //return redirect('/itineraries/'.$itinerary->id.'/decided_only_departure_place');//出発地を保存
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
@@ -132,10 +129,10 @@ class ItineraryController extends Controller
     public function route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        if(Mode == TRANSIT){
+        if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->input('start_address');
             $end_address = $request->input('end_address');
-            return redirect('itineraries/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
+            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
         }else{
             $mode = $request->input('Mode');
             $start = $request->input('start_name');
@@ -150,12 +147,16 @@ class ItineraryController extends Controller
     public function completed_route(ModeRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
+        //移動手段で「電車」が入力された場合
         if($request->input('Mode') == 'TRANSIT'){
-            return redirect('itineraries/geocoding');
+            $start_address = $request->start_address;
+            $end_address = $request->end_address;
+            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
+        //それ以外が入力された場合
         }else{
             $mode = $request->input('Mode');
-            $start = $request->input('start_name');
-            $end = $request->input('end_name');
+            $start_name = $request->input('start_name');
+            $end_name = $request->input('end_name');
         }
         // $mode = $request->input('Mode');
         // $start_name = $request->input('start_name');
@@ -174,16 +175,22 @@ class ItineraryController extends Controller
     //いいね機能
     public function like(Request $request)
     {
-        $user_id = Auth::user()->id; //ログインユーザーのid取得
-        $itinerary_id = $request->itinerary_id; //投稿idの取得
+        //ログインユーザーのid取得
+        $user_id = Auth::user()->id; 
+        //投稿idの取得
+        $itinerary_id = $request->itinerary_id; 
         $already_liked = Like::where('user_id', $user_id)->where('itinerary_id', $itinerary_id)->first();
-    
-        if (!$already_liked) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
-            $like = new Like; //Likeクラスのインスタンスを作成
-            $like->itinerary_id = $itinerary_id; //Likeインスタンスにitinerary_id,user_idをセット
-            $like->user_id = $user_id; //上と同様
+        //もしこのユーザーがこの投稿にまだいいねしてなかったら
+        if (!$already_liked) { 
+            //Likeクラスのインスタンスを作成
+            $like = new Like; 
+            //Likeインスタンスにitinerary_idをセット
+            $like->itinerary_id = $itinerary_id; 
+            //Likeインスタンスにuser_idをセット
+            $like->user_id = $user_id; 
             $like->save();
-        } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+        //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+        } else { 
             Like::where('itinerary_id', $itinerary_id)->where('user_id', $user_id)->delete();
         }
         //この投稿の最新の総いいね数を取得
@@ -211,12 +218,12 @@ class ItineraryController extends Controller
     }
     
     //ジオコーディング（住所から緯度・軽度取得）
-    public function geocoding()
+    public function geocoding(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
+        $start_address = $place->destination_address;
         $client = new \GuzzleHttp\Client();
-        
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config("services.google-map.apikey") . '&address=' . $start_address . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $start_address . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $itineraries = json_decode($response->getBody(), true);
@@ -225,12 +232,7 @@ class ItineraryController extends Controller
         $place_lat = [ ];
         //軽度取得
         $place_lng = [ ];
-        for($i = 0; $i < count($itineraries['results']); $i++)
-        {
-            $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
-            $place_names[ ] = $itineraries['results'][$i]['name'];
-        }
-        $place_details = array_map(null, $place_addresses, $place_names);
+        
     }
     
 

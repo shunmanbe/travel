@@ -11,7 +11,28 @@
 }
 
 .btn {
-    margin: 20px 0px 40px 0px;
+    padding: 5px 10px;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: rgba(255, 140, 0, 0.8);
+    transition: 0.3s;
+    text-align: center;
+    margin: auto;
+    border:2px solid #fffaf0;
 }
 
+
+.btn:hover {
+    color: #ff8c00;
+    background: snow;
+    border: 2px solid #ff8c00;
+}
+
+.btn:active {
+    position: relative;
+    top: 6px;
+    
+}
 

@@ -16,8 +16,8 @@ function initMap() {
   
   // ルートを取得するリクエスト
   const request = {
-    origin: start,      // 出発地点
-    destination: end,   // 到着地点
+    origin: start_name,      // 出発地点
+    destination: end_name,   // 到着地点
     travelMode: travel //トラベルモード
   };
   

@@ -11,11 +11,11 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
-        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -27,13 +27,15 @@
                 </ul>
             </div>
         </header>
-        <!--目的地を選択-->
         <div class="container">
             <h1>目的地を検索</h1> 
             <form action="/itineraries/{{$itinerary->id}}/destination_map/edit/{{$place->id}}" method="POST">
                 @csrf
+                <!--検索ワード入力欄-->
                 <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                <!--エラーメッセージ-->
                 <p class="error-message">{{ $errors->first('search_name') }}</p>
+                <!--検索ボタン-->
                 <input class="btn" type="submit" value="検索">
             </form>
         </div>

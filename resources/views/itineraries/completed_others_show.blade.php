@@ -13,11 +13,11 @@
         <!--モーダル用jQuery読み込み-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/show.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -33,20 +33,23 @@
             <!--しおり名-->
             <div class="theme">
                 <h1>{{ $itinerary->title }}</h1>
-                <span>　　期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                <span>期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
             </div>
             
+            <!--出発地-->
             <div class="departure">
                 <p class="name">
                     <span>出発地：{{ $itinerary->departure_place_name }}</span>
                 </p>
             </div>
+            <!--目的地一覧-->
             <div class="destinations">
                 @if(empty($places))
                     <p>出発時刻：</p>
                 @else
                     @foreach($places as $n => $place)
                         <div class="to_destination">
+                            <!--三角形表示-->
                             <div class="triangles">
                                 @for ($i=0; $i<3; $i++)
                                     <br>
@@ -54,10 +57,13 @@
                                     <br>
                                 @endfor
                             </div>
+                            <!--出発・到着時刻などの補足情報-->
                             <div class="supplement">
+                                <!--出発時刻-->
                                 <div class="departure_time">
-                                            <p>出発時刻：{{$place->departure_time}}</p>
+                                    <p>出発時刻：{{$place->departure_time}}</p>
                                 </div>
+                                <!--経路選択-->
                                 <div class="route">
                                     <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
                                         @csrf
@@ -68,21 +74,29 @@
                                             <option value="WALKING">徒歩</option>
                                         </select>
                                         <p class="error-message">{{ $errors->first('Mode') }}</p>
-                                        <input type="submit" name="route" value="経路詳細">
+                                        <input class="btn" type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
-                                            <input type="hidden" name="start" value={{$itinerary->departure_place_name}}>
-                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                            <!--出発地から出発の場合は出発地→目的地-->
+                                            <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
+                                            <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
+                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
+                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
                                         @else
-                                            <input type="hidden" name="start" value={{$places[$n-1]->destination_name}}>
-                                            <input type="hidden" name="end" value={{$places[$n]->destination_name}}>
+                                            <!--目的地からの出発の場合は目的地→目的地-->
+                                            <input type="hidden" name="start_name" value={{$places[$n-1]->destination_name}}>
+                                            <input type="hidden" name="start_address" value={{$places[$n-1]->destination_address}}>
+                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
+                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
                                         @endif
                                     </form>
                                 </div>
+                                <!--到着時刻-->
                                 <div class="arrival">
-                                        <p>到着時刻：{{$place->arrival_time}}</p>
+                                    <p>到着時刻：{{$place->arrival_time}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!--目的地-->
                         <div class="destination">
                             <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
                                 <!--目的地メモ-->

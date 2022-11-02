@@ -9,11 +9,11 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/title_date.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/title_date.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -29,19 +29,25 @@
             <div class = "date_select">
                 <form action="/itineraries/new_entry/date_store" method="POST">
                     @csrf
-                    <!--//出発日を入力-->
                     <span>旅行タイトル</span>
                     <br>
+                    <!--旅行タイトル入力欄-->
                     <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
+                    <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                     <span>出発日</span>
+                    <!--出発日入力欄-->
                     <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                     <br>
+                    <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
                     <span>到着日</span>
+                    <!--到着日入力欄-->
                     <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
                     <br>
+                    <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
+                    <!--「次へ」ボタン-->
                     <input class ="btn" type="submit" value="次へ">
                 </form>
             </div>

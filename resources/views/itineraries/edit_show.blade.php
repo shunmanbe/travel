@@ -11,11 +11,11 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/show.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/show.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -34,22 +34,23 @@
                 <span>　　期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                 <a href="/itineraries/{{$itinerary->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
             </div>
-            
+            <!--出発地-->
             <div class="departure">
                 <p class="name">
                     <span>出発地：{{ $itinerary->departure_place_name }}</span>
-                    <a class="departure_supplement" href="/itineraries/{{$itinerary->id}}/departure/edit">
-                        <!--編集アイコン-->
-                        <i class="fa-solid fa-pen-to-square icon"></i>
-                    </a>
+                    <!--編集アイコン-->
+                    <a class="departure_supplement" href="/itineraries/{{$itinerary->id}}/departure/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                 </p>
             </div>
-            
+            <!--目的地一覧-->
             <div class="destinations">
+                <!--目的地が入力されていない時-->
                 @if(empty($places))
+                <!--目的地が入力されている時-->
                 @else
                     @foreach($places as $n => $place)
                         <div class="to_destination">
+                            <!--三角形表示-->
                             <div class="triangles">
                                 @for ($i=0; $i<3; $i++)
                                     <br>
@@ -57,30 +58,36 @@
                                     <br>
                                 @endfor
                             </div>
+                            <!--出発・到着時刻などの補足情報-->
                             <div class="supplement">
+                                <!--出発時刻表示-->
                                 <div class="departure_time">
                                     <!--出発時刻が入力されていない時-->
                                     @if(empty($place->departure_time))
                                         <form action="/itineraries/{{$itinerary->id}}/departure_time_store/{{$place->id}}" method="POST">
                                             @csrf
                                             <p>出発時刻：
-                                            <input type="datetime-local" name="time_d[departure_time]"><input class ="btn" type="submit" value="保存"></p>
+                                                <!--出発時刻入力欄-->
+                                                <input type="datetime-local" name="time_d[departure_time]">
+                                                <!--保存ボタン-->
+                                                <input class ="btn" type="submit" value="保存">
+                                            </p>
+                                            <!--エラーメッセージ-->
                                             <p class="error-message">{{ $errors->first('time.departure_time') }}</p>
                                         </form>
                                     <!--出発時刻が入力されている時 -->
                                     @else
                                         <p>出発時刻：{{$place->departure_time}}
-                                            <!--出発時刻を削除-->
-                                            <a class="departure_time" href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit">
-                                                <!--編集アイコン-->
-                                                <i class="fa-solid fa-pen-to-square icon"></i>
-                                            </a>
+                                            <!--出発時刻編集アイコン-->
+                                            <a class="departure_time" href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                         </p>
                                     @endif
                                 </div>
+                                <!--経路情報-->
                                 <div class="route">
                                     <form action="/itineraries/{{$itinerary->id}}/route/{{$place->id}}" method="POST">
                                         @csrf
+                                        <!--移動手段-->
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
                                             <option value="TRANSIT">電車</option>
@@ -88,7 +95,9 @@
                                             <option value="BICYCLING">自転車</option>
                                             <option value="WALKING">徒歩</option>
                                         </select>
+                                        <!--エラーメッセージ-->
                                         <p class="error-message">{{ $errors->first('Mode') }}</p>
+                                        <!--経路詳細表示ボタン-->
                                         <input class="btn" type="submit" name="route" value="経路詳細">
                                         @if($n+1 == 1)
                                             <!--出発地から出発の場合は出発地→目的地-->
@@ -99,26 +108,30 @@
                                         @else
                                             <!--目的地からの出発の場合は目的地→目的地-->
                                             <input type="hidden" name="start_name" value={{$places[$n-1]->destination_name}}>
-                                            <input type="hidden" name="start_address" value={{$place[$n-1]->destination_address}}>
+                                            <input type="hidden" name="start_address" value={{$places[$n-1]->destination_address}}>
                                             <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
                                             <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
                                         @endif
                                     </form>
                                 </div>
+                                <!--到着時刻表示-->
                                 <div class="arrival_time">
                                     <!--到着時刻が入力されていない時-->
                                     @if(empty($place->arrival_time))
                                         <form  action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                             @csrf
-                                            <p>到着時刻：<input type="datetime-local" name="time_a[arrival_time]"><input class ="btn" type="submit" value="保存"></p>
+                                            <p>到着時刻：
+                                                <!--到着時刻入力欄-->
+                                                <input type="datetime-local" name="time_a[arrival_time]">
+                                                <!--保存ボタン-->
+                                                <input class ="btn" type="submit" value="保存">
+                                            </p>
                                         </form>
                                     <!--到着時刻が入力されている時-->
                                     @else
                                         <p>到着時刻：{{$place->arrival_time}}
-                                             <a class="arrival_time" href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit">
-                                                <!--編集アイコン-->
-                                                <i class="fa-solid fa-pen-to-square icon"></i>
-                                            </a>
+                                            <!--到着時刻編集アイコン-->
+                                            <a class="arrival_time" href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                         </p>
                                     @endif
                                 </div>

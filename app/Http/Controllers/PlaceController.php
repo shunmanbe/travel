@@ -28,20 +28,27 @@ class PlaceController extends Controller
     {
         $auth = Auth::user();
         $input_s = $request['search_name'];
+        // GuzzleはHTTP通信を行うパッケージ
         $client = new \GuzzleHttp\Client();
-        //検索ワードに関連する施設の詳細情報を取得
+        // GooglePlaceAPIのURL
         $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
+        // json_decodeでJSON文字列を配列に変換
         $itineraries = json_decode($response->getBody(), true);
+        // placeの住所を入れる配列を用意
         $place_addresses = [ ];
+        // placeの名前を入れる配列を用意
         $place_names = [ ];
+        // APIにより取得した結果の配列のうち、住所情報と名前情報を一つずつ上で定義した配列に挿入
         for($i = 0; $i < count($itineraries['results']); $i++)
         {
             $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
             $place_names[ ] = $itineraries['results'][$i]['name'];
         }
-        $place_details = array_map(null, $place_addresses, $place_names);
+        // 渡す先のbladeでforeachで回すため、$palce_detailsにまとめる
+        // $place_addressesがキー、$place_namesが値の配列を作成
+        $place_details = array_combine($place_addresses, $place_names);
         return view('/itineraries/map_destination')->with(['auth' => $auth, 'place_details' => $place_details, 'itinerary' => $itinerary, 'place' => $place]);
     }
     
@@ -84,8 +91,7 @@ class PlaceController extends Controller
             $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
             $place_names[ ] = $itineraries['results'][$i]['name'];
         }
-        $place_details = array_map(null, $place_addresses, $place_names);
-        dd($place_details);
+        $place_details = array_combine($place_addresses, $place_names);
         return view('/itineraries/map_destination_edit')->with(['auth' => $auth, 'place_details' => $place_details, 'itinerary' => $itinerary, 'place' => $place]);
     }
     
@@ -93,6 +99,7 @@ class PlaceController extends Controller
     public function destination_update(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request->input('destination'))->save();
+        // dd($place);
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');//目的地をupdate
     }
     
