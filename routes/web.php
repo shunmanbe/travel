@@ -15,62 +15,91 @@
 
 Auth::routes();
 
-
-Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザーのみアクセス可能
+#ログイン中のユーザーのみアクセス可能
+Route::group(['middleware'=>['auth']], function(){ 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'ItineraryController@index'); //しおり一覧画面へ
+    #しおり一覧画面へ
+    Route::get('/', 'ItineraryController@index'); 
     Route::post('ajaxlike', 'ItineraryController@ajaxlike');
-    Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select');//日程選択画面へ
-    Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store');//日程を保存
-    Route::get('/itineraries/{itinerary}/completed/show', 'ItineraryController@completed_show');//完成した詳細ページへ
-    Route::get('itineraries/{itinerary}/edit/show', 'PlaceController@geocoding');//詳細編集ページへ
-    // Route::get('itineraries/{itinerary}/edit/show', 'ItineraryController@edit_show');//詳細編集ページへ
+    #日程選択画面へ
+    Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select');
+    #日程を保存
+    Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store');
+    #完成した詳細ページへ
+    Route::get('/itineraries/{itinerary}/completed/show', 'ItineraryController@completed_show');
+    #詳細編集ページへ
+    Route::get('itineraries/{itinerary}/edit/show', 'ItineraryController@edit_show');
     
     //出発地を決める
-    Route::get('/itineraries/{itinerary}/departure_place_search', 'ItineraryController@departure_place_serach');//出発地を検索
-    Route::post('/itineraries/{itinerary}/departure_place_map', 'ItineraryController@departure_place_map');//検索ワードからgoogle-placesマップを表示
-    Route::post('/itineraries/{itinerary}/departure_place_store', 'ItineraryController@departure_place_store');//地図から選択した出発地をデータベースに保存
+    #出発地を検索
+    Route::get('/itineraries/{itinerary}/departure_place_search', 'ItineraryController@departure_place_search');
+    #検索ワードからgoogle-placesマップを表示
+    Route::post('/itineraries/{itinerary}/departure_place_map', 'ItineraryController@departure_place_map');
+    #地図から選択した出発地をデータベースに保存
+    Route::post('/itineraries/{itinerary}/departure_place_store', 'ItineraryController@departure_place_store');
     
     //目的地を決める
-    Route::get('/itineraries/{itinerary}/destination_search', 'PlaceController@destination_search');//目的地検索
-    Route::post('/itineraries/{itinerary}/destination_map', 'PlaceController@destination_map');//検索ワードからgoogle-placesマップを表示
-    Route::post('/itineraries/{itinerary}/destination_store', 'PlaceController@destination_store');//地図から選択した目的地をデータベースに保存
+    #目的地検索
+    Route::get('/itineraries/{itinerary}/destination_search', 'PlaceController@destination_search');
+    #検索ワードからgoogle-placesマップを表示
+    Route::post('/itineraries/{itinerary}/destination_map', 'PlaceController@destination_map');
+    #地図から選択した目的地をデータベースに保存
+    Route::post('/itineraries/{itinerary}/destination_store', 'PlaceController@destination_store');
     
     //編集
-    Route::get('/itineraries/{itinerary}/new_entry/edit', 'ItineraryController@edit_new_entry');//しおり名と旅行期間を編集
-    Route::put('/itineraries/{itinerary}/new_entry/update', 'ItineraryController@update_new_entry');//しおり名と旅行期間をアップデート
-    Route::get('/itineraries/{itinerary}/departure/edit', 'ItineraryController@edit_departure');//出発地を編集
-    Route::get('/itineraries/{itinerary}/edit/{place}', 'PlaceController@edit_destination');//目的地を編集
-    Route::post('/itineraries/{itinerary}/destination_map/edit/{place}', 'PlaceController@edit_destination_map');//目的地を選択
-    Route::put('/itineraries/{itinerary}/destination_update/{place}', 'PlaceController@destination_update');//目的地をアップデート
+    #しおり名と旅行期間を編集
+    Route::get('/itineraries/{itinerary}/new_entry/edit', 'ItineraryController@edit_new_entry');
+    #しおり名と旅行期間をアップデート
+    Route::put('/itineraries/{itinerary}/new_entry/update', 'ItineraryController@update_new_entry');
+    #出発地を編集
+    Route::get('/itineraries/{itinerary}/departure/edit', 'ItineraryController@edit_departure');
+    #目的地を編集
+    Route::get('/itineraries/{itinerary}/edit/{place}', 'PlaceController@edit_destination');
+    #目的地を選択
+    Route::post('/itineraries/{itinerary}/destination_map/edit/{place}', 'PlaceController@edit_destination_map');
+    #目的地をアップデート
+    Route::put('/itineraries/{itinerary}/destination_update/{place}', 'PlaceController@destination_update');
     
     //削除
-    Route::delete('/itineraries/{itinerary}', 'ItineraryController@itinerary_delete');//しおり一覧からしおりを削除
-    Route::delete('/itineraries/{itinerary}/destinetion/{place}','PlaceController@destination_delete');//しおり詳細の目的地を削除
+    #しおり一覧からしおりを削除
+    Route::delete('/itineraries/{itinerary}', 'ItineraryController@itinerary_delete');
+    #しおり詳細の目的地を削除
+    Route::delete('/itineraries/{itinerary}/destinetion/{place}','PlaceController@destination_delete');
     
     //経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
-    Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route'); //詳細編集画面から経路詳細ページへ
-    Route::post('/itineraries/{itinerary}/completed_route/{place}', 'ItineraryController@completed_route'); //詳細完成ページから経路詳細ページへ
+    #詳細編集画面から経路詳細ページへ
+    Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route'); 
+    #詳細完成ページから経路詳細ページへ
+    Route::post('/itineraries/{itinerary}/completed_route/{place}', 'ItineraryController@completed_route'); 
     
     //ログアウト
     Route::get('/itineraries/logout', 'ItineraryController@logout');
     
     //メモ
-    Route::get('/itineraries/{itinerary}/memo/{place}', 'PlaceController@memo');//メモページへ
-    Route::post('/itineraries/{itinerary}/memo/{place}/store', 'PlaceController@memo_store');//メモを保存
+    #メモページへ
+    Route::get('/itineraries/{itinerary}/memo/{place}', 'PlaceController@memo');
+    #メモを保存
+    Route::post('/itineraries/{itinerary}/memo/{place}/store', 'PlaceController@memo_store');
     
     //各地点の出発時刻
-    Route::post('/itineraries/{itinerary}/departure_time_store/{place}', 'PlaceController@departure_time_store'); //出発時刻を保存
-    Route::get('/itineraries/{itinerary}/departure_time/{place}/edit', 'PlaceController@edit_departure_time'); //出発時刻を編集(削除)
+    #出発時刻を保存
+    Route::post('/itineraries/{itinerary}/departure_time_store/{place}', 'PlaceController@departure_time_store'); 
+    #出発時刻を編集(削除)
+    Route::get('/itineraries/{itinerary}/departure_time/{place}/edit', 'PlaceController@edit_departure_time'); 
     
     //各地点の到着時刻
-    Route::post('/itineraries/{itinerary}/arrival_time_store/{place}', 'PlaceController@arrival_time_store'); //到着時刻を保存
-    Route::get('/itineraries/{itinerary}/arrival_time/{place}/edit', 'PlaceController@edit_arrival_time'); //到着時刻を編集(削除)
+    #到着時刻を保存
+    Route::post('/itineraries/{itinerary}/arrival_time_store/{place}', 'PlaceController@arrival_time_store'); 
+    #到着時刻を編集(削除)
+    Route::get('/itineraries/{itinerary}/arrival_time/{place}/edit', 'PlaceController@edit_arrival_time'); 
    
     //お問い合わせ
-    Route::get('/itineraries/contact/form', 'ContactsController@form');//入力フォームページ
-    Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');//入力確認ページ
-    Route::post('/itineraries/contact/thanks', 'ContactsController@send');//「送信しました」画面
+    #入力フォームページ
+    Route::get('/itineraries/contact/form', 'ContactsController@form');
+    #入力確認ページ
+    Route::post('/itineraries/contact/confirm', 'ContactsController@confirm');
+    #「送信しました」画面
+    Route::post('/itineraries/contact/thanks', 'ContactsController@send');
     
     //いいね機能
     Route::post('/like', 'ItineraryController@like');
@@ -80,6 +109,6 @@ Route::group(['middleware'=>['auth']], function(){ //ログイン中のユーザ
     Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show');
     
     //ジオコーディング
-    Route::get('itineraries/geocoding', 'ItineraryController@geocoding');
+    Route::get('/itineraries/{place}/geocoding', 'ItineraryController@geocoding');
     
 });

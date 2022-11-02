@@ -11,11 +11,11 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/memo.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/memo.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
       
     </head>
     <body>
@@ -29,11 +29,14 @@
             </div>
         </header>
         <div class = "container">
+            <!--メモの地名表示-->
             <h2>{{$place->destination_name}}</h2>
+            <!--メモ入力欄-->
             <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
                 @csrf
                 <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
                 <br>
+                <!--保存ボタン-->
                 <input class="btn" type="submit" value="保存して詳細ページへ">
             </form>
         </div>

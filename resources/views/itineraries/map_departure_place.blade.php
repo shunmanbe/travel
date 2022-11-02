@@ -3,19 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>旅のしおり</title>
-
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/map.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/map.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
         
     </head>
     <body>
@@ -31,24 +29,29 @@
         <!--出発地を選択-->
         <div class ="containers">
             <h1>以下から出発地を選択してください</h1> 
-            @foreach ($place_details as $place_detail)
+            @foreach ($place_details as $place_addresses => $place_names)
             <div class="container">
                 <form action="/itineraries/{{ $itinerary->id }}/departure_place_store" method="POST">
                     @csrf
+                    <!--検索候補地名表示-->
                     <h2>{{$place_detail[1]}}</h2>
-                    <input type="hidden" name="departure[departure_place_address]" value={{$place_detail[0]}}>
-                    <input type="hidden" name="departure[departure_place_name]" value={{$place_detail[1]}}>
-                    <input type="hidden" name="departure[detail_id]" value={{$itinerary->id}}>
+                    <!--候補地の住所-->
+                    <input type="hidden" name="departure[departure_place_address]" value="{{$place_addresses}}">
+                    <!--候補地名-->
+                    <input type="hidden" name="departure[departure_place_name]" value="{{$place_names}}">
+                    <!--候補地のdetail_id-->
+                    <input type="hidden" name="departure[detail_id]" value="{{$itinerary->id}}">
+                    <!--保存ボタン-->
                     <input class="btn" type="submit" value="ここを出発地として保存する">
                     <br>
                     <br>
-                    <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_detail[1] }}'
+                    <!--地図を表示-->
+                    <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_names }}'
                     width='50%' height='500' frameborder='0'></iframe>
                 </form>
             </div>
             @endforeach
         </div>
-         <!--ページトップリンク-->
         <footer>
             <div class="footer-wrapper">
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
@@ -57,8 +60,5 @@
                 </ul>
             </div>
         </footer>
-        <!--ページトップリンク-->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="{{ asset('/js/page_top_link.js') }}"></script>
     </body>
 </html>

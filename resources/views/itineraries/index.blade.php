@@ -16,19 +16,20 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/index.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
         <!--loading-->
-        <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
-
     <body>
+        <!--ローディング画面-->
         <div id="splash">
             <div id="splash_text"></div>
         </div>
+        <!--ヘッダー-->
         <header>
             <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
@@ -43,11 +44,12 @@
                 <h1>しおり一覧</h1>
                 <div class="index">
                     <div class="index-detail">
+                        <!--しおり一覧を表示-->
                         @foreach($itineraries as $itinerary)
                             <div class="itinerary">
-                                <div class="theme">
-                                    <h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2>
-                                </div>
+                                <!--しおりタイトル-->
+                                <div class="theme"><h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2></div>
+                                <!--削除ボタン-->
                                 <form action="/itineraries/{{ $itinerary->id }}" method="post">
                                     @csrf
                                     @method('DELETE')

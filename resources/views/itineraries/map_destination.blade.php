@@ -11,13 +11,13 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/map.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/map.css') }}" >
         <!--loading-->
-        <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -32,18 +32,25 @@
         <!--出発地を選択-->
         <div class ="containers">
             <h1>以下から目的地を選択してください</h1> 
-            @foreach ($place_details as $place_detail)
+            @foreach ($place_details as $place_addresses => $place_names)
             <div class="container">
                 <form action="/itineraries/{{ $itinerary->id }}/destination_store" method="POST">
                     @csrf
-                    <h2>{{$place_detail[1]}}</h2>
-                    <input type="hidden" name="destination[destination_address]" value={{$place_detail[0]}}>
-                    <input type="hidden" name="destination[destination_name]" value={{$place_detail[1]}}>
-                    <input type="hidden" name="destination[itinerary_id]" value={{$itinerary->id}}>
+                    <!--検索候補地名表示-->
+                    <h2>{{$place_names}}</h2>
+                    <!--候補地の住所-->
+                    <input type="hidden" name="destination[destination_address]" value="{{$place_addresses}}">
+                    <!--候補地名-->
+                    <input type="hidden" name="destination[destination_name]" value="{{$place_names}}">
+                    <!--候補地のdetail_id-->
+                    <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
+                    <!--保存ボタン-->
                     <input class="btn" type="submit" value="ここを目的地として保存する">
                     <br>
                     <br>
-                    <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_detail[1] }}'
+                    <!--地図を表示-->
+                    <!--GoogleMapsEmbedAPI-->
+                    <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_names }}'
                     width='50%' height='300' frameborder='0'></iframe>
                 </form>
             </div>
@@ -57,8 +64,6 @@
                 </ul>
             </div>
         </footer>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="{{ asset('/js/page_top_link.js') }}"></script>
     </body>
 </html>
 

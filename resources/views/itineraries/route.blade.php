@@ -18,11 +18,11 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
-        <link rel="stylesheet" href="{{ asset('/css/route.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/route.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -52,6 +52,8 @@
             </div>
         </footer>
         <script>
+            // 地図表示に使う変数
+            
             var start = '{{$start}}';
             var end = '{{$end}}';
             var travel = '{{$mode}}';

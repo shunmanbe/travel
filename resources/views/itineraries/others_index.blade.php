@@ -9,13 +9,13 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/index.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
         <!--loading-->
-        <link rel="stylesheet" href="{{ asset('/css/loading.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
     </head>
 
     <body>
@@ -33,14 +33,15 @@
                 <h1>他のユーザーのしおり</h1>
                 <div class="index">
                     <div class="index-detail">
+                        <!--しおり一覧を表示-->
                         @foreach($itineraries as $itinerary)
                             <div class="itinerary">
-                                <div class="theme">
-                                    <h2><a href="/itineraries/{{ $itinerary->id }}/completed/others/show">{{ $itinerary->title }}</a></h2>
-                                </div>
-                                <!--いいねマークについての処理-->
+                                <!--しおりタイトル-->
+                                <div class="theme"><h2><a href="/itineraries/{{ $itinerary->id }}/completed/others/show">{{ $itinerary->title }}</a></h2></div>
+                                <!--いいねボタン-->
                                     <span class="likes">
                                         <i class="fa-regular fa-heart like-toggle liked" data-itinerary-id="{{ $itinerary->id }}"></i>
+                                        <!--いいねカウント-->
                                         <span class="like-counter">{{$itinerary->likes_count}}</span>
                                     </span>
                             </div>
