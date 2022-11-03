@@ -29,25 +29,28 @@
         <!--出発地を選択-->
         <div class ="containers">
             <h1>以下から出発地を選択してください</h1> 
-            @foreach ($place_details as $place_addresses => $place_names)
+            @foreach ($place_detail_requireds as $place_detail_required)
             <div class="container">
                 <form action="/itineraries/{{ $itinerary->id }}/departure_place_store" method="POST">
                     @csrf
                     <!--検索候補地名表示-->
-                    <h2>{{$place_detail[1]}}</h2>
-                    <!--候補地の住所-->
-                    <input type="hidden" name="departure[departure_place_address]" value="{{$place_addresses}}">
-                    <!--候補地名-->
-                    <input type="hidden" name="departure[departure_place_name]" value="{{$place_names}}">
-                    <!--候補地のdetail_id-->
-                    <input type="hidden" name="departure[detail_id]" value="{{$itinerary->id}}">
-                    <!--保存ボタン-->
-                    <input class="btn" type="submit" value="ここを出発地として保存する">
-                    <br>
-                    <br>
-                    <!--地図を表示-->
-                    <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_names }}'
-                    width='50%' height='500' frameborder='0'></iframe>
+                        <h2>{{$place_detail_required[0]}}</h2>
+                        <!--候補地の名前-->
+                        <input type="hidden" name="departure[departure_place_name]" value="{{$place_detail_required[0]}}">
+                        <!--候補地の住所-->
+                        <input type="hidden" name="departure[departure_place_address]" value="{{$place_detail_required[1]}}">
+                        <!--候補地の緯度-->
+                        <input type="hidden" name="departure[departure_place_lat]" value="{{$place_detail_required[2]}}">
+                        <!--候補地の経度-->
+                        <input type="hidden" name="departure[departure_place_lng]" value="{{$place_detail_required[3]}}">
+                        <!--保存ボタン-->
+                        <input class="btn" type="submit" value="ここを目的地として保存する">
+                        <br>
+                        <br>
+                        <!--地図を表示-->
+                        <!--GoogleMapsEmbedAPI-->
+                        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{$place_detail_required[2]}},{{$place_detail_required[3]}}'
+                        width='50%' height='300' frameborder='0'></iframe>
                 </form>
             </div>
             @endforeach

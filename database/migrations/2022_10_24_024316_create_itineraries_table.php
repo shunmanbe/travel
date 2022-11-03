@@ -19,9 +19,12 @@ class CreateItinerariesTable extends Migration
             $table->string('title');
             $table->date('departure_date');
             $table->date('arrival_date');
-            $table->string('departure_place_address')->nullable();
             $table->string('departure_place_name')->nullable();
-            $table->integer('likes_count')->default(0);
+            $table->string('departure_place_address')->nullable();
+            $table->string('departure_place_lat')->nullable();
+            $table->string('departure_place_lng')->nullable();
+            // $table->integer('likes_count')->default(0);
+            $table->integer('likes_count')->nullable();
             $table->timestamps();
         });
     }

@@ -66,22 +66,36 @@ class ItineraryController extends Controller
     public function departure_place_map(ItinerarySearchRequest $request, Itinerary $itinerary)
     {
         $auth = Auth::user();
-        $input_s = $request['search_name'];
+        $input = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
-        $itineraries_get = json_decode($response->getBody(), true);
-        $place_ids = [ ];
-        $place_names = [ ];
-        for($i = 0; $i < count($itineraries_get['results']); $i++)
-        {
-            $place_ids[ ] = $itineraries_get['results'][$i]['formatted_address'];
-            $place_names[ ] = $itineraries_get['results'][$i]['name'];
+        // 受け取った土地に関する情報全てを$place_detailsに代入
+        $place_details = json_decode($response->getBody(), true);
+        // 必要情報を全地点分まとめる
+        $place_detail_requireds =[];
+        // 受け取った情報を一つずつに分解
+        foreach($place_details['results'] as $place_detail){
+            // 地名情報
+            $place_name = $place_detail['name'];
+            // 住所情報
+            $place_address = $place_detail['formatted_address'];
+            // ジオコーディングで緯度・軽度を取得
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $place_address . '&language=ja';
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $place_lat_lng = json_decode($response->getBody(), true);
+            // 緯度情報
+            $place_lat = $place_lat_lng['results'][0]['geometry']['location']['lat'];
+            // 経度情報
+            $place_lng = $place_lat_lng['results'][0]['geometry']['location']['lng'];
+            // 地名・住所・緯度・経度情報を一つにまとめる
+            $place_detail_required = [$place_name, $place_address, $place_lat, $place_lng];
+            $place_detail_requireds[] =$place_detail_required;
         }
-        $place_details = array_map(null, $place_ids, $place_names);
-        return view('/itineraries/map_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary,'place_details' => $place_details]);
+        return view('/itineraries/map_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place_detail_requireds' => $place_detail_requireds]);
     }
     
     //出発地を保存
@@ -221,13 +235,14 @@ class ItineraryController extends Controller
     public function geocoding(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $start_address = $place->destination_address;
+        // $start_address = $request->$start_address;
+        // dd($start_address);
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $start_address . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $itineraries = json_decode($response->getBody(), true);
-        dd($itineraries);
+        // dd($itineraries);
         //緯度取得
         $place_lat = [ ];
         //軽度取得

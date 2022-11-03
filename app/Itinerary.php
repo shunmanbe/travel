@@ -33,12 +33,14 @@ class Itinerary extends Model
         'user_id',
         'departure_date', 
         'arrival_date', 
-        'departure_place_address',
         'departure_place_name',
+        'departure_place_address',
+        'departure_place_lat',
+        'departure_place_lng',
         ];
     
     protected $dates = [
         'departure_date', 
-        'arrival_date'
+        'arrival_date',
         ];
 }

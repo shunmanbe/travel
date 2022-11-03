@@ -138,7 +138,7 @@
                             </div>
                         </div>
                         <div class="destination">
-                            <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
+                            <div class="name">目的地{{ $n + 1 }}:{{ $place->name }}
                                 <!--目的地編集-->
                                 <a href="/itineraries/{{$itinerary->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                 <!--目的地メモ-->

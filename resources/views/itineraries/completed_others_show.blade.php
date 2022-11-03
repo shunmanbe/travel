@@ -98,7 +98,7 @@
                         </div>
                         <!--目的地-->
                         <div class="destination">
-                            <div class="name">目的地{{ $n + 1 }}:{{ $place->destination_name }}
+                            <div class="name">目的地{{ $n + 1 }}:{{ $place->name }}
                                 <!--目的地メモ-->
                                 <a class="memo" href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
                             </div>
