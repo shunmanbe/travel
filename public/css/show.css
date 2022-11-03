@@ -155,14 +155,15 @@ form {
   cursor: pointer;
 }
 
-.memo-body {
+textarea {
+    font-size: 20px;
     border: 5px solid orange;
     border-radius: 5px;
     width: 90%;
     height: 80%;
     position: absolute;
     top: 15%;
-    left: 5%;
-    z-index: 200;
+    left: 4%;
     background-color: white;
+    resize: none;
 }
