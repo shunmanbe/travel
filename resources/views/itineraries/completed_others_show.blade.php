@@ -79,14 +79,14 @@
                                             <!--出発地から出発の場合は出発地→目的地-->
                                             <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
                                             <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
-                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
-                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
+                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
+                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
                                         @else
                                             <!--目的地からの出発の場合は目的地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$places[$n-1]->destination_name}}>
-                                            <input type="hidden" name="start_address" value={{$places[$n-1]->destination_address}}>
-                                            <input type="hidden" name="end_name" value={{$places[$n]->destination_name}}>
-                                            <input type="hidden" name="end_address" value={{$places[$n]->destination_address}}>
+                                            <input type="hidden" name="start_name" value={{$places[$n-1]->name}}>
+                                            <input type="hidden" name="start_address" value={{$places[$n-1]->address}}>
+                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
+                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
                                         @endif
                                     </form>
                                 </div>

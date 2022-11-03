@@ -30,9 +30,8 @@
             <h1>以下から目的地を選択してください</h1> 
             @foreach ($place_detail_requireds as $place_detail_required)
                 <div class="container">
-                    <form action="/itineraries/{{ $itinerary->id }}/destination_update/{{ $place->id }}" method="POST">
+                    <form action="/itineraries/{{ $itinerary->id }}/destination_store" method="POST">
                         @csrf
-                        @method('PUT')
                         <!--検索候補地名表示-->
                         <h2>{{$place_detail_required[0]}}</h2>
                         <!--候補地の名前-->
