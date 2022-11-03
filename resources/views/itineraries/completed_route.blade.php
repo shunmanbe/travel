@@ -36,7 +36,7 @@
         </header>
         <div class="container">
             <div class="title">
-                <h1>経路：{{$start_name}}→{{$end_name}}</h1>
+                <h1>経路：{{$start_name}}→{{$goal_name}}</h1>
             </div>
             <!-- 地図を表示する領域 -->
             <div id="gmap"></div>
@@ -54,7 +54,7 @@
         <script>
         // 地図表示に使う変数
             var start_name = '{{$start_name}}';
-            var end_name = '{{$end_name}}';
+            var end_name = '{{$goal_name}}';
             var travel = '{{$mode}}';
         </script>
         <!--callback関数でapiを呼び出すときにcallback関数でinitMapを呼び出している-->

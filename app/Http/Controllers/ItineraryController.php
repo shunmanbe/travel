@@ -145,16 +145,16 @@ class ItineraryController extends Controller
         $auth = Auth::user();
         if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->input('start_address');
-            $end_address = $request->input('end_address');
-            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
+            $_address = $request->input('goal_address');
+            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
         }else{
             $mode = $request->input('Mode');
-            $start = $request->input('start_name');
-            $end = $request->input('end_name');
+            $start_name = $request->input('start_name');
+            $goal_name = $request->input('goal_name');
         }
         
         //falseにする。ここに到達すればバリデーションテェックは通過。
-        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start' => $start, 'end' => $end, 'itinerary' => $itinerary]);
+        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
@@ -164,19 +164,19 @@ class ItineraryController extends Controller
         //移動手段で「電車」が入力された場合
         if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->start_address;
-            $end_address = $request->end_address;
-            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'end_address' => $end_address]);
+            $goal_address = $request->goal_address;
+            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
         //それ以外が入力された場合
         }else{
             $mode = $request->input('Mode');
             $start_name = $request->input('start_name');
-            $end_name = $request->input('end_name');
+            $goal_name = $request->input('goal_name');
         }
         // $mode = $request->input('Mode');
         // $start_name = $request->input('start_name');
-        // $end_name = $request->input('end_name');
+        // $goal_name = $request->input('goal_name');
         //falseにする。ここに到達すればバリデーションテェックは通過。
-        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'end_name' => $end_name, 'itinerary' => $itinerary]);
+        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }
     
     //ログアウト
