@@ -25,7 +25,7 @@ class ItineraryDateRequest extends FormRequest
         return [
             'initial_setting.title' => 'required|string|max:30',
             'initial_setting.departure_date' => 'required',
-            'initial_setting.arrival_date' => 'required|date|after:initial_setting.departure_date',
+            'initial_setting.arrival_date' => 'required|date|after_or_equal:initial_setting.departure_date',
         ];
     }
     
@@ -35,7 +35,7 @@ class ItineraryDateRequest extends FormRequest
             'initial_setting.title.required' => 'タイトルを入力してください',
             'initial_setting.departure_date.required' => '出発日を選択してください',
             'initial_setting.arrival_date.required' => '到着日を選択してください',
-            'initial_setting.arrival_date.after' => '到着日が正しくありません',
+            'initial_setting.arrival_date.after_or_equal' => '到着日が正しくありません',
         ];
     }
 }

@@ -27,29 +27,36 @@ class PlaceController extends Controller
     public function destination_map(ItinerarySearchRequest $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $input_s = $request['search_name'];
-        // GuzzleはHTTP通信を行うパッケージ
+        $input = $request['search_name'];
         $client = new \GuzzleHttp\Client();
-        // GooglePlaceAPIのURL
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
+        //検索ワードに関連する施設の詳細情報を取得
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
-        // json_decodeでJSON文字列を配列に変換
-        $itineraries = json_decode($response->getBody(), true);
-        // placeの住所を入れる配列を用意
-        $place_addresses = [ ];
-        // placeの名前を入れる配列を用意
-        $place_names = [ ];
-        // APIにより取得した結果の配列のうち、住所情報と名前情報を一つずつ上で定義した配列に挿入
-        for($i = 0; $i < count($itineraries['results']); $i++)
-        {
-            $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
-            $place_names[ ] = $itineraries['results'][$i]['name'];
+        // 受け取った土地に関する情報全てを$place_detailsに代入
+        $place_details = json_decode($response->getBody(), true);
+        // 必要情報を全地点分まとめる
+        $place_detail_requireds =[];
+        // 受け取った情報を一つずつに分解
+        foreach($place_details['results'] as $place_detail){
+            // 地名情報
+            $place_name = $place_detail['name'];
+            // 住所情報
+            $place_address = $place_detail['formatted_address'];
+            // ジオコーディングで緯度・軽度を取得
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $place_address . '&language=ja';
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $place_lat_lng = json_decode($response->getBody(), true);
+            // 緯度情報
+            $place_lat = $place_lat_lng['results'][0]['geometry']['location']['lat'];
+            // 経度情報
+            $place_lng = $place_lat_lng['results'][0]['geometry']['location']['lng'];
+            // 地名・住所・緯度・経度情報を一つにまとめる
+            $place_detail_required = [$place_name, $place_address, $place_lat, $place_lng];
+            $place_detail_requireds[] =$place_detail_required;
         }
-        // 渡す先のbladeでforeachで回すため、$palce_detailsにまとめる
-        // $place_addressesがキー、$place_namesが値の配列を作成
-        $place_details = array_combine($place_addresses, $place_names);
-        return view('/itineraries/map_destination')->with(['auth' => $auth, 'place_details' => $place_details, 'itinerary' => $itinerary, 'place' => $place]);
+        return view('/itineraries/map_destination')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place' => $place, 'place_detail_requireds' => $place_detail_requireds]);
     }
     
     //目的地を保存
@@ -77,29 +84,42 @@ class PlaceController extends Controller
     public function edit_destination_map(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        $input_s = $request['search_name'];
+        $input = $request['search_name'];
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
-        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input_s . '&language=ja';
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
-        $itineraries = json_decode($response->getBody(), true);
-        $place_addresses = [ ];
-        $place_names = [ ];
-        for($i = 0; $i < count($itineraries['results']); $i++)
-        {
-            $place_addresses[ ] = $itineraries['results'][$i]['formatted_address'];
-            $place_names[ ] = $itineraries['results'][$i]['name'];
+        // 受け取った土地に関する情報全てを$place_detailsに代入
+        $place_details = json_decode($response->getBody(), true);
+        // 必要情報を全地点分まとめる
+        $place_detail_requireds =[];
+        // 受け取った情報を一つずつに分解
+        foreach($place_details['results'] as $place_detail){
+            // 地名情報
+            $place_name = $place_detail['name'];
+            // 住所情報
+            $place_address = $place_detail['formatted_address'];
+            // ジオコーディングで緯度・軽度を取得
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $place_address . '&language=ja';
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $place_lat_lng = json_decode($response->getBody(), true);
+            // 緯度情報
+            $place_lat = $place_lat_lng['results'][0]['geometry']['location']['lat'];
+            // 経度情報
+            $place_lng = $place_lat_lng['results'][0]['geometry']['location']['lng'];
+            // 地名・住所・緯度・経度情報を一つにまとめる
+            $place_detail_required = [$place_name, $place_address, $place_lat, $place_lng];
+            $place_detail_requireds[] =$place_detail_required;
         }
-        $place_details = array_combine($place_addresses, $place_names);
-        return view('/itineraries/map_destination_edit')->with(['auth' => $auth, 'place_details' => $place_details, 'itinerary' => $itinerary, 'place' => $place]);
+        return view('/itineraries/map_destination_edit')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place' => $place, 'place_detail_requireds' => $place_detail_requireds]);
     }
     
     //編集内容を更新
     public function destination_update(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request->input('destination'))->save();
-        // dd($place);
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');//目的地をupdate
     }
     

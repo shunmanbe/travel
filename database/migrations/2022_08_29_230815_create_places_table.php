@@ -17,8 +17,10 @@ class CreatePlacesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->integer('itinerary_id')->unsigned()->nullable();
-            $table->string('destination_address')->nullable();
-            $table->string('destination_name')->nullable();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
             $table->datetime('departure_time')->nullable();
             $table->boolean('departure_time_flag')->nullable();
             $table->datetime('arrival_time')->nullable();

@@ -28,18 +28,22 @@
         <!--出発地を選択-->
         <div class ="containers">
             <h1>以下から目的地を選択してください</h1> 
-            @foreach ($place_details as $place_addresses => $place_names)
+            @foreach ($place_detail_requireds as $place_detail_required)
                 <div class="container">
                     <form action="/itineraries/{{ $itinerary->id }}/destination_update/{{ $place->id }}" method="POST">
                         @csrf
                         @method('PUT')
                         <!--検索候補地名表示-->
-                        <h2>{{$place_names}}</h2>
+                        <h2>{{$place_detail_required[0]}}</h2>
+                        <!--候補地の名前-->
+                        <input type="hidden" name="destination[name]" value="{{$place_detail_required[0]}}">
                         <!--候補地の住所-->
-                        <input type="hidden" name="destination[destination_address]" value="{{$place_addresses}}">
-                        <!--候補地名-->
-                        <input type="hidden" name="destination[destination_name]" value="{{$place_names}}">
-                        <!--候補地のdetail_id-->
+                        <input type="hidden" name="destination[address]" value="{{$place_detail_required[1]}}">
+                        <!--候補地の緯度-->
+                        <input type="hidden" name="destination[lat]" value="{{$place_detail_required[2]}}">
+                        <!--候補地の経度-->
+                        <input type="hidden" name="destination[lng]" value="{{$place_detail_required[3]}}">
+                        <!--候補地が属するしおりのid-->
                         <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
                         <!--保存ボタン-->
                         <input class="btn" type="submit" value="ここを目的地として保存する">
@@ -47,7 +51,7 @@
                         <br>
                         <!--地図を表示-->
                         <!--GoogleMapsEmbedAPI-->
-                        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{ $place_names }}'
+                        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{$place_detail_required[2]}},{{$place_detail_required[3]}}'
                         width='50%' height='300' frameborder='0'></iframe>
                     </form>
                 </div>

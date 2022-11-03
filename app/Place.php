@@ -13,8 +13,10 @@ class Place extends Model
     
     protected $fillable = [
         'itinerary_id',
-        'destination_address',
-        'destination_name',
+        'name',
+        'address',
+        'lat',
+        'lng',
         'departure_time',
         'arrival_time', 
         'memo',
