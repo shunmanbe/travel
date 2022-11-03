@@ -56,14 +56,14 @@ URL:https://radiant-mountain-36845.herokuapp.com
   - Googleの他にもYahoo, NAVITIMEのAPIを導入して比較し、今回のサービスではGoogleのAPIが最も使いやすいと判断しました。
   - 住所情報だけでも地図表示はできますが、たまに地図がエラーを起こします。そこでジオコーディングを用いて住所から緯度・経度を出力し、これらを用いて地図を表示することで、より正確な地図を表示できるようにしました。
 
-<img width="1440" alt="スクリーンショット 2022-10-23 14 56 07" src="https://user-images.githubusercontent.com/111550037/197376433-18ada851-e10b-4726-a55c-3bae6479b7d3.png">
+![スクリーンショット 2022-11-03 15 39 28](https://user-images.githubusercontent.com/111550037/199669663-b2c256d4-c765-4779-b430-57ea245d164c.png)
 
 
 - 出発地・目的地登録機能
   - マップを選択することで、選択した地名をしおりにそのまま反映させることができます。
   - この機能を追加したことで、しおりの作成をより簡単にすることができました。
 
-<img width="749" alt="スクリーンショット 2022-10-23 14 57 44" src="https://user-images.githubusercontent.com/111550037/197376503-4944d749-bed5-405a-91d2-a83b23327925.png">
+![スクリーンショット 2022-11-03 15 40 02](https://user-images.githubusercontent.com/111550037/199669759-23e486ea-96c5-43b6-9aea-88a0de5504c3.png)
 
 
 - ルート検索機能
