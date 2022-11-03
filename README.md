@@ -28,6 +28,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
 - Google Places API
 - Google Directions API
 - Google Maps Embed API
+- Google Geocoding API
 
 ## 機能一覧
 - ユーザー登録
@@ -52,6 +53,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
   - 検索したワードに対して複数の候補地を地図とともに返却します。
   - 地名だけでなく地図も一緒に表示することで、視覚的にもわかりやすくしました。
   - Googleの他にもYahoo, NAVITIMEのAPIを導入して比較し、今回のサービスではGoogleのAPIが最も使いやすいと判断しました。
+  - 住所情報だけでも地図表示はできますが、たまに地図がエラーを起こします。そこでジオコーディングを用いて住所から緯度・経度を出力し、これらを用いて地図を表示することで、より正確な地図を表示できるようにしました。
 
 <img width="1440" alt="スクリーンショット 2022-10-23 14 56 07" src="https://user-images.githubusercontent.com/111550037/197376433-18ada851-e10b-4726-a55c-3bae6479b7d3.png">
 
