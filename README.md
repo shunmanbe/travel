@@ -71,7 +71,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
   - 移動方法を選択できるようにすることで、適切な経路を表示できるようにしました。
   - 経路がない場合はエラーが出て表示されません。
 
-<img width="1440" alt="スクリーンショット 2022-10-23 15 02 18" src="https://user-images.githubusercontent.com/111550037/197376672-32642b54-91a0-460b-b984-a542a877293c.png">
+<img width="1440" alt="スクリーンショット 2022-11-03 16 52 11" src="https://user-images.githubusercontent.com/111550037/199670341-093bf201-503c-4d51-bd4a-4fd2b33f8d74.png">
 
 
 - お問い合わせ機能
