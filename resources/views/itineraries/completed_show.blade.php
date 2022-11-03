@@ -109,7 +109,7 @@
                                         <!--メモ-->
                                         <div class="memo"><span>メモ</span></div>
                                         <!--メモ内容-->
-                                        <div class="memo-body"><span>{{$place->memo}}</span></div>
+                                        <div class="memo-body"><textarea readonly>{{$place->memo}}</textarea></div>
                                     </div>
                                 </div>
                             </div>
