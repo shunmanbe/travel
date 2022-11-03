@@ -16,7 +16,8 @@ URL:https://radiant-mountain-36845.herokuapp.com
 大人になっても学生時代のように、旅行の時はしおりがほしい！という友人たちとの会話から着想を得て、作成に至りました。
 ユーザー目線に立ち、さまざまな人からフィードバックをもらい、使いやすさを重視して作成しました。
 
-<img width="1440" alt="スクリーンショット 2022-10-23 14 53 40" src="https://user-images.githubusercontent.com/111550037/197376389-6465ce26-4a2f-48d7-8fab-89e31f574327.png">
+![スクリーンショット 2022-11-03 15 38 36](https://user-images.githubusercontent.com/111550037/199669423-983ce279-bef8-4178-95cf-cea4713569ca.png)
+
 
 
 ## 使用技術
