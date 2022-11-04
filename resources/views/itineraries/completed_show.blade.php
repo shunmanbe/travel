@@ -58,7 +58,7 @@
                             <div class="supplement">
                                 <!--出発時刻表示-->
                                 <div class="departure_time">
-                                    <p>出発時刻：{{$place->departure_time}}</p>
+                                    <p>出発時刻：{{ $place->departure_time }}</p>
                                 </div>
                                 <!--経路情報-->
                                 <div class="route">
@@ -67,7 +67,7 @@
                                         <!--移動手段選択肢-->
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
-                                            <option value="TRANSIT">電車</option>
+                                            <!--<option value="TRANSIT">電車</option>-->
                                             <option value="DRIVING">自動車</option>
                                             <option value="BICYCLING">自転車</option>
                                             <option value="WALKING">徒歩</option>
@@ -93,7 +93,7 @@
                                     </form>
                                 </div>
                                 <!--到着時刻表示-->
-                                <div class="arrival"><p>到着時刻：{{$place->arrival_time}}</p></div>
+                                <div class="arrival"><p>到着時刻：{{$place->arrival_time }}</p></div>
                             </div>
                         </div>
                         <div class="destination">
