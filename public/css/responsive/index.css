@@ -1,0 +1,114 @@
+@media(max-width:425px){
+    body {
+    font-family: 筑紫A丸ゴシック;
+    background-color: #fffaf0;
+    }
+    
+    /*ここからmain*/
+    a {
+        text-decoration: none;
+    }
+    
+    .index {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .index-detail {
+        width: 70%;
+        margin: 0 auto;
+    }
+    
+    .theme {
+        text-align: left;
+        width: 80%;
+        background: linear-gradient(to right, #fffaf0 0%, #fffaf0 51%, #FFDCAC 100%);
+        background-size: 200% auto;
+        transition: 0.3s;
+    }
+    .theme:hover {
+        background-position: right center;
+    }
+    
+    .theme a {
+        display: block;
+    }
+    
+    .trash {
+        text-align: left;
+        width: 20%;
+        padding-top: 30%;
+        color: #339900;
+    }
+    
+    .trash:hover {
+        color: #FF8177;
+        transition: 0.2s;
+    }
+    
+    .container {
+        background-color: #fffaf0;
+        font-size: 28px;
+        width: 100%;
+        padding-top: 80px;
+        padding-bottom: 50px;
+    }
+    
+    .itineraries {
+        width: 100%;
+    }
+    
+    .itineraries h1 {
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+    
+    .itinerary {
+        font-size: 20px;
+        display:flex;
+        margin: 0px 20% 5px 10%;
+        width: 100%;
+    }
+    
+    .btn {
+        text-align: center;
+    }
+    
+    .new_entry {
+        padding: 8px 24px;
+        color: white;
+        display: inline-block;
+        font-weight: bold;
+        border-radius: 100px;
+        background-color: rgba(255, 140, 0, 0.8);
+        transition: 0.3s;
+        text-align: center;
+        margin: auto;
+        border:2px solid #fffaf0;
+    }
+    
+    
+    .new_entry:hover {
+        color: #ff8c00;
+        background: snow;
+        border: 2px solid #ff8c00;
+    }
+    
+    .new_entry:active {
+        position: relative;
+        top: 6px;
+        
+    }
+    
+    .liked {
+        color: fuchsia;
+    }
+    
+    .others {
+        text-align: center;
+        font-size: 20px;
+    }
+
+}

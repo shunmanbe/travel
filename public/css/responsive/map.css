@@ -1,0 +1,43 @@
+/*mapのページだけ"user agent stylesheet"が邪魔しているようなのでheader情報を追加*/
+.header-title h1 {
+    font-size: 40px;
+}
+
+.containers {
+    padding-top: 100px;
+    text-align: center;
+    padding-bottom: 55px;
+}
+.containers h1 {
+  font-size: 30px;
+}
+
+.container {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.btn {
+    border: 2px solid orange;
+    border-radius: 40px;
+    background-color: #EB6357;
+    padding: 0px 30px;
+    color: white;
+    font-family: 筑紫A丸ゴシック;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0px 5px #72220A;
+}
+
+.btn:active {
+    box-shadow: none;
+    position:relative;
+    left: 0px;
+    top: 5px;
+}
+
+#map {
+    border-bottom: 5px solid orange;
+    padding-bottom: 30px;
+}

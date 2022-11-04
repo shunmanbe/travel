@@ -90,7 +90,7 @@
                                         <!--移動手段-->
                                         <select name="Mode">
                                             <option value="">移動手段を選択</option>
-                                            <option value="TRANSIT">電車</option>
+                                            <!--<option value="TRANSIT">電車</option>-->
                                             <option value="DRIVING">自動車</option>
                                             <option value="BICYCLING">自転車</option>
                                             <option value="WALKING">徒歩</option>

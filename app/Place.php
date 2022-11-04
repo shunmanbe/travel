@@ -21,4 +21,11 @@ class Place extends Model
         'arrival_time', 
         'memo',
         ];
+    
+    // protected $dates = [
+    //     'departure_time', 
+    //     'arrival_time',
+    //     ];
+    
+    
 }

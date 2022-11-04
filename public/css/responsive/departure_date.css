@@ -1,0 +1,18 @@
+.container {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 40px;
+    padding-bottom: 80px;
+}
+
+.date_select {
+    background-color: white;
+    text-align:center;
+    font-size: 30px;
+}
+
+.btn {
+    background-color:red;
+    color:red;
+    opacity:0.8;
+}
