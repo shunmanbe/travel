@@ -69,7 +69,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2020 Shun.N</span></div>
+                <div class="copyright"><span>©︎2020 Shun NakanishN</span></div>
                 <ul>
                     <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
                 </ul>

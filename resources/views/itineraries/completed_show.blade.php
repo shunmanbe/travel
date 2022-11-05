@@ -3,21 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>旅のしおり</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--モーダル用jQuery読み込み-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/show.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -42,58 +41,56 @@
             <!--目的地一覧-->
             <div class="destinations">
                 @if(empty($places))
-                    <p>出発時刻：</p>
                 @else
                     @foreach($places as $n => $place)
-                        <div class="to_destination">
+                        <div class="to-destination">
                             <!--三角形表示-->
                             <div class="triangles">
+                                <br>
                                 @for ($i=0; $i<3; $i++)
-                                    <br>
                                     <div class="triangle"></div>
-                                    <br>
+                                    <br class="not-responsive">
                                 @endfor
                             </div>
                             <!--出発・到着時刻などの補足情報-->
                             <div class="supplement">
                                 <!--出発時刻表示-->
-                                <div class="departure_time">
-                                    <p>出発時刻：{{ $place->departure_time }}</p>
+                                <div class="departure-time">
+                                    <p class="departure-time-empty departure-time-entered">出発時刻：{{ $place->departure_time }}</p>
                                 </div>
                                 <!--経路情報-->
                                 <div class="route">
                                     <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
                                         @csrf
-                                        <!--移動手段選択肢-->
-                                        <select name="Mode">
-                                            <option value="">移動手段を選択</option>
-                                            <!--<option value="TRANSIT">電車</option>-->
-                                            <option value="DRIVING">自動車</option>
-                                            <option value="BICYCLING">自転車</option>
-                                            <option value="WALKING">徒歩</option>
-                                        </select>
-                                        <!--エラーメッセージ-->
-                                        <p class="error-message">{{ $errors->first('Mode') }}</p>
-                                        <!--経路詳細表示ボタン-->
-                                        <input class="btn" type="submit" name="route" value="経路詳細">
+                                        <!--移動手段-->
+                                        <p>移動手段：
+                                            <select name="Mode">
+                                                <option value="WALKING">徒歩</option>
+                                                <!--<option value="TRANSIT">電車</option>-->
+                                                <option value="DRIVING">自動車</option>
+                                                <option value="BICYCLING">自転車</option>
+                                            </select>
+                                            <!--経路詳細表示ボタン-->
+                                            <input class="btn" type="submit" name="route" value="経路詳細">
+                                        </p>
                                         <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                         @if($n+1 == 1)
                                             <!--出発地から出発の場合は出発地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
-                                            <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
+                                            <input type="hidden" name="start_address" value="{{$itinerary->departure_place_address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @else
                                             <!--目的地からの出発の場合は目的地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$places[$n-1]->name}}>
-                                            <input type="hidden" name="start_address" value={{$places[$n-1]->address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
+                                            <input type="hidden" name="start_address" value="{{$places[$n-1]->address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @endif
                                     </form>
                                 </div>
                                 <!--到着時刻表示-->
-                                <div class="arrival"><p>到着時刻：{{$place->arrival_time }}</p></div>
+                                <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered">到着時刻：{{$place->arrival_time }}</p></div>
                             </div>
                         </div>
                         <div class="destination">

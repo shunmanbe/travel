@@ -13,11 +13,13 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--css読み込み-->
-        <link rel="stylesheet" href="{{ asset('/css/contact.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/contact.css') }}" >
         <!--header-->
-        <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
-        <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
+        <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>

@@ -145,7 +145,7 @@ class ItineraryController extends Controller
         $auth = Auth::user();
         if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->input('start_address');
-            $_address = $request->input('goal_address');
+            $goal_address = $request->input('goal_address');
             return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
         }else{
             $mode = $request->input('Mode');
@@ -172,9 +172,6 @@ class ItineraryController extends Controller
             $start_name = $request->input('start_name');
             $goal_name = $request->input('goal_name');
         }
-        // $mode = $request->input('Mode');
-        // $start_name = $request->input('start_name');
-        // $goal_name = $request->input('goal_name');
         //falseにする。ここに到達すればバリデーションテェックは通過。
         return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }

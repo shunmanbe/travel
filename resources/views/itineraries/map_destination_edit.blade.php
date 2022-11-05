@@ -10,10 +10,13 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/map.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/map.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -27,7 +30,7 @@
         </header>
         <!--出発地を選択-->
         <div class ="containers">
-            <h1>以下から目的地を選択してください</h1> 
+            <h1>以下から目的地を<br class="responsive">選択してください</h1> 
             @foreach ($place_detail_requireds as $place_detail_required)
                 <div class="container">
                     <form action="/itineraries/{{ $itinerary->id }}/destination_update/{{ $place->id }}" method="POST">
