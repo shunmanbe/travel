@@ -3,27 +3,29 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>旅のしおり</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/show.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>
             <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
+                    <li class="not-responsive"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                    <li class="not-responsive"><a href="/itineraries/logout">ログアウト</a></li>
+                    <li class="responsive bars"><i class="fa-solid fa-bars"></i></li>
                 </ul>
             </div>
         </header>
@@ -31,7 +33,7 @@
             <!--しおり名-->
             <div class="theme">
                 <h1>{{ $itinerary->title }}</h1>
-                <span>　　期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                <span class="not-responsive">　　</span><span><span class="not-responsive">期間:</span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                 <a href="/itineraries/{{$itinerary->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
             </div>
             <!--出発地-->
@@ -39,7 +41,7 @@
                 <p class="name">
                     <span>出発地：{{ $itinerary->departure_place_name }}</span>
                     <!--編集アイコン-->
-                    <a class="departure_supplement" href="/itineraries/{{$itinerary->id}}/departure/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                    <a class="departure-supplement" href="/itineraries/{{$itinerary->id}}/departure/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                 </p>
             </div>
             <!--目的地一覧-->
@@ -49,26 +51,26 @@
                 <!--目的地が入力されている時-->
                 @else
                     @foreach($places as $n => $place)
-                        <div class="to_destination">
+                        <div class="to-destination">
                             <!--三角形表示-->
                             <div class="triangles">
+                                <br>
                                 @for ($i=0; $i<3; $i++)
-                                    <br>
                                     <div class="triangle"></div>
-                                    <br>
+                                    <br class="not-responsive">
                                 @endfor
                             </div>
                             <!--出発・到着時刻などの補足情報-->
                             <div class="supplement">
                                 <!--出発時刻表示-->
-                                <div class="departure_time">
+                                <div class="departure-time">
                                     <!--出発時刻が入力されていない時-->
                                     @if(empty($place->departure_time))
                                         <form action="/itineraries/{{$itinerary->id}}/departure_time_store/{{$place->id}}" method="POST">
                                             @csrf
-                                            <p>出発時刻：
+                                            <p class="departure-time-empty">出発時刻：
                                                 <!--出発時刻入力欄-->
-                                                <input type="datetime-local" name="time_d[departure_time]">
+                                                <input class="input" type="datetime-local" name="time_d[departure_time]">
                                                 <!--保存ボタン-->
                                                 <input class ="btn" type="submit" value="保存">
                                             </p>
@@ -77,9 +79,9 @@
                                         </form>
                                     <!--出発時刻が入力されている時 -->
                                     @else
-                                        <p>出発時刻：{{$place->departure_time}}
+                                        <p class="departure-time-entered">出発時刻：{{$place->departure_time}}
                                             <!--出発時刻編集アイコン-->
-                                            <a class="departure_time" href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                            <a href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                         </p>
                                     @endif
                                 </div>
@@ -88,51 +90,50 @@
                                     <form action="/itineraries/{{$itinerary->id}}/route/{{$place->id}}" method="POST">
                                         @csrf
                                         <!--移動手段-->
-                                        <select name="Mode">
-                                            <option value="">移動手段を選択</option>
-                                            <!--<option value="TRANSIT">電車</option>-->
-                                            <option value="DRIVING">自動車</option>
-                                            <option value="BICYCLING">自転車</option>
-                                            <option value="WALKING">徒歩</option>
-                                        </select>
-                                        <!--エラーメッセージ-->
-                                        <p class="error-message">{{ $errors->first('Mode') }}</p>
-                                        <!--経路詳細表示ボタン-->
-                                        <input class="btn" type="submit" name="route" value="経路詳細">
-                                        
+                                        <p>移動手段：
+                                            <select name="Mode">
+                                                <option value="WALKING">徒歩</option>
+                                                <!--<option value="TRANSIT">電車</option>-->
+                                                <option value="DRIVING">自動車</option>
+                                                <option value="BICYCLING">自転車</option>
+                                            </select>
+                                            <!--経路詳細表示ボタン-->
+                                            <input class="btn" type="submit" name="route" value="経路詳細">
+                                        </p>
+                                        <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                         @if($n+1 == 1)
                                             <!--出発地から出発の場合は出発地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
-                                            <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
+                                            <input type="hidden" name="start_address" value="{{$itinerary->departure_place_address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @else
                                             <!--目的地からの出発の場合は目的地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$places[$n-1]->name}}>
-                                            <input type="hidden" name="start_address" value={{$places[$n-1]->address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
+                                            <input type="hidden" name="start_address" value="{{$places[$n-1]->address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @endif
                                     </form>
                                 </div>
                                 <!--到着時刻表示-->
-                                <div class="arrival_time">
+                                <div class="arrival-time">
                                     <!--到着時刻が入力されていない時-->
                                     @if(empty($place->arrival_time))
                                         <form  action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                             @csrf
-                                            <p>到着時刻：
+                                            <p class="arrival-time-empty">到着時刻：
                                                 <!--到着時刻入力欄-->
-                                                <input type="datetime-local" name="time_a[arrival_time]">
+                                                <input class="input" type="datetime-local" name="time_a[arrival_time]">
                                                 <!--保存ボタン-->
                                                 <input class ="btn" type="submit" value="保存">
                                             </p>
                                         </form>
                                     <!--到着時刻が入力されている時-->
                                     @else
-                                        <p>到着時刻：{{$place->arrival_time}}
+                                        <p class="arrival-time-entered">到着時刻：{{$place->arrival_time}}
                                             <!--到着時刻編集アイコン-->
-                                            <a class="arrival_time" href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                            <a href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                         </p>
                                     @endif
                                 </div>

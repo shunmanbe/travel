@@ -12,8 +12,10 @@
         <link rel="stylesheet" href="{{ asset('/css/title_date.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -37,18 +39,20 @@
                 <!--エラーメッセージ-->
                 <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                 <span>出発日</span>
+                <br class="responsive">
                 <!--出発日入力欄-->
                 <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
                 <br>
                 <!--エラーメッセージ-->
                 <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
                 <span>到着日</span>
+                <br class="responsive">
                 <!--到着日入力欄-->
                 <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
                 <br>
                 <!--エラーメッセージ-->
                 <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
-                <br>
+                <br class="not-responsive">
                 <!--「次へ」ボタン-->
                 <input class ="btn" type="submit" value="次へ">
             </form>

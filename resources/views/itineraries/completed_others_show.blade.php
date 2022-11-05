@@ -13,10 +13,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/show.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/response/show.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
         <header>
@@ -34,7 +37,6 @@
                 <h1>{{ $itinerary->title }}</h1>
                 <span>期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
             </div>
-            
             <!--出発地-->
             <div class="departure">
                 <p class="name">
@@ -66,26 +68,30 @@
                                 <div class="route">
                                     <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
                                         @csrf
-                                        <select name="Mode">
-                                            <option value="">移動手段を選択</option>
-                                            <option value="DRIVING">自動車</option>
-                                            <option value="TRANSIT">電車</option>
-                                            <option value="WALKING">徒歩</option>
-                                        </select>
-                                        <p class="error-message">{{ $errors->first('Mode') }}</p>
-                                        <input class="btn" type="submit" name="route" value="経路詳細">
+                                        <!--移動手段-->
+                                        <p>移動手段：
+                                            <select name="Mode">
+                                                <option value="WALKING">徒歩</option>
+                                                <!--<option value="TRANSIT">電車</option>-->
+                                                <option value="DRIVING">自動車</option>
+                                                <option value="BICYCLING">自転車</option>
+                                            </select>
+                                            <!--経路詳細表示ボタン-->
+                                            <input class="btn" type="submit" name="route" value="経路詳細">
+                                        </p>
+                                        <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                         @if($n+1 == 1)
                                             <!--出発地から出発の場合は出発地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$itinerary->departure_place_name}}>
-                                            <input type="hidden" name="start_address" value={{$itinerary->departure_place_address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
+                                            <input type="hidden" name="start_address" value="{{$itinerary->departure_place_address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @else
                                             <!--目的地からの出発の場合は目的地→目的地-->
-                                            <input type="hidden" name="start_name" value={{$places[$n-1]->name}}>
-                                            <input type="hidden" name="start_address" value={{$places[$n-1]->address}}>
-                                            <input type="hidden" name="goal_name" value={{$places[$n]->name}}>
-                                            <input type="hidden" name="goal_address" value={{$places[$n]->address}}>
+                                            <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
+                                            <input type="hidden" name="start_address" value="{{$places[$n-1]->address}}">
+                                            <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
+                                            <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
                                         @endif
                                     </form>
                                 </div>

@@ -70,19 +70,20 @@
                                         </div>
                                     </div>
                                 </div>
-        
+                                <br>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-8 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('ログイン') }}
                                         </button>
                                         <br>
+                                        <br>
                                         @if (Route::has('register'))
                                             <div>
                                                 <a class="nav-link" href="{{ route('register') }}">{{ __('新規登録はこちら') }}</a>
                                             </div>
                                         @endif
-        
+                                        <br>
                                         @if (Route::has('password.request'))
                                             <a class="btn-link" href="{{ route('password.request') }}">
                                                 {{ __('パスワードを忘れた方はこちら') }}
@@ -98,10 +99,7 @@
         </div>
         <footer>
             <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2020 Shun.N</span></div>
-                <ul>
-                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
+                <div class="copyright"><span>©︎2020 Shun Nakanishi</span></div>
             </div>
         </footer>
     </body>

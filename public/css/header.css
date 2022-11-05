@@ -21,6 +21,10 @@ span {
     font-size: 15px;
 }
 
+.responsive {
+    display: none;
+}
+
 /*ここからはheader*/
 header {
     background-color: #ffdab9;
