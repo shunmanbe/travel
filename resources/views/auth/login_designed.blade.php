@@ -16,6 +16,16 @@
         <link rel="stylesheet" href="{{ asset('/css/footer.css')  }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css')  }}" >
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-248562908-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-248562908-1');
+        </script>
+
     </head>
     <body>
         <header>
