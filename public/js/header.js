@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11007,35 +11007,33 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./resources/js/memo-modal.js":
-/*!************************************!*\
-  !*** ./resources/js/memo-modal.js ***!
-  \************************************/
+/***/ "./resources/js/header.js":
+/*!********************************!*\
+  !*** ./resources/js/header.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function () {
-  $('.open-memo').click(function () {
-    $('.memo-modal').fadeIn();
-    $('.memo-body').fadeIn();
+  $('.open-setting').click(function () {
+    $('.setting-modal-contents').fadeIn();
   });
-  $('.close-memo').click(function () {
-    $('.memo-modal').fadeOut();
-    $('.memo-body').fadeOut();
+  $('.close-setting').click(function () {
+    $('.setting-modal-contents').fadeOut();
   });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
-/***/ 2:
-/*!******************************************!*\
-  !*** multi ./resources/js/memo-modal.js ***!
-  \******************************************/
+/***/ 3:
+/*!**************************************!*\
+  !*** multi ./resources/js/header.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ec2-user/environment/travel/resources/js/memo-modal.js */"./resources/js/memo-modal.js");
+module.exports = __webpack_require__(/*! /home/ec2-user/environment/travel/resources/js/header.js */"./resources/js/header.js");
 
 
 /***/ })
