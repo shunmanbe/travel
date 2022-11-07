@@ -44,9 +44,11 @@
         <footer>
             <div class="footer-wrapper">
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <ul>
-                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
+                <div class="contact">
+                    <ul>
+                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
     </body>

@@ -38,20 +38,22 @@
             <br>
             <span>お問い合わせありがとうございました。</span>
             <br>
-            <span>送信内容をメールでお送りします。少し時間をおいてからご確認ください。</span>
+            <span>送信内容をメールでお送りします。<br class="responsive">少し時間をおいてからご確認ください。</span>
             <br>
             <br>
             <a class="btn to-index" href="/">しおり一覧へ</a>
             <br>
             <br>
-            <span class="warning">このページでリロード・戻るボタンを押さないでください</span>
+            <span class="warning">このページでリロード・戻るボタンを<br class="responsive">押さないでください</span>
         </div>
         <footer>
             <div class="footer-wrapper">
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <ul>
-                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
+                <div class="contact">
+                    <ul>
+                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
     </body>

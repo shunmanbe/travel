@@ -14,6 +14,7 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--css読み込み-->
         <link rel="stylesheet" href="{{ asset('/css/contact.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/contact.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
@@ -34,17 +35,22 @@
         <div class="container">
             <form action="/itineraries/contact/thanks" method="POST">
                 @csrf
-                <label>メールアドレス：</label>
-                {{ $inputs['email'] }}
+                <label>メールアドレス</label>
+                <br>
+                <input value="{{ $inputs['email'] }}" readonly>
                 <input name="email" value="{{ $inputs['email'] }}" type="hidden">
                 <br>
-                <label>タイトル：</label>
-                {{ $inputs['title'] }}
+                <br>
+                <label>タイトル</label>
+                <br>
+                <input value="{{ $inputs['title'] }}" readonly>
                 <input name="title" value="{{ $inputs['title'] }}" type="hidden">
+                <br>
                 <br>
                 <label>お問い合わせ内容</label>
                 <br>
-                {!! nl2br(e($inputs['body'])) !!}
+                <textarea readonly>{{$inputs['body']}}</textarea>
+                
                 <input name="body" value="{{ $inputs['body'] }}" type="hidden">
                 <br>
                 <br>
@@ -59,9 +65,11 @@
         <footer>
             <div class="footer-wrapper">
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <ul>
-                    <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
+                <div class="contact">
+                    <ul>
+                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
     </body>
