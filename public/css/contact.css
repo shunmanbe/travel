@@ -10,6 +10,7 @@ input {
     background-color: white;
     border: 2px solid orange;
     border-radius: 5px;
+    width: 80%;
 }
 
 textarea {
@@ -17,6 +18,8 @@ textarea {
     border: 2px solid orange;
     background-color: white;
     height: 200px;
+    border-radius: 5px;
+    resize: none;
 }
 
 .center {

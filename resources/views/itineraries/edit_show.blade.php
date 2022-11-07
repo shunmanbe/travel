@@ -23,19 +23,9 @@
             <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             <div class="header-right">
                 <ul>
-                    <li class="not-responsive"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li class="not-responsive"><a href="/itineraries/logout">ログアウト</a></li>
-                    <li class="responsive bars open-setting"><i class="fa-solid fa-bars"></i></li>
+                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                    <li><a href="/itineraries/logout">ログアウト</a></li>
                 </ul>
-            </div>
-            <div class="setting-modal responsive">
-                <div class="setting-modal-contents">
-                    <!--設定閉じるボタン-->
-                    <div class="close-setting"><i class="fa fa-2x fa-times close-setting-icon"></i></div>
-                    <li class="responsive"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li class="responsive"><a href="/itineraries/logout">ログアウト</a></li>
-                    <li class="responsive"><a href="/itineraries/contact/form">お問い合わせ</a></li>
-                </div>
             </div>
         </header>
         <div class="containers">
@@ -180,12 +170,13 @@
         <footer>
             <div class="footer-wrapper">
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <ul>
-                    <li><a class="not-responsive" href="/itineraries/contact/form">お問い合わせ</a></li>
-                </ul>
+                <div class="contact">
+                    <ul>
+                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
         <script src="{{ asset('/js/alert.js') }}"></script>
-        <script src="{{ asset('/js/header.js') }}"></script>
     </body>
 </html>
