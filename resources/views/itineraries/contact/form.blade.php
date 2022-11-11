@@ -23,60 +23,59 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="container">
-            <form action="/itineraries/contact/confirm" method="POST">
-                @csrf
-                <div class="mail-address">
-                    <label>メールアドレス</label>
-                    <br>
-                    <input name="email" value="{{ old('email') }}" type="text">
-                    @if ($errors->has('email'))
-                        <p class="error-message">{{ $errors->first('email') }}</p>
-                    @endif
-                </div>
-                <br>
-                <div class="title">
-                    <label>タイトル</label>
-                    <br>
-                    <input name="title" value="{{ old('title') }}" type="text">
-                    @if ($errors->has('title'))
-                        <p class="error-message">{{ $errors->first('title') }}</p>
-                    @endif
-                </div>
-                <br>
-                <div class="contact-form">
-                    <label>お問い合わせ内容</label>
-                    <br>
-                    <textarea name="body">{{ old('body') }}</textarea>
-                    @if ($errors->has('body'))
-                        <p class="error-message">{{ $errors->first('body') }}</p>
-                    @endif
-                </div>
-                <br>
-                <div class="center">
-                    <button class="btn" type="submit">入力内容確認</button>
-                </div>
-            </form>
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <div class="container containers">
+                <form action="/itineraries/contact/confirm" method="POST">
+                    @csrf
+                    <div class="mail-address">
+                        <label>メールアドレス</label>
+                        <br>
+                        <input name="email" value="{{ old('email') }}" type="text">
+                        @if ($errors->has('email'))
+                            <p class="error-message">{{ $errors->first('email') }}</p>
+                        @endif
+                    </div>
+                    <br>
+                    <div class="title">
+                        <label>タイトル</label>
+                        <br>
+                        <input name="title" value="{{ old('title') }}" type="text">
+                        @if ($errors->has('title'))
+                            <p class="error-message">{{ $errors->first('title') }}</p>
+                        @endif
+                    </div>
+                    <br>
+                    <div class="contact-form">
+                        <label>お問い合わせ内容</label>
+                        <br>
+                        <textarea name="body">{{ old('body') }}</textarea>
+                        @if ($errors->has('body'))
+                            <p class="error-message">{{ $errors->first('body') }}</p>
+                        @endif
+                    </div>
+                    <br>
+                    <div class="center">
+                        <button class="btn" type="submit">入力内容確認</button>
+                    </div>
+                    <br>
+                </form>
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>
 

@@ -2,12 +2,13 @@
     .container {
         padding: 100px 10% 15% 10%;
     }
+    
      input {
          width: 80%;
      }
     
     .container-thanks {
-        width: 90%;
+        padding: 20px 5% 0 5%;
     }
     
 }

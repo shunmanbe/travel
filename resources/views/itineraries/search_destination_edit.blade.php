@@ -20,36 +20,34 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="container">
-            <h1>目的地を検索</h1> 
-            <form action="/itineraries/{{$itinerary->id}}/destination_map/edit/{{$place->id}}" method="POST">
-                @csrf
-                <!--検索ワード入力欄-->
-                <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                <!--エラーメッセージ-->
-                <p class="error-message">{{ $errors->first('search_name') }}</p>
-                <!--検索ボタン-->
-                <input class="btn" type="submit" value="検索">
-            </form>
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <div class="container">
+                <h1>目的地を検索</h1> 
+                <form action="/itineraries/{{$itinerary->id}}/destination_map/edit/{{$place->id}}" method="POST">
+                    @csrf
+                    <!--検索ワード入力欄-->
+                    <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                    <!--エラーメッセージ-->
+                    <p class="error-message">{{ $errors->first('search_name') }}</p>
+                    <!--検索ボタン-->
+                    <input class="btn" type="submit" value="検索">
+                </form>
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>

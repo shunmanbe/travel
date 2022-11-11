@@ -12,6 +12,7 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/memo.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/memo.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
@@ -21,36 +22,34 @@
       
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class = "container">
-            <!--メモの地名表示-->
-            <h2>{{$place->destination_name}}</h2>
-            <!--メモ入力欄-->
-            <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
-                @csrf
-                <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
-                <br>
-                <!--保存ボタン-->
-                <input class="btn" type="submit" value="保存して詳細ページへ">
-            </form>
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <div class = "container containers">
+                <!--メモの地名表示-->
+                <h2>{{$place->destination_name}}</h2>
+                <!--メモ入力欄-->
+                <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
+                    @csrf
+                    <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
+                    <br>
+                    <!--保存ボタン-->
+                    <input class="btn" type="submit" value="保存して詳細ページへ">
+                </form>
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>

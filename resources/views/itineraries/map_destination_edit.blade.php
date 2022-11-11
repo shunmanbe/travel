@@ -19,57 +19,55 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <!--出発地を選択-->
-        <div class ="containers">
-            <h1>以下から目的地を<br class="responsive">選択してください</h1> 
-            @foreach ($place_detail_requireds as $place_detail_required)
-                <div class="container">
-                    <form action="/itineraries/{{ $itinerary->id }}/destination_update/{{ $place->id }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <!--検索候補地名表示-->
-                        <h2>{{$place_detail_required[0]}}</h2>
-                        <!--候補地の名前-->
-                        <input type="hidden" name="destination[name]" value="{{$place_detail_required[0]}}">
-                        <!--候補地の住所-->
-                        <input type="hidden" name="destination[address]" value="{{$place_detail_required[1]}}">
-                        <!--候補地の緯度-->
-                        <input type="hidden" name="destination[lat]" value="{{$place_detail_required[2]}}">
-                        <!--候補地の経度-->
-                        <input type="hidden" name="destination[lng]" value="{{$place_detail_required[3]}}">
-                        <!--候補地が属するしおりのid-->
-                        <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
-                        <!--保存ボタン-->
-                        <input class="btn" type="submit" value="ここを目的地として保存する">
-                        <br>
-                        <br>
-                        <!--地図を表示-->
-                        <!--GoogleMapsEmbedAPI-->
-                        <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{$place_detail_required[2]}},{{$place_detail_required[3]}}'
-                        width='50%' height='300' frameborder='0'></iframe>
-                    </form>
-                </div>
-            @endforeach
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <!--出発地を選択-->
+            <div class ="containers">
+                <h1>以下から目的地を<br class="responsive">選択してください</h1> 
+                @foreach ($place_detail_requireds as $place_detail_required)
+                    <div class="container">
+                        <form action="/itineraries/{{ $itinerary->id }}/destination_update/{{ $place->id }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <!--検索候補地名表示-->
+                            <h2>{{$place_detail_required[0]}}</h2>
+                            <!--候補地の名前-->
+                            <input type="hidden" name="destination[name]" value="{{$place_detail_required[0]}}">
+                            <!--候補地の住所-->
+                            <input type="hidden" name="destination[address]" value="{{$place_detail_required[1]}}">
+                            <!--候補地の緯度-->
+                            <input type="hidden" name="destination[lat]" value="{{$place_detail_required[2]}}">
+                            <!--候補地の経度-->
+                            <input type="hidden" name="destination[lng]" value="{{$place_detail_required[3]}}">
+                            <!--候補地が属するしおりのid-->
+                            <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
+                            <!--保存ボタン-->
+                            <input class="btn" type="submit" value="ここを目的地として保存する">
+                            <br>
+                            <br>
+                            <!--地図を表示-->
+                            <!--GoogleMapsEmbedAPI-->
+                            <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key={{ config("services.google-map.apikey") }}&q={{$place_detail_required[2]}},{{$place_detail_required[3]}}'
+                            width='50%' height='300' frameborder='0'></iframe>
+                        </form>
+                    </div>
+                @endforeach
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>
 

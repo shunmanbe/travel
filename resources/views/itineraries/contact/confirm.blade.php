@@ -23,55 +23,53 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="container">
-            <form action="/itineraries/contact/thanks" method="POST">
-                @csrf
-                <label>メールアドレス</label>
-                <br>
-                <input value="{{ $inputs['email'] }}" readonly>
-                <input name="email" value="{{ $inputs['email'] }}" type="hidden">
-                <br>
-                <br>
-                <label>タイトル</label>
-                <br>
-                <input value="{{ $inputs['title'] }}" readonly>
-                <input name="title" value="{{ $inputs['title'] }}" type="hidden">
-                <br>
-                <br>
-                <label>お問い合わせ内容</label>
-                <br>
-                <textarea readonly>{{$inputs['body']}}</textarea>
-                
-                <input name="body" value="{{ $inputs['body'] }}" type="hidden">
-                <br>
-                <br>
-                <div class="center">
-                    <button class="modify" type="submit" name="action" value="back">入力内容修正</button>
-                    <br>
-                    <br>
-                    <button class="btn" type="submit" name="action" value="submit">送信する</button>
-                </div>
-            </form>
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <div class="container containers">
+                <form action="/itineraries/contact/thanks" method="POST">
+                    @csrf
+                    <label>メールアドレス</label>
+                    <br>
+                    <input value="{{ $inputs['email'] }}" readonly>
+                    <input name="email" value="{{ $inputs['email'] }}" type="hidden">
+                    <br>
+                    <br>
+                    <label>タイトル</label>
+                    <br>
+                    <input value="{{ $inputs['title'] }}" readonly>
+                    <input name="title" value="{{ $inputs['title'] }}" type="hidden">
+                    <br>
+                    <br>
+                    <label>お問い合わせ内容</label>
+                    <br>
+                    <textarea readonly>{{$inputs['body']}}</textarea>
+                    <input name="body" value="{{ $inputs['body'] }}" type="hidden">
+                    <br>
+                    <br>
+                    <div class="center">
+                        <button class="modify" type="submit" name="action" value="back">入力内容修正</button>
+                        <br>
+                        <br>
+                        <button class="btn" type="submit" name="action" value="submit">送信する</button>
+                    </div>
+                    <br>
+                </form>
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>
 

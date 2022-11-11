@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ModeRequest;
 use App\Http\Requests\ItineraryDateRequest;
 use App\Http\Requests\ItinerarySearchRequest;
 use Illuminate\Support\Facades\Validator;
@@ -140,7 +139,7 @@ class ItineraryController extends Controller
     }
     
     //詳細編集ページから経路詳細（ルート）を表示
-    public function route(ModeRequest $request, Itinerary $itinerary, Place $place)
+    public function route(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         if($request->input('Mode') == 'TRANSIT'){
@@ -153,12 +152,11 @@ class ItineraryController extends Controller
             $goal_name = $request->input('goal_name');
         }
         
-        //falseにする。ここに到達すればバリデーションテェックは通過。
         return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
-    public function completed_route(ModeRequest $request, Itinerary $itinerary, Place $place)
+    public function completed_route(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -172,7 +170,7 @@ class ItineraryController extends Controller
             $start_name = $request->input('start_name');
             $goal_name = $request->input('goal_name');
         }
-        //falseにする。ここに到達すればバリデーションテェックは通過。
+        
         return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }
     
@@ -222,10 +220,29 @@ class ItineraryController extends Controller
         return view ('itineraries/others_index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', '!=', $auth->id)->get(), 'param' => $param]);
     }
     
+    //他のユーザーのしおり詳細を見る
     public function completed_others_show(Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         return view('/itineraries/completed_others_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+    }
+    
+    
+    public function completed_others_route(Request $request, Itinerary $itinerary, Place $place)
+    {
+        $auth = Auth::user();
+        //移動手段で「電車」が入力された場合
+        if($request->input('Mode') == 'TRANSIT'){
+            $start_address = $request->start_address;
+            $goal_address = $request->goal_address;
+            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+        //それ以外が入力された場合
+        }else{
+            $mode = $request->input('Mode');
+            $start_name = $request->input('start_name');
+            $goal_name = $request->input('goal_name');
+        }
+        return view('/itineraries/completed_others_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
     }
     
     //ジオコーディング（住所から緯度・軽度取得）
