@@ -11,9 +11,11 @@
 |
 */
 
-
-
 Auth::routes();
+
+// Googleアカウントでのログイン
+Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 #ログイン中のユーザーのみアクセス可能
 Route::group(['middleware'=>['auth']], function(){ 

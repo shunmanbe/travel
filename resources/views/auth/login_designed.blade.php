@@ -87,6 +87,10 @@
                                             {{ __('ログイン') }}
                                         </button>
                                         <br>
+                                        <a href="/login/google" class="btn btn-secondary" role="button">
+                                            Google Login
+                                        </a>
+                                        <br>
                                         <br>
                                         @if (Route::has('register'))
                                             <div>
