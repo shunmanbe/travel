@@ -174,6 +174,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        // Googleアカウント認証に必要なSocialiteをファザードとして使えるようにする
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -225,6 +228,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        // Googleアカウント認証に必要なSocialiteをファザードとして使えるようにする
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

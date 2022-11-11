@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^6.20.26",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3"
     },
