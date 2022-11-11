@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -50,7 +51,7 @@ class LoginController extends Controller
     {
         // Google 認証後の処理
         $googleUser = Socialite::driver('google')->stateless()->user();
-        dd($gUser);
+        // dd($googleUser);
         // emailが合致するユーザーを取得
         $user = User::where('email', $googleUser->email)->first();
         // 見つからなければ新しくユーザーを作成
@@ -59,7 +60,7 @@ class LoginController extends Controller
         }
         // ログイン処理
         \Auth::login($user, true);
-        return redirect('\home');
+        return redirect('/');
     }
     
     public function createUserByGoogle($googleUser)
