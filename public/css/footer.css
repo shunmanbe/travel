@@ -2,31 +2,34 @@ footer {
     background-color: #ffdab9;
     width: 100%;
     height: 60px;
-    position: fixed;
-    bottom: 0px;
+    display: flex;
+    position: absolute;
+    bottom: 0;
 }
 
-.footer-wrapper ul {
-    text-align: right;
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    margin: 0 auto;
+.footer-left {
+    width: 30%;
 }
 
-.footer-wrapper li {
-    padding-right: 25px;
-    line-height: 60px;
-    margin: auto;
-    list-style: none;
-}
-
-.footer-wrapper a {
-    padding: 0px 20px;
-}
 
 /*コピーライト*/
 .copyright {
     line-height: 60px;
     text-align: center;
+    width: 40%;
 }
+
+.contact {
+    line-height: 60px;
+    text-align: center;
+    width: 30%;
+    text-align: right;
+}
+
+.contact a {
+    display: inline-block;
+    padding-right: 45px;
+}
+
+
+

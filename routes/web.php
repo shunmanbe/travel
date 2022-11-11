@@ -107,8 +107,13 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/like', 'ItineraryController@like');
     
     //他の人のしおりを見る
+    #他人のしおり一覧
     Route::get('/itineraries/others/index', 'ItineraryController@others_index');
+    #他人のしおり詳細
     Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show');
+    #他人のしおりルート詳細ページへ
+    Route::post('/itineraries/{itinerary}/completed_others_route/{place}', 'ItineraryController@completed_others_route'); 
+    
     
     //ジオコーディング
     Route::get('/itineraries/{place}/geocoding', 'ItineraryController@geocoding');

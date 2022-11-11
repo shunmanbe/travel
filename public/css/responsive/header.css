@@ -1,27 +1,4 @@
 @media(max-width:425px){
-    body {
-        font-family: 筑紫A丸ゴシック;
-        margin: 0;
-        background-color: #fffaf0;
-    }
-    
-    a {
-        text-decoration:none;
-        font-weight: bold;
-        color: black;
-    }
-    a:hover{
-         color: orange;
-    }
-    span {
-        font-weight: bold;
-    }
-    
-    .error-message {
-        color:red;
-        font-size: 15px;
-    }
-    
     .responsive {
         display: block;
     }
@@ -30,42 +7,38 @@
         display: none;
     }
     
+    .containers {
+        padding-bottom: 60px;
+    }
+    
     /*ここからはheader*/
     header {
-        background-color: #ffdab9;
-        width: 100%;
-        height: 8%;
-        position: fixed;;
-        display: flex;
+        height: 55px;
     }
     
     .header-title {
         line-height: 50px;
+        align-items: center;
         text-align: left;
         font-size: 13px;
-        width: 50%;
-    }
-    
-    .header-title a {
-        padding-left: 20%;
+        width: 40%;
     }
     
     .header-right {
         height: 100%;
-        display: flex;
-        align-items: center;
+        /*align-items: center;*/
         font-size: 12px;
+        width: 60%;
+        text-align: right;
     }
     
     .header-right ul {
-        height: 8%;
-        display: flex;
         align-items: center;
+        display: flex;
+        height: 100%;
     }
     
     .header-right li {
-        height: 100%;
-        display: flex;
         align-items: center;
         padding-right: 0px;
     }
@@ -76,10 +49,15 @@
         align-items: center;
     }
     
+    .icon{
+        display: inline-block;
+    }
+    
     
     header h1 {
         margin: 0 auto;
         height: 100%;
+        text-align: center;
     }
     
     header a {
@@ -91,9 +69,4 @@
         padding: 0px 0px;
     }
     
-    .bars {
-        height: 16%;
-        display: flex;
-        align-items: center;
-    }
 }

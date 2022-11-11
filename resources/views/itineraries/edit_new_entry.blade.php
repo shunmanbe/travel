@@ -18,54 +18,52 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <header>
-            <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
-            <div class="header-right">
-                <ul>
-                    <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                    <li><a href="/itineraries/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class = "container">
-            <form action="/itineraries/{{$itinerary->id}}/new_entry/update" method="POST">
-                @csrf
-                @method('PUT')
-                <span>旅行タイトル</span>
-                <br>
-                <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
-                <!--旅行タイトル入力欄-->
-                <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $itinerary->title) }}"> 
-                <!--エラーメッセージ-->
-                <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
-                <span>出発日</span>
-                <br class="responsive">
-                <!--出発日入力欄-->
-                <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
-                <br>
-                <!--エラーメッセージ-->
-                <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
-                <span>到着日</span>
-                <br class="responsive">
-                <!--到着日入力欄-->
-                <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
-                <br>
-                <!--エラーメッセージ-->
-                <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
-                <br class="not-responsive">
-                <!--「次へ」ボタン-->
-                <input class ="btn" type="submit" value="次へ">
-            </form>
-        </div>
-        <footer>
-            <div class="footer-wrapper">
-                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact">
+        <div class="wrapper">
+            <header>
+                <div class="header-left not-responsive"></div>
+                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-right">
                     <ul>
-                        <li><a href="/itineraries/contact/form">お問い合わせ</a></li>
+                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li><a href="/itineraries/logout">ログアウト</a></li>
                     </ul>
                 </div>
+            </header>
+            <div class = "container containers">
+                <form action="/itineraries/{{$itinerary->id}}/new_entry/update" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <span>旅行タイトル</span>
+                    <br>
+                    <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
+                    <!--旅行タイトル入力欄-->
+                    <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $itinerary->title) }}"> 
+                    <!--エラーメッセージ-->
+                    <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
+                    <span>出発日</span>
+                    <br class="responsive">
+                    <!--出発日入力欄-->
+                    <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
+                    <br>
+                    <!--エラーメッセージ-->
+                    <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
+                    <span>到着日</span>
+                    <br class="responsive">
+                    <!--到着日入力欄-->
+                    <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
+                    <br>
+                    <!--エラーメッセージ-->
+                    <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
+                    <br class="not-responsive">
+                    <!--「次へ」ボタン-->
+                    <input class ="btn" type="submit" value="次へ">
+                </form>
             </div>
-        </footer>
+            <footer>
+                <div class="footer-left"></div>
+                <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
+                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+            </footer>
+        </div>
     </body>
 </html>
