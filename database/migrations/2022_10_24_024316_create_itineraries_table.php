@@ -17,6 +17,7 @@ class CreateItinerariesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
+            $table->string('explanation')->nullable();
             $table->date('departure_date');
             $table->date('arrival_date');
             $table->string('departure_place_name')->nullable();

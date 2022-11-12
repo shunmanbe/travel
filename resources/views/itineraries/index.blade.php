@@ -51,12 +51,16 @@
                             @foreach($itineraries as $itinerary)
                                 <div class="itinerary">
                                     <!--しおりタイトル-->
-                                    <div class="theme"><h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2></div>
+                                    <div class="theme">
+                                        <h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2><span>{{ $itinerary->explanation }}</span>
+                                    </div>
+                                    <!--しおり概要編集-->
+                                    <a href="/itineraries/{{$itinerary->id}}/explanation"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
                                     <!--削除ボタン-->
                                     <form action="/itineraries/{{ $itinerary->id }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="trash" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
+                                        <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
                                     </form>
                                 </div>
                             @endforeach

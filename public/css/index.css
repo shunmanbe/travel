@@ -33,14 +33,14 @@ a {
     display: block;
 }
 
-.trash {
+.icon {
     text-align: left;
     width: 20%;
     padding-top: 30%;
     color: #339900;
 }
 
-.trash:hover {
+.icon:hover {
     color: #FF8177;
     transition: 0.2s;
 }
