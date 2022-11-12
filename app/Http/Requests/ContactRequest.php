@@ -26,7 +26,7 @@ class ContactRequest extends FormRequest
         return [
             //filter：平仮名、カタカナ、漢字が不可。@の後にドットが最低一つ必要。
             //dns：メールアドレスのドメインが存在するかチェック
-            'email' => 'required|email',
+            'email' => 'required|string|email:filter,dns',
             'title' => 'required',
             'body' => 'required',
         ];
@@ -36,9 +36,10 @@ class ContactRequest extends FormRequest
     {
         return [
             'email.required' => 'メールアドレスが入力されていません',
+            'email.string' => '文字列を入力してください',
             'email.email' => 'メールアドレスが正しくありません',
             'title.required' => 'タイトルが入力されていません',
-            'body.required' => 'お問い合わせ内容が入力されていません。',
+            'body.required' => 'お問い合わせ内容が入力されていません',
         ];
     }
 }

@@ -1,38 +1,7 @@
-.container {
-    text-align: center;
-    padding-top: 100px;
-    font-size: 20px;
-    font-weight: bold;
-}
+@media(max-width:425px){
+    .card-header {
+        font-size: 23px;
+    }
 
-.card-header {
-    padding-bottom: 30px;
-    font-size: 30px;
-}
-
-.btn {
-    padding: 5px 10px;
-    color: white;
-    display: inline-block;
-    font-weight: bold;
-    border-radius: 10px;
-    background-color: rgba(255, 140, 0, 0.8);
-    transition: 0.3s;
-    text-align: center;
-    margin: auto;
-    border:2px solid #fffaf0;
-}
-
-
-.btn:hover {
-    color: #ff8c00;
-    background: snow;
-    border: 2px solid #ff8c00;
-}
-
-.btn:active {
-    position: relative;
-    top: 6px;
-    
 }
 

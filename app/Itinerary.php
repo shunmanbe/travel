@@ -37,6 +37,7 @@ class Itinerary extends Model
         'departure_place_address',
         'departure_place_lat',
         'departure_place_lng',
+        'explanation',
         ];
     
     protected $dates = [

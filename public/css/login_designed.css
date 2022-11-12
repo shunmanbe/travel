@@ -36,3 +36,42 @@
     
 }
 
+.header-title {
+    margin: 0 auto;
+}
+
+.blue {
+    color: #4280EF;
+}
+
+.red {
+    color: #E54335;
+}
+
+.yellow {
+    color: #F6B704;
+}
+
+.green {
+    color: #34A353;
+}
+
+.btn-secondary {
+    padding: 5px 10px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: white;
+    transition: 0.3s;
+    text-align: center;
+    margin: auto;
+    border:2px solid #FF8C00;
+}
+
+strong {
+    font-size: 15px;
+    color: red;
+}
+
+
+

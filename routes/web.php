@@ -23,6 +23,10 @@ Route::group(['middleware'=>['auth']], function(){
     #しおり一覧画面へ
     Route::get('/', 'ItineraryController@index'); 
     Route::post('ajaxlike', 'ItineraryController@ajaxlike');
+    #しおりの説明編集画面へ
+    Route::get('/itineraries/{itinerary}/explanation', 'ItineraryController@explanation');
+    #しおりの説明を保存
+    Route::post('/itineraries/{itinerary}/explanation/store', 'ItineraryController@explanation_store');
     #日程選択画面へ
     Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select');
     #日程を保存

@@ -104,11 +104,22 @@ header h1 {
 
 header a {
     cursor: pointer;
+    transition: .3s;
 }
 
 header a:hover{
     color: #FF8177;
 }
+
+.contact a {
+    cursor: pointer;
+    transition: .3s;
+}
+
+.contact a:hover{
+    color: #FF8177;
+}
+
 
 .header-right {
     width: 30%;

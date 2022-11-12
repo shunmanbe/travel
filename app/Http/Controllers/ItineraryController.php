@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItineraryDateRequest;
 use App\Http\Requests\ItinerarySearchRequest;
+use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
 
 class ItineraryController extends Controller
@@ -21,6 +22,22 @@ class ItineraryController extends Controller
     {
         $auth = Auth::user();
         return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', auth()->id())->get(), 'place' => $place]);
+    }
+    
+    //しおりの説明文入力画面へ
+    public function explanation(Itinerary $itinerary)
+    {
+        $auth = Auth::user();
+        return view('itineraries/explanation')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+    }
+    
+    //しおりの説明文を保存
+    public function explanation_store(ExplanationRequest $request, Itinerary $itinerary)
+    {
+        $input = $request['explanation'];
+        $itinerary->fill($input)->save();
+        //地域選択画面を表示するweb.phpへ
+        return redirect('/');
     }
 
     //完成した詳細画面表示
