@@ -6,13 +6,6 @@
         <title>旅のしおり</title></title>
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <style>
-            #gmap 
-            {
-              height: 400px;
-              width: 600px;
-            }
-        </style>
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--CSS-->
@@ -45,6 +38,8 @@
                 <!-- 地図を表示する領域 -->
                 <div id="gmap"></div>
                 <p>地図がうまく表示されない場合はリロードしてください</p>
+                <p>距離：{{$distance}}</p>
+                <p>時間：{{$duration_ja}}（自動車移動の時）</p>
                 <a class="btn-click" href="/itineraries/{{$itinerary->id}}/completed/others/show">戻る</a>
             </div>
             <br>
