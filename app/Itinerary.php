@@ -29,8 +29,8 @@ class Itinerary extends Model
     }
     
     protected $fillable = [
-        'title',
         'user_id',
+        'title',
         'departure_date', 
         'arrival_date', 
         'departure_place_name',
@@ -38,10 +38,10 @@ class Itinerary extends Model
         'departure_place_lat',
         'departure_place_lng',
         'explanation',
-        ];
+    ];
     
     protected $dates = [
         'departure_date', 
         'arrival_date',
-        ];
+    ];
 }

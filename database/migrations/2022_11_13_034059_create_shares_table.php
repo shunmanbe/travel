@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItinerariesTable extends Migration
+class CreateSharesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateItinerariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('itineraries', function (Blueprint $table) {
+        Schema::create('shares', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->string('title');
             $table->string('explanation')->nullable();
             $table->date('departure_date');
@@ -36,7 +36,6 @@ class CreateItinerariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itineraries');
+        Schema::dropIfExists('shares');
     }
 }
-
