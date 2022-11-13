@@ -104,16 +104,24 @@
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->
+                                                <!--出発地の名前・緯度・経度-->
                                                 <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
-                                                <input type="hidden" name="start_address" value="{{$itinerary->departure_place_address}}">
+                                                <input type="hidden" name="start_lat" value="{{$itinerary->departure_place_lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$itinerary->departure_place_lng}}">
+                                                <!--目的地の名前・緯度・経度-->
                                                 <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
+                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
                                             @else
                                                 <!--目的地からの出発の場合は目的地→目的地-->
+                                                <!--出発地の名前・緯度・経度-->
                                                 <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
-                                                <input type="hidden" name="start_address" value="{{$places[$n-1]->address}}">
+                                                <input type="hidden" name="start_lat" value="{{$places[$n-1]->lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$places[$n-1]->lng}}">
+                                                <!--目的地の名前・緯度・経度-->
                                                 <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_address" value="{{$places[$n]->address}}">
+                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
                                             @endif
                                         </form>
                                     </div>

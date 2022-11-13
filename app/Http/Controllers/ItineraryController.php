@@ -14,6 +14,7 @@ use App\Http\Requests\ItineraryDateRequest;
 use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ItineraryController extends Controller
 {
@@ -159,17 +160,34 @@ class ItineraryController extends Controller
     public function route(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
+        //移動手段で「電車」が入力された場合
         if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->input('start_address');
             $goal_address = $request->input('goal_address');
             return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+        //それ以外が入力された場合
         }else{
             $mode = $request->input('Mode');
             $start_name = $request->input('start_name');
             $goal_name = $request->input('goal_name');
+            $start_lat = $request->input('start_lat');
+            $start_lng = $request->input('start_lng');
+            $goal_lat = $request->input('goal_lat');
+            $goal_lng = $request->input('goal_lng');
+            $client = new \GuzzleHttp\Client();
+            $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $route_details = json_decode($response->getBody(), true);
+            // 距離情報を取り出す
+            $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
+            // 時間情報を取り出す
+            $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
+            // 時間情報を日本語に変換
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        
-        return view('/itineraries/route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
+        return view('/itineraries/route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
@@ -186,9 +204,24 @@ class ItineraryController extends Controller
             $mode = $request->input('Mode');
             $start_name = $request->input('start_name');
             $goal_name = $request->input('goal_name');
+            $start_lat = $request->input('start_lat');
+            $start_lng = $request->input('start_lng');
+            $goal_lat = $request->input('goal_lat');
+            $goal_lng = $request->input('goal_lng');
+            $client = new \GuzzleHttp\Client();
+            $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $route_details = json_decode($response->getBody(), true);
+            // 距離情報を取り出す
+            $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
+            // 時間情報を取り出す
+            $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
+            // 時間情報を日本語に変換
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        
-        return view('/itineraries/completed_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
+        return view('/itineraries/completed_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
     //ログアウト
@@ -258,8 +291,24 @@ class ItineraryController extends Controller
             $mode = $request->input('Mode');
             $start_name = $request->input('start_name');
             $goal_name = $request->input('goal_name');
+            $start_lat = $request->input('start_lat');
+            $start_lng = $request->input('start_lng');
+            $goal_lat = $request->input('goal_lat');
+            $goal_lng = $request->input('goal_lng');
+            $client = new \GuzzleHttp\Client();
+            $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
+            $response = $client->request('GET', $url,
+            ['Bearer' => config('serveices.google-map.apikey')]);
+            $route_details = json_decode($response->getBody(), true);
+            // 距離情報を取り出す
+            $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
+            // 時間情報を取り出す
+            $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
+            // 時間情報を日本語に変換
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/completed_others_route')->with(['auth' => $auth, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'itinerary' => $itinerary]);
+        return view('/itineraries/completed_others_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
     //ジオコーディング（住所から緯度・軽度取得）

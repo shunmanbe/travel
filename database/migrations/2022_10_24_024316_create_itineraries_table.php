@@ -15,6 +15,7 @@ class CreateItinerariesTable extends Migration
     {
         Schema::create('itineraries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('group_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('explanation')->nullable();
