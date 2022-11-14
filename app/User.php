@@ -49,6 +49,13 @@ class Users extends Model
     
     public function groups()
     {
-        return $this->belongsToMany('App\Group');
+        // 呼び出すDBのモデル, 中間テーブル, 自モデルの主キー, 呼び出すモデルの主キー
+        return $this->belongsToMany('App\Group', 'group_user', 'user_id', 'group_id');
     }
+    
+    public function belongsToGroup($user_id)
+    {
+        return$this->belongsToMany('App\Group')->wherePivot('user_id', $user_id);
+    }
+    
 }

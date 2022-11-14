@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Datetime;
 
 class Place extends Model
 {
@@ -22,10 +23,10 @@ class Place extends Model
         'memo',
         ];
     
-    // protected $dates = [
-    //     'departure_time', 
-    //     'arrival_time',
-    //     ];
+    protected $casts = [
+        'departure_time' => 'datetime',
+        'arrival_time' => 'datetime',
+        ];
     
     
 }

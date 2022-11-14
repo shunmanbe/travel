@@ -103,6 +103,11 @@ a {
     color: fuchsia;
 }
 
+.group {
+    text-align: center;
+}
+
+
 .others {
     text-align: center;
 }

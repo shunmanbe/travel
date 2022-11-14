@@ -80,7 +80,7 @@
                                             </form>
                                         <!--出発時刻が入力されている時 -->
                                         @else
-                                            <p class="departure-time-entered">出発時刻：{{$place->departure_time}}
+                                            <p class="departure-time-entered">出発時刻：{{$place->departure_time->format('Y年m月d日 H時i分')}}
                                                 <!--出発時刻編集アイコン-->
                                                 <a href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
@@ -140,7 +140,7 @@
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered">到着時刻：{{$place->arrival_time}}
+                                            <p class="arrival-time-entered">到着時刻：{{$place->arrival_time->format('Y年m月d日 H時i分')}}
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
