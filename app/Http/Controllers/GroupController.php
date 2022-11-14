@@ -17,7 +17,10 @@ class GroupController extends Controller
     public function show_group(Group $group, Place $place)
     {
         $auth = Auth::user();
-        return view('/itineraries/group/index')->with(['auth' => $auth, 'groups' => $group->where('user_id', auth()->id())->get(), 'place' => $place]);
+        $groups = Group::whereHas('users', function ($query) { 
+            $query->where('users.id', auth()->id());
+            })->get();
+        return view('/itineraries/group/index')->with(['auth' => $auth, 'groups' => $groups, 'place' => $place]);
     }
     // グループを作成
     public function create_group()
@@ -33,29 +36,14 @@ class GroupController extends Controller
         $auth = Auth::user();
         $input = $request['group'];
         $group->fill($input)->save();
-        
         // ここから中間テーブルへの書き込み
         $user_id = $auth['id'];
-        // dd($user_id);
         // 今保存したグループを取得（nameが先ほど送られてきたnameと一致するもの）
-        // $get_group = Group::where('name', $input['name'])->get();
         $get_group = Group::where('name', $input['name'])->first(); //get()だと、ddした時に配列の階層が一つ増えるため、うまくいかない。
-        // dd($get_group);
         // 中間テーブルにおいて、今のグループに登録したユーザーを追加（グループid:登録したグループのid にユーザーid:登録したユーザーのid を追加）
         $get_group->users()->attach($user_id);
         
-        
-        
-        
-        
-        
-        // これなら動く↓
-        // $group_id = Group::find(2);
-        // dd($group_id);
-        // これなら動く↓
-        // $group_id->users()->attach(1);
-        
-        return redirect()->route('group.itinerary_index', ['group' => $group->id]);
+        return redirect()->route('index.group');
     }
     
     public function itinerary_index(Share $share, Group $group)

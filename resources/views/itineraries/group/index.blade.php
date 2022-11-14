@@ -40,7 +40,7 @@
                     <div class="index">
                         <div class="index-detail">
                             <!--しおり一覧を表示-->
-                            @foreach($groups as $group)
+                            @foreach($groups as $group )
                                 {{$group->name}}
                             @endforeach
                         </div>

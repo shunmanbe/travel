@@ -69,11 +69,11 @@
                     <div class="btn">
                         <a class="new_entry" href="/itineraries/new_entry/date">新規作成</a>
                     </div>
+                    <br>
                     <div class="group">
                         <a class="btn-click" href="/itineraries/group/index">グループ一覧</a>
                     </div>
                 </div>
-                <br>
                 <br>
                 <div class="others">
                     <a  class="btn-click" href="/itineraries/others/index">他のユーザーが作成したしおりを見る</a>
