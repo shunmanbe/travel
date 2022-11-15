@@ -3,17 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Datetime;
 
-class Place extends Model
+class GroupPlace extends Model
 {
-    public function itinerary()
+    public function shareItinerary()
     {
-        return $this->belongsTo('App\Itinerary');
+        return $this->belongsTo('App\ShareItinerary');
     }
     
     protected $fillable = [
-        'itinerary_id',
+        'share_itinerary_id',
         'name',
         'address',
         'lat',
@@ -27,6 +26,4 @@ class Place extends Model
         'departure_time' => 'datetime',
         'arrival_time' => 'datetime',
         ];
-    
-    
 }

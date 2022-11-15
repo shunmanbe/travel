@@ -12,14 +12,15 @@ class Group extends Model
         return $this->belongsToMany('App\User', 'group_user', 'group_id', 'user_id')->withTimestamps(); 
     }
     
-    public function shares()
+    public function shareItineraries()
     {
-        return $this->hasMany('App\Itinerary');
+        return $this->hasMany('App\ShareItinerary');
     }
     
     protected $fillable = [
         'created_at',
         'updated_at',
+        'group_id',
         'name',
         'password',
         ];

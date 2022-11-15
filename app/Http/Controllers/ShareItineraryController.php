@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Itinerary;
-use App\Place;
+use App\ShareItinerary;
+use App\Group;
+use App\GroupPlace;
 use App\Like;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -14,73 +15,72 @@ use App\Http\Requests\ItineraryDateRequest;
 use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class ItineraryController extends Controller
+class ShareItineraryController extends Controller
 {
-    //しおり一覧画面へ
-    public function index(Itinerary $itinerary, Place $place, User $user)
+    // グループのしおり一覧画面へ
+    public function itinerary_index(Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('itineraries/index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', auth()->id())->get(), 'place' => $place]);
+        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shareItineraries' => $shareItinerary->where('group_id', $group->id)->get() ]);
     }
     
     //しおりの説明文入力画面へ
-    public function explanation(Itinerary $itinerary)
+    public function explanation(ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('itineraries/explanation')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+        return view('itineraries/group/explanation')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary]);
     }
     
     //しおりの説明文を保存
-    public function explanation_store(ExplanationRequest $request, Itinerary $itinerary)
+    public function explanation_store(ExplanationRequest $request, ShareItinerary $shareItinerary)
     {
         $input = $request['explanation'];
-        $itinerary->fill($input)->save();
+        $shareItinerary->fill($input)->save();
         //地域選択画面を表示するweb.phpへ
-        return redirect('/');
+        return redirect()->route('group.index_group');
     }
 
     //完成した詳細画面表示
-    public function completed_show(Itinerary $itinerary, Place $place) 
+    public function completed_show(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace) 
     {
         $auth = Auth::user();
-        return view('/itineraries/completed_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+        return view('/itineraries/group/completed_show')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlaces' => $groupPlace->where('share_itinerary_id', $shareItinerary->id)->get()]);
     }
     
     //詳細編集画面表示
-    public function edit_show(Itinerary $itinerary, Place $place) 
+    public function edit_show(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace) 
     {
         $auth = Auth::user();
-        return view('/itineraries/edit_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+        return view('/itineraries/group/edit_show')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlaces' => $groupPlace->where('share_itinerary_id', $shareItinerary->id)->get()]);
     }
     
     //日付選択画面へ
-    public function date_select(User $user)
+    public function date_select(User $user, Group $group)
     {
         $auth = Auth::user();
-        return view('itineraries/new_entry_date')->with(['auth' => $auth, 'user' => $user]);
+        return view('itineraries/group/new_entry')->with(['auth' => $auth, 'user' => $user, 'group' => $group]);
     }
     
     //日付を保存
-    public function date_store(ItineraryDateRequest $request, Itinerary $itinerary)
+    public function date_store(ItineraryDateRequest $request, Group $group, ShareItinerary $shareItinerary)
     {
         $input_date = $request['initial_setting'];
-        $input_date['user_id'] = Auth::id();
-        $itinerary->fill($input_date)->save();
+        $input_date['group_id'] = $group->id;
+        $shareItinerary->fill($input_date)->save();
         //地域選択画面を表示するweb.phpへ
-        return redirect('/itineraries/'.$itinerary->id.'/departure_place_search');
+        return redirect()->route('group.departure_place_search', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
     //出発地を選択
-    public function departure_place_search(Itinerary $itinerary)
+    public function departure_place_search(Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+        return view('/itineraries/group/search_departure_place')->with(['auth' => $auth, 'group'=> $group, 'shareItinerary' => $shareItinerary]);
     }
     
     //出発地をマップから選択
-    public function departure_place_map(ItinerarySearchRequest $request, Itinerary $itinerary)
+    public function departure_place_map(ItinerarySearchRequest $request, Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
         $input = $request['search_name'];
@@ -112,52 +112,51 @@ class ItineraryController extends Controller
             $place_detail_required = [$place_name, $place_address, $place_lat, $place_lng];
             $place_detail_requireds[] =$place_detail_required;
         }
-        return view('/itineraries/map_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place_detail_requireds' => $place_detail_requireds]);
+        return view('/itineraries/group/map_departure_place')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'place_detail_requireds' => $place_detail_requireds]);
     }
     
     //出発地を保存
-    public function departure_place_store(Request $request, Place $place, Itinerary $itinerary)
+    public function departure_place_store(Request $request, Group $group, ShareItinerary $shareItinerary)
     {
         $input_departure = $request['departure'];
-        $itinerary->fill($input_departure)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        $shareItinerary->fill($input_departure)->save();
+        return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
     
     //しおりを削除
-    public function itinerary_delete(Itinerary $itinerary)
+    public function itinerary_delete(ShareItinerary $shareItinerary)
     {
-        $itinerary->delete();
-        return redirect('/');
+        $shareItinerary->delete();
+        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shareItineraries' => $shareItinerary->where('group_id', $group->id)->get() ]);
     }
     
     //しおり名・旅行期間を編集
-    public function edit_new_entry(Itinerary $itinerary, User $user)
+    public function edit_new_entry(Group $group, ShareItinerary $shareItinerary, User $user)
     {
         $auth = Auth::user();
-        // $inputs = $itinerary['title', 'departure_date', 'arrival_date'];
-        return view('itineraries/edit_new_entry')->with(['auth' => $auth, 'itinerary' => $itinerary, 'user' => $user]);
+        return view('itineraries/group/edit_new_entry')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'user' => $user]);
     }
     
     //しおり名と旅行期間をアップデート
-    public function update_new_entry(ItineraryDateRequest $request, Itinerary $itinerary)
+    public function update_new_entry(ItineraryDateRequest $request, Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
-        $itinerary->fill($input_date)->save();
-        return redirect('/itineraries/' . $itinerary->id . '/edit/show');
+        $shareItinerary->fill($input_date)->save();
+        return redirect()->route('group.edit_show',['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
     //出発地を編集
-    public function edit_departure(Itinerary $itinerary)
+    public function edit_departure(ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+        return view('/itineraries/group/search_departure_place')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary]);
     }
     
     //詳細編集ページから経路詳細（ルート）を表示
-    public function route(Request $request, Itinerary $itinerary, Place $place)
+    public function route(Request $request, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -187,11 +186,11 @@ class ItineraryController extends Controller
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
+        return view('/itineraries/group/route')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
-    public function completed_route(Request $request, Itinerary $itinerary, Place $place)
+    public function completed_route(Request $request, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -221,14 +220,7 @@ class ItineraryController extends Controller
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/completed_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
-    }
-    
-    //ログアウト
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
+        return view('/itineraries/group/completed_route')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
     //いいね機能
@@ -237,48 +229,48 @@ class ItineraryController extends Controller
         //ログインユーザーのid取得
         $user_id = Auth::user()->id; 
         //投稿idの取得
-        $itinerary_id = $request->itinerary_id; 
-        $already_liked = Like::where('user_id', $user_id)->where('itinerary_id', $itinerary_id)->first();
+        $shareItinerary_id = $request->itinerary_id; 
+        $already_liked = Like::where('user_id', $user_id)->where('itinerary_id', $shareItinerary_id)->first();
         //もしこのユーザーがこの投稿にまだいいねしてなかったら
         if (!$already_liked) { 
             //Likeクラスのインスタンスを作成
             $like = new Like; 
             //Likeインスタンスにitinerary_idをセット
-            $like->itinerary_id = $itinerary_id; 
+            $like->itinerary_id = $shareItinerary_id; 
             //Likeインスタンスにuser_idをセット
             $like->user_id = $user_id; 
             $like->save();
         //もしこのユーザーがこの投稿に既にいいねしてたらdelete
         } else { 
-            Like::where('itinerary_id', $itinerary_id)->where('user_id', $user_id)->delete();
+            Like::where('itinerary_id', $shareItinerary_id)->where('user_id', $user_id)->delete();
         }
         //この投稿の最新の総いいね数を取得
         //withCountメソッドを使用することでリレーションされている別テーブルの数をカウントすることができる。
-        $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        $shareItinerary_likes_count = Itinerary::withCount('likes')->findOrFail($shareItinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
         $param = [
-            'itinerary_likes_count' => $itinerary_likes_count,
+            'itinerary_likes_count' => $shareItinerary_likes_count,
         ];
         return response()->json($param); //JSONデータをjQueryに返す
     }
     
     //他のユーザーのしおりを見る
-    public function others_index(Itinerary $itinerary)
+    public function others_index(ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
         $itineraries = Itinerary::withCount('likes')->orderBy('id', 'desc')->paginate(10);
         $param = ['itineraries' => $itineraries];
-        return view ('itineraries/others_index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', '!=', $auth->id)->get(), 'param' => $param]);
+        return view ('itineraries/group/others_index')->with(['auth' => $auth, 'itineraries' => $shareItinerary->where('user_id', '!=', $auth->id)->get(), 'param' => $param]);
     }
     
     //他のユーザーのしおり詳細を見る
-    public function completed_others_show(Itinerary $itinerary, Place $place)
+    public function completed_others_show(ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
-        return view('/itineraries/completed_others_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+        return view('/itineraries/group/completed_others_show')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'places' => $place->where('itinerary_id', $shareItinerary->id)->get()]);
     }
     
     
-    public function completed_others_route(Request $request, Itinerary $itinerary, Place $place)
+    public function completed_others_route(Request $request, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -308,11 +300,11 @@ class ItineraryController extends Controller
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/completed_others_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
+        return view('/itineraries/group/completed_others_route')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
     //ジオコーディング（住所から緯度・軽度取得）
-    public function geocoding(Request $request, Itinerary $itinerary, Place $place)
+    public function geocoding(Request $request, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
         // $start_address = $request->$start_address;

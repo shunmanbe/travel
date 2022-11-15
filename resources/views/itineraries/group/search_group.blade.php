@@ -35,26 +35,14 @@
                 </div>
             </header>
             <div class="container containers">
-                <div class='itineraries'>
-                    <h1>グループ一覧</h1>
-                    <div class="index">
-                        <div class="index-detail">
-                            <!--しおり一覧を表示-->
-                            @foreach($groups as $group )
-                                {{$group->name}}
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="btn">
-                        <a class="new_entry" href="/itineraries/create/group">グループを作成</a>
-                    </div>
-                    
-                </div>
-                <br>
-                <br>
-                <div class="others">
-                    <a  class="btn-click" href="{{ route('index') }}">自分のしおり一覧に戻る</a>
-                </div>
+               <form action="{{ route('group.registration_check')}}" method="POST">
+                   @csrf
+                   <span>グループid</span>
+                   <input type="text" name="check[group_id]">
+                   <span>パスワード</span>
+                   <input type="text" name="check[password]">
+                   <input class="btn-click" type="submit" value="登録する">
+               </form>
             </div>
             <footer>
                 <div class="footer-left"></div>

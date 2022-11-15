@@ -33,25 +33,25 @@
             <div class="containers">
                 <!--しおり名-->
                 <div class="theme">
-                    <h1>{{ $itinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間:</span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
-                    <a href="/itineraries/{{$itinerary->id}}/new_entry/edit">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
+                    <h1>{{ $shareItinerary->title }}</h1>
+                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間:</span>{{ $shareItinerary->departure_date->format('Y年m月d日') }}→{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <a href="{{ route('group.edit_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
                 <div class="departure">
                     <p class="name">
-                        <span>出発地：{{ $itinerary->departure_place_name }}</span>
+                        <span>出発地：{{ $shareItinerary->departure_place_name }}</span>
                         <!--編集アイコン-->
-                        <a class="departure-supplement" href="/itineraries/{{$itinerary->id}}/departure/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                        <a class="{{ route('group.edit_departure', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                     </p>
                 </div>
                 <!--目的地一覧-->
                 <div class="destinations">
                     <!--目的地が入力されていない時-->
-                    @if(empty($places))
+                    @if(empty($groupPlaces))
                     <!--目的地が入力されている時-->
                     @else
-                        @foreach($places as $n => $place)
+                        @foreach($groupPlaces as $n => $groupPlace)
                             <div class="to-destination">
                                 <!--三角形表示-->
                                 <div class="triangles">
@@ -66,8 +66,8 @@
                                     <!--出発時刻表示-->
                                     <div class="departure-time">
                                         <!--出発時刻が入力されていない時-->
-                                        @if(empty($place->departure_time))
-                                            <form action="/itineraries/{{$itinerary->id}}/departure_time_store/{{$place->id}}" method="POST">
+                                        @if(empty($groupPlace->departure_time))
+                                            <form action="{{ route('group.departure_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                                 @csrf
                                                 <p class="departure-time-empty">出発時刻：
                                                     <!--出発時刻入力欄-->
@@ -80,15 +80,15 @@
                                             </form>
                                         <!--出発時刻が入力されている時 -->
                                         @else
-                                            <p class="departure-time-entered">出発時刻：{{$place->departure_time}}
+                                            <p class="departure-time-entered">出発時刻：{{$groupPlace->departure_time}}
                                                 <!--出発時刻編集アイコン-->
-                                                <a href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                                <a href="{{ route('group.edit_departure_time', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
                                         @endif
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="/itineraries/{{$itinerary->id}}/route/{{$place->id}}" method="POST">
+                                        <form action="{{ route('group.route', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
                                             <p>移動手段：
@@ -105,31 +105,31 @@
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->
                                                 <!--出発地の名前・緯度・経度-->
-                                                <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
-                                                <input type="hidden" name="start_lat" value="{{$itinerary->departure_place_lat}}">
-                                                <input type="hidden" name="start_lng" value="{{$itinerary->departure_place_lng}}">
+                                                <input type="hidden" name="start_name" value="{{$shareItinerary->departure_place_name}}">
+                                                <input type="hidden" name="start_lat" value="{{$shareItinerary->departure_place_lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$shareItinerary->departure_place_lng}}">
                                                 <!--目的地の名前・緯度・経度-->
-                                                <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
-                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
+                                                <input type="hidden" name="goal_name" value="{{$groupPlaces[$n]->name}}">
+                                                <input type="hidden" name="goal_lat" value="{{$groupPlaces[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$groupPlaces[$n]->lng}}">
                                             @else
                                                 <!--目的地からの出発の場合は目的地→目的地-->
                                                 <!--出発地の名前・緯度・経度-->
-                                                <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
-                                                <input type="hidden" name="start_lat" value="{{$places[$n-1]->lat}}">
-                                                <input type="hidden" name="start_lng" value="{{$places[$n-1]->lng}}">
+                                                <input type="hidden" name="start_name" value="{{$groupPlaces[$n-1]->name}}">
+                                                <input type="hidden" name="start_lat" value="{{$groupPlaces[$n-1]->lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$groupPlaces[$n-1]->lng}}">
                                                 <!--目的地の名前・緯度・経度-->
-                                                <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
-                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
+                                                <input type="hidden" name="goal_name" value="{{$groupPlaces[$n]->name}}">
+                                                <input type="hidden" name="goal_lat" value="{{$groupPlaces[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$groupPlaces[$n]->lng}}">
                                             @endif
                                         </form>
                                     </div>
                                     <!--到着時刻表示-->
                                     <div class="arrival-time">
                                         <!--到着時刻が入力されていない時-->
-                                        @if(empty($place->arrival_time))
-                                            <form  action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
+                                        @if(empty($groupPlace->arrival_time))
+                                            <form  action="{{ route('group.arrival_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}}" method="POST">
                                                 @csrf
                                                 <p class="arrival-time-empty">到着時刻：
                                                     <!--到着時刻入力欄-->
@@ -140,22 +140,22 @@
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered">到着時刻：{{$place->arrival_time}}
+                                            <p class="arrival-time-entered">到着時刻：{{$groupPlace->arrival_time}}
                                                 <!--到着時刻編集アイコン-->
-                                                <a href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                                <a href="{{ route('group.edit_arrival_time', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="destination">
-                                <div class="name">目的地{{ $n + 1 }}:{{ $place->name }}
+                                <div class="name">目的地{{ $n + 1 }}:{{ $groupPlace->name }}
                                     <!--目的地編集-->
-                                    <a href="/itineraries/{{$itinerary->id}}/edit/{{ $place->id }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                    <a href="{{ route('group.edit_destination', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                     <!--目的地メモ-->
-                                    <a class="memo" href="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}"><i class="fa-regular fa-comment icon"></i></a>
+                                    <a class="memo" href="{{ route('group.memo', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}"><i class="fa-regular fa-comment icon"></i></a>
                                     <!--目的地削除-->
-                                    <form action="/itineraries/{{ $itinerary->id }}/destinetion/{{ $place->id }}" method="post" style="display:inline">
+                                    <form action="{{ route('group.destination_delete', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id])}}" method="post" style="display:inline">
                                         @csrf
                                         @method('DELETE') 
                                         <input class="trash icon" type="submit" onclick="delete_alert(event);return false;" value="&#xf2ed;"> 
@@ -167,10 +167,10 @@
                     @endif
                 </div>
                 <div class="center">
-                    <a class="btn-click" href ="/itineraries/{{$itinerary->id}}/destination_search">目的地を選択</a>
+                    <a class="btn-click" href ="{{ route('group.destination_search', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">目的地を選択</a>
                     <br>
                     <br>
-                    <a class="btn-click" href="/itineraries/{{$itinerary->id}}/completed/show">しおりを確定する</a>
+                    <a class="btn-click" href="{{ route('group.itinerary_index', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを確定する</a>
                     <br>
                     <br>
                     <a class="btn-click" href ="/">しおり一覧に戻る</a>

@@ -35,7 +35,7 @@
                 <h1>以下から目的地を<br class="responsive">選択してください</h1> 
                 @foreach ($place_detail_requireds as $place_detail_required)
                     <div class="container">
-                        <form action="/itineraries/{{ $itinerary->id }}/destination_store" method="POST">
+                        <form action="{{ route('group.destination_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                             @csrf
                             <!--検索候補地名表示-->
                             <h2>{{$place_detail_required[0]}}</h2>
@@ -48,7 +48,7 @@
                             <!--候補地の経度-->
                             <input type="hidden" name="destination[lng]" value="{{$place_detail_required[3]}}">
                             <!--候補地が属するしおりのid-->
-                            <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
+                            <input type="hidden" name="destination[share_itinerary_id]" value="{{$shareItinerary->id}}">
                             <!--保存ボタン-->
                             <input class="btn" type="submit" value="ここを目的地として保存する">
                             <br>

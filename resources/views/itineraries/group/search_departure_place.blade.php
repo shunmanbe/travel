@@ -33,7 +33,7 @@
             </header>
             <div class="container containers">
                 <h1>出発地を検索</h1> 
-                <form action="/itineraries/{{$itinerary->id}}/departure_place_map" method="POST">
+                <form action="{{ route('group.departure_place_map', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                     @csrf
                     <!--検索ワード入力欄-->
                     <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">

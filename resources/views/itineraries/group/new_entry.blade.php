@@ -32,7 +32,7 @@
             </header>
             <div class="container containers">
                 <div class = "date_select">
-                    <form action="/itineraries/new_entry/date_store" method="POST">
+                    <form action="{{ route('group.date_store', ['group' => $group->id]) }}" method="POST">
                         @csrf
                         <span>旅行タイトル</span>
                         <br>

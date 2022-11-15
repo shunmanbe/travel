@@ -35,7 +35,7 @@
                 <h1>以下から出発地を<br class="responsive">選択してください</h1> 
                 @foreach ($place_detail_requireds as $place_detail_required)
                 <div class="container">
-                    <form action="/itineraries/{{ $itinerary->id }}/departure_place_store" method="POST">
+                    <form action="{{ route('group.departure_place_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                         @csrf
                         <!--検索候補地名表示-->
                             <h2>{{$place_detail_required[0]}}</h2>

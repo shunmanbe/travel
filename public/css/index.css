@@ -18,18 +18,21 @@ a {
     margin: 0 auto;
 }
 
-.theme {
+.theme, .group-name {
     text-align: left;
     width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
     background: linear-gradient(to right, #fffaf0 0%, #fffaf0 51%, #FFDCAC 100%);
     background-size: 200% auto;
     transition: 0.3s;
 }
-.theme:hover {
+.theme:hover, .group-name:hover{
     background-position: right center;
 }
 
-.theme a {
+.theme a, .group-name a{
     display: block;
 }
 
@@ -53,19 +56,21 @@ a {
     padding-bottom: 50px;
 }
 
-.itineraries {
+.itineraries, .groups{
     width: 100%;
 }
 
-.itineraries h1 {
+.itineraries h1, .groups h1{
     font-size: 40px;
     text-align: center;
     width: 100%;
 }
 
-.itinerary {
+.itinerary, .group{
     font-size: 20px;
+    height: 60px;
     display:flex;
+    align-items: center;
     margin: 0px 20% 5px 25%;
 }
 
@@ -103,13 +108,27 @@ a {
     color: fuchsia;
 }
 
-.group {
+.display-group, .search-group {
     text-align: center;
 }
 
 
-.others {
+.others, .own {
     text-align: center;
 }
 
-
+.fa-person-running {
+    font-size: 24px;
+    /*これを書くことでアイコン表示可能*/
+    font-family: FontAwesome; 
+	/*その他の文字が太くなるので以下で調整*/
+	font-weight: normal;
+	border: none;
+	background-color: #fffaf0;
+	cursor: pointer;
+	padding: 0;
+}
+button {
+    border: none;
+	background-color: #fffaf0;
+}

@@ -5,6 +5,13 @@
     font-weight: bold;
 }
 
+.catchphrase{
+    font-size: 25px;
+    margin: 0 auto;
+    width: 35%;
+    border-bottom: 3px dotted #000;
+}
+
 .card-header {
     padding-bottom: 30px;
     font-size: 30px;
