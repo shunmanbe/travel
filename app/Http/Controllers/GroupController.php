@@ -6,32 +6,36 @@ use Illuminate\Http\Request;
 use App\Group;
 use App\User;
 use App\Itinerary;
+use App\ShareItinerary;
 use App\Place;
-use App\Share;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class GroupController extends Controller
 {
     // 所属しているグループ一覧を表示
-    public function show_group(Group $group, Place $place)
+    public function index_group(Group $group, Place $place)
     {
         $auth = Auth::user();
         $groups = Group::whereHas('users', function ($query) { 
             $query->where('users.id', auth()->id());
             })->get();
-        return view('/itineraries/group/index')->with(['auth' => $auth, 'groups' => $groups, 'place' => $place]);
+        return view('/itineraries/group/group_index')->with(['auth' => $auth, 'groups' => $groups, 'place' => $place]);
     }
+    
     // グループを作成
     public function create_group()
     {
         $auth = Auth::user();
+        // idを作
+        $group_id = random_int(000000, 999999); //random_intは 暗号論的に安全な疑似乱数を生成する。random_int(min, max)
+        // パスワードを作成
         $password = Str::random(15);
-        return view('/itineraries/group/create_group')->with(['auth' => $auth, 'password' => $password]);
+        return view('/itineraries/group/create_group')->with(['auth' => $auth, 'group_id' => $group_id, 'password' => $password]);
     }
     
     // 作成したグループを登録
-    public function store_group(Request $request, Share $share, Group $group)
+    public function store_group(Request $request, Group $group)
     {
         $auth = Auth::user();
         $input = $request['group'];
@@ -43,21 +47,50 @@ class GroupController extends Controller
         // 中間テーブルにおいて、今のグループに登録したユーザーを追加（グループid:登録したグループのid にユーザーid:登録したユーザーのid を追加）
         $get_group->users()->attach($user_id);
         
+        return redirect()->route('group.index_group');
+    }
+    
+    // グループを検索する
+    public function search_group()
+    {
+        $auth = Auth::user();
+        return view('itineraries/group/search_group')->with(['auth' => $auth]);
+    }
+    
+    // グループに入るときにチェックする
+    public function registration_check(Request $request, Group $group)
+    {
+        $auth = Auth::user();
+        // 送られてきた値をデータベースで検索
+        $input = $request['check'];
+        // idとパスワードが一致するグループをデータベースから取得
+        $get_group = Group::where('group_id', $input['group_id'])->where('password', $input['password'])->first();
+        // 取得したグループの名前を取り出す
+        $group_name = $get_group['name'];
+        // 参加グループを確認するページへ
+        return view('/itineraries/group/confirm_group')->with(['auth' => $auth, 'group_name' => $group_name, 'get_group' => $get_group]);
+    }
+    
+    // グループに登録する
+    public function register_group(Request $request)
+    {
+        $auth = Auth::user();
+        $input = $request['register'];
+        
+        $user_id = $auth['id'];
+        // $get_groupにnameとpasswordが一致するものを代入
+        $get_group = Group::where('name', $input['name'])->where('password', $input['password'])->first();
+        // 中間テーブルに上で指定したグループのidとユーザーのidを追加
+        $get_group->users()->attach($user_id);
         return redirect()->route('index.group');
     }
     
-    public function itinerary_index(Share $share, Group $group)
+    
+    // グループのしおり一覧画面へ
+    public function itinerary_index(Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'shares' => $share->where('group_id', $group->id)->get() ]);
+        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shares' => $shareItinerary->where('group_id', $group->id)->get() ]);
     }
-    
-    public function new_entry(Share $share, Group $group)
-    {
-        $auth = Auth::user();
-    }
-    
-    
-    
     
 }

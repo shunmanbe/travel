@@ -97,6 +97,10 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <br>
+                                    <a href="/login/google" class="btn-secondary" role="button">
+                                        <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>で登録
+                                    </a>
                                 </form>
                                 <br>
                                 <div>

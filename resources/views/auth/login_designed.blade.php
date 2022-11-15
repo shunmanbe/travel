@@ -34,6 +34,10 @@
                 <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
             </header>
             <div class="container containers">
+                <div>
+                    <h1 class="catchphrase">〜楽しい旅行には楽しい計画を〜</h1>
+                </div>
+                <br>
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">

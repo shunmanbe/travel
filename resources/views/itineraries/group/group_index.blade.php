@@ -8,9 +8,6 @@
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-        <link href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/loading.css') }}" >
         <!--アイコン表示-->
         <!--<script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>-->
         <!--<script defer src="https://use.fontawesome.com/releases/v6.2.0/js/all.js"></script>-->
@@ -28,11 +25,6 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <!--ローディング画面-->
-        <div id="splash">
-            <div id="splash_text"></div>
-        </div>
-        <!--ヘッダー-->
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
@@ -45,56 +37,51 @@
                 </div>
             </header>
             <div class="container containers">
-                <div class='itineraries'>
-                    <h1>しおり一覧</h1>
+                <div class='groups'>
+                    <h1>グループ一覧</h1>
                     <div class="index">
                         <div class="index-detail">
                             <!--しおり一覧を表示-->
-                            @foreach($itineraries as $itinerary)
-                                <div class="itinerary">
-                                    <!--しおりタイトル-->
-                                    <div class="theme">
-                                        <h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2><span>{{ $itinerary->explanation }}</span>
+                            @foreach($groups as $group)
+                                <div class="group">
+                                    <!--グループ名-->
+                                    <div class="group-name">
+                                        <h2><a href="{{ route('group.itinerary_index', ['group' => $group->id]) }}">{{ $group->name }}</a></h2>
                                     </div>
-                                    <!--しおり概要編集-->
-                                    <a href="/itineraries/{{$itinerary->id}}/explanation"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
-                                    <!--削除ボタン-->
-                                    <form action="/itineraries/{{ $itinerary->id }}" method="post">
+                                    <!--グループ詳細画面へ-->
+                                    <a href="/itineraries/{{ $group->id }}/explanation"><i class="fa-solid fa-circle-info icon"></i>　</a>
+                                    <!--グループを抜ける-->
+                                    <form action="/itineraries/{{ $group->id }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
+                                        <button class="btn icon" type="submit" onClick="escape_alert(event);return false;"><i class="fa-solid fa-person-running"></i></button>
                                     </form>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="btn">
-                        <a class="new_entry" href="/itineraries/new_entry/date">新規作成</a>
+                        <a class="new_entry" href="{{ route('group.create_group') }}">グループを作成</a>
                     </div>
                     <br>
-                    <div class="display-group">
-                        <a class="btn-click" href="/itineraries/group/index">グループ一覧</a>
+                    <div class="search-group">
+                        <a class="" href="{{ route('group.search_group') }}">グループを検索する</a>
                     </div>
+                    
                 </div>
                 <br>
-                <div class="others">
-                    <a  class="btn-click" href="/itineraries/others/index">他のユーザーが作成したしおりを見る</a>
+                <br>
+                <div class="own">
+                    <a  class="btn-click" href="{{ route('index') }}">自分のしおり一覧に戻る</a>
                 </div>
+                <br>
             </div>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/delete_alert.js') }}"></script>
-            <!--==============JQuery読み込み===============-->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-            <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
-            <!--IE11用-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-            <!--自作のJS-->
-            <script src="{{ asset('/js/loading.js') }}"></script>
+            <script src="{{ asset('/js/escape_alert.js') }}"></script>
         </div>
     </body>
 </html>

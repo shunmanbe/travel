@@ -35,11 +35,11 @@
             </header>
             <div class = "container containers">
                 <!--しおり名表示-->
-                <h2>{{$itinerary->title}}</h2>
+                <h2>{{$shareItinerary->title}}</h2>
                 <!--説明入力欄-->
-                <form action="/itineraries/{{ $itinerary->id }}/explanation/store" method="POST">
+                <form action="{{ route('group.explanation_store', ['shareItinerary' => $shareItinerary->id]) }}" method="POST">
                     @csrf
-                    <input class="text" type="text" name="explanation[explanation]" value="{{ old('explanation.explanation', $itinerary->explanation) }}"placeholder="20文字以内で入力してください">
+                    <input class="text" type="text" name="explanation[explanation]" value="{{ old('explanation.explanation', $shareItinerary->explanation) }}"placeholder="20文字以内で入力してください">
                     <p class="error-message">{{ $errors->first('explanation.explanation') }}</p>
                     <br>
                     <br>

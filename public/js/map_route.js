@@ -1,8 +1,7 @@
 function initMap() { 
   // 地図を生成して表示
-  var map = new google.maps.Map(document.getElementById("gmap"), {
+  const map = new google.maps.Map(document.getElementById("gmap"), {
     zoom: 13,
-    //center: new google.maps.LatLng(40.750127,-73.981084),  //Madison Av/E 38 St
     mapTypeId: "roadmap"
   });
   //DirectionsService のオブジェクトを生成

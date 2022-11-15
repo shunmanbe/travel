@@ -33,12 +33,12 @@
             <div class="containers">
                 <!--しおり名-->
                 <div class="theme">
-                    <h1>{{ $itinerary->title }}</h1>
-                    <span>期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <h1>{{ $shareItinerary->title }}</h1>
+                    <span>期間:{{ $shareItinerary->departure_date->format('Y年m月d日') }}→{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
                 </div>
                 <!--出発地-->
                 <div class="departure">
-                    <p class="name">出発地：{{ $itinerary->departure_place_name }}</p>
+                    <p class="name">出発地：{{ $shareItinerary->departure_place_name }}</p>
                 </div>
                 <!--目的地一覧-->
                 <div class="destinations">
@@ -62,7 +62,7 @@
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
+                                        <form action="{{ route('group.completed_route', ['shareItinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
                                             <p>移動手段：
@@ -79,9 +79,9 @@
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->
                                                 <!--出発地の名前・緯度・経度-->
-                                                <input type="hidden" name="start_name" value="{{$itinerary->departure_place_name}}">
-                                                <input type="hidden" name="start_lat" value="{{$itinerary->departure_place_lat}}">
-                                                <input type="hidden" name="start_lng" value="{{$itinerary->departure_place_lng}}">
+                                                <input type="hidden" name="start_name" value="{{$shareItinerary->departure_place_name}}">
+                                                <input type="hidden" name="start_lat" value="{{$shareItinerary->departure_place_lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$shareItinerary->departure_place_lng}}">
                                                 <!--目的地の名前・緯度・経度-->
                                                 <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
                                                 <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
@@ -126,9 +126,9 @@
                     @endif
                 </div>
                 <div class="center">
-                    <a class="btn-click" href ="/itineraries/{{$itinerary->id}}/edit/show">しおりを編集する</a>
+                    <a class="btn-click" href ="{{ route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを編集する</a>
                     <br>
-                    <a class="btn-click" href ="/">しおり一覧に戻る</a>
+                    <a class="btn-click" href ="{{ route('group.itinerary_index', ['group' => $group->id]) }}">グループのしおり一覧に戻る</a>
                 </div>
             </div>
             <footer>

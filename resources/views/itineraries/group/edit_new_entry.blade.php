@@ -30,33 +30,33 @@
                 </div>
             </header>
             <div class = "container containers">
-                <form action="/itineraries/{{$itinerary->id}}/new_entry/update" method="POST">
+                <form action="{{ route('group.update_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id])}}" method="POST">
                     @csrf
                     @method('PUT')
                     <span>旅行タイトル</span>
                     <br>
                     <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
                     <!--旅行タイトル入力欄-->
-                    <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $itinerary->title) }}"> 
+                    <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $shareItinerary->title) }}"> 
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                     <span>出発日</span>
                     <br class="responsive">
                     <!--出発日入力欄-->
-                    <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
+                    <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $shareItinerary->departure_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
                     <span>到着日</span>
                     <br class="responsive">
                     <!--到着日入力欄-->
-                    <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
+                    <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $shareItinerary->arrival_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                     <br class="not-responsive">
                     <!--「次へ」ボタン-->
-                    <input class ="btn" type="submit" value="次へ">
+                    <input class ="btn" type="submit" value="更新">
                 </form>
             </div>
             <footer>

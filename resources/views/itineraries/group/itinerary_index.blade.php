@@ -40,16 +40,16 @@
                     <div class="index">
                         <div class="index-detail">
                             <!--しおり一覧を表示-->
-                            @foreach($shares as $share)
+                            @foreach($shareItineraries as $shareItinerary)
                                 <div class="itinerary">
                                     <!--しおりタイトル-->
                                     <div class="theme">
-                                        <h2><a href="/itineraries/{{ $share->id }}/completed/show">{{ $share->title }}</a></h2><span>{{ $share->explanation }}</span>
+                                        <h2><a href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id ]) }}">{{ $shareItinerary->title }}</a></h2><span>{{ $shareItinerary->explanation }}</span>
                                     </div>
                                     <!--しおり概要編集-->
-                                    <a href="/itineraries/{{$share->id}}/explanation"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
+                                    <a href="{{ route('group.explanation', ['shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
                                     <!--削除ボタン-->
-                                    <form action="/itineraries/{{ $share->id }}" method="post">
+                                    <form action="{{ route('group.itinerary_delete',['group' => $group->id, 'shareItinerary' => $shareItinerary->id ] ) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
@@ -66,7 +66,7 @@
                 <br>
                 <br>
                 <div class="others">
-                    <a  class="btn-click" href="{{ route('index.group')}}">グループ一覧に戻る</a>
+                    <a  class="btn-click" href="{{ route('group.index_group')}}">グループ一覧に戻る</a>
                 </div>
             </div>
             <footer>
@@ -74,7 +74,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
+            <script src="{{ asset('/js/delete_alert.js') }}"></script>
         </div>
     </body>
 </html>

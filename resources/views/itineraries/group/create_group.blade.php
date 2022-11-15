@@ -11,8 +11,8 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
-        <link rel="stylesheet" href="{{ asset('/css/responsive/index.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/create_group.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/create.css') }}" >
         <!--loading-->
         <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
         <!--header-->
@@ -35,12 +35,15 @@
                 </div>
             </header>
             <div class="container containers">
-               <form action="{{ route('store.group')}}" method="POST">
+               <form action="{{ route('group.store_group')}}" method="POST">
                    @csrf
-                   <span>グループ名</span>
+                   <p>グループ名</p>
                    <input type="text" name="group[name]" value="">
-                   <span>共有パスワード</span>
+                   <p>共有パスワード</p>
                    <input type="text" name="group[password]" value="{{$password}}">
+                   <input type="hidden" name="group[group_id]" value="{{$group_id}}">
+                   <br>
+                   <br>
                    <input class="btn-click" type="submit" value="登録する">
                </form>
             </div>
