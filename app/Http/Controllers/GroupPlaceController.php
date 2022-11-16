@@ -149,9 +149,13 @@ class GroupPlaceController extends Controller
     //出発時刻を保存
     public function departure_time_store(Request $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
-        $auth = Auth::user();
-        $input = $request['time_d'];
-        $groupPlace->fill($input)->save();
+        $input = $request['time']['departure_time'];
+        // Carbonを使ってformatを書き換える
+        $input = Carbon::parse($input)->format('Y年m月d日 H時i分');
+        // 保存するために連想配列を作る
+        $input_array = ['departure_time' => $input];
+        // 保存する
+        $groupPlace->fill($input_array)->save();
         return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
@@ -164,11 +168,16 @@ class GroupPlaceController extends Controller
     }
     
      //到着時刻を保存
-    public function arrival_time_store(ArrivalTimeRequest $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
+    public function arrival_time_store(Request $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
-        $auth = Auth::user();
-        $input = $request['time_a'];
-        $groupPlace->fill($input)->save();
+        // requestで送られてきた"departure_time"を抜き出す
+        $input = $request['time']['arrival_time'];
+        // Carbonを使ってformatを書き換える
+        $input = Carbon::parse($input)->format('Y年m月d日 H時i分');
+        // 保存するために連想配列を作る
+        $input_array = ['arrival_time' => $input];
+        // 保存する
+        $groupPlace->fill($input_array)->save();
         return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     

@@ -21,9 +21,9 @@ class CreateGroupPlacesTable extends Migration
             $table->string('address')->nullable();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->datetime('departure_time')->nullable();
+            $table->string('departure_time')->nullable();
             $table->boolean('departure_time_flag')->nullable();
-            $table->datetime('arrival_time')->nullable();
+            $table->string('arrival_time')->nullable();
             $table->boolean('arrival_time_flag')->nullable();
             $table->string('memo')->nullable();
         });

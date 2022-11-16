@@ -71,7 +71,7 @@
                                                 @csrf
                                                 <p class="departure-time-empty">出発時刻：
                                                     <!--出発時刻入力欄-->
-                                                    <input class="input" type="datetime-local" name="time_d[departure_time]">
+                                                    <input class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
                                                     <input class ="btn" type="submit" value="保存">
                                                 </p>
@@ -80,7 +80,7 @@
                                             </form>
                                         <!--出発時刻が入力されている時 -->
                                         @else
-                                            <p class="departure-time-entered">出発時刻：{{$place->departure_time->format('Y年m月d日 H時i分')}}
+                                            <p class="departure-time-entered">出発時刻：{{$place->departure_time}}
                                                 <!--出発時刻編集アイコン-->
                                                 <a href="/itineraries/{{$itinerary->id}}/departure_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
@@ -129,18 +129,18 @@
                                     <div class="arrival-time">
                                         <!--到着時刻が入力されていない時-->
                                         @if(empty($place->arrival_time))
-                                            <form  action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
+                                            <form action="/itineraries/{{$itinerary->id}}/arrival_time_store/{{$place->id}}" method="POST">
                                                 @csrf
                                                 <p class="arrival-time-empty">到着時刻：
                                                     <!--到着時刻入力欄-->
-                                                    <input class="input" type="datetime-local" name="time_a[arrival_time]">
+                                                    <input class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
                                                     <input class ="btn" type="submit" value="保存">
                                                 </p>
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered">到着時刻：{{$place->arrival_time->format('Y年m月d日 H時i分')}}
+                                            <p class="arrival-time-entered">到着時刻：{{$place->arrival_time}}
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="/itineraries/{{$itinerary->id}}/arrival_time/{{$place->id}}/edit"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
