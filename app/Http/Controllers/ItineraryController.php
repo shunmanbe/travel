@@ -174,6 +174,7 @@ class ItineraryController extends Controller
             $start_lng = $request->input('start_lng');
             $goal_lat = $request->input('goal_lat');
             $goal_lng = $request->input('goal_lng');
+            
             $client = new \GuzzleHttp\Client();
             $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
             $response = $client->request('GET', $url,

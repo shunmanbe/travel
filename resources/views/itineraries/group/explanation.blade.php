@@ -37,7 +37,7 @@
                 <!--しおり名表示-->
                 <h2>{{$shareItinerary->title}}</h2>
                 <!--説明入力欄-->
-                <form action="{{ route('group.explanation_store', ['shareItinerary' => $shareItinerary->id]) }}" method="POST">
+                <form action="{{ route('group.explanation_store', ['group' => $group, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                     @csrf
                     <input class="text" type="text" name="explanation[explanation]" value="{{ old('explanation.explanation', $shareItinerary->explanation) }}"placeholder="20文字以内で入力してください">
                     <p class="error-message">{{ $errors->first('explanation.explanation') }}</p>

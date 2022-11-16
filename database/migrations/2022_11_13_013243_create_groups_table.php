@@ -19,6 +19,7 @@ class CreateGroupsTable extends Migration
             $table->integer('group_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->string('password')->nullable();
+            $table->string('information')->nullable();
         });
     }
 

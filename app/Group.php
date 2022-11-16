@@ -23,5 +23,6 @@ class Group extends Model
         'group_id',
         'name',
         'password',
+        'information',
         ];
 }

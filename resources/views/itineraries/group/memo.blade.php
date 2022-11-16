@@ -35,11 +35,11 @@
             </header>
             <div class = "container containers">
                 <!--メモの地名表示-->
-                <h2>{{$place->destination_name}}</h2>
+                <h2>{{$groupPlace->destination_name}}</h2>
                 <!--メモ入力欄-->
-                <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
+                <form action="{{ route('group.memo_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                     @csrf
-                    <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
+                    <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $groupPlace->memo }}</textarea>
                     <br>
                     <!--保存ボタン-->
                     <input class="btn" type="submit" value="保存して詳細ページへ">

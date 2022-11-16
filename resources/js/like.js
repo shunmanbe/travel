@@ -18,6 +18,7 @@ $(function () { //$()はjQueryのセレクターの書き方。$はjQueryの略�
     })
     //通信成功した時の処理
     .done(function (data) {
+      //toggleClassメソッドは 指定したクラス名の CSS がある場合は削除を行い、なければ追加するメソッド
       $this.toggleClass('liked'); //likedクラスのON/OFF切り替え。
       $this.next('.like-counter').html(data.itinerary_likes_count); //.next()は同列（同位？）の後ろの全ての要素を返す。その中から特定の要素を指定する場合は、パラメータで指定する。
       //html(htmlString)はHTMLエンコード済みの文字列を表すオブジェクト。itinerary_likes_countは{itinerary_likes_count:1}というjsonの形で渡ってくる。

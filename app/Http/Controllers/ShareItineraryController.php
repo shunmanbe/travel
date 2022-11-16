@@ -15,6 +15,7 @@ use App\Http\Requests\ItineraryDateRequest;
 use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ShareItineraryController extends Controller
 {
@@ -26,19 +27,27 @@ class ShareItineraryController extends Controller
     }
     
     //しおりの説明文入力画面へ
-    public function explanation(ShareItinerary $shareItinerary)
+    public function explanation(Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('itineraries/group/explanation')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary]);
+        return view('itineraries/group/explanation')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary]);
     }
     
     //しおりの説明文を保存
-    public function explanation_store(ExplanationRequest $request, ShareItinerary $shareItinerary)
+    public function explanation_store(ExplanationRequest $request, Group $group, ShareItinerary $shareItinerary)
     {
         $input = $request['explanation'];
         $shareItinerary->fill($input)->save();
         //地域選択画面を表示するweb.phpへ
-        return redirect()->route('group.index_group');
+        return redirect()->route('group.itinerary_index', ['group' => $group]);
+    }
+    
+    //しおりを削除
+    public function itinerary_delete(Group $group, ShareItinerary $shareItinerary)
+    {
+        $auth = Auth::user();
+        $shareItinerary->delete();
+        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shareItineraries' => $shareItinerary->where('group_id', $group->id)->get() ]);
     }
 
     //完成した詳細画面表示
@@ -123,14 +132,6 @@ class ShareItineraryController extends Controller
         return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
-    
-    //しおりを削除
-    public function itinerary_delete(ShareItinerary $shareItinerary)
-    {
-        $shareItinerary->delete();
-        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shareItineraries' => $shareItinerary->where('group_id', $group->id)->get() ]);
-    }
-    
     //しおり名・旅行期間を編集
     public function edit_new_entry(Group $group, ShareItinerary $shareItinerary, User $user)
     {
@@ -149,21 +150,21 @@ class ShareItineraryController extends Controller
     }
     
     //出発地を編集
-    public function edit_departure(ShareItinerary $shareItinerary)
+    public function edit_departure(Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
-        return view('/itineraries/group/search_departure_place')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary]);
+        return view('/itineraries/group/search_departure_place')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary]);
     }
     
     //詳細編集ページから経路詳細（ルート）を表示
-    public function route(Request $request, ShareItinerary $shareItinerary, Place $place)
+    public function route(Request $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
         if($request->input('Mode') == 'TRANSIT'){
             $start_address = $request->input('start_address');
             $goal_address = $request->input('goal_address');
-            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+            return redirect('/itineraries/' . $groupPlace->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
         //それ以外が入力された場合
         }else{
             $mode = $request->input('Mode');
@@ -186,11 +187,11 @@ class ShareItineraryController extends Controller
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/group/route')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
+        return view('/itineraries/group/route')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
-    public function completed_route(Request $request, ShareItinerary $shareItinerary, Place $place)
+    public function completed_route(Request $request, Group $group, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -220,7 +221,7 @@ class ShareItineraryController extends Controller
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
         }
-        return view('/itineraries/group/completed_route')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
+        return view('/itineraries/group/completed_route')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
     //いいね機能
@@ -269,7 +270,7 @@ class ShareItineraryController extends Controller
         return view('/itineraries/group/completed_others_show')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'places' => $place->where('itinerary_id', $shareItinerary->id)->get()]);
     }
     
-    
+    // 他のユーザーのしおり詳細から経路を見る
     public function completed_others_route(Request $request, ShareItinerary $shareItinerary, Place $place)
     {
         $auth = Auth::user();

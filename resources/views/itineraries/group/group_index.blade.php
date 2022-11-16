@@ -49,11 +49,10 @@
                                         <h2><a href="{{ route('group.itinerary_index', ['group' => $group->id]) }}">{{ $group->name }}</a></h2>
                                     </div>
                                     <!--グループ詳細画面へ-->
-                                    <a href="/itineraries/{{ $group->id }}/explanation"><i class="fa-solid fa-circle-info icon"></i>　</a>
+                                    <a href="{{ route('group.group_information', ['group' => $group->id]) }}"><i class="fa-solid fa-circle-info icon"></i>　</a>
                                     <!--グループを抜ける-->
-                                    <form action="/itineraries/{{ $group->id }}" method="post">
+                                    <form action="{{ route('group.escape', ['group' => $group->id]) }}" method="post">
                                         @csrf
-                                        @method('DELETE')
                                         <button class="btn icon" type="submit" onClick="escape_alert(event);return false;"><i class="fa-solid fa-person-running"></i></button>
                                     </form>
                                 </div>
@@ -65,7 +64,7 @@
                     </div>
                     <br>
                     <div class="search-group">
-                        <a class="" href="{{ route('group.search_group') }}">グループを検索する</a>
+                        <a class="btn-click" href="{{ route('group.search_group') }}">グループを検索する</a>
                     </div>
                     
                 </div>

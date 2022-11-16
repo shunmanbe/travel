@@ -42,9 +42,9 @@
                 </div>
                 <!--目的地一覧-->
                 <div class="destinations">
-                    @if(empty($places))
+                    @if(empty($groupPlaces))
                     @else
-                        @foreach($places as $n => $place)
+                        @foreach($groupPlaces as $n => $groupPlace)
                             <div class="to-destination">
                                 <!--三角形表示-->
                                 <div class="triangles">
@@ -58,11 +58,11 @@
                                 <div class="supplement">
                                     <!--出発時刻表示-->
                                     <div class="departure-time">
-                                        <p class="departure-time-empty departure-time-entered">出発時刻：{{ $place->departure_time }}</p>
+                                        <p class="departure-time-empty departure-time-entered">出発時刻：{{ $groupPlace->departure_time }}</p>
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="{{ route('group.completed_route', ['shareItinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
+                                        <form action="{{ route('group.completed_route', ['group' => $group, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
                                             <p>移動手段：
@@ -83,28 +83,28 @@
                                                 <input type="hidden" name="start_lat" value="{{$shareItinerary->departure_place_lat}}">
                                                 <input type="hidden" name="start_lng" value="{{$shareItinerary->departure_place_lng}}">
                                                 <!--目的地の名前・緯度・経度-->
-                                                <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
-                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
+                                                <input type="hidden" name="goal_name" value="{{$groupPlaces[$n]->name}}">
+                                                <input type="hidden" name="goal_lat" value="{{$groupPlaces[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$groupPlaces[$n]->lng}}">
                                             @else
                                                 <!--目的地からの出発の場合は目的地→目的地-->
                                                 <!--出発地の名前・緯度・経度-->
-                                                <input type="hidden" name="start_name" value="{{$places[$n-1]->name}}">
-                                                <input type="hidden" name="start_lat" value="{{$places[$n-1]->lat}}">
-                                                <input type="hidden" name="start_lng" value="{{$places[$n-1]->lng}}">
+                                                <input type="hidden" name="start_name" value="{{$groupPlaces[$n-1]->name}}">
+                                                <input type="hidden" name="start_lat" value="{{$groupPlaces[$n-1]->lat}}">
+                                                <input type="hidden" name="start_lng" value="{{$groupPlaces[$n-1]->lng}}">
                                                 <!--目的地の名前・緯度・経度-->
-                                                <input type="hidden" name="goal_name" value="{{$places[$n]->name}}">
-                                                <input type="hidden" name="goal_lat" value="{{$places[$n]->lat}}">
-                                                <input type="hidden" name="goal_lng" value="{{$places[$n]->lng}}">
+                                                <input type="hidden" name="goal_name" value="{{$groupPlaces[$n]->name}}">
+                                                <input type="hidden" name="goal_lat" value="{{$groupPlaces[$n]->lat}}">
+                                                <input type="hidden" name="goal_lng" value="{{$groupPlaces[$n]->lng}}">
                                             @endif
                                         </form>
                                     </div>
                                     <!--到着時刻表示-->
-                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered">到着時刻：{{$place->arrival_time }}</p></div>
+                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered">到着時刻：{{ $groupPlace->arrival_time }}</p></div>
                                 </div>
                             </div>
                             <div class="destination">
-                                <div class="name">目的地{{ $n + 1 }}:{{ $place->name }}
+                                <div class="name">目的地{{ $n + 1 }}:{{ $groupPlace->name }}
                                     <!--目的地メモ-->
                                     <!--メモアイコン-->
                                     <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
@@ -116,7 +116,7 @@
                                             <!--メモ-->
                                             <div class="memo"><span>メモ</span></div>
                                             <!--メモ内容-->
-                                            <div class="memo-body"><textarea readonly>{{$place->memo}}</textarea></div>
+                                            <div class="memo-body"><textarea readonly>{{$groupPlace->memo}}</textarea></div>
                                         </div>
                                     </div>
                                 </div>

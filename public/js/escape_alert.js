@@ -1,5 +1,5 @@
-function delete_alert(e){
-     if(!window.confirm('本当に削除しますか？')){
+function escape_alert(e){
+     if(!window.confirm('このグループを本当に抜けますか？')){
       window.alert('キャンセルされました'); 
       return false;
      }

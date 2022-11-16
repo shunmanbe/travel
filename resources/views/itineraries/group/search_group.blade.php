@@ -11,10 +11,8 @@
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
-        <link rel="stylesheet" href="{{ asset('/css/responsive/index.css') }}" >
-        <!--loading-->
-        <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/create_group.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/create_group.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
@@ -37,11 +35,16 @@
             <div class="container containers">
                <form action="{{ route('group.registration_check')}}" method="POST">
                    @csrf
-                   <span>グループid</span>
-                   <input type="text" name="check[group_id]">
+                   <span>グループID</span>
+                   <br>
+                   <input type="text" name="check[group_id]", value="{{ old('check.group_id') }}">
+                   <p class="error-message">{{ $errors->first('check.group_id') }}</p>
+                   <br>
                    <span>パスワード</span>
-                   <input type="text" name="check[password]">
-                   <input class="btn-click" type="submit" value="登録する">
+                   <br>
+                   <input type="text" name="check[password]" value="{{ old('check.password') }}">
+                   <p class="error-message">{{ $errors->first('check.password') }}</p>
+                   <input class="btn-click" type="submit" value="検索する">
                </form>
             </div>
             <footer>
@@ -49,7 +52,6 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
         </div>
     </body>
 </html>
