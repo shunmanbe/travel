@@ -71,7 +71,7 @@
                                                 @csrf
                                                 <p class="departure-time-empty">出発時刻：
                                                     <!--出発時刻入力欄-->
-                                                    <input class="input" type="datetime-local" name="time_d[departure_time]">
+                                                    <input class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
                                                     <input class ="btn" type="submit" value="保存">
                                                 </p>
@@ -133,7 +133,7 @@
                                                 @csrf
                                                 <p class="arrival-time-empty">到着時刻：
                                                     <!--到着時刻入力欄-->
-                                                    <input class="input" type="datetime-local" name="time_a[arrival_time]">
+                                                    <input class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
                                                     <input class ="btn" type="submit" value="保存">
                                                 </p>

@@ -22,11 +22,17 @@ class Place extends Model
         'arrival_time', 
         'memo',
         ];
+        
+        
+    // protected $dates = [
+    //     'departure_time',
+    //     'arrival_time',
+    // ];
     
-    protected $casts = [
-        'departure_time' => 'datetime',
-        'arrival_time' => 'datetime',
-        ];
+    // protected $casts = [
+    //     'departure_time' => 'datetime',
+    //     'arrival_time' => 'datetime',
+    //     ];
     
     
 }

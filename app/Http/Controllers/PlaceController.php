@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\Itinerary;
 use Carbon\Carbon;
+// use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItinerarySearchRequest;
@@ -148,9 +149,14 @@ class PlaceController extends Controller
     //出発時刻を保存
     public function departure_time_store(Request $request, Itinerary $itinerary, Place $place)
     {
-        $auth = Auth::user();
-        $input = $request['time_d'];
-        $place->fill($input)->save();
+        // requestで送られてきた"departure_time"を抜き出す
+        $input = $request['time']['departure_time'];
+        // Carbonを使ってformatを書き換える
+        $input = Carbon::parse($input)->format('Y年m月d日 H時i分');
+        // 保存するために連想配列を作る
+        $input_array = ['departure_time' => $input];
+        // 保存する
+        $place->fill($input_array)->save();
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
@@ -163,11 +169,16 @@ class PlaceController extends Controller
     }
     
      //到着時刻を保存
-    public function arrival_time_store(ArrivalTimeRequest $request, Itinerary $itinerary, Place $place)
+    public function arrival_time_store(Request $request, Itinerary $itinerary, Place $place)
     {
-        $auth = Auth::user();
-        $input = $request['time_a'];
-        $place->fill($input)->save();
+        // requestで送られてきた"departure_time"を抜き出す
+        $input = $request['time']['arrival_time'];
+        // Carbonを使ってformatを書き換える
+        $input = Carbon::parse($input)->format('Y年m月d日 H時i分');
+        // 保存するために連想配列を作る
+        $input_array = ['arrival_time' => $input];
+        // 保存する
+        $place->fill($input_array)->save();
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
