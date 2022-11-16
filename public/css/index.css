@@ -104,8 +104,12 @@ a {
     
 }
 
+.like-toggle {
+    color: black;
+}
+
 .liked {
-    color: fuchsia;
+    color: #FF30CC;
 }
 
 .display-group, .search-group {
@@ -128,7 +132,13 @@ a {
 	cursor: pointer;
 	padding: 0;
 }
+
 button {
     border: none;
 	background-color: #fffaf0;
+}
+
+.group-trash {
+    /*width: 100px;*/
+    font-size: 20px;
 }

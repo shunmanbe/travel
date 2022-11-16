@@ -135,7 +135,7 @@ class GroupPlaceController extends Controller
     public function memo(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
         $auth = Auth::user();
-        return view('itineraries/group/memo')->with(['auth' => $auth, 'shareItinerary' => $shareItinerary, 'groupPlace' => $groupPlace]);
+        return view('itineraries/group/memo')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlace' => $groupPlace]);
     }
     
     //メモを保存

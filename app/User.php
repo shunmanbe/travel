@@ -50,7 +50,7 @@ class Users extends Model
     public function groups()
     {
         // 呼び出すDBのモデル, 中間テーブル, 自モデルの主キー, 呼び出すモデルの主キー
-        return $this->belongsToMany('App\Group', 'group_user', 'user_id', 'group_id');
+        return $this->belongsToMany('App\Group', 'group_user', 'user_id', 'group_id')->withTimestamps();
     }
     
     public function belongsToGroup($user_id)

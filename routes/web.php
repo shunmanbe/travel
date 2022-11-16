@@ -139,19 +139,26 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/registration/check', 'GroupController@registration_check')->name('group.registration_check');
     #グループに登録する
     Route::post('/itineraries/register/group', 'GroupController@register_group')->name('group.register_group');
-    
+    #グループの情報を表示
+    Route::get('/itineraries/{group}/group/information', 'GroupController@group_information')->name('group.group_information');
+    #グループの情報を保存
+    Route::post('/itineraries/{group}/group/information_store', 'GroupController@information_store')->name('group.information_store');
+    #グループを抜ける
+    Route::post('/itineraries/{group}/group/escape', 'GroupController@escape')->name('group.escape');
     
     // しおり作成
     #グループのしおり一覧へ
-    Route::get('/itineraries/group/{group}/itinerary_index', 'ShareItineraryController@itinerary_index')->name('group.itinerary_index');
+    Route::get('/itineraries/{group}/group/itinerary_index', 'ShareItineraryController@itinerary_index')->name('group.itinerary_index');
     #しおりの説明編集画面へ
-    Route::get('/itineraries/group/{shareItinerary}/explanation', 'ShareItineraryController@explanation')->name('group.explanation');
+    Route::get('/itineraries/{group}/group/{shareItinerary}/explanation', 'ShareItineraryController@explanation')->name('group.explanation');
     #しおりの説明を保存
-    Route::post('/itineraries/group/{shareItinerary}/explanation/store', 'ShareItineraryController@explanation_store')->name('group.explanation_store');
+    Route::post('/itineraries/{group}/group/{shareItinerary}/explanation/store', 'ShareItineraryController@explanation_store')->name('group.explanation_store');
     #新規登録画面（日程選択画面）へ
     Route::get('/itineraries/{group}/group/new_entry/date', 'ShareItineraryController@date_select')->name('group.new_entry');
     #日程を保存
     Route::post('/itineraries/{group}/group/new_entry/date_store', 'ShareItineraryController@date_store')->name('group.date_store');
+    #しおり一覧からしおりを削除
+    Route::delete('/itineraries/{group}/group/{shareItinerary}', 'ShareItineraryController@itinerary_delete')->name('group.itinerary_delete');
     #完成した詳細ページへ
     Route::get('/itineraries/{group}/group/{shareItinerary}/completed/show', 'ShareItineraryController@completed_show')->name('group.completed_show');
     #詳細編集ページへ
@@ -186,13 +193,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{group}/group/{shareItinerary}/destination_map/edit/share/{groupPlace}', 'GroupPlaceController@edit_destination_map')->name('group.edit_destination_map');
     #目的地をアップデート
     Route::put('/itineraries/{group}/group/{shareItinerary}/destination_update/share/{groupPlace}', 'GroupPlaceController@destination_update')->name('group.destination_update');
-    
-    // 削除
-    #しおり一覧からしおりを削除
-    Route::delete('/itineraries/{group}/group/{shareItinerary}', 'ShareItineraryController@itinerary_delete')->name('group.itinerary_delete');
     #しおり詳細の目的地を削除
     Route::delete('/itineraries/{group}/group/{shareItinerary}/destinetion/share/{groupPlace}','GroupPlaceController@destination_delete')->name('group.destination_delete');
-    
+   
+   
     // 経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
     #詳細編集画面から経路詳細ページへ
     Route::post('/itineraries/{group}/group/{shareItinerary}/route/share/{groupPlace}', 'ShareItineraryController@route')->name('group.route'); 

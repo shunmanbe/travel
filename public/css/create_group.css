@@ -14,15 +14,21 @@ a {
     padding-top: 100px;
     padding-bottom: 50px;
     text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .container p {
-    font-weight: bold;
-    font-size: 40px;
     margin-bottom: 10px;
 }
 
 input {
     font-size: 20px;
 }
+
+.btn-click {
+    display: inline-block;
+    font-size: 20px;
+}
+
 

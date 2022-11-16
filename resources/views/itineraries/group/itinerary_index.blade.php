@@ -9,7 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <!--アイコン表示-->
-        <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
+        <!--<script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/index.css') }}" >
@@ -47,12 +48,12 @@
                                         <h2><a href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id ]) }}">{{ $shareItinerary->title }}</a></h2><span>{{ $shareItinerary->explanation }}</span>
                                     </div>
                                     <!--しおり概要編集-->
-                                    <a href="{{ route('group.explanation', ['shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
+                                    <a href="{{ route('group.explanation', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
                                     <!--削除ボタン-->
-                                    <form action="{{ route('group.itinerary_delete',['group' => $group->id, 'shareItinerary' => $shareItinerary->id ] ) }}" method="post">
+                                    <form action="{{ route('group.itinerary_delete',['group' => $group->id, 'shareItinerary' => $shareItinerary->id] ) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
+                                        <button class="icon group-trash" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
                                     </form>
                                 </div>
                             @endforeach
@@ -68,6 +69,7 @@
                 <div class="others">
                     <a  class="btn-click" href="{{ route('group.index_group')}}">グループ一覧に戻る</a>
                 </div>
+                <br>
             </div>
             <footer>
                 <div class="footer-left"></div>

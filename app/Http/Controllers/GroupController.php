@@ -8,6 +8,7 @@ use App\User;
 use App\Itinerary;
 use App\ShareItinerary;
 use App\Place;
+use App\Http\Requests\GroupSearchRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -28,7 +29,7 @@ class GroupController extends Controller
     {
         $auth = Auth::user();
         // idを作
-        $group_id = random_int(000000, 999999); //random_intは 暗号論的に安全な疑似乱数を生成する。random_int(min, max)
+        $group_id = random_int(100000, 999999); //random_intは 暗号論的に安全な疑似乱数を生成する。random_int(min, max)
         // パスワードを作成
         $password = Str::random(15);
         return view('/itineraries/group/create_group')->with(['auth' => $auth, 'group_id' => $group_id, 'password' => $password]);
@@ -58,7 +59,7 @@ class GroupController extends Controller
     }
     
     // グループに入るときにチェックする
-    public function registration_check(Request $request, Group $group)
+    public function registration_check(GroupSearchRequest $request, Group $group)
     {
         $auth = Auth::user();
         // 送られてきた値をデータベースで検索
@@ -82,15 +83,29 @@ class GroupController extends Controller
         $get_group = Group::where('name', $input['name'])->where('password', $input['password'])->first();
         // 中間テーブルに上で指定したグループのidとユーザーのidを追加
         $get_group->users()->attach($user_id);
-        return redirect()->route('index.group');
+        return redirect()->route('group.index_group');
     }
     
-    
-    // グループのしおり一覧画面へ
-    public function itinerary_index(Group $group, ShareItinerary $shareItinerary)
+    // グループの情報を表示
+    public function group_information(Group $group)
     {
         $auth = Auth::user();
-        return view('itineraries/group/itinerary_index')->with(['auth' => $auth, 'group' => $group, 'shares' => $shareItinerary->where('group_id', $group->id)->get() ]);
+        return view('/itineraries/group/group_information')->with(['auth' => $auth, 'group' => $group]);
+    }
+    // グループ情報を保存
+    public function information_store(Request $request, Group $group)
+    {
+        $input = $request['information'];
+        $group->fill($input)->save();
+        return redirect()->route('group.index_group');
     }
     
+    // グループを抜ける
+    public function escape(Group $group)
+    {
+        $auth = Auth::user();
+        $user_id = $auth['id'];
+        $group->users()->detach($user_id);
+        return redirect()->route('group.index_group');
+    }
 }

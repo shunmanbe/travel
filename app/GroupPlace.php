@@ -22,8 +22,8 @@ class GroupPlace extends Model
         'memo',
         ];
     
-    protected $casts = [
-        'departure_time' => 'datetime',
-        'arrival_time' => 'datetime',
-        ];
+    // protected $casts = [
+    //     'departure_time' => 'datetime',
+    //     'arrival_time' => 'datetime',
+    //     ];
 }

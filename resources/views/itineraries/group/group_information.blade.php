@@ -3,22 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>旅のしおり</title>
+
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
-        <link rel="stylesheet" href="{{ asset('/css/create_group.css') }}" >
-        <link rel="stylesheet" href="{{ asset('/css/responsive/create_group.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/group_information.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/group_information.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
+      
     </head>
     <body>
         <div class="wrapper">
@@ -32,30 +33,31 @@
                     </ul>
                 </div>
             </header>
-            <div class="container containers">
-               <form action="{{ route('group.register_group')}}" method="POST">
-                   @csrf
-                   <p>グループ名</p>
-                   {{$group_name}}
-                   <p>こちらのグループでよろしいですか？</p>
-                   <input type="hidden" name="register[name]" value="{{$get_group->name}}">
-                   <input type="hidden" name="register[password]" value="{{$get_group->password}}">
-                   <input class="btn-click" type="submit" value="参加する">
-                   </form>
-                   <br>
-                   <a class="btn-click" href="{{ route('group.search_group') }}">グループ検索画面に戻る</a>
-               
+            <div class ="container containers">
+                <div class="information-wrapper">
+                    <div class="left"></div>
+                    <div class="information">
+                        <p>グループ名：{{ $group->name }}</p>
+                        <p>グループID：{{ $group->group_id }}</p>
+                        <p>パスワード:{{ $group->password }}</p>
+                    </div>
+                    <div class="right"></div>
+                </div>
+                <div class="information-free">
+                    <p>その他情報</p>
+                    <form action="{{ route('group.information_store', ['group' => $group->id]) }}" method="POST">
+                    @csrf
+                    <textarea name="information[information]" placeholder="グループ情報をメモしよう！">{{ $group->information }}</textarea>
+                    <br>
+                    <input class="btn-click" type=submit value="保存する">
+                </div>
+                <br>
             </div>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
         </div>
     </body>
 </html>
-
-        
-        
-       

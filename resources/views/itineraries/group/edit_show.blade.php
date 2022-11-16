@@ -42,7 +42,7 @@
                     <p class="name">
                         <span>出発地：{{ $shareItinerary->departure_place_name }}</span>
                         <!--編集アイコン-->
-                        <a class="{{ route('group.edit_departure', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                        <a href="{{ route('group.edit_departure', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                     </p>
                 </div>
                 <!--目的地一覧-->
@@ -170,7 +170,7 @@
                     <a class="btn-click" href ="{{ route('group.destination_search', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">目的地を選択</a>
                     <br>
                     <br>
-                    <a class="btn-click" href="{{ route('group.itinerary_index', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを確定する</a>
+                    <a class="btn-click" href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを確定する</a>
                     <br>
                     <br>
                     <a class="btn-click" href ="/">しおり一覧に戻る</a>
@@ -181,7 +181,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
+            <script src="{{ asset('/js/delete_alert.js') }}"></script>
         </div>
     </body>
 </html>
