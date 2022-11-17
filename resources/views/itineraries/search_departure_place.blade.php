@@ -40,7 +40,7 @@
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('search_name') }}</p>
                     <!--検索ボタン-->
-                    <input class ="btn" type="submit" value="検索">
+                    <input class ="btn-orange" type="submit" value="検索">
                 </form>
             </div>
             <footer>

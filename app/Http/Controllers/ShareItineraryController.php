@@ -184,14 +184,18 @@ class ShareItineraryController extends Controller
             // 時間情報を取り出す
             $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
             // 時間情報を日本語に変換
+            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+            // replaceArray('変換する部分', ['変換先'], 変換元)
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
         }
         return view('/itineraries/group/route')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
      //詳細完成ページから経路詳細（ルート）を表示
-    public function completed_route(Request $request, Group $group, ShareItinerary $shareItinerary, Place $place)
+    public function completed_route(Request $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
         $auth = Auth::user();
         //移動手段で「電車」が入力された場合
@@ -218,8 +222,12 @@ class ShareItineraryController extends Controller
             // 時間情報を取り出す
             $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
             // 時間情報を日本語に変換
+            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+            // replaceArray('変換する部分', ['変換先'], 変換元)
             $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
         }
         return view('/itineraries/group/completed_route')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }

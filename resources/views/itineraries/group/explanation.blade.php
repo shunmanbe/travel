@@ -44,7 +44,7 @@
                     <br>
                     <br>
                     <!--保存ボタン-->
-                    <input class="btn" type="submit" value="保存してしおり一覧ページへ">
+                    <input class="btn-orange" type="submit" value="保存してしおり一覧ページへ">
                 </form>
             </div>
             <footer>

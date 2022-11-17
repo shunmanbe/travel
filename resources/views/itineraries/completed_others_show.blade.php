@@ -73,7 +73,7 @@
                                                     <option value="BICYCLING">自転車</option>
                                                 </select>
                                                 <!--経路詳細表示ボタン-->
-                                                <input class="btn" type="submit" name="route" value="経路詳細">
+                                                <input class="btn-green" type="submit" name="route" value="経路詳細">
                                             </p>
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)

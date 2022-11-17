@@ -44,7 +44,7 @@ class PlaceController extends Controller
             $place_name = $place_detail['name'];
             // 住所情報
             $place_address = $place_detail['formatted_address'];
-            // ジオコーディングで緯度・軽度を取得
+            // ジオコーディングで緯度・経度を取得
             $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $place_address . '&language=ja';
             $response = $client->request('GET', $url,
             ['Bearer' => config('serveices.google-map.apikey')]);
@@ -57,6 +57,7 @@ class PlaceController extends Controller
             $place_detail_required = [$place_name, $place_address, $place_lat, $place_lng];
             $place_detail_requireds[] =$place_detail_required;
         }
+        // dd($place_detail_requireds);
         return view('/itineraries/map_destination')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place' => $place, 'place_detail_requireds' => $place_detail_requireds]);
     }
     
@@ -101,7 +102,7 @@ class PlaceController extends Controller
             $place_name = $place_detail['name'];
             // 住所情報
             $place_address = $place_detail['formatted_address'];
-            // ジオコーディングで緯度・軽度を取得
+            // ジオコーディングで緯度・経度を取得
             $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $place_address . '&language=ja';
             $response = $client->request('GET', $url,
             ['Bearer' => config('serveices.google-map.apikey')]);

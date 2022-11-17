@@ -39,6 +39,7 @@
                 </div>
                 <!-- 地図を表示する領域 -->
                 <div id="gmap"></div>
+                <div id="route-time"></div>
                 <p>距離：{{$distance}}</p>
                 <p>時間：{{$duration_ja}}（自動車移動の時）</p>
                 <p>地図がうまく表示されない場合は<br class="responsive">リロードしてください</p>

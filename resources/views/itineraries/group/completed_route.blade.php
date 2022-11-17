@@ -42,7 +42,7 @@
                 <p>距離：{{$distance}}</p>
                 <p>時間：{{$duration_ja}}（自動車移動の時）</p>
                 <p>地図がうまく表示されない場合<br class="responsive">はリロードしてください</p>
-                <a class="btn-click" href="/itineraries/{{$itinerary->id}}/completed/show">戻る</a>
+                <a class="btn-click" href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">戻る</a>
             </div>
             <br>
             <footer>
