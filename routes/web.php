@@ -188,41 +188,41 @@ Route::group(['middleware'=>['auth']], function(){
     #出発地を編集
     Route::get('/itineraries/{group}/group/{shareItinerary}/departure/edit', 'ShareItineraryController@edit_departure')->name('group.edit_departure');
     #目的地を編集
-    Route::get('/itineraries/{group}/group/{shareItinerary}/edit/share/{groupPlace}', 'GroupPlaceController@edit_destination')->name('group.edit_destination');
+    Route::get('/itineraries/{group}/group/{shareItinerary}/edit/shareItinerary/{groupPlace}', 'GroupPlaceController@edit_destination')->name('group.edit_destination');
     #目的地を選択
-    Route::post('/itineraries/{group}/group/{shareItinerary}/destination_map/edit/share/{groupPlace}', 'GroupPlaceController@edit_destination_map')->name('group.edit_destination_map');
+    Route::post('/itineraries/{group}/group/{shareItinerary}/destination_map/edit/shareItinerary/{groupPlace}', 'GroupPlaceController@edit_destination_map')->name('group.edit_destination_map');
     #目的地をアップデート
-    Route::put('/itineraries/{group}/group/{shareItinerary}/destination_update/share/{groupPlace}', 'GroupPlaceController@destination_update')->name('group.destination_update');
+    Route::put('/itineraries/{group}/group/{shareItinerary}/destination_update/shareItinerary/{groupPlace}', 'GroupPlaceController@destination_update')->name('group.destination_update');
     #しおり詳細の目的地を削除
-    Route::delete('/itineraries/{group}/group/{shareItinerary}/destinetion/share/{groupPlace}','GroupPlaceController@destination_delete')->name('group.destination_delete');
+    Route::delete('/itineraries/{group}/group/{shareItinerary}/destinetion/shareItinerary/{groupPlace}','GroupPlaceController@destination_delete')->name('group.destination_delete');
    
    
     // 経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
     #詳細編集画面から経路詳細ページへ
-    Route::post('/itineraries/{group}/group/{shareItinerary}/route/share/{groupPlace}', 'ShareItineraryController@route')->name('group.route'); 
+    Route::post('/itineraries/{group}/group/{shareItinerary}/route/shareItinerary/{groupPlace}', 'ShareItineraryController@route')->name('group.route'); 
     #詳細完成ページから経路詳細ページへ
-    Route::post('/itineraries/{group}/group/{shareItinerary}/completed_route/share/{groupPlace}', 'ShareItineraryController@completed_route')->name('group.completed_route'); 
+    Route::post('/itineraries/{group}/group/{shareItinerary}/completed_route/shareItinerary/{groupPlace}', 'ShareItineraryController@completed_route')->name('group.completed_route'); 
     
     // ログアウト
     Route::get('/itineraries/logout', 'ItineraryController@logout')->name('group.logout');
     
     // メモ
     #メモページへ
-    Route::get('/itineraries/{group}/group/{shareItinerary}/memo/share/{groupPlace}', 'GroupPlaceController@memo')->name('group.memo');
+    Route::get('/itineraries/{group}/group/{shareItinerary}/memo/shareItinerary/{groupPlace}', 'GroupPlaceController@memo')->name('group.memo');
     #メモを保存
-    Route::post('/itineraries/{group}/group/{shareItinerary}/memo/share/{groupPlace}/store', 'GroupPlaceController@memo_store')->name('group.memo_store');
+    Route::post('/itineraries/{group}/group/{shareItinerary}/memo/shareItinerary/{groupPlace}/store', 'GroupPlaceController@memo_store')->name('group.memo_store');
     
     // 各地点の出発時刻
     #出発時刻を保存
-    Route::post('/itineraries/{group}/group/{shareItinerary}/departure_time_store/share/{groupPlace}', 'GroupPlaceController@departure_time_store')->name('group.departure_time_store'); 
+    Route::post('/itineraries/{group}/group/{shareItinerary}/departure_time_store/shareItinerary/{groupPlace}', 'GroupPlaceController@departure_time_store')->name('group.departure_time_store'); 
     #出発時刻を編集(削除)
-    Route::get('/itineraries/{group}/group/{shareItinerary}/departure_time/share/{groupPlace}/edit', 'GroupPlaceController@edit_departure_time')->name('group.edit_departure_time'); 
+    Route::get('/itineraries/{group}/group/{shareItinerary}/departure_time/shareItinerary/{groupPlace}/edit', 'GroupPlaceController@edit_departure_time')->name('group.edit_departure_time'); 
     
     // 各地点の到着時刻
     #到着時刻を保存
-    Route::post('/itineraries/{group}/group/{shareItinerary}/arrival_time_store/share/{groupPlace}', 'GroupPlaceController@arrival_time_store')->name('group.arrival_time_store'); 
+    Route::post('/itineraries/{group}/group/{shareItinerary}/arrival_time_store/shareItinerary/{groupPlace}', 'GroupPlaceController@arrival_time_store')->name('group.arrival_time_store'); 
     #到着時刻を編集(削除)
-    Route::get('/itineraries/{group}/group/{shareItinerary}/arrival_time/share/{groupPlace}/edit', 'GroupPlaceController@edit_arrival_time')->name('group.edit_arrival_time'); 
+    Route::get('/itineraries/{group}/group/{shareItinerary}/arrival_time/shareItinerary/{groupPlace}/edit', 'GroupPlaceController@edit_arrival_time')->name('group.edit_arrival_time'); 
    
     // お問い合わせ
     #入力フォームページ
@@ -241,10 +241,10 @@ Route::group(['middleware'=>['auth']], function(){
     #他人のしおり詳細
     Route::get('/itineraries/group/{shareItinerary}/completed/others/show', 'ItineraryController@completed_others_show')->name('group.completed_others_route');
     #他人のしおりルート詳細ページへ
-    Route::post('/itineraries/group/{shareItinerary}/completed_others_route/share/{groupPlace}', 'ItineraryController@completed_others_route')->name('group.completed_others_route'); 
+    Route::post('/itineraries/group/{shareItinerary}/completed_others_route/shareItinerary/{groupPlace}', 'ItineraryController@completed_others_route')->name('group.completed_others_route'); 
     
     // ジオコーディング
-    Route::get('/itineraries/share/{shareItinerary}/geocoding', 'ItineraryController@geocoding')->name('group.geocoding');
+    Route::get('/itineraries/shareItinerary/{shareItinerary}/geocoding', 'ItineraryController@geocoding')->name('group.geocoding');
     
     
     

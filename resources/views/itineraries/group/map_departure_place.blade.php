@@ -48,7 +48,7 @@
                             <!--候補地の経度-->
                             <input type="hidden" name="departure[departure_place_lng]" value="{{$place_detail_required[3]}}">
                             <!--保存ボタン-->
-                            <input class="btn" type="submit" value="ここを出発地として保存する">
+                            <input class="btn-orange" type="submit" value="ここを出発地として保存する">
                             <br>
                             <br>
                             <!--地図を表示-->

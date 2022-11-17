@@ -56,7 +56,7 @@
                     <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                     <br class="not-responsive">
                     <!--「次へ」ボタン-->
-                    <input class ="btn" type="submit" value="更新">
+                    <input class ="btn-orange" type="submit" value="更新">
                 </form>
             </div>
             <footer>

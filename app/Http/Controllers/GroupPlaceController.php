@@ -44,7 +44,7 @@ class GroupPlaceController extends Controller
             $groupPlace_name = $groupPlace_detail['name'];
             // 住所情報
             $groupPlace_address = $groupPlace_detail['formatted_address'];
-            // ジオコーディングで緯度・軽度を取得
+            // ジオコーディングで緯度・経度を取得
             $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $groupPlace_address . '&language=ja';
             $response = $client->request('GET', $url,
             ['Bearer' => config('serveices.google-map.apikey')]);
@@ -101,7 +101,7 @@ class GroupPlaceController extends Controller
             $groupPlace_name = $groupPlace_detail['name'];
             // 住所情報
             $groupPlace_address = $groupPlace_detail['formatted_address'];
-            // ジオコーディングで緯度・軽度を取得
+            // ジオコーディングで緯度・経度を取得
             $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $groupPlace_address . '&language=ja';
             $response = $client->request('GET', $url,
             ['Bearer' => config('serveices.google-map.apikey')]);

@@ -20,6 +20,28 @@ function initMap() {
     travelMode: travel //トラベルモード
   };
   
+  function timeRequired(response, status) {
+	    if(status == "OK") 
+	    {
+        for (var i = 0; i < origins.length; i++)
+        {
+          var results = response.rows[i].elements;
+          for (var j = 0; j < results.length; j++) 
+          {
+            var element = results[j];
+            var distance = element.distance.text;
+            var duration = element.duration.text;
+            var from = origins[i];
+            var to = destinations[j];
+            var routeTime = document.getElementById("route-time");
+            routeTime.innerHTML = "およそ" + duration + "で着きます"
+	         }
+        }
+	    }  
+   }
+   
+   timeRequired();
+  
   //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、
   //コールバック関数で結果を setDirections(result) で directionsRenderer にセットして表示
   directionsService.route(request, function(result, status) {

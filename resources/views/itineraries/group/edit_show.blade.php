@@ -73,7 +73,7 @@
                                                     <!--出発時刻入力欄-->
                                                     <input class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
-                                                    <input class ="btn" type="submit" value="保存">
+                                                    <input class ="btn-green" type="submit" value="保存">
                                                 </p>
                                                 <!--エラーメッセージ-->
                                                 <p class="error-message">{{ $errors->first('time.departure_time') }}</p>
@@ -99,7 +99,7 @@
                                                     <option value="BICYCLING">自転車</option>
                                                 </select>
                                                 <!--経路詳細表示ボタン-->
-                                                <input class="btn" type="submit" name="route" value="経路詳細">
+                                                <input class="btn-green" type="submit" name="route" value="経路詳細">
                                             </p>
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
@@ -135,7 +135,7 @@
                                                     <!--到着時刻入力欄-->
                                                     <input class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
-                                                    <input class ="btn" type="submit" value="保存">
+                                                    <input class ="btn-green" type="submit" value="保存">
                                                 </p>
                                             </form>
                                         <!--到着時刻が入力されている時-->
@@ -167,7 +167,7 @@
                     @endif
                 </div>
                 <div class="center">
-                    <a class="btn-click" href ="{{ route('group.destination_search', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">目的地を選択</a>
+                    <a class="btn-click" href ="{{ route('group.destination_search', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">目的地を追加</a>
                     <br>
                     <br>
                     <a class="btn-click" href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを確定する</a>

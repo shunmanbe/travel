@@ -55,7 +55,7 @@
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                         <!--「次へ」ボタン-->
-                        <input class ="btn" type="submit" value="次へ">
+                        <input class ="btn-orange" type="submit" value="次へ">
                     </form>
                 </div>
             </div>

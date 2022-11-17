@@ -42,7 +42,7 @@
                     <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $groupPlace->memo }}</textarea>
                     <br>
                     <!--保存ボタン-->
-                    <input class="btn" type="submit" value="保存して詳細ページへ">
+                    <input class="btn-green" type="submit" value="保存して詳細ページへ">
                 </form>
             </div>
             <footer>

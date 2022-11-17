@@ -39,7 +39,7 @@
                     <div class="information">
                         <p>グループ名：{{ $group->name }}</p>
                         <p>グループID：{{ $group->group_id }}</p>
-                        <p>パスワード:{{ $group->password }}</p>
+                        <p>パスワード：{{ $group->password }}</p>
                     </div>
                     <div class="right"></div>
                 </div>

@@ -51,7 +51,7 @@
                             <!--候補地が属するしおりのid-->
                             <input type="hidden" name="destination[itinerary_id]" value="{{$itinerary->id}}">
                             <!--保存ボタン-->
-                            <input class="btn" type="submit" value="ここを目的地として保存する">
+                            <input class="btn-orange" type="submit" value="ここを目的地として保存する">
                             <br>
                             <br>
                             <!--地図を表示-->
