@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $itinerary->title }}</h1>
-                    <span>期間:{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span>期間：{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                 </div>
                 <!--出発地-->
                 <div class="departure">

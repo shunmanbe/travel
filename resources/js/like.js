@@ -17,10 +17,12 @@ $(function () { //$()はjQueryのセレクターの書き方。$はjQueryの略�
       },
     })
     //通信成功した時の処理
-    .done(function (data) {
+    .done(function (data) { // dataにjson($param)が入って帰ってくる
       //toggleClassメソッドは 指定したクラス名の CSS がある場合は削除を行い、なければ追加するメソッド
       $this.toggleClass('liked'); //likedクラスのON/OFF切り替え。
-      $this.next('.like-counter').html(data.itinerary_likes_count); //.next()は同列（同位？）の後ろの全ての要素を返す。その中から特定の要素を指定する場合は、パラメータで指定する。
+      // $this.next(".like-counter")の場合は、$thisで指定したHTML要素の、次にあるHTML要素を指定して、
+      // その要素に.like-counterクラスが追いてる場合に、.html以降のコードを実行する。
+      $this.next('.like-counter').html(data.itinerary_likes_count); 
       //html(htmlString)はHTMLエンコード済みの文字列を表すオブジェクト。itinerary_likes_countは{itinerary_likes_count:1}というjsonの形で渡ってくる。
     })
     //通信失敗した時の処理
