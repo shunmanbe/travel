@@ -40,14 +40,16 @@
                         <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
-                        <span class="contents-title">出発日</span>
+                        <span>期間</span>
+                        <br>
                         <br class="responsive">
                         <!--出発日入力欄-->
                         <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                         <br>
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
-                        <span>到着日</span>
+                        <span>↓</span>
+                        <br>
                         <br class="responsive">
                         <!--到着日入力欄-->
                         <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">

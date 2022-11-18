@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $itinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間:</span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間：</span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                     <a href="{{ route('edit_new_entry', ['itinerary' => $itinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
@@ -129,18 +129,19 @@
                                     <div class="arrival-time">
                                         <!--到着時刻が入力されていない時-->
                                         @if(empty($place->arrival_time))
-                                            <form novalidate action="{{ route('arrival_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
+                                            <form name="arrival_time_store" action="{{ route('arrival_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                                 @csrf
                                                 <p class="arrival-time-empty">到着時刻：
                                                     <!--到着時刻入力欄-->
                                                     <input id="arrival-empty-{{$n}}" class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
-                                                    <input id="store-arrival-time" class ="btn-green" type="submit" value="保存" onclick="check(event);return false;">
+                                                    <!--return falseをすることで、jsが起動後に親要素（ここではform）への伝播止める。trueにするとエラーを表示させた後に保存されてしまう。-->
+                                                    <input id="store-arrival-time" class ="btn-green" type="submit" value="保存" onclick="checkArrivalTime(event);return false;">
                                                 </p>
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered">到着時刻：<span id="arrival-empty-{{$n}}">{{$place->arrival_time}}</span>
+                                            <p class="arrival-time-entered">到着時刻：<span id='arrival-empty-{{$n}}'>{{$place->arrival_time}}</span>
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="{{ route('edit_arrival_time', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>

@@ -52,6 +52,7 @@ class ItineraryController extends Controller
     public function edit_show(Itinerary $itinerary, Place $place) 
     {
         $auth = Auth::user();
+        // 出発地しか決まっていない時は<script>の$nに値がなくてエラーが出るため、$nにnullを代入しておく
         $n = null;
         return view('/itineraries/edit_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get(), 'n' => $n]);
     }
@@ -247,14 +248,16 @@ class ItineraryController extends Controller
     }
     
     //いいね機能
-    public function like(Request $request)
+    public function like(Request $request, Itinerary $itinerary)
     {
         //ログインユーザーのid取得
         $user_id = Auth::user()->id; 
         //投稿idの取得
         $itinerary_id = $request->itinerary_id; 
+        // Likeテーブル（中間テーブル）の'user_id'カラムが上で定義した$user_id（userのid）で、'itinerary_id'カラムが上で定義した$itinerary_id（itineraryのid）と一致するものを一つとってくる。
         $already_liked = Like::where('user_id', $user_id)->where('itinerary_id', $itinerary_id)->first();
-        //もしこのユーザーがこの投稿にまだいいねしてなかったら
+        //もしこのユーザーがこの投稿にまだいいねしてなかったら（already_Likedが空だったら（上で該当するものがなかったら））
+        // 中間テーブルにおける処理
         if (!$already_liked) { 
             //Likeクラスのインスタンスを作成
             $like = new Like; 
@@ -265,21 +268,29 @@ class ItineraryController extends Controller
             $like->save();
         //もしこのユーザーがこの投稿に既にいいねしてたらdelete
         } else { 
-            Like::where('itinerary_id', $itinerary_id)->where('user_id', $user_id)->delete();
+            Like::where('user_id', $user_id)->where('itinerary_id', $itinerary_id)->delete();
         }
         //この投稿の最新の総いいね数を取得
         //withCountメソッドを使用することでリレーションされている別テーブルの数をカウントすることができる。
-        $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        // $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        // $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count;
+        $itinerary_likes_array = Like::where('itinerary_id', $itinerary_id)->get();
+        $itinerary->likes_count = count($itinerary_likes_array);
+        $itinerary->save();
+        $itinerary_likes_count = count($itinerary_likes_array);
+        
         $param = [
             'itinerary_likes_count' => $itinerary_likes_count,
         ];
-        return response()->json($param); //JSONデータをjQueryに返す
+        return response()->json($param); //JSONデータをjQueryに返す(dataに入る)
     }
     
     //他のユーザーのしおりを見る
     public function others_index(Itinerary $itinerary)
     {
         $auth = Auth::user();
+        // withCountはリレーション結果の件数を実際にレコードに読み込むことなく取得することができる。件数の結果は'{リレーション名}_count'カラム名に格納される。
+        // withCountの引数は取得したいリレーションテーブル名。
         $itineraries = Itinerary::withCount('likes')->orderBy('id', 'desc')->paginate(10);
         $param = ['itineraries' => $itineraries];
         return view ('itineraries/others_index')->with(['auth' => $auth, 'itineraries' => $itinerary->where('user_id', '!=', $auth->id)->get(), 'param' => $param]);

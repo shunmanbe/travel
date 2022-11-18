@@ -40,21 +40,22 @@
                     <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $itinerary->title) }}"> 
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
-                    <span>出発日</span>
+                    <span>期間</span>
+                    <br>
                     <br class="responsive">
                     <!--出発日入力欄-->
                     <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $itinerary->departure_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
-                    <span>到着日</span>
+                    <span>↓</span>
+                    <br>
                     <br class="responsive">
                     <!--到着日入力欄-->
                     <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $itinerary->arrival_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
-                    <br class="not-responsive">
                     <!--「次へ」ボタン-->
                     <input class ="btn-orange" type="submit" value="更新">
                 </form>
