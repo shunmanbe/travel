@@ -22,11 +22,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -42,7 +42,7 @@
                 </div>
                 @foreach ($place_detail_requireds as $i => $place_detail_required)
                     <div class="container">
-                        <form action="/itineraries/{{ $itinerary->id }}/destination_store" method="POST">
+                        <form action="{{ route('destination_store', ['itinerary' => $itinerary->id]) }}" method="POST">
                             @csrf
                             <!--検索候補地名表示-->
                             <h2 id="{{$i}}">{{$place_detail_required[0]}}</h2>
@@ -71,7 +71,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
         </div>
     </body>

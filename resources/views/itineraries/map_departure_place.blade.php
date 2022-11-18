@@ -22,23 +22,30 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
             <!--出発地を選択-->
             <div class ="containers">
-                <h1>以下から出発地を<br class="responsive">選択してください</h1> 
-                @foreach ($place_detail_requireds as $place_detail_required)
+                <h1>以下から出発地を<br class="responsive">選択してください</h1>
+                <div class="place-index">
+                    <ul>
+                        @foreach ($place_detail_requireds as $i => $place_detail_required)
+                            <li><a href="#{{$i}}">{{ $place_detail_required[0] }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                @foreach ($place_detail_requireds as $i => $place_detail_required)
                 <div class="container">
-                    <form action="/itineraries/{{ $itinerary->id }}/departure_place_store" method="POST">
+                    <form action="{{ route('departure_place_store', ['itinerary' => $itinerary->id]) }}" method="POST">
                         @csrf
                         <!--検索候補地名表示-->
-                            <h2>{{$place_detail_required[0]}}</h2>
+                            <h2 id="{{$i}}">{{$place_detail_required[0]}}</h2>
                             <!--候補地の名前-->
                             <input type="hidden" name="departure[departure_place_name]" value="{{$place_detail_required[0]}}">
                             <!--候補地の住所-->
@@ -62,7 +69,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
         </div>
     </body>

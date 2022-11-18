@@ -25,11 +25,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -42,13 +42,13 @@
                 <p>距離：{{$distance}}</p>
                 <p>時間：{{$duration_ja}}（自動車移動の時）</p>
                 <p>地図がうまく表示されない場合<br class="responsive">はリロードしてください</p>
-                <a class="btn-click" href="/itineraries/{{$itinerary->id}}/completed/show">戻る</a>
+                <a class="btn-click" href="{{ route('completed_show',['itinerary' => $itinerary->id]) }}">戻る</a>
             </div>
             <br>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script>
             // 地図表示に使う変数

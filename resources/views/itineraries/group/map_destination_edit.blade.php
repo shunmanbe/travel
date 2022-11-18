@@ -32,14 +32,21 @@
             </header>
             <!--出発地を選択-->
             <div class ="containers">
-                <h1>以下から目的地を<br class="responsive">選択してください</h1> 
-                @foreach ($place_detail_requireds as $place_detail_required)
+                <h1>以下から目的地を<br class="responsive">選択してください</h1>
+                <div class="place-index">
+                    <ul>
+                        @foreach ($place_detail_requireds as $i => $place_detail_required)
+                            <li><a href="#{{$i}}">{{ $place_detail_required[0] }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                @foreach ($place_detail_requireds as $i => $place_detail_required)
                     <div class="container">
                         <form action="{{ route('group.destination_update', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <!--検索候補地名表示-->
-                            <h2>{{$place_detail_required[0]}}</h2>
+                            <h2 id="{{$i}}">{{$place_detail_required[0]}}</h2>
                             <!--候補地の名前-->
                             <input type="hidden" name="destination[name]" value="{{$place_detail_required[0]}}">
                             <!--候補地の住所-->

@@ -25,11 +25,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -37,7 +37,7 @@
                 <!--しおり名表示-->
                 <h2>{{$itinerary->title}}</h2>
                 <!--説明入力欄-->
-                <form action="/itineraries/{{ $itinerary->id }}/explanation/store" method="POST">
+                <form action="{{ route('explanation_store', ['itinerary' => $itinerary->id]) }}" method="POST">
                     @csrf
                     <input class="text" type="text" name="explanation[explanation]" value="{{ old('explanation.explanation', $itinerary->explanation) }}"placeholder="20文字以内で入力してください">
                     <p class="error-message">{{ $errors->first('explanation.explanation') }}</p>
@@ -50,7 +50,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
         </div>
     </body>

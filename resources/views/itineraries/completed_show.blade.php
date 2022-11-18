@@ -22,11 +22,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -62,7 +62,7 @@
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="/itineraries/{{$itinerary->id}}/completed_route/{{$place->id}}" method="POST">
+                                        <form action="{{ route('completed_route', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
                                             <p>移動手段：
@@ -73,7 +73,7 @@
                                                     <option value="BICYCLING">自転車</option>
                                                 </select>
                                                 <!--経路詳細表示ボタン-->
-                                                <input class="btn" type="submit" name="route" value="経路詳細">
+                                                <input class="btn-green" type="submit" name="route" value="経路詳細">
                                             </p>
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
@@ -126,7 +126,7 @@
                     @endif
                 </div>
                 <div class="center">
-                    <a class="btn-click" href ="/itineraries/{{$itinerary->id}}/edit/show">しおりを編集する</a>
+                    <a class="btn-click" href ="{{ route('edit_show', ['itinerary' => $itinerary->id]) }}">しおりを編集する</a>
                     <br>
                     <a class="btn-click" href ="/">しおり一覧に戻る</a>
                 </div>
@@ -134,7 +134,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/alert.js') }}"></script>
             <script src="{{ asset('/js/memo-modal.js') }}"></script>

@@ -27,7 +27,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/{itinerary}/explanation', 'ItineraryController@explanation')->name('explanation');
     #しおりの説明を保存
     Route::post('/itineraries/{itinerary}/explanation/store', 'ItineraryController@explanation_store')->name('explanation_store');
-    #日程選択画面へ
+    #新規作成（日程選択画面）へ
     Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select')->name('new_entry');
     #日程を保存
     Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store')->name('date_store');
@@ -44,7 +44,7 @@ Route::group(['middleware'=>['auth']], function(){
     #地図から選択した出発地をデータベースに保存
     Route::post('/itineraries/{itinerary}/departure_place_store', 'ItineraryController@departure_place_store')->name('departure_place_store');
     
-    // 目的地を決める
+    // 目的地を追加する
     #目的地検索
     Route::get('/itineraries/{itinerary}/destination_search', 'PlaceController@destination_search')->name('destination_search');
     #検索ワードからgoogle-placesマップを表示
@@ -114,7 +114,7 @@ Route::group(['middleware'=>['auth']], function(){
     #他人のしおり一覧
     Route::get('/itineraries/others/index', 'ItineraryController@others_index')->name('others_index');
     #他人のしおり詳細
-    Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show')->name('completed_others_route');
+    Route::get('/itineraries/{itinerary}/completed/others/show', 'ItineraryController@completed_others_show')->name('completed_others_show');
     #他人のしおりルート詳細ページへ
     Route::post('/itineraries/{itinerary}/completed_others_route/{place}', 'ItineraryController@completed_others_route')->name('completed_others_route'); 
     
@@ -203,9 +203,6 @@ Route::group(['middleware'=>['auth']], function(){
     #詳細完成ページから経路詳細ページへ
     Route::post('/itineraries/{group}/group/{shareItinerary}/completed_route/shareItinerary/{groupPlace}', 'ShareItineraryController@completed_route')->name('group.completed_route'); 
     
-    // ログアウト
-    Route::get('/itineraries/logout', 'ItineraryController@logout')->name('group.logout');
-    
     // メモ
     #メモページへ
     Route::get('/itineraries/{group}/group/{shareItinerary}/memo/shareItinerary/{groupPlace}', 'GroupPlaceController@memo')->name('group.memo');
@@ -223,29 +220,6 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{group}/group/{shareItinerary}/arrival_time_store/shareItinerary/{groupPlace}', 'GroupPlaceController@arrival_time_store')->name('group.arrival_time_store'); 
     #到着時刻を編集(削除)
     Route::get('/itineraries/{group}/group/{shareItinerary}/arrival_time/shareItinerary/{groupPlace}/edit', 'GroupPlaceController@edit_arrival_time')->name('group.edit_arrival_time'); 
-   
-    // お問い合わせ
-    #入力フォームページ
-    Route::get('/itineraries/contact/form', 'ContactsController@form')->name('group.form');
-    #入力確認ページ
-    Route::post('/itineraries/contact/confirm', 'ContactsController@confirm')->name('group.confirm');
-    #「送信しました」画面
-    Route::post('/itineraries/contact/thanks', 'ContactsController@send')->name('group.send');
-    
-    // いいね機能
-    Route::post('/like', 'ItineraryController@like')->name('group.like');
-    
-    // 他の人のしおりを見る
-    #他人のしおり一覧
-    Route::get('/itineraries/others/index', 'ItineraryController@others_index')->name('group.others_index');
-    #他人のしおり詳細
-    Route::get('/itineraries/group/{shareItinerary}/completed/others/show', 'ItineraryController@completed_others_show')->name('group.completed_others_route');
-    #他人のしおりルート詳細ページへ
-    Route::post('/itineraries/group/{shareItinerary}/completed_others_route/shareItinerary/{groupPlace}', 'ItineraryController@completed_others_route')->name('group.completed_others_route'); 
-    
-    // ジオコーディング
-    Route::get('/itineraries/shareItinerary/{shareItinerary}/geocoding', 'ItineraryController@geocoding')->name('group.geocoding');
-    
     
     
     
