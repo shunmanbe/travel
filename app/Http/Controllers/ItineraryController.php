@@ -52,7 +52,8 @@ class ItineraryController extends Controller
     public function edit_show(Itinerary $itinerary, Place $place) 
     {
         $auth = Auth::user();
-        return view('/itineraries/edit_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get()]);
+        $n = null;
+        return view('/itineraries/edit_show')->with(['auth' => $auth, 'itinerary' => $itinerary, 'places' => $place->where('itinerary_id', $itinerary->id)->get(), 'n' => $n]);
     }
     
     //日付選択画面へ
@@ -185,8 +186,14 @@ class ItineraryController extends Controller
             // 時間情報を取り出す
             $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
             // 時間情報を日本語に変換
-            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+            // replaceArray('変換する部分', ['変換先'], 変換元)
+            $duration_ja = Str::replaceArray('days', ['日'], $duration);
+            $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
+            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
         }
         return view('/itineraries/route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
@@ -219,8 +226,15 @@ class ItineraryController extends Controller
             // 時間情報を取り出す
             $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
             // 時間情報を日本語に変換
-            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            // 時間情報を日本語に変換
+            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+            // replaceArray('変換する部分', ['変換先'], 変換元)
+            $duration_ja = Str::replaceArray('days', ['日'], $duration);
+            $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
+            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
         }
         return view('/itineraries/completed_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
@@ -306,8 +320,14 @@ class ItineraryController extends Controller
             // 時間情報を取り出す
             $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
             // 時間情報を日本語に変換
-            $duration_ja = Str::replaceArray('hours', ['時間'], $duration);
+            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+            // replaceArray('変換する部分', ['変換先'], 変換元)
+            $duration_ja = Str::replaceArray('days', ['日'], $duration);
+            $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
+            $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
+            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
             $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
         }
         return view('/itineraries/completed_others_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }

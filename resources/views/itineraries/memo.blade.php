@@ -25,11 +25,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -37,7 +37,7 @@
                 <!--メモの地名表示-->
                 <h2>{{$place->destination_name}}</h2>
                 <!--メモ入力欄-->
-                <form action="/itineraries/{{ $itinerary->id }}/memo/{{ $place->id }}/store" method="POST">
+                <form action="{{ route('memo_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                     @csrf
                     <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $place->memo }}</textarea>
                     <br>
@@ -48,7 +48,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
         </div>
     </body>

@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $shareItinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間:</span>{{ $shareItinerary->departure_date->format('Y年m月d日') }}→{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span class="not-responsive">　　</span><span class="not-responsive">期間:</span>{{ $shareItinerary->departure_date->format('Y年m月d日') }}→{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
                     <a href="{{ route('group.edit_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
@@ -173,7 +173,7 @@
                     <a class="btn-click" href="{{ route('group.completed_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">しおりを確定する</a>
                     <br>
                     <br>
-                    <a class="btn-click" href ="/">しおり一覧に戻る</a>
+                    <a class="btn-click" href ="{{ route('group.index_group') }}">グループのしおり一覧に戻る</a>
                 </div>
             </div>
             <footer>

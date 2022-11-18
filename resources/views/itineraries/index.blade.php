@@ -36,11 +36,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -54,12 +54,12 @@
                                 <div class="itinerary">
                                     <!--しおりタイトル-->
                                     <div class="theme">
-                                        <h2><a href="/itineraries/{{ $itinerary->id }}/completed/show">{{ $itinerary->title }}</a></h2><span>{{ $itinerary->explanation }}</span>
+                                        <h2><a href="{{ route('completed_show', ['itinerary' => $itinerary->id]) }}">{{ $itinerary->title }}</a></h2><span>{{ $itinerary->explanation }}</span>
                                     </div>
                                     <!--しおり概要編集-->
-                                    <a href="/itineraries/{{$itinerary->id}}/explanation"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
+                                    <a href="{{ route('explanation', ['itinerary' => $itinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i>　</a>
                                     <!--削除ボタン-->
-                                    <form action="/itineraries/{{ $itinerary->id }}" method="post">
+                                    <form action="{{ route('itinerary_delete', ['itinerary' => $itinerary->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
@@ -69,22 +69,22 @@
                         </div>
                     </div>
                     <div class="btn">
-                        <a class="new_entry" href="/itineraries/new_entry/date">新規作成</a>
+                        <a class="new_entry" href="{{ route('new_entry') }}">新規作成</a>
                     </div>
                     <br>
                     <div class="display-group">
-                        <a class="btn-click" href="/itineraries/group/index">グループ一覧</a>
+                        <a class="btn-click" href="{{ route('group.index_group') }}">グループ一覧</a>
                     </div>
                 </div>
                 <br>
                 <div class="others">
-                    <a  class="btn-click" href="/itineraries/others/index">他のユーザーが作成したしおりを見る</a>
+                    <a  class="btn-click" href="{{ route('others_index') }}">他のユーザーが作成したしおりを見る</a>
                 </div>
             </div>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/delete_alert.js') }}"></script>
             <!--==============JQuery読み込み===============-->

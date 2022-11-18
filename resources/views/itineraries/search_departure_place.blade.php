@@ -23,17 +23,17 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
             <div class="container containers">
                 <h1>出発地を検索</h1> 
-                <form action="/itineraries/{{$itinerary->id}}/departure_place_map" method="POST">
+                <form action="{{ route('departure_place_map', ['itinerary' => $itinerary->id]) }}" method="POST">
                     @csrf
                     <!--検索ワード入力欄-->
                     <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
@@ -46,7 +46,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
         </div>
     </body>

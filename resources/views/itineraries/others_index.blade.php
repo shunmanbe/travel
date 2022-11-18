@@ -21,11 +21,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -38,7 +38,7 @@
                             @foreach($itineraries as $itinerary)
                                 <div class="itinerary">
                                     <!--しおりタイトル-->
-                                    <div class="theme"><h2><a href="/itineraries/{{ $itinerary->id }}/completed/others/show">{{ $itinerary->title }}</a></h2></div>
+                                    <div class="theme"><h2><a href="{{ route('completed_others_show', ['itinerary' => $itinerary->id]) }}">{{ $itinerary->title }}</a></h2></div>
                                     <!--いいねボタン-->
                                         <span class="likes">
                                             <i class="fa-regular fa-heart like-toggle liked" data-itinerary-id="{{ $itinerary->id }}"></i>
@@ -56,7 +56,7 @@
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/alert.js') }}"></script>
             <script src="{{ asset('/js/like.js') }}"></script>

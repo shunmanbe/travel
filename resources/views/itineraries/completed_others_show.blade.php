@@ -22,11 +22,11 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route() }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
@@ -62,7 +62,7 @@
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="/itineraries/{{$itinerary->id}}/completed_others_route/{{$place->id}}" method="POST">
+                                        <form action="{{ route('completed_others_route', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
                                             <p>移動手段：
@@ -126,15 +126,14 @@
                     @endif
                 </div>
                 <div class="center">
-                    <a class="btn-click" href ="/itineraries/others/index">他のユーザーのしおり一覧に戻る</a>
+                    <a class="btn-click" href ="{{ route('others_index') }}">他のユーザーのしおり一覧に戻る</a>
                 </div>
             </div>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
-                <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
+                <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
             <script src="{{ asset('/js/memo-modal.js') }}"></script>
         </div>
     </body>
