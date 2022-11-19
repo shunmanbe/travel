@@ -52,6 +52,7 @@
                     <!--目的地が入力されている時-->
                     @else
                         @foreach($places as $n => $place)
+                        <span id="js-getVariable" name="{{ $n }}"></span>
                             <div class="to-destination">
                                 <!--三角形表示-->
                                 <div class="triangles">
@@ -184,7 +185,7 @@
             </footer>
             <script>
                 // バリデーションに使う変数
-                let n = '{{$n}}';
+                
             </script>
             <script src="{{ asset('/js/delete_alert.js') }}"></script>
             <script src="{{ asset('/js/validation.js') }}"></script>
