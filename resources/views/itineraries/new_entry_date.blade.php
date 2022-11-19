@@ -32,7 +32,7 @@
             </header>
             <div class="container containers">
                 <div class = "date_select">
-                    <form action="{{ route('date_store') }}" method="POST">
+                    <form name="date_store" action="{{ route('date_store') }}" method="POST">
                         @csrf
                         <span>旅行タイトル</span>
                         <br>
