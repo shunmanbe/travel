@@ -58,14 +58,14 @@
                                 <div class="supplement">
                                     <!--出発時刻表示-->
                                     <div class="departure-time">
-                                        <p class="departure-time-empty departure-time-entered">出発時刻：{{ $groupPlace->departure_time }}</p>
+                                        <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $groupPlace->departure_time }}</span></p>
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
                                         <form action="{{ route('group.completed_route', ['group' => $group, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
-                                            <p>移動手段：
+                                            <p><span>移動手段：</span>
                                                 <select name="Mode">
                                                     <option value="WALKING">徒歩</option>
                                                     <!--<option value="TRANSIT">電車</option>-->
@@ -100,7 +100,7 @@
                                         </form>
                                     </div>
                                     <!--到着時刻表示-->
-                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered">到着時刻：{{ $groupPlace->arrival_time }}</p></div>
+                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered"><span>到着時刻：{{ $groupPlace->arrival_time }}</span></p></div>
                                 </div>
                             </div>
                             <div class="destination">
