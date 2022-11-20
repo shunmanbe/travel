@@ -32,19 +32,19 @@
             </header>
             <div class="container containers">
                 <div class = "date_select">
-                    <form action="{{ route('group.date_store', ['group' => $group->id]) }}" method="POST">
+                    <form name="date_store" action="{{ route('group.date_store', ['group' => $group->id]) }}" method="POST">
                         @csrf
                         <span>旅行タイトル</span>
                         <br>
                         <!--旅行タイトル入力欄-->
-                        <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
+                        <input id="title" type="text" name="initial_setting[title]" value="{{ old('initial_setting.title') }}">
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                         <span>期間</span>
                         <br>
                         <br class="responsive">
                         <!--出発日入力欄-->
-                        <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
+                        <input id="departure-day" type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                         <br>
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
@@ -52,12 +52,12 @@
                         <br>
                         <br class="responsive">
                         <!--到着日入力欄-->
-                        <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
+                        <input id="arrival-day" type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
                         <br>
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                         <!--「次へ」ボタン-->
-                        <input class ="btn-orange" type="submit" value="次へ">
+                        <input class ="btn-orange" type="submit" value="次へ" onclick="check_new_entry(event);return false;">
                     </form>
                 </div>
             </div>
@@ -66,6 +66,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
+            <script src="{{ asset('/js/validation.js') }}"></script>
         </div>
     </body>
 </html>

@@ -10,6 +10,7 @@
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/title_date.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/title_date.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
@@ -21,7 +22,7 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
@@ -30,33 +31,34 @@
                 </div>
             </header>
             <div class = "container containers">
-                <form action="{{ route('group.update_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id])}}" method="POST">
+                <form name="date_store" action="{{ route('group.update_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <span>旅行タイトル</span>
                     <br>
                     <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
                     <!--旅行タイトル入力欄-->
-                    <input type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $shareItinerary->title) }}"> 
+                    <input id="title" type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $shareItinerary->title) }}"> 
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
                     <span>期間</span>
                     <br>
                     <br class="responsive">
                     <!--出発日入力欄-->
-                    <input type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $shareItinerary->departure_date->format('Y-m-d') )}}">
+                    <input id="departure-day" type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $shareItinerary->departure_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
                     <span>↓</span>
+                    <br>
                     <br class="responsive">
                     <!--到着日入力欄-->
-                    <input type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $shareItinerary->arrival_date->format('Y-m-d') )}}">
+                    <input id="arrival-day" type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $shareItinerary->arrival_date->format('Y-m-d') )}}">
                     <br>
                     <!--エラーメッセージ-->
                     <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
                     <!--「次へ」ボタン-->
-                    <input class ="btn-orange" type="submit" value="更新">
+                    <input class ="btn-orange" type="submit" value="更新" onclick="check_new_entry(event);return false;">
                 </form>
             </div>
             <footer>
@@ -64,6 +66,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
+            <script src="{{ asset('/js/validation.js') }}"></script>
         </div>
     </body>
 </html>

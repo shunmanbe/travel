@@ -81,6 +81,7 @@
                     <a  class="btn-click" href="{{ route('others_index') }}">他のユーザーが作成したしおりを見る</a>
                 </div>
             </div>
+            <br>
             <footer>
                 <div class="footer-left"></div>
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
