@@ -272,12 +272,8 @@ class ItineraryController extends Controller
         }
         //この投稿の最新の総いいね数を取得
         //withCountメソッドを使用することでリレーションされている別テーブルの数をカウントすることができる。
-        // $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
-        // $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count;
-        $itinerary_likes_array = Like::where('itinerary_id', $itinerary_id)->get();
-        $itinerary->likes_count = count($itinerary_likes_array);
-        $itinerary->save();
-        $itinerary_likes_count = count($itinerary_likes_array);
+        $itinerary_likes_count = Itinerary::withCount('likes')->findOrFail($itinerary_id)->likes_count; //findOrFail()は一致する()が見つからなかったらエラーを返す。
+        // $itinerary_likes_count = Itinerary::withCount('likes')->where('itinerary_id', $itinerary_id)->first();
         
         $param = [
             'itinerary_likes_count' => $itinerary_likes_count,

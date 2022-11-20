@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $itinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間：</span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間：</span><span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                     <a href="{{ route('edit_new_entry', ['itinerary' => $itinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
@@ -69,7 +69,7 @@
                                         @if(empty($place->departure_time))
                                             <form action="{{ route('departure_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                                 @csrf
-                                                <p class="departure-time-empty">出発時刻：
+                                                <p class="departure-time-empty"><span>出発時刻：</span>
                                                     <!--出発時刻入力欄-->
                                                     <input id="departure-empty-{{$n}}" class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
@@ -80,7 +80,7 @@
                                             </form>
                                         <!--出発時刻が入力されている時 -->
                                         @else
-                                            <p class="departure-time-entered">出発時刻：<span id="departure-entered-{{$n}}">{{$place->departure_time}}</span>
+                                            <p class="departure-time-entered"><span>出発時刻：</span><span id="departure-entered-{{$n}}">{{$place->departure_time}}</span>
                                                 <!--出発時刻編集アイコン-->
                                                 <a href="{{ route('edit_departure_time', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
@@ -91,7 +91,7 @@
                                         <form action="{{ route('route', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
-                                            <p>移動手段：
+                                            <p><span>移動手段：</span>
                                                 <select name="Mode">
                                                     <option value="WALKING">徒歩</option>
                                                     <!--<option value="TRANSIT">電車</option>-->
@@ -131,7 +131,7 @@
                                         @if(empty($place->arrival_time))
                                             <form name="arrival_time_store" action="{{ route('arrival_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                                 @csrf
-                                                <p class="arrival-time-empty">到着時刻：
+                                                <p class="arrival-time-empty"><span>到着時刻：</span>
                                                     <!--到着時刻入力欄-->
                                                     <input id="arrival-empty-{{$n}}" class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
@@ -141,7 +141,7 @@
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered">到着時刻：<span id='arrival-empty-{{$n}}'>{{$place->arrival_time}}</span>
+                                            <p class="arrival-time-entered"><span>到着時刻：</span><span id='arrival-empty-{{$n}}'>{{$place->arrival_time}}</span>
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="{{ route('edit_arrival_time', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
