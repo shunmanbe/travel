@@ -131,7 +131,7 @@
                                         @if(empty($place->arrival_time))
                                             <form name="arrival_time_store" action="{{ route('arrival_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                                 @csrf
-                                                <p class="arrival-time-empty"><span>到着時刻：</span>
+                                                <p class="arrival_time_empty"><span>到着時刻：</span>
                                                     <!--到着時刻入力欄-->
                                                     <input id="arrival-empty-{{$n}}" class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->

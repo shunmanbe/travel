@@ -69,7 +69,7 @@
                                         @if(empty($groupPlace->departure_time))
                                             <form action="{{ route('group.departure_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                                 @csrf
-                                                <p class="departure-time-empty"><span>出発時刻：</span>
+                                                <p class="departure_time_empty"><span>出発時刻：</span>
                                                     <!--出発時刻入力欄-->
                                                     <input id="departure-empty-{{$n}}" class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->

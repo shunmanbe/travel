@@ -44,7 +44,7 @@
                         <br>
                         <br class="responsive">
                         <!--出発日入力欄-->
-                        <input id="departure" type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
+                        <input id="departure-day" type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date') }}">
                         <br>
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
@@ -52,7 +52,7 @@
                         <br>
                         <br class="responsive">
                         <!--到着日入力欄-->
-                        <input id="arrive" type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
+                        <input id="arrival-day" type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date') }}">
                         <br>
                         <!--エラーメッセージ-->
                         <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
