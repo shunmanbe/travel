@@ -1,31 +1,23 @@
  
 // 到着時刻の保存ボタンが押された時に実行
-function checkArrivalTime(e){
-    const n = document.getElementById('js-getVariable').name;
+function checkArrivalTime(n){
     // n番目の出発時刻を取り出す
-    const DEPARTURE_TIME = document.getElementById('departure-entered-' + n);
+    const departureTime = document.getElementById('departure-entered-' + n);
     // 出発時刻から数字だけ抜き出す
-    const INT_DEPARTURE_TIME = DEPARTURE_TIME.innerHTML.replace(/[^0-9]/g, '');
+    const intDepartureTime = departureTime.innerHTML.replace(/[^0-9]/g, '');
     // 入力されたn番目の到着時刻を取り出す
-    const ARRIVAL_TIME = document.getElementById('arrival-empty-' + n).value;
+    const arrivalTime = document.getElementById('arrival-empty-' + n).value;
     // 到着時刻から数字だけ抜き出す
-    const INT_ARRIVAL_TIME = ARRIVAL_TIME.replace(/[^0-9]/g, '');
-    if(INT_DEPARTURE_TIME > INT_ARRIVAL_TIME){
-        window.alert(n);
-        console.log(n);
+    const intArrivalTime = arrivalTime.replace(/[^0-9]/g, '');
+    console.log(n);
+    if(intDepartureTime > intArrivalTime){
+        window.alert('到着時刻が正しくありません');
+        
         return false;
     }else{
-        document.arrival_time_empty.submit();
+        document.arrival-time-empty.submit();
     }
 }
-
-
-// for (let i = 0; i < n; i++) {
- 
-//  // 繰り返し処理
- 
-// }
-
 
 
 
@@ -38,3 +30,34 @@ function check_new_entry(e){
         window.alert(departure);
     };
 }
+
+
+function check_a(e){
+     if(!window.confirm('本当に削除しますか？')){
+      window.alert('キャンセルされました'); 
+      return false;
+     }
+     document.deleteform.submit();
+}
+
+
+
+// // n番目の出発時刻を取り出す
+// const departureTime = document.getElementById('departure-entered-' + n);
+// // 入力されたn番目の到着時刻を取り出す
+// const arrivalTime = document.getElementById('arrival-empty-' + n);
+// // 出発時刻から数字だけ抜き出す
+// const intDepartureTime = departureTime.innerHTML.replace(/[^0-9]/g, '');
+// // 到着時刻から数字だけ抜き出す
+// const intArrivalTime = arrivalTime.innerHTML.replace(/[^0-9]/g, '');
+// // 到着時刻の保存ボタンが押された時に実行
+// function check(e){
+//     if(2>1){
+//         console.log(intDepartureTime);
+//         window.alert(intDepartureTime);
+//         // window.alert('到着時刻が正しくありません');
+//         return false;
+//     }else{
+//         return false;
+//     }
+// }

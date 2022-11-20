@@ -52,7 +52,6 @@
                     <!--目的地が入力されている時-->
                     @else
                         @foreach($places as $n => $place)
-                        <span id="js-getVariable" name="{{ $n }}"></span>
                             <div class="to-destination">
                                 <!--三角形表示-->
                                 <div class="triangles">
@@ -137,7 +136,7 @@
                                                     <input id="arrival-empty-{{$n}}" class="input" type="datetime-local" name="time[arrival_time]">
                                                     <!--保存ボタン-->
                                                     <!--return falseをすることで、jsが起動後に親要素（ここではform）への伝播止める。trueにするとエラーを表示させた後に保存されてしまう。-->
-                                                    <input id="store-arrival-time" class ="btn-green" type="submit" value="保存" onclick="checkArrivalTime(event);return false;">
+                                                    <input id="store-arrival-time" class ="btn-green" type="submit" value="保存" onclick="checkArrivalTime({{$n}});return false;">
                                                 </p>
                                             </form>
                                         <!--到着時刻が入力されている時-->
@@ -185,7 +184,7 @@
             </footer>
             <script>
                 // バリデーションに使う変数
-                
+                let n = {{$n}};
             </script>
             <script src="{{ asset('/js/delete_alert.js') }}"></script>
             <script src="{{ asset('/js/validation.js') }}"></script>
