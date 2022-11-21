@@ -5,7 +5,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
 
 #### テストアカウント
 ##### （日々修正を行っているため、デプロイのタイミングによってはお試し用アカウントが作成されていない場合がございます。その場合は、新規登録していただけると助かります。）
-メールアドレス：travel_sevice_test@gmail.com （テスト用のアドレス名です。他の用途での使用厳禁。）
+メールアドレス：travel_service_test@gmail.com （テスト用のアドレス名です。他の用途での使用厳禁。）
 
 パスワード:traveltravel
 
@@ -13,9 +13,9 @@ URL:https://radiant-mountain-36845.herokuapp.com
 
 グループ登録テスト用
 
-グループID：524909
+グループID：
 
-パスワード:f9RMrYheoeyt9N3
+パスワード:
 
 お問い合わせ機能を使用する場合は、個人のメールアドレスを使用していただくと、確認メールが届きます。
 
