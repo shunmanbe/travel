@@ -63,7 +63,7 @@ class ShareItineraryController extends Controller
         $auth = Auth::user();
         // 出発地しか決まっていない時は<script>の$nに値がなくてエラーが出るため、$nにnullを代入しておく
         $n = null;
-        return view('/itineraries/group/edit_show')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlaces' => $groupPlace->where('share_itinerary_id', $shareItinerary->id)->get()]);
+        return view('/itineraries/group/edit_show')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlaces' => $groupPlace->where('share_itinerary_id', $shareItinerary->id)->get(), 'n' => $n]);
     }
     
     //日付選択画面へ
