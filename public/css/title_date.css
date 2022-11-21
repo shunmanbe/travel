@@ -28,3 +28,22 @@ input {
     top: 6px;
 }
 
+.btn-orange {
+    border: 2px solid orange;
+    border-radius: 40px;
+    background-color: #EB6357;
+    padding: 0px 30px;
+    color: white;
+    font-family: 筑紫A丸ゴシック;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0px 5px #72220A;
+    cursor: pointer;
+}
+
+.btn-orange:active {
+    box-shadow: none;
+    position:relative;
+    left: 0px;
+    top: 5px;
+}
