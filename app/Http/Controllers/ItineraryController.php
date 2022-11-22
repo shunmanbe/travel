@@ -86,12 +86,16 @@ class ItineraryController extends Controller
     {
         $auth = Auth::user();
         $input = $request['search_name'];
+        // GuzzleパッケージはPHPでWebサーバにAPIリクエストを送信したい場合に利用するもの
+        // インスタンス作成
         $client = new \GuzzleHttp\Client();
         //検索ワードに関連する施設の詳細情報を取得
         $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=' . config("services.google-map.apikey") . '&query=' . $input . '&language=ja';
+        // APIに対してGETメソッドでHTTP通信を行う。
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         // 受け取った土地に関する情報全てを$place_detailsに代入
+        // json_decode関数はJSONフォーマットされた文字列をPHPの変数に変換する関数。
         $place_details = json_decode($response->getBody(), true);
         // 必要情報を全地点分まとめる
         $place_detail_requireds =[];
