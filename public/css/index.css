@@ -105,11 +105,11 @@ a {
 }
 
 .like-toggle {
-    color: black;
+    color: #FF30CC;
 }
 
 .liked {
-    color: #FF30CC;
+    color: black;
 }
 
 .display-group, .search-group {
