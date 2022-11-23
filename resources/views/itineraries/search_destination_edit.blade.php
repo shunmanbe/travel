@@ -33,14 +33,13 @@
             </header>
             <div class="container">
                 <h1>目的地を検索</h1> 
-                <form action="{{ route('edit_destination_map', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
+                <form name="search_place" action="{{ route('edit_destination_map', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                     @csrf
                     <!--検索ワード入力欄-->
-                    <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                    <!--エラーメッセージ-->
-                    <p class="error-message">{{ $errors->first('search_name') }}</p>
+                    <input id="place" class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                    
                     <!--検索ボタン-->
-                    <input class="btn-orange" type="submit" value="検索">
+                    <input class="btn-orange" type="submit" value="検索" onclick="check_place_search(event);return false;">
                 </form>
             </div>
             <footer>
@@ -48,6 +47,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
+            <script src="{{ asset('/js/validation.js') }}"></script>
         </div>
     </body>
 </html>

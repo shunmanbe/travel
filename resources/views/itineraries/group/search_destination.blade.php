@@ -23,24 +23,23 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <ul>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
+                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
             </header>
             <div class="container containers">
                 <h1>目的地を検索</h1> 
-                <form action="{{ route('group.destination_map', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
+                <form name="search_place" action="{{ route('group.destination_map', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}" method="POST">
                     @csrf
                     <!--検索ワード入力欄-->
-                    <input class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
-                    <!--エラーメッセージ-->
-                    <p class="error-message">{{ $errors->first('search_name') }}</p>
+                    <input id="place" class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                
                     <!--検索ボタン-->
-                    <input class="btn-orange" type="submit" value="検索">
+                    <input class="btn-orange" type="submit" value="検索" onclick="check_place_search(event);return false;">
                 </form>
             </div>
             <footer>
@@ -48,6 +47,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
+            <script src="{{ asset('/js/validation.js') }}"></script>
         </div>
     </body>
 </html>
