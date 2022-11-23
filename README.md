@@ -5,7 +5,7 @@ URL:https://radiant-mountain-36845.herokuapp.com
 
 #### テストアカウント
 ##### （日々修正を行っているため、デプロイのタイミングによってはお試し用アカウントが作成されていない場合がございます。その場合は、新規登録していただけると助かります。）
-メールアドレス：travel_service_test@gmail.com （テスト用のアドレス名です。他の用途での使用厳禁。）
+メールアドレス：travelitineraryservicetest@gmail.com （テスト用のアドレス名です。他の用途での使用厳禁。）
 
 パスワード:traveltravel
 
