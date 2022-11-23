@@ -48,3 +48,15 @@ function check_new_entry(e){
     }
 }
 
+function check_place_search(e){
+    // タイトルを取り出す
+    const PLACE = document.getElementById('place').value;
+    
+    if(PLACE == ""){
+        window.alert("検索したいワードを入力してください");
+        return false;
+    }else{
+        document.date_store.submit();
+    }
+}
+

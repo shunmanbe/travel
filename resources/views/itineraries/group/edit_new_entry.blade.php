@@ -39,24 +39,22 @@
                     <!--old関数の第一引数は入力した値、第二引数は第一引数がなかった場合に入力される値（今回はもともと入力されていた値）-->
                     <!--旅行タイトル入力欄-->
                     <input id="title" type="text" name="initial_setting[title]" value="{{ old('initial_setting.title', $shareItinerary->title) }}"> 
-                    <!--エラーメッセージ-->
-                    <p class="error-message">{{ $errors->first('initial_setting.title') }}</p>
+                    <br>
+                    <br>
                     <span>期間</span>
                     <br>
                     <br class="responsive">
                     <!--出発日入力欄-->
                     <input id="departure-day" type="date" name="initial_setting[departure_date]" value="{{ old('initial_setting.departure_date', $shareItinerary->departure_date->format('Y-m-d') )}}">
                     <br>
-                    <!--エラーメッセージ-->
-                    <p class="error-message">{{ $errors->first('initial_setting.departure_date') }}</p>
+                    
                     <span>↓</span>
                     <br>
                     <br class="responsive">
                     <!--到着日入力欄-->
                     <input id="arrival-day" type="date" name="initial_setting[arrival_date]" value="{{ old('initial_setting.arrival_date', $shareItinerary->arrival_date->format('Y-m-d') )}}">
                     <br>
-                    <!--エラーメッセージ-->
-                    <p class="error-message">{{ $errors->first('initial_setting.arrival_date') }}</p>
+                    
                     <!--「次へ」ボタン-->
                     <input class ="btn-orange" type="submit" value="更新" onclick="check_new_entry(event);return false;">
                 </form>
