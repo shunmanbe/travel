@@ -43,6 +43,8 @@
                         <span>出発地：{{ $itinerary->departure_place_name }}</span>
                         <!--編集アイコン-->
                         <a class="departure-supplement" href="{{ route('edit_departure', ['itinerary' => $itinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                        <!--目的地メモ-->
+                        <a class="memo" href="{{ route('memo_departure', ['itinerary' => $itinerary->id]) }}"><i class="fa-regular fa-comment icon"></i></a>
                     </p>
                 </div>
                 <!--目的地一覧-->

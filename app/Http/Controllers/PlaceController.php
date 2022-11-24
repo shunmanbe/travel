@@ -132,14 +132,14 @@ class PlaceController extends Controller
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
-    //メモ
+    //目的地のメモ
     public function memo(Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         return view('itineraries/memo')->with(['auth' => $auth, 'itinerary' => $itinerary, 'place' => $place]);
     }
     
-    //メモを保存
+    //目的地のメモを保存
     public function memo_store(Itinerary $itinerary, Place $place, Request $request)
     {
         $input_memo = $request->input('memo');
