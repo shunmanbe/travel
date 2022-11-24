@@ -82,9 +82,14 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/logout', 'ItineraryController@logout')->name('logout');
     
     // メモ
-    #メモページへ
+    #出発地のメモページへ
+    Route::get('/itineraries/{itinerary}/memo', 'ItineraryController@memo_departure')->name('memo_departure');
+    #出発地のメモを保存
+    Route::post('/itineraries/{itinerary}/memo/store', 'ItineraryController@memo_departure_store')->name('memo_departure_store');
+    
+    #目的地のメモページへ
     Route::get('/itineraries/{itinerary}/memo/{place}', 'PlaceController@memo')->name('memo');
-    #メモを保存
+    #目的地のメモを保存
     Route::post('/itineraries/{itinerary}/memo/{place}/store', 'PlaceController@memo_store')->name('memo_store');
     
     // 各地点の出発時刻

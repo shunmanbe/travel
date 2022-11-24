@@ -6,18 +6,20 @@
 
         <title>旅のしおり</title>
 
-         <!-- Fonts -->
+        <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!--アイコン表示-->
         <script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>
-        <!--CSS-->
-        <link rel="stylesheet" href="{{ asset('/css/search_departure_place.css') }}" >
+        <!--ページCSS-->
+        <link rel="stylesheet" href="{{ asset('/css/memo.css') }}" >
+        <link rel="stylesheet" href="{{ asset('/css/responsive/memo.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
         <!--footer-->
         <link rel="stylesheet" href="{{ asset('/css/footer.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
+      
     </head>
     <body>
         <div class="wrapper">
@@ -31,15 +33,16 @@
                     </ul>
                 </div>
             </header>
-            <div class="container containers">
-                <h1>出発地を検索</h1> 
-                <form name="search_place" action="{{ route('departure_place_map', ['itinerary' => $itinerary->id]) }}" method="POST">
+            <div class = "container containers">
+                <!--メモの地名表示-->
+                <h2>{{$itinerary->departure_place_name}}</h2>
+                <!--メモ入力欄-->
+                <form action="{{ route('memo_departure_store', ['itinerary' => $itinerary->id]) }}" method="POST">
                     @csrf
-                    <!--検索ワード入力欄-->
-                    <input id="place" class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
+                    <textarea name="memo[memo]" placeholder="必要なことはここにメモをしておこう！">{{ $itinerary->memo }}</textarea>
                     <br>
-                    <!--検索ボタン-->
-                    <input class ="btn-orange" type="submit" value="検索" onclick="check_place_search(event);return false;">
+                    <!--保存ボタン-->
+                    <input class="btn-green" type="submit" value="保存して詳細ページへ">
                 </form>
             </div>
             <footer>
@@ -47,7 +50,6 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/validation.js') }}"></script>
         </div>
     </body>
 </html>

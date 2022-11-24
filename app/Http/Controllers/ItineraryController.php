@@ -162,6 +162,21 @@ class ItineraryController extends Controller
         return view('/itineraries/search_departure_place')->with(['auth' => $auth, 'itinerary' => $itinerary]);
     }
     
+    //出発地のメモ
+    public function memo_departure(Itinerary $itinerary)
+    {
+        $auth = Auth::user();
+        return view('itineraries/memo_departure')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+    }
+    
+    //出発地のメモを保存
+    public function memo_departure_store(Itinerary $itinerary, Request $request)
+    {
+        $input_memo = $request->input('memo');
+        $itinerary->fill($input_memo)->save();
+        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+    }
+    
     //詳細編集ページから経路詳細（ルート）を表示
     public function route(Request $request, Itinerary $itinerary, Place $place)
     {
