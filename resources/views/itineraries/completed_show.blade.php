@@ -38,7 +38,22 @@
                 </div>
                 <!--出発地-->
                 <div class="departure">
-                    <p class="name">出発地：{{ $itinerary->departure_place_name }}</p>
+                    <div class="name">出発地：{{ $itinerary->departure_place_name }}
+                        <!--出発地メモ-->
+                        <!--メモアイコン-->
+                        <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
+                        <!--メモモーダル-->
+                        <div class="memo-modal">
+                            <div class="modal-contents">
+                                <!--メモ閉じるボタン-->
+                                <div class="close-memo"><i class="fa fa-2x fa-times"></i></div>
+                                <!--メモ-->
+                                <div class="memo"><span>メモ</span></div>
+                                <!--メモ内容-->
+                                <div class="memo-body"><textarea readonly>{{$itinerary->memo}}</textarea></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--目的地一覧-->
                 <div class="destinations">
