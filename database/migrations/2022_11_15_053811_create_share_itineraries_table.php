@@ -25,6 +25,7 @@ class CreateShareItinerariesTable extends Migration
             $table->string('departure_place_address')->nullable();
             $table->string('departure_place_lat')->nullable();
             $table->string('departure_place_lng')->nullable();
+            $table->string('memo')->nullable();
             $table->integer('likes_count')->default(0);
         });
     }
