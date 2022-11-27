@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\DepartureTimeRequest;
 use App\Http\Requests\ArrivalTimeRequest;
+use Illuminate\Support\Str;
 
 class PlaceController extends Controller
 {
@@ -145,6 +146,24 @@ class PlaceController extends Controller
         $input_memo = $request->input('memo');
         $place->fill($input_memo)->save();
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+    }
+    
+    // 移動手段を保存
+    public function transportation_store(Itinerary $itinerary, Place $place, Request $request)
+    {
+        // dd($request);
+        $input = $request->input('transportation');
+        // dd($input);
+        $place->fill($input)->save();
+        return redirect()->route('edit_show', ['itinerary' => $itinerary, 'place' => $place]);
+    }
+    
+    // 移動手段を変更
+    public function transportation_edit(Itinerary $itinerary, Place $place)
+    {
+        $place->transportation = null;
+        $place->save();
+        return redirect()->route('edit_show', ['itinerary' => $itinerary, 'place' => $place]);
     }
     
     //出発時刻を保存

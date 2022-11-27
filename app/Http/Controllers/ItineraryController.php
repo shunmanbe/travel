@@ -177,44 +177,48 @@ class ItineraryController extends Controller
         return redirect('/itineraries/'.$itinerary->id.'/edit/show');
     }
     
-    //詳細編集ページから経路詳細（ルート）を表示
+    //詳細編集ページから経路詳細（ルート）を表示（移動手段が決まっていない時）
     public function route(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        //移動手段で「電車」が入力された場合
-        if($request->input('Mode') == 'TRANSIT'){
-            $start_address = $request->input('start_address');
-            $goal_address = $request->input('goal_address');
-            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
-        //それ以外が入力された場合
-        }else{
-            $mode = $request->input('Mode');
-            $start_name = $request->input('start_name');
-            $goal_name = $request->input('goal_name');
-            $start_lat = $request->input('start_lat');
-            $start_lng = $request->input('start_lng');
-            $goal_lat = $request->input('goal_lat');
-            $goal_lng = $request->input('goal_lng');
-            
-            $client = new \GuzzleHttp\Client();
-            $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
-            $response = $client->request('GET', $url,
-            ['Bearer' => config('serveices.google-map.apikey')]);
-            $route_details = json_decode($response->getBody(), true);
-            // 距離情報を取り出す
-            $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
-            // 時間情報を取り出す
-            $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
-            // 時間情報を日本語に変換
-            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
-            // replaceArray('変換する部分', ['変換先'], 変換元)
-            $duration_ja = Str::replaceArray('days', ['日'], $duration);
-            $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
-            $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
-            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
-            $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
-            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
+        // 移動手段が登録されている時
+        if($place->transportation !== null){
+            $mode = $place->transportation;
+        }else{ //移動手段が登録されていなかった時
+            // 選択された移動手段を取得
+            $mode = $request->input('transportation')['transportation'];
+            // 移動手段で「電車」が入力された場合
+            if($mode == 'TRAIN'){
+                $start_address = $request->start_address;
+                $goal_address = $request->goal_address;
+                return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+            }
         }
+        $start_name = $request->input('start_name');
+        $goal_name = $request->input('goal_name');
+        $start_lat = $request->input('start_lat');
+        $start_lng = $request->input('start_lng');
+        $goal_lat = $request->input('goal_lat');
+        $goal_lng = $request->input('goal_lng');
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $mode . '&key=' . config('services.google-map.apikey');
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $route_details = json_decode($response->getBody(), true);
+        // 距離情報を取り出す
+        $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
+        // 時間情報を取り出す
+        $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
+        // 時間情報を日本語に変換
+        // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+        // replaceArray('変換する部分', ['変換先'], 変換元)
+        $duration_ja = Str::replaceArray('days', ['日'], $duration);
+        $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
+        $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
+        $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
+        $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+        $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
+            
         return view('/itineraries/route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
@@ -222,40 +226,33 @@ class ItineraryController extends Controller
     public function completed_route(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        //移動手段で「電車」が入力された場合
-        if($request->input('Mode') == 'TRANSIT'){
-            $start_address = $request->start_address;
-            $goal_address = $request->goal_address;
-            return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
-        //それ以外が入力された場合
-        }else{
-            $mode = $request->input('Mode');
-            $start_name = $request->input('start_name');
-            $goal_name = $request->input('goal_name');
-            $start_lat = $request->input('start_lat');
-            $start_lng = $request->input('start_lng');
-            $goal_lat = $request->input('goal_lat');
-            $goal_lng = $request->input('goal_lng');
-            $client = new \GuzzleHttp\Client();
-            $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $request->input('Mode') . '&key=' . config('services.google-map.apikey');
-            $response = $client->request('GET', $url,
-            ['Bearer' => config('serveices.google-map.apikey')]);
-            $route_details = json_decode($response->getBody(), true);
-            // 距離情報を取り出す
-            $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
-            // 時間情報を取り出す
-            $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
-            // 時間情報を日本語に変換
-            // 時間情報を日本語に変換
-            // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
-            // replaceArray('変換する部分', ['変換先'], 変換元)
-            $duration_ja = Str::replaceArray('days', ['日'], $duration);
-            $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
-            $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
-            $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
-            $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
-            $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
-        }
+        $mode = $place->transportation;
+        $start_name = $request->input('start_name');
+        $goal_name = $request->input('goal_name');
+        $start_lat = $request->input('start_lat');
+        $start_lng = $request->input('start_lng');
+        $goal_lat = $request->input('goal_lat');
+        $goal_lng = $request->input('goal_lng');
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $start_lat . ',' . $start_lng . '&destination=' . $goal_lat . ',' . $goal_lng . '&mode=' . $mode . '&key=' . config('services.google-map.apikey');
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $route_details = json_decode($response->getBody(), true);
+        // 距離情報を取り出す
+        $distance = $route_details['routes'][0]['legs'][0]['distance']['text'];
+        // 時間情報を取り出す
+        $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
+        // 時間情報を日本語に変換
+        // 時間情報を日本語に変換
+        // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
+        // replaceArray('変換する部分', ['変換先'], 変換元)
+        $duration_ja = Str::replaceArray('days', ['日'], $duration);
+        $duration_ja = Str::replaceArray('day', ['日'], $duration_ja);
+        $duration_ja = Str::replaceArray('hours', ['時間'], $duration_ja);
+        $duration_ja = Str::replaceArray('hour', ['時間'], $duration_ja);
+        $duration_ja = Str::replaceArray('mins', ['分'], $duration_ja);
+        $duration_ja = Str::replaceArray('min', ['分'], $duration_ja);
+            
         return view('/itineraries/completed_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     

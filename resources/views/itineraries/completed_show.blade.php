@@ -73,23 +73,39 @@
                                 <div class="supplement">
                                     <!--出発時刻表示-->
                                     <div class="departure-time">
-                                        <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $place->departure_time }}</span></p>
+                                        @if($place->departure_time == null)
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：未登録</span></p>
+                                        @else
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $place->departure_time }}</span></p>
+                                        @endif
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
                                         <form action="{{ route('completed_route', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
-                                            <p><span>移動手段：</span>
-                                                <select name="Mode">
-                                                    <option value="WALKING">徒歩</option>
-                                                    <!--<option value="TRANSIT">電車</option>-->
-                                                    <option value="DRIVING">自動車</option>
-                                                    <option value="BICYCLING">自転車</option>
-                                                </select>
-                                                <!--経路詳細表示ボタン-->
+                                            <!--移動手段が登録されていない時-->
+                                            @if($place->transportation == null)
+                                                <span>移動手段：未登録</span>
+                                            <!--移動手段が"WALKING"で保存されているとき-->
+                                            @elseif($place->transportation == "WALKING")
+                                                <span>移動手段：徒歩</span>
+                                            <!--移動手段が"TRAIN"で保存されているとき-->
+                                            @elseif($place->transportation == "TRAIN")
+                                                <span>移動手段：電車</span>
+                                            <!--移動手段が"DRIVING"で保存されているとき-->
+                                            @elseif($place->transportation == "DRIVING")
+                                                <span>移動手段：自動車</span>
+                                            <!--移動手段が"BICYCLING"で保存されているとき-->
+                                            @else($place->transportation == "BICYCLING")
+                                                <span>移動手段：自転車</span>
+                                            @endif
+                                            <!--経路詳細-->
+                                            @if($place->transportation == null)
+                                            <!--経路詳細は表示しない-->
+                                            @else
                                                 <input class="btn-green" type="submit" name="route" value="経路詳細">
-                                            </p>
+                                            @endif
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->
@@ -115,7 +131,13 @@
                                         </form>
                                     </div>
                                     <!--到着時刻表示-->
-                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered"><span>到着時刻：{{$place->arrival_time }}</span></p></div>
+                                    <div class="arrival-time">
+                                        @if($place->arrival_time == null)
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：未登録</span></p>
+                                        @else
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $place->arrival_time }}</span></p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="destination">

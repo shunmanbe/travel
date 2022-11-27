@@ -38,7 +38,7 @@
                 </div>
                 <!--出発地-->
                 <div class="departure">
-                    <p class="name">出発地：{{ $shareItinerary->departure_place_name }}</p>
+                    <div class="name">出発地：{{ $shareItinerary->departure_place_name }}
                         <!--出発地メモ-->
                         <!--メモアイコン-->
                         <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
@@ -53,6 +53,7 @@
                                 <div class="memo-body"><textarea readonly>{{$shareItinerary->memo}}</textarea></div>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <!--目的地一覧-->
                 <div class="destinations">
@@ -72,23 +73,39 @@
                                 <div class="supplement">
                                     <!--出発時刻表示-->
                                     <div class="departure-time">
-                                        <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $groupPlace->departure_time }}</span></p>
+                                        @if($groupPlace->departure_time == null)
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：未登録</span></p>
+                                        @else
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $groupPlace->departure_time }}</span></p>
+                                        @endif
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
-                                        <form action="{{ route('group.completed_route', ['group' => $group, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
+                                        <form action="{{ route('group.completed_route', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                             @csrf
                                             <!--移動手段-->
-                                            <p><span>移動手段：</span>
-                                                <select name="Mode">
-                                                    <option value="WALKING">徒歩</option>
-                                                    <!--<option value="TRANSIT">電車</option>-->
-                                                    <option value="DRIVING">自動車</option>
-                                                    <option value="BICYCLING">自転車</option>
-                                                </select>
-                                                <!--経路詳細表示ボタン-->
+                                            <!--移動手段が登録されていない時-->
+                                            @if($groupPlace->transportation == null)
+                                                <span>移動手段：未登録</span>
+                                            <!--移動手段が"WALKING"で保存されているとき-->
+                                            @elseif($groupPlace->transportation == "WALKING")
+                                                <span>移動手段：徒歩</span>
+                                            <!--移動手段が"TRAIN"で保存されているとき-->
+                                            @elseif($groupPlace->transportation == "TRAIN")
+                                                <span>移動手段：電車</span>
+                                            <!--移動手段が"DRIVING"で保存されているとき-->
+                                            @elseif($groupPlace->transportation == "DRIVING")
+                                                <span>移動手段：自動車</span>
+                                            <!--移動手段が"BICYCLING"で保存されているとき-->
+                                            @else($groupPlace->transportation == "BICYCLING")
+                                                <span>移動手段：自転車</span>
+                                            @endif
+                                            <!--経路詳細-->
+                                            @if($groupPlace->transportation == null)
+                                            <!--経路詳細は表示しない-->
+                                            @else
                                                 <input class="btn-green" type="submit" name="route" value="経路詳細">
-                                            </p>
+                                            @endif
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->
@@ -114,7 +131,13 @@
                                         </form>
                                     </div>
                                     <!--到着時刻表示-->
-                                    <div class="arrival-time"><p class="arrival-time-empty arrival-time-entered"><span>到着時刻：{{ $groupPlace->arrival_time }}</span></p></div>
+                                    <div class="arrival-time">
+                                        @if($groupPlace->arrival_time == null)
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：未登録</span></p>
+                                        @else
+                                            <p class="departure-time-empty departure-time-entered"><span>出発時刻：{{ $groupPlace->arrival_time }}</span></p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="destination">

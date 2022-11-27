@@ -75,6 +75,10 @@ Route::group(['middleware'=>['auth']], function(){
     // 経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
     #詳細編集画面から経路詳細ページへ
     Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route')->name('route'); 
+    #移動手段を保存
+    Route::post('/itineraries/{itinerary}/transportation_store/{place}', 'PlaceController@transportation_store')->name('store_transportation'); 
+    #移動手段編集（削除）
+    Route::get('/itineraries/{itinerary}/transportation_edit/{place}', 'PlaceController@transportation_edit')->name('edit_transportation');
     #詳細完成ページから経路詳細ページへ
     Route::post('/itineraries/{itinerary}/completed_route/{place}', 'ItineraryController@completed_route')->name('completed_route'); 
     
@@ -205,6 +209,10 @@ Route::group(['middleware'=>['auth']], function(){
     // 経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
     #詳細編集画面から経路詳細ページへ
     Route::post('/itineraries/{group}/group/{shareItinerary}/route/shareItinerary/{groupPlace}', 'ShareItineraryController@route')->name('group.route'); 
+    #移動手段を保存
+    Route::post('/itineraries/{group}/group/{shareItinerary}/transportation_store/{groupPlace}', 'GroupPlaceController@transportation_store')->name('group.store_transportation'); 
+    #移動手段編集（削除）
+    Route::get('/itineraries/{group}/group/{shareItinerary}/transportation_edit/{groupPlace}', 'GroupPlaceController@transportation_edit')->name('group.edit_transportation');
     #詳細完成ページから経路詳細ページへ
     Route::post('/itineraries/{group}/group/{shareItinerary}/completed_route/shareItinerary/{groupPlace}', 'ShareItineraryController@completed_route')->name('group.completed_route'); 
     
