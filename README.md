@@ -61,6 +61,11 @@ URL:https://radiant-mountain-36845.herokuapp.com
 - googleログイン機能
  -ログインはメールアドレスのほかに、googleアカウントを用いて簡単にログインできるようにしました。
  <img width="441" alt="スクリーンショット 2022-11-27 14 00 27" src="https://user-images.githubusercontent.com/111550037/204120014-0e3f4df2-a549-4fcb-9ff1-33fdac679cdf.png">
+ 
+-JavaScriptでのバリデーション
+ -旅行中は電波の悪い地域に行くこともあり、そこでは通信に時間がかかります。通信に時間がかかってからエラーが表示されると、ユーザーにとっては不快であるため、通信をする前にエラーを表示できるように、JavaScriptでのバリデーションを実装しました。
+<img width="688" alt="スクリーンショット 2022-11-27 14 11 27" src="https://user-images.githubusercontent.com/111550037/204120285-49d0ee83-8971-458e-b961-e6bc35350ed6.png">
+ 
 
 -グループ機能
  -グループで旅行するときのために、グループを作成して共通のしおりを編集・閲覧できるようにしました。
