@@ -90,19 +90,44 @@
                                     </div>
                                     <!--経路情報-->
                                     <div class="route">
+                                        <!--経路情報をコントローラーに送る-->
                                         <form action="{{ route('group.route', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                             @csrf
-                                            <!--移動手段-->
-                                            <p><span>移動手段：</span>
-                                                <select name="Mode">
-                                                    <option value="WALKING">徒歩</option>
-                                                    <!--<option value="TRANSIT">電車</option>-->
-                                                    <option value="DRIVING">自動車</option>
-                                                    <option value="BICYCLING">自転車</option>
-                                                </select>
+                                            <!--移動手段が決定していない時-->
+                                            @if(empty($groupPlace->transportation))
+                                                <!--移動手段-->
+                                                <p><span>移動手段：</span>
+                                                    <select name="transportation[transportation]">
+                                                        <option value="WALKING">徒歩</option>
+                                                        <!--<option value="TRAIN">電車</option>-->
+                                                        <option value="DRIVING">自動車</option>
+                                                        <option value="BICYCLING">自転車</option>
+                                                    </select>
+                                                    <!--移動手段保存ボタン-->
+                                                    <input class="btn-green" type="submit" value="保存" formaction="{{ route('group.store_transportation', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace'=> $groupPlace->id]) }}">
+                                                    <!--経路詳細表示ボタン-->
+                                                    <input class="btn-green" type="submit" value="経路詳細" formaction="{{ route('group.route', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace'=> $groupPlace->id]) }}">
+                                                </p>
+                                            <!--移動手段が決定している時-->
+                                            @else
+                                                <!--移動手段が"WALKING"で保存されているとき-->
+                                                @if($groupPlace->transportation == "WALKING")
+                                                    <span>移動手段：徒歩</span>
+                                                <!--移動手段が"TRAIN"で保存されているとき-->
+                                                @elseif($groupPlace->transportation == "TRAIN")
+                                                    <span>移動手段：電車</span>
+                                                <!--移動手段が"DRIVING"で保存されているとき-->
+                                                @elseif($groupPlace->transportation == "DRIVING")
+                                                    <span>移動手段：自動車</span>
+                                                <!--移動手段が"BICYCLING"で保存されているとき-->
+                                                @else($groupPlace->transportation == "BICYCLING")
+                                                    <span>移動手段：自転車</span>
+                                                @endif
+                                                <!--移動手段編集アイコン-->
+                                                    <a href="{{ route('group.edit_transportation', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace'=> $groupPlace->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                                 <!--経路詳細表示ボタン-->
-                                                <input class="btn-green" type="submit" name="route" value="経路詳細">
-                                            </p>
+                                                <input class="btn-green" type="submit" value="経路詳細" formaction="{{ route('group.route', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace'=> $groupPlace->id]) }}">
+                                            @endif
                                             <!--出発地からの出発か、目的地からの出発かで場合分け-->
                                             @if($n+1 == 1)
                                                 <!--出発地から出発の場合は出発地→目的地-->

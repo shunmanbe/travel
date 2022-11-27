@@ -19,6 +19,7 @@ class GroupPlace extends Model
         'lng',
         'departure_time',
         'arrival_time', 
+        'transportation',
         'memo',
         ];
     

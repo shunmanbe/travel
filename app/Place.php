@@ -20,19 +20,8 @@ class Place extends Model
         'lng',
         'departure_time',
         'arrival_time', 
+        'transportation',
         'memo',
         ];
-        
-        
-    // protected $dates = [
-    //     'departure_time',
-    //     'arrival_time',
-    // ];
-    
-    // protected $casts = [
-    //     'departure_time' => 'datetime',
-    //     'arrival_time' => 'datetime',
-    //     ];
-    
     
 }

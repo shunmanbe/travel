@@ -131,18 +131,34 @@ class GroupPlaceController extends Controller
         return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
-    //メモ
+    //目的地のメモ
     public function memo(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
         $auth = Auth::user();
         return view('itineraries/group/memo')->with(['auth' => $auth, 'group' => $group, 'shareItinerary' => $shareItinerary, 'groupPlace' => $groupPlace]);
     }
     
-    //メモを保存
+    //目的地のメモを保存
     public function memo_store(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace, Request $request)
     {
         $input_memo = $request->input('memo');
         $groupPlace->fill($input_memo)->save();
+        return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
+    }
+    
+    // 移動手段を保存
+    public function transportation_store(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace, Request $request)
+    {
+        $input = $request->input('transportation');
+        $groupPlace->fill($input)->save();
+        return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
+    }
+    
+    // 移動手段を変更
+    public function transportation_edit(Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
+    {
+        $groupPlace->transportation = null;
+        $groupPlace->save();
         return redirect()->route('group.edit_show', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]);
     }
     
