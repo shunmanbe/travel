@@ -43,6 +43,8 @@
                         <span>出発地：{{ $shareItinerary->departure_place_name }}</span>
                         <!--編集アイコン-->
                         <a href="{{ route('group.edit_departure', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                        <!--目的地メモ-->
+                        <a class="memo" href="{{ route('group.memo_departure', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}"><i class="fa-regular fa-comment icon"></i></a>
                     </p>
                 </div>
                 <!--目的地一覧-->

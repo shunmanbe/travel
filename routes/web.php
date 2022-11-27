@@ -209,6 +209,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/itineraries/{group}/group/{shareItinerary}/completed_route/shareItinerary/{groupPlace}', 'ShareItineraryController@completed_route')->name('group.completed_route'); 
     
     // メモ
+    #出発地のメモページへ
+    Route::get('/itineraries/{group}/group/{shareItinerary}/memo', 'ShareItineraryController@memo_departure')->name('group.memo_departure');
+    #出発地のメモを保存
+    Route::post('/itineraries/{group}/gruop/{shareItinerary}/memo/store', 'ShareItineraryController@memo_departure_store')->name('group.memo_departure_store');
     #メモページへ
     Route::get('/itineraries/{group}/group/{shareItinerary}/memo/shareItinerary/{groupPlace}', 'GroupPlaceController@memo')->name('group.memo');
     #メモを保存
