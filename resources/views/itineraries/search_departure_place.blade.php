@@ -39,7 +39,7 @@
                     <input id="place" class="use_icon" type="text" name="search_name" placeholder="&#xf002;検索"　value="{{ old('search_name') }}">
                     <br>
                     <!--検索ボタン-->
-                    <input class ="btn-orange" type="submit" value="検索" onclick="check_place_search(event);return false;">
+                    <input class ="btn-orange" type="submit" value="検索" onclick="checkPlaceSearch(event);return false;">
                 </form>
             </div>
             <footer>

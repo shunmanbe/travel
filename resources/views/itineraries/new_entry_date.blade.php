@@ -55,7 +55,7 @@
                         <br>
                         
                         <!--「次へ」ボタン-->
-                        <input class ="btn-orange" type="submit" value="次へ" onclick="check_new_entry(event);return false;">
+                        <input class ="btn-orange" type="submit" value="次へ" onclick="checkNewEntry(event);return false;">
                     </form>
                 </div>
             </div>

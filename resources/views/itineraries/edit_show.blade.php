@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $itinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間：</span><span>{{ $itinerary->departure_date->format('Y年m月d日') }}→{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span class="not-responsive">　　</span><span><span class="not-responsive">期間：</span><span id="departure_day">{{ $itinerary->departure_date->format('Y年m月d日') }}</span><span>→</span><span id="arrival_day">{{ $itinerary->arrival_date->format('Y年m月d日') }}</span>
                     <a href="{{ route('edit_new_entry', ['itinerary' => $itinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
@@ -69,13 +69,13 @@
                                     <div class="departure-time">
                                         <!--出発時刻が入力されていない時-->
                                         @if(empty($place->departure_time))
-                                            <form action="{{ route('departure_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
+                                            <form name="departure_time_store" action="{{ route('departure_time_store', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}" method="POST">
                                                 @csrf
                                                 <p class="departure-time-empty"><span>出発時刻：</span>
                                                     <!--出発時刻入力欄-->
                                                     <input id="departure-empty-{{$n}}" class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
-                                                    <input class ="btn-green" type="submit" value="保存">
+                                                    <input class ="btn-green" type="submit" value="保存" onclick="checkDepartureTime({{$n}});return false;">
                                                 </p>
                                             </form>
                                         <!--出発時刻が入力されている時 -->
@@ -122,7 +122,7 @@
                                                     <span>移動手段：自転車</span>
                                                 @endif
                                                 <!--移動手段編集アイコン-->
-                                                    <a href="{{ route('edit_transportation', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
+                                                <a href="{{ route('edit_transportation', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                                 <!--経路詳細表示ボタン-->
                                                 <input class="btn-green" type="submit" value="経路詳細" formaction="{{ route('route', ['itinerary' => $itinerary, 'place'=> $place]) }}">
                                             @endif
@@ -167,7 +167,7 @@
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered"><span>到着時刻：</span><span id='arrival-empty-{{$n}}'>{{$place->arrival_time}}</span>
+                                            <p class="arrival-time-entered"><span>到着時刻：</span><span id='arrival-entered-{{$n}}'>{{$place->arrival_time}}</span>
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="{{ route('edit_arrival_time', ['itinerary' => $itinerary->id, 'place' => $place->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
