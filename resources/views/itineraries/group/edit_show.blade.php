@@ -34,7 +34,7 @@
                 <!--しおり名-->
                 <div class="theme">
                     <h1>{{ $shareItinerary->title }}</h1>
-                    <span class="not-responsive">　　</span><span class="not-responsive">期間：</span><span>{{ $shareItinerary->departure_date->format('Y年m月d日') }}→{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
+                    <span class="not-responsive">　　</span><span class="not-responsive">期間：</span><span id="departure_day">{{ $shareItinerary->departure_date->format('Y年m月d日') }}</span><span>→</span><span id="arrival_day">{{ $shareItinerary->arrival_date->format('Y年m月d日') }}</span>
                     <a href="{{ route('group.edit_new_entry', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id]) }}">　　<i class="fa-solid fa-pen-to-square icon"></i></a>
                 </div>
                 <!--出発地-->
@@ -69,13 +69,13 @@
                                     <div class="departure-time">
                                         <!--出発時刻が入力されていない時-->
                                         @if(empty($groupPlace->departure_time))
-                                            <form action="{{ route('group.departure_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
+                                            <form name="departure_time_store" action="{{ route('group.departure_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                                 @csrf
-                                                <p class="departure_time_empty"><span>出発時刻：</span>
+                                                <p class="departure-time-empty"><span>出発時刻：</span>
                                                     <!--出発時刻入力欄-->
                                                     <input id="departure-empty-{{$n}}" class="input" type="datetime-local" name="time[departure_time]">
                                                     <!--保存ボタン-->
-                                                    <input class ="btn-green" type="submit" value="保存">
+                                                    <input class ="btn-green" type="submit" value="保存" onclick="checkDepartureTime({{$n}});return false;">
                                                 </p>
                                                 <!--エラーメッセージ-->
                                                 <p class="error-message">{{ $errors->first('time.departure_time') }}</p>
@@ -156,7 +156,7 @@
                                     <div class="arrival-time">
                                         <!--到着時刻が入力されていない時-->
                                         @if(empty($groupPlace->arrival_time))
-                                            <form name="arrival_time_store" action="{{ route('group.arrival_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}}" method="POST">
+                                            <form name="arrival_time_store" action="{{ route('group.arrival_time_store', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}" method="POST">
                                                 @csrf
                                                 <p class="arrival-time-empty"><span>到着時刻：</span>
                                                     <!--到着時刻入力欄-->
@@ -167,7 +167,7 @@
                                             </form>
                                         <!--到着時刻が入力されている時-->
                                         @else
-                                            <p class="arrival-time-entered"><span>到着時刻：</span><span id='arrival-empty-{{$n}}'>{{$groupPlace->arrival_time}}</span>
+                                            <p class="arrival-time-entered"><span>到着時刻：</span><span id='arrival-entered-{{$n}}'>{{$groupPlace->arrival_time}}</span>
                                                 <!--到着時刻編集アイコン-->
                                                 <a href="{{ route('group.edit_arrival_time', ['group' => $group->id, 'shareItinerary' => $shareItinerary->id, 'groupPlace' => $groupPlace->id]) }}"><i class="fa-solid fa-pen-to-square icon"></i></a>
                                             </p>
