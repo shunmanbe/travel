@@ -44,7 +44,7 @@ class GroupController extends Controller
         // ここから中間テーブルへの書き込み
         $user_id = $auth['id'];
         // 今保存したグループを取得（nameが先ほど送られてきたnameと一致するもの）
-        $get_group = Group::where('name', $input['name'])->first(); //get()だと、ddした時に配列の階層が一つ増えるため、うまくいかない。
+        $get_group = Group::where('group_id', $input['group_id'])->where('password', $input['password'])->first(); //get()だと、ddした時に配列の階層が一つ増えるため、うまくいかない。
         // 中間テーブルにおいて、今のグループに登録したユーザーを追加（グループid:登録したグループのid にユーザーid:登録したユーザーのid を追加）
         $get_group->users()->attach($user_id);
         

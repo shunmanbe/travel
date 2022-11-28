@@ -22,7 +22,7 @@ function checkDepartureTime(n){
     const INT_DEPARTURE_TIME = DEPARTURE_TIME.replace(/[^0-9]/g, '');
     
     // n番目の到着時刻を取り出す
-    let ARRIVAL_TIME = document.getElementById('arrival-entered-' + n);
+    const ARRIVAL_TIME = document.getElementById('arrival-entered-' + n);
     
     // もし到着時刻が入力されていない時、nullのままだとINT_ARRIVAL_TIMEでエラーが出てそれ以降のjsが
     // 機能しないため、到着日を代わりに代入しておく
@@ -55,9 +55,8 @@ function checkArrivalTime(n){
     const ARRIVAL_TIME = document.getElementById('arrival-empty-' + n).value;
     // 到着時刻から数字だけ抜き出す
     const INT_ARRIVAL_TIME = ARRIVAL_TIME.replace(/[^0-9]/g, '');
-    console.log(INT_ARRIVAL_TIME);
     // n番目の出発時刻を取り出す
-    let DEPARTURE_TIME = document.getElementById('departure-entered-' + n);
+    const DEPARTURE_TIME = document.getElementById('departure-entered-' + n);
     
     // もし出発時刻が入力されていない時、nullのままだとINT_ARRIVAL_TIMEでエラーが出てそれ以降のjsが
     // 機能しないため、出発日を代わりに代入しておく。
@@ -68,7 +67,6 @@ function checkArrivalTime(n){
         // 出発時刻から数字だけ抜き出す
         var INT_DEPARTURE_TIME = DEPARTURE_TIME.innerHTML.replace(/[^0-9]/g, '');
     }
-    console.log(INT_DEPARTURE_TIME)
     // 入力された到着時刻に対するバリデーション
     if(INT_ARRIVAL_TIME == ""){
         window.alert('日時を指定してください');
