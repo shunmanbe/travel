@@ -145,21 +145,22 @@
                                     <!--目的地メモ-->
                                     <!--メモアイコン-->
                                     <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
-                                    <!--メモモーダル-->
-                                    <div class="memo-modal">
-                                        <div class="modal-contents">
-                                            <!--メモ閉じるボタン-->
-                                            <div class="close-memo"><i class="fa fa-2x fa-times"></i></div>
-                                            <!--メモ-->
-                                            <div class="memo"><span>メモ</span></div>
-                                            <!--メモ内容-->
-                                            <div class="memo-body"><textarea readonly>{{$place->memo}}</textarea></div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <br>
                         @endforeach
+                        <!--メモモーダル-->
+                        <div class="memo-modal">
+                            <div class="modal-contents">
+                                <!--メモ閉じるボタン-->
+                                <div class="close-memo"><i class="fa fa-2x fa-times"></i></div>
+                                <!--メモ-->
+                                <div class="memo"><span>メモ</span></div>
+                                <!--メモ内容-->
+                                <div class="memo-body"><textarea readonly>{{$place->memo}}</textarea></div>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="center">
@@ -173,7 +174,6 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
             <script src="{{ asset('/js/memo-modal.js') }}"></script>
         </div>
     </body>

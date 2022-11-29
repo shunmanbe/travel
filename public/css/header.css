@@ -115,6 +115,10 @@ span {
     display: none;
 }
 
+.icon {
+    cursor: pointer;
+}
+
 /*ここからはheader*/
 header {
     background-color: #ffdab9;
