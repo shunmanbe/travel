@@ -256,6 +256,16 @@ class ItineraryController extends Controller
         return view('/itineraries/completed_route')->with(['auth' => $auth, 'itinerary' => $itinerary, 'mode'=> $mode, 'start_name' => $start_name, 'goal_name' => $goal_name, 'distance' => $distance, 'duration_ja' => $duration_ja ]);
     }
     
+    // 電車移動
+    public function route_train()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.ekispert.jp/v1/json/station/light?key=**********&code=22828';
+        $response = $client->request('GET', $url,
+        ['Bearer' => config('serveices.google-map.apikey')]);
+        $route_details = json_decode($response->getBody(), true);
+    }
+    
     //ログアウト
     public function logout()
     {
