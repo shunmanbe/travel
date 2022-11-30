@@ -66,7 +66,7 @@ class PlaceController extends Controller
     public function destination_store(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request['destination'])->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //目的地を含めた詳細画面表示
@@ -123,14 +123,14 @@ class PlaceController extends Controller
     public function destination_update(Request $request, Itinerary $itinerary, Place $place)
     {
         $place->fill($request->input('destination'))->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');//目的地をupdate
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //削除
     public function destination_delete(Itinerary $itinerary, Place $place)
     {
         $place->delete();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //目的地のメモ
@@ -145,7 +145,7 @@ class PlaceController extends Controller
     {
         $input_memo = $request->input('memo');
         $place->fill($input_memo)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     // 移動手段を保存
@@ -177,7 +177,7 @@ class PlaceController extends Controller
         $input_array = ['departure_time' => $input];
         // 保存する
         $place->fill($input_array)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //出発時刻を編集(削除)
@@ -199,7 +199,7 @@ class PlaceController extends Controller
         $input_array = ['arrival_time' => $input];
         // 保存する
         $place->fill($input_array)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //到着時刻を編集(削除)
@@ -207,7 +207,7 @@ class PlaceController extends Controller
     {
         $place->arrival_time = null;
         $place->save();
-        return redirect('/itineraries/'. $itinerary->id .'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     

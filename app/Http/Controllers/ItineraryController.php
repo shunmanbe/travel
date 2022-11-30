@@ -38,7 +38,7 @@ class ItineraryController extends Controller
         $input = $request['explanation'];
         $itinerary->fill($input)->save();
         //地域選択画面を表示するweb.phpへ
-        return redirect('/');
+        return redirect()->route('index');
     }
 
     //完成した詳細画面表示
@@ -71,7 +71,7 @@ class ItineraryController extends Controller
         $input_date['user_id'] = Auth::id();
         $itinerary->fill($input_date)->save();
         //地域選択画面を表示するweb.phpへ
-        return redirect('/itineraries/'.$itinerary->id.'/departure_place_search');
+        return redirect()->route('departure_place_search',['itinerary' => $itinerary->id]);
     }
     
     //出発地を選択
@@ -126,7 +126,7 @@ class ItineraryController extends Controller
     {
         $input_departure = $request['departure'];
         $itinerary->fill($input_departure)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     
@@ -134,7 +134,7 @@ class ItineraryController extends Controller
     public function itinerary_delete(Itinerary $itinerary)
     {
         $itinerary->delete();
-        return redirect('/');
+        return redirect()->route('index');
     }
     
     //しおり名・旅行期間を編集
@@ -152,7 +152,7 @@ class ItineraryController extends Controller
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
         $itinerary->fill($input_date)->save();
-        return redirect('/itineraries/' . $itinerary->id . '/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //出発地を編集
@@ -174,7 +174,7 @@ class ItineraryController extends Controller
     {
         $input_memo = $request->input('memo');
         $itinerary->fill($input_memo)->save();
-        return redirect('/itineraries/'.$itinerary->id.'/edit/show');
+        return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
     }
     
     //詳細編集ページから経路詳細（ルート）を表示（移動手段が決まっていない時）
@@ -260,7 +260,7 @@ class ItineraryController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect()->route('index');
     }
     
     //いいね機能
