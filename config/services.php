@@ -39,4 +39,8 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_CALLBACK_URL'),
     ],
+    
+    'ekispert' => [
+        'apikey' => env('EKISPERT_API_KEY'),
+    ]
 ];

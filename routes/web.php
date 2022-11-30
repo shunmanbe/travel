@@ -75,6 +75,8 @@ Route::group(['middleware'=>['auth']], function(){
     // 経路詳細表示(二つの詳細ページから進んだ時に、戻るボタンを押してそれぞれに別れるように2つ作った)
     #詳細編集画面から経路詳細ページへ
     Route::post('/itineraries/{itinerary}/route/{place}', 'ItineraryController@route')->name('route'); 
+    #電車移動時のページへ
+    Route::post('/itineraries/{itinerary}/route/{place}/train', 'ItineraryController@route_train')->name('route_train'); 
     #移動手段を保存
     Route::post('/itineraries/{itinerary}/transportation_store/{place}', 'PlaceController@transportation_store')->name('store_transportation'); 
     #移動手段編集（削除）
