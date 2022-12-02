@@ -191,7 +191,8 @@ class ItineraryController extends Controller
             if($mode == 'TRAIN'){
                 $start_address = $request->start_address;
                 $goal_address = $request->goal_address;
-                return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+                // return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
+                return redirect()->route('route_train', ['itinerary' => $itinerary->id, 'place' => $place->id]);
             }
         }
         $start_name = $request->input('start_name');
@@ -260,10 +261,11 @@ class ItineraryController extends Controller
     public function route_train()
     {
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.ekispert.jp/v1/json/station/light?key=**********&code=22828';
+        $url = 'https://api.ekispert.jp/v1/json/station/light?key=' . config('services.ekispert.apikey') . '&code=22828';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $route_details = json_decode($response->getBody(), true);
+        dd($route_details);
     }
     
     //ログアウト
