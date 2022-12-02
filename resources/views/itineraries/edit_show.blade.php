@@ -97,7 +97,7 @@
                                                 <p><span>移動手段：</span>
                                                     <select name="transportation[transportation]">
                                                         <option value="WALKING">徒歩</option>
-                                                        <!--<option value="TRAIN">電車</option>-->
+                                                        <option value="TRAIN">電車</option>
                                                         <option value="DRIVING">自動車</option>
                                                         <option value="BICYCLING">自転車</option>
                                                     </select>
