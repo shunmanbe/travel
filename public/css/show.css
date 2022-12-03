@@ -19,6 +19,7 @@
     text-align: left;
     margin-top: 0;
     margin-bottom: 0;
+    
 }
 
 select {
@@ -104,54 +105,6 @@ form {
     margin-bottom: 60px;
 }
 
-
-
-/*completed_showのみ*/
-/*モーダル部分（完成した詳細ページのみ）*/
-.memo-modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 100;
-  display: none;
-}
-
-.modal-contents {
-  position: absolute;
-  top: 20%;
-  left: 30%;
-  background-color: #fffaf0;
-  padding: 20px 0 40px;
-  border-radius: 10px;
-  width: 40%;
-  height: 60%;
-  text-align: center;
-}
-
-.fa-times {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  color: rgba(128, 128, 128, 0.46);
-  cursor: pointer;
-}
-
-textarea {
-    font-size: 20px;
-    border: 5px solid orange;
-    border-radius: 5px;
-    width: 90%;
-    height: 80%;
-    position: absolute;
-    top: 15%;
-    left: 4%;
-    background-color: white;
-    resize: none;
-}
-
 .btn-green {
     border: 2px solid #22B48D;
     border-radius: 5px;
@@ -170,3 +123,67 @@ textarea {
     left: 0px;
     top: 5px;
 }
+
+
+/*completed_showのみ*/
+/*モーダル部分（完成した詳細ページのみ）*/
+/*.memo-modal {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  background-color: rgba(0, 0, 0, 0.2);*/
+/*  z-index: 100;*/
+/*  display: none;*/
+/*}*/
+
+/*.modal-contents {*/
+/*  position: absolute;*/
+/*  top: 20%;*/
+/*  left: 30%;*/
+/*  background-color: #fffaf0;*/
+/*  padding: 20px 0 40px;*/
+/*  border-radius: 10px;*/
+/*  width: 40%;*/
+/*  height: 60%;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.fa-times {*/
+/*  position: absolute;*/
+/*  top: 12px;*/
+/*  right: 12px;*/
+/*  color: rgba(128, 128, 128, 0.46);*/
+/*  cursor: pointer;*/
+/*}*/
+
+textarea {
+    font-size: 15px;
+    border: 5px solid orange;
+    border-radius: 5px;
+    width: 90%;
+    height: 100%;
+    top: 15%;
+    left: 4%;
+    background-color: white;
+    resize: none;
+}
+
+/*アコーディオン*/
+.memo span {
+    font-weight: lighter;
+    font-size: 15px;
+}
+
+.memo-body {
+    font-size: 12px;
+    padding: 5px 0px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.memo-display {
+    letter-spacing: 4px;
+}
+

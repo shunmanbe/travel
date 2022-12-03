@@ -41,16 +41,13 @@
                     <div class="name">出発地：{{ $itinerary->departure_place_name }}
                         <!--出発地メモ-->
                         <!--メモアイコン-->
-                        <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
-                        <!--メモモーダル-->
-                        <div class="memo-modal">
-                            <div class="modal-contents">
-                                <!--メモ閉じるボタン-->
-                                <div class="close-memo"><i class="fa fa-2x fa-times"></i></div>
-                                <!--メモ-->
-                                <div class="memo"><span>メモ</span></div>
-                                <!--メモ内容-->
-                                <div class="memo-body"><textarea readonly>{{$itinerary->memo}}</textarea></div>
+                        <div class="memo">
+                            <!--メモアコーディオン-->
+                            <span><i class="fa-solid fa-circle-info icon memo-display">open</i></span>
+                            <!--<span>メモ</span>-->
+                            <!--<span class="memo-display">開く</span>-->
+                            <div class="memo-body">
+                                <textarea readonly>{{$itinerary->memo}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -144,23 +141,17 @@
                                 <div class="name">目的地{{ $n + 1 }}:{{ $place->name }}
                                     <!--目的地メモ-->
                                     <!--メモアイコン-->
-                                    <span class="open-memo"><i class="fa-regular fa-comment icon"></i></span>
-                                    
+                                    <div class="memo">
+                                       <!--メモアコーディオン-->
+                                        <span><i class="fa-solid fa-circle-info icon memo-display">open</i></span>
+                                        <div class="memo-body">
+                                            <textarea readonly>{{$place->memo}}</textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <br>
                         @endforeach
-                        <!--メモモーダル-->
-                        <div class="memo-modal">
-                            <div class="modal-contents">
-                                <!--メモ閉じるボタン-->
-                                <div class="close-memo"><i class="fa fa-2x fa-times"></i></div>
-                                <!--メモ-->
-                                <div class="memo"><span>メモ</span></div>
-                                <!--メモ内容-->
-                                <div class="memo-body"><textarea readonly>{{$place->memo}}</textarea></div>
-                            </div>
-                        </div>
                     @endif
                 </div>
                 <div class="center">
@@ -175,6 +166,7 @@
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/memo-modal.js') }}"></script>
+            <script src="{{ asset('/js/memo-accordion.js') }}"></script>
         </div>
     </body>
 </html>

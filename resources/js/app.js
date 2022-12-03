@@ -32,12 +32,12 @@ const app = new Vue({
 });
 
 
-require('./ajaxlike.js');
+// require('./ajaxlike.js');
 
 // vue-js-modalをインポート
-import VModal from 'vue-js-modal';
+// import VModal from 'vue-js-modal';
 
 Vue.use(VModal)
 
-Vue.component('Memo-modal', require('.components/modals/Memo_modal.vue').default);
+// Vue.component('memo-modal', require('.components/modals/Memo_modal.vue').default);
 
