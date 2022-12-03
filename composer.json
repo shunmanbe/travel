@@ -16,6 +16,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "str/str": "^1.1"
     },
     "require-dev": {
