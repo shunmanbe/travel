@@ -31,6 +31,8 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/itineraries/new_entry/date', 'ItineraryController@date_select')->name('new_entry');
     #日程を保存
     Route::post('/itineraries/new_entry/date_store', 'ItineraryController@date_store')->name('date_store');
+    #写真を投稿
+    Route::post('/itineraries/{itinerary}/image', 'ItineraryController@image')->name('image');
     #完成した詳細ページへ
     Route::get('/itineraries/{itinerary}/completed/show', 'ItineraryController@completed_show')->name('completed_show');
     #詳細編集ページへ
