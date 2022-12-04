@@ -27,6 +27,8 @@ class CreateItinerariesTable extends Migration
             $table->string('departure_place_lng')->nullable();
             $table->string('memo')->nullable();
             $table->integer('likes_count')->default(0);
+            // 画像のパスを保存するカラムを追加
+            $table->string('image_path')->nullable();
         });
     }
 
