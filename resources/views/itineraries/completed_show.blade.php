@@ -44,8 +44,6 @@
                         <div class="memo">
                             <!--メモアコーディオン-->
                             <span><i class="fa-solid fa-circle-info icon memo-display">open</i></span>
-                            <!--<span>メモ</span>-->
-                            <!--<span class="memo-display">開く</span>-->
                             <div class="memo-body">
                                 <textarea readonly>{{$itinerary->memo}}</textarea>
                             </div>

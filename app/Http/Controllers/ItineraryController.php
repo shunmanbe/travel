@@ -41,21 +41,6 @@ class ItineraryController extends Controller
         //地域選択画面を表示するweb.phpへ
         return redirect()->route('index');
     }
-    
-    // 写真の投稿
-    public function image(Request $request, Itinerary $itinerary)
-    {
-        $form = $request->all();
-        
-        // s3アップロード開始
-        $image = $request->file('image');
-        // バケットのmyprefixフォルダへアップロード
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-        // アップロードした画像のパスを取得
-        $itinerary->image_path = Storage::disk('s3')->url($path);
-        $itinerary->save();
-        return redirect()->route('index');
-    }
 
     //完成した詳細画面表示
     public function completed_show(Itinerary $itinerary, Place $place) 
@@ -143,6 +128,28 @@ class ItineraryController extends Controller
         $input_departure = $request['departure'];
         $itinerary->fill($input_departure)->save();
         return redirect()->route('edit_show',['itinerary' => $itinerary->id]);
+    }
+    
+    // 写真投稿画面へ
+    public function image_departure(Itinerary $itinerary)
+    {
+        $auth = Auth::user();
+        return view('itineraries/image_departure')->with(['auth' => $auth, 'itinerary' => $itinerary]);
+    }
+    
+    // 写真の投稿
+    public function image(Request $request, Itinerary $itinerary)
+    {
+        $form = $request->all();
+        
+        // s3アップロード開始
+        $image = $request->file('image');
+        // バケットのmyprefixフォルダへアップロード
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // アップロードした画像のパスを取得
+        $itinerary->image_path = Storage::disk('s3')->url($path);
+        $itinerary->save();
+        return redirect()->route('index');
     }
     
     
