@@ -64,6 +64,13 @@
                                         @method('DELETE')
                                         <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
                                     </form>
+                                    <form action="{{ route('image', ['itinerary' => $itinerary->id]) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <!-- アップロードフォームの作成 -->
+                                        <input type="file" name="image">
+                                        <input type="submit" value="アップロード">
+                                    </form>
+                                    <img src="{{ $itinerary->image_path }}">
                                 </div>
                             @endforeach
                         </div>

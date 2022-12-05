@@ -15,6 +15,7 @@ use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ItineraryController extends Controller
 {
@@ -38,6 +39,21 @@ class ItineraryController extends Controller
         $input = $request['explanation'];
         $itinerary->fill($input)->save();
         //地域選択画面を表示するweb.phpへ
+        return redirect()->route('index');
+    }
+    
+    // 写真の投稿
+    public function image(Request $request, Itinerary $itinerary)
+    {
+        $form = $request->all();
+        
+        // s3アップロード開始
+        $image = $request->file('image');
+        // バケットのmyprefixフォルダへアップロード
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // アップロードした画像のパスを取得
+        $itinerary->image_path = Storage::disk('s3')->url($path);
+        $itinerary->save();
         return redirect()->route('index');
     }
 
