@@ -46,7 +46,7 @@
                         <!--目的地メモ-->
                         <a class="memo" href="{{ route('memo_departure', ['itinerary' => $itinerary->id]) }}"><i class="fa-regular fa-comment icon"></i></a>
                         <!--写真投稿-->
-                        <a class="image" href="{{ route('image_departure', ['itinerary' => $itinerary->id]) }}"><i class="fa-solid fa-image icon"></i></a>
+                        <!--<a class="image" href="{{ route('image_departure', ['itinerary' => $itinerary->id]) }}"><i class="fa-solid fa-image icon"></i></a>-->
                     </p>
                 </div>
                 <!--目的地一覧-->

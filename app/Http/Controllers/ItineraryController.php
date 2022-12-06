@@ -140,10 +140,11 @@ class ItineraryController extends Controller
     // 写真の投稿
     public function image(Request $request, Itinerary $itinerary)
     {
+        // dd($request);
         $form = $request->all();
-        
         // s3アップロード開始
         $image = $request->file('image');
+        // dd($image);
         // バケットのmyprefixフォルダへアップロード
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
         // アップロードした画像のパスを取得
