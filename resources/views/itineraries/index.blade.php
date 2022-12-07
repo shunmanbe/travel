@@ -38,7 +38,9 @@
                 <div class="header-left not-responsive"></div>
                 <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
+                    
                     <ul>
+                        <li><i class="fa-solid fa-bars icon-included"></i></li>
                         <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
                         <li><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
