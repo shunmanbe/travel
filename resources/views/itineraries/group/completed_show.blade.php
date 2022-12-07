@@ -163,8 +163,7 @@
                 <div class="copyright"><span>©︎2022 Shun Nakanishi</span></div>
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
-            <script src="{{ asset('/js/alert.js') }}"></script>
-            <script src="{{ asset('/js/memo-modal.js') }}"></script>
+            <script src="{{ asset('/js/memo-accordion.js') }}"></script>
         </div>
     </body>
 </html>
