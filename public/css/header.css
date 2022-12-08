@@ -166,31 +166,77 @@ header a:hover{
 
 .header-right {
     width: 30%;
+    display: flex;
 }
 
-.setting {
-    font-size: 30px;
-    float: right;
-    height: 100%;
+.setting-list-left {
+    width: 60%;
+}
+
+.setting-list {
     display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+/*completed_showのみ*/
+/*モーダル部分（完成した詳細ページのみ）*/
+.setting-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: none;
+}
+
+.setting-list {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  background-color: #fffaf0;
+  padding: 20px 0 40px;
+  border-radius: 10px;
+  width: 40%;
+  height: 60%;
+  text-align: center;
+  display: none;
+  z-index: 101;
+}
+
+
+
+.setting-icon {
+    font-size: 30px;
+    height: 100%;
+    width: 40%;
+    display:flex;
     justify-content: center;
     align-items: center;
-    padding-right: 40px;
+} 
+
+.setting-list-item {
+    width: 100%;
+    /*display: none;*/
 }
 
-.header-right ul {
+.setting-list ul {
     list-style: none;
     float: right;
     margin: 0px;
     display: block;
 }
 
-.header-right li {
+.setting-list li {
     float: none;
     line-height: 80px;
     padding-right: 25px;
-    /*display: none;*/
+    display: none;
 }
+
+
 
 .header-right a {
     display: block;

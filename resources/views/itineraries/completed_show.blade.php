@@ -24,11 +24,21 @@
                 <div class="header-left not-responsive"></div>
                 <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
-                    <ul>
-                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
-                    </ul>
+                    <div class="setting-list-left"></div>
+                    <div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
+                    <div class="setting-list">
+                        <ul>
+                            <li class="setting-list-item"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                            <li class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></li>
+                            <li class="close-setting"><span>閉じる</span></li>
+                        </ul>
+                        
+                        <!--<div class="setting-list-item"><i class="fa-solid fa-user"></i> {{ $auth->name }}</div>-->
+                        <!--<div class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></div>-->
+                        <!--<div class="close-setting"><span>閉じる</span></div>-->
+                    </div>
                 </div>
+                <div class="setting-background"></div>
             </header>
             <div class="containers">
                 <!--しおり名-->
@@ -164,6 +174,7 @@
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/memo-accordion.js') }}"></script>
+            <script src="{{ asset('/js/setting.js') }}"></script>
         </div>
     </body>
 </html>

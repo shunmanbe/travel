@@ -38,12 +38,13 @@
                 <div class="header-left not-responsive"></div>
                 <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
-                    <i class="fa-solid fa-bars setting"></i>
-                    <ul class="setting_body">
-                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="{{ route('logout') }}">ログアウト</a></li>
+                    <ul>
+                        <li class="setting_body"><i class="fa-solid fa-bars setting"></i></li>
+                        <li class="setting_body"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                        <li class="setting_body"><a href="{{ route('logout') }}">ログアウト</a></li>
                     </ul>
                 </div>
+                
             </header>
             <div class="container containers">
                 <div class='itineraries'>
