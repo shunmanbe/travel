@@ -168,16 +168,28 @@ header a:hover{
     width: 30%;
 }
 
+.setting {
+    font-size: 30px;
+    float: right;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 40px;
+}
+
 .header-right ul {
     list-style: none;
     float: right;
     margin: 0px;
+    display: block;
 }
 
 .header-right li {
-    float: left;
+    float: none;
     line-height: 80px;
     padding-right: 25px;
+    /*display: none;*/
 }
 
 .header-right a {
@@ -191,3 +203,4 @@ header a:hover{
     background-color:rgba(255, 165, 0, 0.6);
     color: black;
 }
+
