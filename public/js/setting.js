@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11007,29 +11007,24 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./resources/js/memo-accordion.js":
-/*!****************************************!*\
-  !*** ./resources/js/memo-accordion.js ***!
-  \****************************************/
+/***/ "./resources/js/setting.js":
+/*!*********************************!*\
+  !*** ./resources/js/setting.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function () {
-  $('.memo').click(function () {
-    var $memo_body = $(this).find('.memo-body');
-    if ($memo_body.hasClass('open')) {
-      $memo_body.removeClass('open');
-      // $memo_bodyを隠す
-      $memo_body.slideUp();
-      // spanタグの中身を書き換える
-      $(this).find('.memo-display').text('open');
+  $('.setting').click(function () {
+    var $setting_body = $(this).find('.setting_body');
+    if ($setting_body.hasClass('open')) {
+      $setting_body.removeClass('open');
+      // $setting_bodyを隠す
+      $setting_body.slideUp();
     } else {
-      $memo_body.addClass('open');
-      // $memo_bodyを表示
-      $memo_body.slideDown();
-
-      // spanタグの中身を書き換える
-      $(this).find('.memo-display').text('close');
+      $setting_body.addClass('open');
+      // $setting_bodyを表示
+      $setting_body.slideDown();
     }
   });
 });
@@ -11037,14 +11032,14 @@ return jQuery;
 
 /***/ }),
 
-/***/ 3:
-/*!**********************************************!*\
-  !*** multi ./resources/js/memo-accordion.js ***!
-  \**********************************************/
+/***/ 4:
+/*!***************************************!*\
+  !*** multi ./resources/js/setting.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ec2-user/environment/travel/resources/js/memo-accordion.js */"./resources/js/memo-accordion.js");
+module.exports = __webpack_require__(/*! /home/ec2-user/environment/travel/resources/js/setting.js */"./resources/js/setting.js");
 
 
 /***/ })

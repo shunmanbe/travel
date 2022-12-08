@@ -18,9 +18,4 @@ $(function(){
       
     }
   });
-  
-    $('.icon-included').click(function(){
-      const $
-    }
-    
 });

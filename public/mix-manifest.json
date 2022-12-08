@@ -4,5 +4,6 @@
     "/js/header.js": "/js/header.js",
     "/js/like.js": "/js/like.js",
     "/js/memo-accordion.js": "/js/memo-accordion.js",
-    "/js/memo-modal.js": "/js/memo-modal.js"
+    "/js/memo-modal.js": "/js/memo-modal.js",
+    "/js/setting.js": "/js/setting.js"
 }
