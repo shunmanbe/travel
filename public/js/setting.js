@@ -11015,17 +11015,13 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function () {
-  $('.setting').click(function () {
-    var $setting_body = $(this).find('.setting_body');
-    if ($setting_body.hasClass('open')) {
-      $setting_body.removeClass('open');
-      // $setting_bodyを隠す
-      $setting_body.slideUp();
-    } else {
-      $setting_body.addClass('open');
-      // $setting_bodyを表示
-      $setting_body.slideDown();
-    }
+  $('.setting-icon').click(function () {
+    $('.setting-background').fadeIn();
+    $('.setting-list').fadeIn();
+  });
+  $('.close-setting').click(function () {
+    $('.setting-background').fadeOut();
+    $('.setting-list').fadeOut();
   });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
