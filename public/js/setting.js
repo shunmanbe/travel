@@ -11017,11 +11017,11 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function($) {$(function () {
   $('.setting-icon').click(function () {
     $('.setting-background').fadeIn();
-    $('.setting-list').fadeIn();
+    $('.setting-list').slideDown();
   });
   $('.close-setting').click(function () {
     $('.setting-background').fadeOut();
-    $('.setting-list').fadeOut();
+    $('.setting-list').slideUp();
   });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))

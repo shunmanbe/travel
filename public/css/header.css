@@ -154,6 +154,15 @@ header a:hover{
     color: #FF8177;
 }
 
+.color-change {
+    cursor: pointer;
+    transition: .3s;
+}
+
+.color-change:hover{
+    color: #FF8177;
+}
+
 .contact a {
     cursor: pointer;
     transition: .3s;
@@ -179,8 +188,6 @@ header a:hover{
     height: 100%;
 }
 
-/*completed_showのみ*/
-/*モーダル部分（完成した詳細ページのみ）*/
 .setting-background {
   position: fixed;
   top: 0;
@@ -194,19 +201,22 @@ header a:hover{
 
 .setting-list {
   position: absolute;
-  top: 20%;
-  left: 30%;
+  top: 80px;
+  right: 0px;
   background-color: #fffaf0;
-  padding: 20px 0 40px;
-  border-radius: 10px;
-  width: 40%;
-  height: 60%;
-  text-align: center;
+  padding: 10px 20px 20px 20px;
+  margin-right: 10px;
+  border: solid 2px orange;
+  border-radius: 5px;
+  /*width: 15%;*/
+  text-align: left;
   display: none;
   z-index: 101;
 }
 
-
+.setting-list-item {
+    border-bottom: dashed 0.5px gray;
+}
 
 .setting-icon {
     font-size: 30px;
@@ -224,29 +234,16 @@ header a:hover{
 
 .setting-list ul {
     list-style: none;
-    float: right;
+    /*float: right;*/
+    padding-left: 0px;
     margin: 0px;
     display: block;
 }
 
 .setting-list li {
     float: none;
-    line-height: 80px;
-    padding-right: 25px;
-    display: none;
-}
-
-
-
-.header-right a {
-    display: block;
-    transition: all 0.3s;
-    padding: 0px 20px;
-    height: 80px;
-}
-
-.header-right a:hover {
-    background-color:rgba(255, 165, 0, 0.6);
-    color: black;
+    line-height: 30px;
+    /*padding-right: 25px;*/
+    display: list-item;
 }
 
