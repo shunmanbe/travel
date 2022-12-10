@@ -25,12 +25,12 @@
                 <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
                     <div class="setting-list-left"></div>
-                    <div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
+                    <div class="setting-icon open-setting"><i class="fa-solid fa-gear color-change"></i></div>
                     <div class="setting-list">
                         <ul>
-                            <li class="setting-list-item"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
+                            <li class="setting-list-item"><span class="color-change"><i class="fa-solid fa-user"></i> {{ $auth->name }}</span></li>
                             <li class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></li>
-                            <li class="close-setting"><span>閉じる</span></li>
+                            <li class="close-setting setting-list-item"><span class="color-change">閉じる</span></li>
                         </ul>
                         
                         <!--<div class="setting-list-item"><i class="fa-solid fa-user"></i> {{ $auth->name }}</div>-->
