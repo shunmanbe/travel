@@ -23,13 +23,19 @@
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
-                <div class="header-title"><h1><a href="/">旅のしおり</a></h1></div>
+                <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
-                    <ul>
-                        <li><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li><a href="/itineraries/logout">ログアウト</a></li>
-                    </ul>
+                    <div class="setting-list-left"></div>
+                    <div class="setting-icon open-setting"><i class="fa-solid fa-gear color-change"></i></div>
+                    <div class="setting-list">
+                        <ul>
+                            <li class="setting-list-item"><span class="color-change"><i class="fa-solid fa-user"></i> {{ $auth->name }}</span></li>
+                            <li class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></li>
+                            <li class="close-setting setting-list-item"><span class="color-change">閉じる</span></li>
+                        </ul>
+                    </div>
                 </div>
+                <div class="setting-background"></div>
             </header>
             <div class="container containers">
                 <h1>出発地を検索</h1> 
@@ -49,6 +55,7 @@
                 <div class="contact"><a href="/itineraries/contact/form">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/validation.js') }}"></script>
+            <script src="{{ asset('/js/setting.js') }}"></script>
         </div>
     </body>
 </html>

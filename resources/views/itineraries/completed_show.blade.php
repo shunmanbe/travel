@@ -32,10 +32,6 @@
                             <li class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></li>
                             <li class="close-setting setting-list-item"><span class="color-change">閉じる</span></li>
                         </ul>
-                        
-                        <!--<div class="setting-list-item"><i class="fa-solid fa-user"></i> {{ $auth->name }}</div>-->
-                        <!--<div class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></div>-->
-                        <!--<div class="close-setting"><span>閉じる</span></div>-->
                     </div>
                 </div>
                 <div class="setting-background"></div>

@@ -137,7 +137,12 @@ button {
 	background-color: #fffaf0;
 }
 
-.group-trash {
+.group-trash, .trash {
     /*width: 100px;*/
     font-size: 20px;
+}
+
+/*トップページだけ設定が変になるので記載*/
+.setting-list {
+  height: 110px;
 }

@@ -6,20 +6,11 @@
         <title>旅のしおり</title>
         <!-- Fonts -->
         <link href="https:fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-        <link href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/loading.css') }}" >
         <!--アイコン表示-->
-        <!--<script src="https://kit.fontawesome.com/af4a7db726.js" crossorigin="anonymous"></script>-->
-        <!--<script defer src="https://use.fontawesome.com/releases/v6.2.0/js/all.js"></script>-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         <!--ページCSS-->
         <link rel="stylesheet" href="{{ asset('/css/index.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/index.css') }}" >
-        <!--loading-->
-        <link rel="stylesheet" href="{{ asset('/css/loading.css') }}" >
         <!--header-->
         <link rel="stylesheet" href="{{ asset('/css/header.css') }}" >
         <link rel="stylesheet" href="{{ asset('/css/responsive/header.css') }}" >
@@ -28,23 +19,23 @@
         <link rel="stylesheet" href="{{ asset('/css/responsive/footer.css') }}" >
     </head>
     <body>
-        <!--ローディング画面-->
-        <div id="splash">
-            <div id="splash_text"></div>
-        </div>
         <!--ヘッダー-->
         <div class="wrapper">
             <header>
                 <div class="header-left not-responsive"></div>
                 <div class="header-title"><h1><a href="{{ route('index') }}">旅のしおり</a></h1></div>
                 <div class="header-right">
-                    <ul>
-                        <li class="setting_body"><i class="fa-solid fa-bars setting"></i></li>
-                        <li class="setting_body"><i class="fa-solid fa-user"></i> {{ $auth->name }}</li>
-                        <li class="setting_body"><a href="{{ route('logout') }}">ログアウト</a></li>
-                    </ul>
+                    <div class="setting-list-left"></div>
+                    <div class="setting-icon open-setting"><i class="fa-solid fa-gear color-change"></i></div>
+                    <div class="setting-list">
+                        <ul>
+                            <li class="setting-list-item"><span class="color-change"><i class="fa-solid fa-user"></i> {{ $auth->name }}</span></li>
+                            <li class="setting-list-item"><a href="{{ route('logout') }}">ログアウト</a></li>
+                            <li class="close-setting setting-list-item"><span class="color-change">閉じる</span></li>
+                        </ul>
+                    </div>
                 </div>
-                
+                <div class="setting-background"></div>
             </header>
             <div class="container containers">
                 <div class='itineraries'>
@@ -64,7 +55,7 @@
                                     <form action="{{ route('itinerary_delete', ['itinerary' => $itinerary->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can"></i></button>
+                                        <button class="icon" type="submit" onClick="delete_alert(event);return false;"><i class="fa-solid fa-trash-can trash"></i></button>
                                     </form>
                                 </div>
                             @endforeach
@@ -90,13 +81,6 @@
                 <div class="contact"><a href="{{ route('form') }}">お問い合わせ</a></div>
             </footer>
             <script src="{{ asset('/js/delete_alert.js') }}"></script>
-            <!--==============JQuery読み込み===============-->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-            <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
-            <!--IE11用-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-            <!--自作のJS-->
             <script src="{{ asset('/js/loading.js') }}"></script>
             <script src="{{ asset('/js/setting.js') }}"></script>
         </div>
