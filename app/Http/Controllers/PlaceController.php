@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\Itinerary;
 use Carbon\Carbon;
-// use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItinerarySearchRequest;
