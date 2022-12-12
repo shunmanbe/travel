@@ -141,8 +141,3 @@ button {
     /*width: 100px;*/
     font-size: 20px;
 }
-
-/*トップページだけ設定が変になるので記載*/
-.setting-list {
-  height: 110px;
-}

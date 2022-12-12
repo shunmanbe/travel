@@ -10,8 +10,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ItineraryDateRequest;
-use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -66,7 +64,7 @@ class ItineraryController extends Controller
     }
     
     //日付を保存
-    public function date_store(ItineraryDateRequest $request, Itinerary $itinerary)
+    public function date_store(Request $request, Itinerary $itinerary)
     {
         $input_date = $request['initial_setting'];
         $input_date['user_id'] = Auth::id();
@@ -83,7 +81,7 @@ class ItineraryController extends Controller
     }
     
     //出発地をマップから選択
-    public function departure_place_map(ItinerarySearchRequest $request, Itinerary $itinerary)
+    public function departure_place_map(Request $request, Itinerary $itinerary)
     {
         $auth = Auth::user();
         $input = $request['search_name'];
@@ -147,6 +145,7 @@ class ItineraryController extends Controller
         // dd($image);
         // バケットのmyprefixフォルダへアップロード
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        dd(a);
         // アップロードした画像のパスを取得
         $itinerary->image_path = Storage::disk('s3')->url($path);
         $itinerary->save();
@@ -165,12 +164,11 @@ class ItineraryController extends Controller
     public function edit_new_entry(Itinerary $itinerary, User $user)
     {
         $auth = Auth::user();
-        // $inputs = $itinerary['title', 'departure_date', 'arrival_date'];
         return view('itineraries/edit_new_entry')->with(['auth' => $auth, 'itinerary' => $itinerary, 'user' => $user]);
     }
     
     //しおり名と旅行期間をアップデート
-    public function update_new_entry(ItineraryDateRequest $request, Itinerary $itinerary)
+    public function update_new_entry(Request $request, Itinerary $itinerary)
     {
         $auth = Auth::user();
         $input_date = $request['initial_setting'];
@@ -215,7 +213,6 @@ class ItineraryController extends Controller
             if($mode == 'TRAIN'){
                 $start_address = $request->start_address;
                 $goal_address = $request->goal_address;
-                // return redirect('/itineraries/' . $place->id . '/geocoding')->with(['start_address' => $start_address, 'goal_address' => $goal_address]);
                 return redirect()->route('route_train', ['itinerary' => $itinerary->id, 'place' => $place->id]);
             }
         }
@@ -268,7 +265,6 @@ class ItineraryController extends Controller
         // 時間情報を取り出す
         $duration = $route_details['routes'][0]['legs'][0]['duration']['text'];
         // 時間情報を日本語に変換
-        // 時間情報を日本語に変換
         // 変換したいものが複数あるので、変換した状態のものを次の変換元に指定
         // replaceArray('変換する部分', ['変換先'], 変換元)
         $duration_ja = Str::replaceArray('days', ['日'], $duration);
@@ -289,7 +285,7 @@ class ItineraryController extends Controller
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $route_details = json_decode($response->getBody(), true);
-        dd($route_details);
+        // dd($route_details);
     }
     
     //ログアウト
@@ -395,14 +391,11 @@ class ItineraryController extends Controller
     public function geocoding(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
-        // $start_address = $request->$start_address;
-        // dd($start_address);
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . config('services.google-map.apikey') . '&address=' . $start_address . '&language=ja';
         $response = $client->request('GET', $url,
         ['Bearer' => config('serveices.google-map.apikey')]);
         $itineraries = json_decode($response->getBody(), true);
-        // dd($itineraries);
         //緯度取得
         $place_lat = [ ];
         //軽度取得
