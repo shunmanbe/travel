@@ -103,6 +103,10 @@ a {
     
 }
 
+.fa-heart {
+    cursor: pointer;
+}
+
 .like-toggle {
     color: #FF30CC;
 }
