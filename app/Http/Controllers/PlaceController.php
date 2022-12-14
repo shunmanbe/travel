@@ -8,7 +8,6 @@ use App\Itinerary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\DepartureTimeRequest;
 use App\Http\Requests\ArrivalTimeRequest;
 use Illuminate\Support\Str;
@@ -25,7 +24,7 @@ class PlaceController extends Controller
     }
     
     //目的地を地図表示
-    public function destination_map(ItinerarySearchRequest $request, Itinerary $itinerary, Place $place)
+    public function destination_map(Request $request, Itinerary $itinerary, Place $place)
     {
         $auth = Auth::user();
         $input = $request['search_name'];
