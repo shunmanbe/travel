@@ -13,9 +13,9 @@ URL:https://travel-itinerary-service.herokuapp.com
 
 グループ登録（テスト用）
 
-グループID：413972
+グループID：215270
 
-パスワード:dTUZyhZu5v86bkL
+パスワード:qaQwdKARETM1qRF
 
 グループ名:テストグループ1
 
