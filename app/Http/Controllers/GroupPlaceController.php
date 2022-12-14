@@ -9,7 +9,6 @@ use App\ShareItinerary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\DepartureTimeRequest;
 use App\Http\Requests\ArrivalTimeRequest;
 
@@ -25,7 +24,7 @@ class GroupPlaceController extends Controller
     }
     
     //目的地を地図表示
-    public function destination_map(ItinerarySearchRequest $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
+    public function destination_map(Request $request, Group $group, ShareItinerary $shareItinerary, GroupPlace $groupPlace)
     {
         $auth = Auth::user();
         $input = $request['search_name'];
