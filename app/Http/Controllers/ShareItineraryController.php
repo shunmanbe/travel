@@ -11,8 +11,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ItineraryDateRequest;
-use App\Http\Requests\ItinerarySearchRequest;
 use App\Http\Requests\ExplanationRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -74,7 +72,7 @@ class ShareItineraryController extends Controller
     }
     
     //日付を保存
-    public function date_store(ItineraryDateRequest $request, Group $group, ShareItinerary $shareItinerary)
+    public function date_store(Request $request, Group $group, ShareItinerary $shareItinerary)
     {
         $input_date = $request['initial_setting'];
         $input_date['group_id'] = $group->id;
@@ -91,7 +89,7 @@ class ShareItineraryController extends Controller
     }
     
     //出発地をマップから選択
-    public function departure_place_map(ItinerarySearchRequest $request, Group $group, ShareItinerary $shareItinerary)
+    public function departure_place_map(Request $request, Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
         $input = $request['search_name'];
@@ -142,7 +140,7 @@ class ShareItineraryController extends Controller
     }
     
     //しおり名と旅行期間をアップデート
-    public function update_new_entry(ItineraryDateRequest $request, Group $group, ShareItinerary $shareItinerary)
+    public function update_new_entry(Request $request, Group $group, ShareItinerary $shareItinerary)
     {
         $auth = Auth::user();
         $input_date = $request['initial_setting'];
