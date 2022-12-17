@@ -8,8 +8,6 @@ use App\Itinerary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\DepartureTimeRequest;
-use App\Http\Requests\ArrivalTimeRequest;
 use Illuminate\Support\Str;
 
 class PlaceController extends Controller
