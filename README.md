@@ -129,5 +129,7 @@ URL:https://travel-itinerary-service.herokuapp.com
 - 写真投稿機能
 - プロフィール編集機能
 - 電車乗り換えアプリとの連携
-- 複数経路表示
+- React実装
 - 周辺地域のおすすめ情報表示
+- トランザクション処理
+- 有料化機能
