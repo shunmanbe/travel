@@ -7,7 +7,7 @@ URL:https://travel-itinerary-service.herokuapp.com
 ##### （日々修正を行っているため、デプロイのタイミングによってはお試し用アカウントが作成されていない場合がございます。その場合は、新規登録していただけると助かります。）
 メールアドレス：travelitineraryservicetest@gmail.com （テスト用のアドレス名です。他の用途での使用厳禁。）
 
-パスワード:traveltravel
+パスワード：traveltravel
 
 新規登録から試す場合は、個人のメールアドレス等をご使用ください。
 
